@@ -57,9 +57,10 @@ pub struct Example {
     /// in scope) — type-checked by `validate`, and executed by the
     /// engine's doc-example harness when `runnable`.
     pub code: String,
-    /// Consumed by the runnable-examples export (stage 4) — schema'd
-    /// now so authored content never has to change shape.
-    #[allow(dead_code)]
+    /// Exported to `target/runnable-examples.json` for the engine's
+    /// doc-example harness, which executes the snippet in the standard
+    /// scaffold place. Only mark an example runnable when it holds
+    /// against that scaffold (see the repo README).
     #[serde(default)]
     pub runnable: bool,
 }

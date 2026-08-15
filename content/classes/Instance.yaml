@@ -18,7 +18,8 @@ members:
       is the right shape only when the child is genuinely on its way
       (a streamed part, something another script is about to create).
     examples:
-      - title: Waiting for a part another script creates
+      - runnable: true
+        title: Waiting for a part another script creates
         code: |
           local pad = workspace:WaitForChild("SpawnPad", 5)
           if pad then
@@ -36,7 +37,8 @@ members:
       frame: names hash-compare, but a find is still a scan of the
       children.
     examples:
-      - title: Branching on an optional child
+      - runnable: true
+        title: Branching on an optional child
         code: |
           local door = workspace:FindFirstChild("Door")
           if door and door:IsA("BasePart") then
@@ -60,7 +62,8 @@ members:
       and the matching `GetAttributeChangedSignal`; same-value writes are
       silent.
     examples:
-      - title: A score attribute driving a signal
+      - runnable: true
+        title: A score attribute driving a signal
         code: |
           local part = Instance.new("Part")
           part.Parent = workspace
@@ -80,7 +83,8 @@ members:
       The value — a bare primitive or datatype, a table of fields for
       records — or nil when unset.
     examples:
-      - title: Reading a primitive and projecting a record field
+      - runnable: true
+        title: Reading a primitive and projecting a record field
         code: |
           local part = Instance.new("Part")
           part:SetAttribute("Hp", 100)
@@ -98,7 +102,8 @@ members:
       The fresh instance, with Parent nil — assign Parent to bring it
       into the world (derived state appears on attach).
     examples:
-      - title: Building a part from scratch
+      - runnable: true
+        title: Building a part from scratch
         code: |
           local part = Instance.new("Part")
           part.Position = vector.create(0, 10, 0)

@@ -39,6 +39,26 @@ database.
 Content is additive: a member without rich content still ships fully
 documented at the engine's summary level, so partial coverage is fine.
 
+## Examples
+
+Every example is a SELF-CONTAINED Luau script — the definitions file's
+globals (`workspace`, `game`, `script`, the constructors) are in scope
+and nothing else. `validate` type-checks every example (and every
+`lua`/`luau` fence in a guide) against the current model, so samples
+never rot silently.
+
+An example marked `runnable: true` additionally EXECUTES in the real
+engine (the engine repo's CI runs them headless). Runnable examples run
+against the **standard scaffold place** and must complete without
+error against exactly this world:
+
+- `Baseplate` — an anchored 64×1×64 part at the origin
+- `SpawnPad` — a SpawnLocation on it
+- `Windmill` — a Model with a PrimaryPart (`WindmillBase`)
+
+Keep examples that need anything else illustrative — omit `runnable`
+(it defaults to false) and they stay type-checked only.
+
 ## Editor integration
 
 See the [Editor setup](content/guides/editor-setup.md) guide — the

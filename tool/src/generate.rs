@@ -77,6 +77,39 @@ pub fn generate(root: &Path, dump: &Dump, content: &Content) -> io::Result<()> {
             book.join(guide),
         )?;
     }
+
+    // The runnable-examples manifest — what the engine's doc-example
+    // harness executes against the standard scaffold place.
+    let mut runnable = Vec::new();
+    for (section, owners) in &content.owners {
+        for (owner, owner_content) in owners {
+            for (member, member_content) in &owner_content.members {
+                for (index, example) in member_content.examples.iter().enumerate() {
+                    if example.runnable {
+                        runnable.push(json!({
+                            "id": format!("{section}.{owner}.{member}.{index}"),
+                            "code": example.code,
+                        }));
+                    }
+                }
+            }
+            if let Some(extras) = &owner_content.class {
+                for (index, example) in extras.examples.iter().enumerate() {
+                    if example.runnable {
+                        runnable.push(json!({
+                            "id": format!("{section}.{owner}.{index}"),
+                            "code": example.code,
+                        }));
+                    }
+                }
+            }
+        }
+    }
+    fs::create_dir_all(root.join("target"))?;
+    let mut manifest =
+        serde_json::to_string_pretty(&Value::Array(runnable)).expect("plain data");
+    manifest.push('\n');
+    fs::write(root.join("target").join("runnable-examples.json"), manifest)?;
     Ok(())
 }
 

@@ -12,7 +12,8 @@ members:
       identity rotation, so repeated ROTATING pivots compound there —
       give the model a PrimaryPart.
     examples:
-      - title: Turning a model in place
+      - runnable: true
+        title: Turning a model in place
         code: |
           local model = workspace:WaitForChild("Windmill")
           local pivot = model:GetPivot()
