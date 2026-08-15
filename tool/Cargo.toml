@@ -4,6 +4,11 @@ version = "0.1.0"
 edition = "2021"
 description = "The BetterVoxel docs tool: validates hand-authored content against the engine's API dump and generates the book."
 
+# Standalone even when this repo is checked out INSIDE another cargo
+# workspace — the engine's CI nests it in its own tree, and without
+# this cargo walks up, finds the engine workspace and refuses.
+[workspace]
+
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
