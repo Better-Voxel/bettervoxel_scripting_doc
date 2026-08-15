@@ -606,6 +606,12 @@ fn emit_docs_json(dump: &Dump, content: &Content) -> String {
             "The enum families; every item is an EnumItem.",
             "enums.html",
         ),
+        (
+            "warn",
+            "Prints its arguments to the output as a warning (an engine global — \
+             plain Luau has no `warn`).",
+            "globals.html",
+        ),
     ] {
         entries.insert(
             format!("{PACKAGE}/global/{symbol}"),

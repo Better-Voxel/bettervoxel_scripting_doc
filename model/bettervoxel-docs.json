@@ -517,6 +517,10 @@
     "documentation": "The running script's own Instance — `script.Parent` navigates from it.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
   },
+  "@bettervoxel/global/warn": {
+    "documentation": "Prints its arguments to the output as a warning (an engine global — plain Luau has no `warn`).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
   "@bettervoxel/global/workspace": {
     "documentation": "The Workspace root — the container every world object lives under.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html"

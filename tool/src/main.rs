@@ -7,6 +7,7 @@
 mod content;
 mod dump;
 mod generate;
+mod snippets;
 
 use std::path::PathBuf;
 use std::process::ExitCode;
@@ -43,6 +44,13 @@ fn run(root: &std::path::Path, and_generate: bool) -> ExitCode {
             return ExitCode::FAILURE;
         }
     };
+    if let Err(errors) = snippets::check(root, &content) {
+        for error in &errors {
+            eprintln!("error: {error}");
+        }
+        eprintln!("{} snippet error(s)", errors.len());
+        return ExitCode::FAILURE;
+    }
     let (covered, total) = content.coverage(&dump);
     println!(
         "content valid — {covered}/{total} members carry rich content, {} guide(s), \

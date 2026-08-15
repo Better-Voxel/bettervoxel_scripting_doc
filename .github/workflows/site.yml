@@ -16,6 +16,7 @@ on:
 
 env:
   MDBOOK_VERSION: v0.5.4
+  LUAU_LSP_VERSION: 1.69.0
 
 permissions:
   contents: read
@@ -36,6 +37,13 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: tool
+
+      # The snippet type-checker — validate refuses to run without it.
+      - name: Install luau-lsp
+        run: |
+          curl -sSL -o luau-lsp.zip "https://github.com/JohnnyMorganz/luau-lsp/releases/download/${LUAU_LSP_VERSION}/luau-lsp-linux-x86_64.zip"
+          unzip -o luau-lsp.zip -d "$HOME/.cargo/bin"
+          chmod +x "$HOME/.cargo/bin/luau-lsp"
 
       - name: Validate content and generate the book
         run: cargo run --manifest-path tool/Cargo.toml --locked -- generate .

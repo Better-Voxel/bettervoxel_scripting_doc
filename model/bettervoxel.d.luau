@@ -512,6 +512,8 @@ declare Enum: {
     UserInputType: { Keyboard: EnumItem, MouseButton1: EnumItem, MouseButton2: EnumItem, MouseButton3: EnumItem },
 }
 
+declare function warn(...: any): ()
+
 declare workspace: Workspace
 declare script: Instance
 declare game: DataModel
