@@ -1,0 +1,3128 @@
+{
+  "@bettervoxel/global/CFrame": {
+    "documentation": "The CFrame constructors — see the CFrame page.",
+    "keys": {
+      "Angles": "@bettervoxel/global/CFrame.Angles",
+      "fromAxisAngle": "@bettervoxel/global/CFrame.fromAxisAngle",
+      "fromEulerAnglesXYZ": "@bettervoxel/global/CFrame.fromEulerAnglesXYZ",
+      "identity": "@bettervoxel/global/CFrame.identity",
+      "lookAt": "@bettervoxel/global/CFrame.lookAt",
+      "new": "@bettervoxel/global/CFrame.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html"
+  },
+  "@bettervoxel/global/CFrame.Angles": {
+    "documentation": "A rotation-only CFrame from XYZ Euler angles in radians — the canonical spelling of fromEulerAnglesXYZ (measured: the X·Y·Z product, matching the reference).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#angles",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.Angles/param/0",
+        "name": "rx"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.Angles/param/1",
+        "name": "ry"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.Angles/param/2",
+        "name": "rz"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.Angles/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.Angles/param/0": {
+    "documentation": "`rx: number`"
+  },
+  "@bettervoxel/global/CFrame.Angles/param/1": {
+    "documentation": "`ry: number`"
+  },
+  "@bettervoxel/global/CFrame.Angles/param/2": {
+    "documentation": "`rz: number`"
+  },
+  "@bettervoxel/global/CFrame.Angles/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/global/CFrame.fromAxisAngle": {
+    "documentation": "A rotation-only CFrame around axis (a nonzero vector) by angle radians.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fromaxisangle",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromAxisAngle/param/0",
+        "name": "axis"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromAxisAngle/param/1",
+        "name": "angle"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.fromAxisAngle/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.fromAxisAngle/param/0": {
+    "documentation": "`axis: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.fromAxisAngle/param/1": {
+    "documentation": "`angle: number`"
+  },
+  "@bettervoxel/global/CFrame.fromAxisAngle/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesXYZ": {
+    "documentation": "A rotation-only CFrame from XYZ Euler angles in radians — the same axis order the instance Rotation property uses (in degrees there).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fromeuleranglesxyz",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/param/0",
+        "name": "rx"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/param/1",
+        "name": "ry"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/param/2",
+        "name": "rz"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/param/0": {
+    "documentation": "`rx: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/param/1": {
+    "documentation": "`ry: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/param/2": {
+    "documentation": "`rz: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/global/CFrame.identity": {
+    "documentation": "The identity transform: zero position, no rotation.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#identity"
+  },
+  "@bettervoxel/global/CFrame.lookAt": {
+    "documentation": "A CFrame at position with its LookVector aimed at target; up defaults to the world Y axis.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lookat",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.lookAt/param/0",
+        "name": "position"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.lookAt/param/1",
+        "name": "target"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.lookAt/param/2",
+        "name": "up"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.lookAt/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.lookAt/param/0": {
+    "documentation": "`position: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.lookAt/param/1": {
+    "documentation": "`target: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.lookAt/param/2": {
+    "documentation": "`up: Vector3?`"
+  },
+  "@bettervoxel/global/CFrame.lookAt/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/global/CFrame.new": {
+    "documentation": "The identity (no arguments), a translation from a position vector or from x, y, z, or the legacy two-vector form: a position looking at a point (Y up).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#new"
+  },
+  "@bettervoxel/global/Color3": {
+    "documentation": "The Color3 constructors — see the Color3 page.",
+    "keys": {
+      "fromHSV": "@bettervoxel/global/Color3.fromHSV",
+      "fromRGB": "@bettervoxel/global/Color3.fromRGB",
+      "new": "@bettervoxel/global/Color3.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html"
+  },
+  "@bettervoxel/global/Color3.fromHSV": {
+    "documentation": "A color from hue, saturation and value, all 0..1; the hue wraps.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#fromhsv",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Color3.fromHSV/param/0",
+        "name": "h"
+      },
+      {
+        "documentation": "@bettervoxel/global/Color3.fromHSV/param/1",
+        "name": "s"
+      },
+      {
+        "documentation": "@bettervoxel/global/Color3.fromHSV/param/2",
+        "name": "v"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Color3.fromHSV/return/0"
+    ]
+  },
+  "@bettervoxel/global/Color3.fromHSV/param/0": {
+    "documentation": "`h: number`"
+  },
+  "@bettervoxel/global/Color3.fromHSV/param/1": {
+    "documentation": "`s: number`"
+  },
+  "@bettervoxel/global/Color3.fromHSV/param/2": {
+    "documentation": "`v: number`"
+  },
+  "@bettervoxel/global/Color3.fromHSV/return/0": {
+    "documentation": "`Color3`"
+  },
+  "@bettervoxel/global/Color3.fromRGB": {
+    "documentation": "A color from byte components, clamped 0..255 — the editor color picker's scale.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#fromrgb",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Color3.fromRGB/param/0",
+        "name": "r"
+      },
+      {
+        "documentation": "@bettervoxel/global/Color3.fromRGB/param/1",
+        "name": "g"
+      },
+      {
+        "documentation": "@bettervoxel/global/Color3.fromRGB/param/2",
+        "name": "b"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Color3.fromRGB/return/0"
+    ]
+  },
+  "@bettervoxel/global/Color3.fromRGB/param/0": {
+    "documentation": "`r: number`"
+  },
+  "@bettervoxel/global/Color3.fromRGB/param/1": {
+    "documentation": "`g: number`"
+  },
+  "@bettervoxel/global/Color3.fromRGB/param/2": {
+    "documentation": "`b: number`"
+  },
+  "@bettervoxel/global/Color3.fromRGB/return/0": {
+    "documentation": "`Color3`"
+  },
+  "@bettervoxel/global/Color3.new": {
+    "documentation": "A color from sRGB components 0..1 (unclamped); omitted components default to 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Color3.new/param/0",
+        "name": "r"
+      },
+      {
+        "documentation": "@bettervoxel/global/Color3.new/param/1",
+        "name": "g"
+      },
+      {
+        "documentation": "@bettervoxel/global/Color3.new/param/2",
+        "name": "b"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Color3.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/Color3.new/param/0": {
+    "documentation": "`r: number?`"
+  },
+  "@bettervoxel/global/Color3.new/param/1": {
+    "documentation": "`g: number?`"
+  },
+  "@bettervoxel/global/Color3.new/param/2": {
+    "documentation": "`b: number?`"
+  },
+  "@bettervoxel/global/Color3.new/return/0": {
+    "documentation": "`Color3`"
+  },
+  "@bettervoxel/global/Enum": {
+    "documentation": "The enum families; every item is an EnumItem.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/enums.html"
+  },
+  "@bettervoxel/global/Instance": {
+    "documentation": "The Instance constructors — see the Instance page.",
+    "keys": {
+      "new": "@bettervoxel/global/Instance.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
+  },
+  "@bettervoxel/global/Instance.new": {
+    "documentation": "A default-constructed instance of the named class, with Parent nil — assign Parent to bring it into the world (derived state appears on attach). Only creatable classes are accepted; abstract and engine-spawned classes error exactly like an unknown name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Instance.new/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Instance.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/Instance.new/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/global/Instance.new/return/0": {
+    "documentation": "`Instance`"
+  },
+  "@bettervoxel/global/TweenInfo": {
+    "documentation": "The TweenInfo constructors — see the TweenInfo page.",
+    "keys": {
+      "new": "@bettervoxel/global/TweenInfo.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html"
+  },
+  "@bettervoxel/global/TweenInfo.new": {
+    "documentation": "Bundles the parameters TweenService:Create consumes. Defaults follow the reference engine: 1 second, Quad, Out, no repeats, no reverse, no delay; time and delay floor at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/TweenInfo.new/param/0",
+        "name": "time"
+      },
+      {
+        "documentation": "@bettervoxel/global/TweenInfo.new/param/1",
+        "name": "easingStyle"
+      },
+      {
+        "documentation": "@bettervoxel/global/TweenInfo.new/param/2",
+        "name": "easingDirection"
+      },
+      {
+        "documentation": "@bettervoxel/global/TweenInfo.new/param/3",
+        "name": "repeatCount"
+      },
+      {
+        "documentation": "@bettervoxel/global/TweenInfo.new/param/4",
+        "name": "reverses"
+      },
+      {
+        "documentation": "@bettervoxel/global/TweenInfo.new/param/5",
+        "name": "delayTime"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/TweenInfo.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/TweenInfo.new/param/0": {
+    "documentation": "`time: number?`"
+  },
+  "@bettervoxel/global/TweenInfo.new/param/1": {
+    "documentation": "`easingStyle: Enum.EasingStyle?`"
+  },
+  "@bettervoxel/global/TweenInfo.new/param/2": {
+    "documentation": "`easingDirection: Enum.EasingDirection?`"
+  },
+  "@bettervoxel/global/TweenInfo.new/param/3": {
+    "documentation": "`repeatCount: number?`"
+  },
+  "@bettervoxel/global/TweenInfo.new/param/4": {
+    "documentation": "`reverses: boolean?`"
+  },
+  "@bettervoxel/global/TweenInfo.new/param/5": {
+    "documentation": "`delayTime: number?`"
+  },
+  "@bettervoxel/global/TweenInfo.new/return/0": {
+    "documentation": "`TweenInfo`"
+  },
+  "@bettervoxel/global/UDim2": {
+    "documentation": "The UDim2 constructors — see the UDim2 page.",
+    "keys": {
+      "fromOffset": "@bettervoxel/global/UDim2.fromOffset",
+      "fromScale": "@bettervoxel/global/UDim2.fromScale",
+      "new": "@bettervoxel/global/UDim2.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html"
+  },
+  "@bettervoxel/global/UDim2.fromOffset": {
+    "documentation": "A UDim2 with only the pixel offsets set (scales zero).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#fromoffset",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/UDim2.fromOffset/param/0",
+        "name": "x"
+      },
+      {
+        "documentation": "@bettervoxel/global/UDim2.fromOffset/param/1",
+        "name": "y"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/UDim2.fromOffset/return/0"
+    ]
+  },
+  "@bettervoxel/global/UDim2.fromOffset/param/0": {
+    "documentation": "`x: number`"
+  },
+  "@bettervoxel/global/UDim2.fromOffset/param/1": {
+    "documentation": "`y: number`"
+  },
+  "@bettervoxel/global/UDim2.fromOffset/return/0": {
+    "documentation": "`UDim2`"
+  },
+  "@bettervoxel/global/UDim2.fromScale": {
+    "documentation": "A UDim2 with only the scale components set (offsets zero).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#fromscale",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/UDim2.fromScale/param/0",
+        "name": "x"
+      },
+      {
+        "documentation": "@bettervoxel/global/UDim2.fromScale/param/1",
+        "name": "y"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/UDim2.fromScale/return/0"
+    ]
+  },
+  "@bettervoxel/global/UDim2.fromScale/param/0": {
+    "documentation": "`x: number`"
+  },
+  "@bettervoxel/global/UDim2.fromScale/param/1": {
+    "documentation": "`y: number`"
+  },
+  "@bettervoxel/global/UDim2.fromScale/return/0": {
+    "documentation": "`UDim2`"
+  },
+  "@bettervoxel/global/UDim2.new": {
+    "documentation": "A UDim2 from its four components: per-axis parent fraction plus pixel offset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/UDim2.new/param/0",
+        "name": "xScale"
+      },
+      {
+        "documentation": "@bettervoxel/global/UDim2.new/param/1",
+        "name": "xOffset"
+      },
+      {
+        "documentation": "@bettervoxel/global/UDim2.new/param/2",
+        "name": "yScale"
+      },
+      {
+        "documentation": "@bettervoxel/global/UDim2.new/param/3",
+        "name": "yOffset"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/UDim2.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/UDim2.new/param/0": {
+    "documentation": "`xScale: number`"
+  },
+  "@bettervoxel/global/UDim2.new/param/1": {
+    "documentation": "`xOffset: number`"
+  },
+  "@bettervoxel/global/UDim2.new/param/2": {
+    "documentation": "`yScale: number`"
+  },
+  "@bettervoxel/global/UDim2.new/param/3": {
+    "documentation": "`yOffset: number`"
+  },
+  "@bettervoxel/global/UDim2.new/return/0": {
+    "documentation": "`UDim2`"
+  },
+  "@bettervoxel/global/Vector3": {
+    "documentation": "The Vector3 constructors — see the Vector3 page.",
+    "keys": {
+      "new": "@bettervoxel/global/Vector3.new",
+      "one": "@bettervoxel/global/Vector3.one",
+      "xAxis": "@bettervoxel/global/Vector3.xAxis",
+      "yAxis": "@bettervoxel/global/Vector3.yAxis",
+      "zAxis": "@bettervoxel/global/Vector3.zAxis",
+      "zero": "@bettervoxel/global/Vector3.zero"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html"
+  },
+  "@bettervoxel/global/Vector3.new": {
+    "documentation": "A vector from its components; omitted components default to 0. The result IS a native Luau vector — Vector3.new(1, 2, 3) equals vector.create(1, 2, 3), and typeof says 'vector' (a recorded divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Vector3.new/param/0",
+        "name": "x"
+      },
+      {
+        "documentation": "@bettervoxel/global/Vector3.new/param/1",
+        "name": "y"
+      },
+      {
+        "documentation": "@bettervoxel/global/Vector3.new/param/2",
+        "name": "z"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Vector3.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/Vector3.new/param/0": {
+    "documentation": "`x: number?`"
+  },
+  "@bettervoxel/global/Vector3.new/param/1": {
+    "documentation": "`y: number?`"
+  },
+  "@bettervoxel/global/Vector3.new/param/2": {
+    "documentation": "`z: number?`"
+  },
+  "@bettervoxel/global/Vector3.new/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/global/Vector3.one": {
+    "documentation": "The all-ones vector (1, 1, 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#one"
+  },
+  "@bettervoxel/global/Vector3.xAxis": {
+    "documentation": "The X unit vector (1, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#xaxis"
+  },
+  "@bettervoxel/global/Vector3.yAxis": {
+    "documentation": "The Y unit vector (0, 1, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#yaxis"
+  },
+  "@bettervoxel/global/Vector3.zAxis": {
+    "documentation": "The Z unit vector (0, 0, 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#zaxis"
+  },
+  "@bettervoxel/global/Vector3.zero": {
+    "documentation": "The zero vector (0, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#zero"
+  },
+  "@bettervoxel/global/game": {
+    "documentation": "The DataModel: `game:GetService(name)` hands out the engine services.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html"
+  },
+  "@bettervoxel/global/script": {
+    "documentation": "The running script's own Instance — `script.Parent` navigates from it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
+  },
+  "@bettervoxel/global/workspace": {
+    "documentation": "The Workspace root — the container every world object lives under.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html"
+  },
+  "@bettervoxel/globaltype/Attachment": {
+    "documentation": "A named point on a part: its CFrame, Position and Orientation are LOCAL to the parent, and the WorldCFrame/WorldPosition pair is the composed world view (writing it recomputes the local). Constraints anchor to attachments; Visible draws the editor marker.",
+    "keys": {
+      "CFrame": "@bettervoxel/globaltype/Attachment.CFrame",
+      "Orientation": "@bettervoxel/globaltype/Attachment.Orientation",
+      "Position": "@bettervoxel/globaltype/Attachment.Position",
+      "Visible": "@bettervoxel/globaltype/Attachment.Visible",
+      "WorldCFrame": "@bettervoxel/globaltype/Attachment.WorldCFrame",
+      "WorldPosition": "@bettervoxel/globaltype/Attachment.WorldPosition"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html"
+  },
+  "@bettervoxel/globaltype/Attachment.CFrame": {
+    "documentation": "The attachment's LOCAL pose relative to its parent part (§15); the world-space view is WorldCFrame.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#cframe"
+  },
+  "@bettervoxel/globaltype/Attachment.Orientation": {
+    "documentation": "The attachment's LOCAL rotation as XYZ Euler angles in degrees (§15).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#orientation"
+  },
+  "@bettervoxel/globaltype/Attachment.Position": {
+    "documentation": "The attachment's LOCAL position, relative to its parent part (§15). The world-space view is WorldPosition.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#position"
+  },
+  "@bettervoxel/globaltype/Attachment.Visible": {
+    "documentation": "Draws the editor's marker gizmo at the attachment's world pose. Purely an authoring aid — nothing at runtime reads it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#visible"
+  },
+  "@bettervoxel/globaltype/Attachment.WorldCFrame": {
+    "documentation": "The attachment's world pose: the parent part's pose composed with the local CFrame — the local values when no posed parent exists. Writing it recomputes the LOCAL pose against the current parent (§15).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#worldcframe"
+  },
+  "@bettervoxel/globaltype/Attachment.WorldPosition": {
+    "documentation": "The attachment's world position (parent pose ∘ local). Writing it recomputes the LOCAL position against the current parent (§15).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#worldposition"
+  },
+  "@bettervoxel/globaltype/BVScriptConnection": {
+    "documentation": "One registered callback on a signal: Disconnect unregisters it, Connected reads back. Connections die with their creating script.",
+    "keys": {
+      "Connected": "@bettervoxel/globaltype/BVScriptConnection.Connected",
+      "Disconnect": "@bettervoxel/globaltype/BVScriptConnection.Disconnect"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptConnection.html"
+  },
+  "@bettervoxel/globaltype/BVScriptConnection.Connected": {
+    "documentation": "Whether the connection is still registered: false after Disconnect, after a Once connection fires, and after the owning script stops.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptConnection.html#connected"
+  },
+  "@bettervoxel/globaltype/BVScriptConnection.Disconnect": {
+    "documentation": "Unregisters the callback; Connected reads false afterward. Safe to call more than once.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptConnection.html#disconnect",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/BVScriptSignal": {
+    "documentation": "The event surface (the BV spelling of the reference engine's RBXScriptSignal): Connect and Once register callbacks, Wait suspends until the next fire. Delivery is deferred to the script pass after the event.",
+    "keys": {
+      "Connect": "@bettervoxel/globaltype/BVScriptSignal.Connect",
+      "Once": "@bettervoxel/globaltype/BVScriptSignal.Once",
+      "Wait": "@bettervoxel/globaltype/BVScriptSignal.Wait"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptSignal.html"
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Connect": {
+    "documentation": "Registers callback for every fire and returns the connection. The callback receives the signal's fired arguments; delivery is deferred to the script pass after the event.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptSignal.html#connect",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BVScriptSignal.Connect/param/0",
+        "name": "callback"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/BVScriptSignal.Connect/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Connect/param/0": {
+    "documentation": "`callback: (...any) -> ()`"
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Connect/return/0": {
+    "documentation": "`BVScriptConnection`"
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Once": {
+    "documentation": "Like Connect, but the connection disconnects itself the moment it fires; the already-queued callback still runs.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptSignal.html#once",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BVScriptSignal.Once/param/0",
+        "name": "callback"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/BVScriptSignal.Once/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Once/param/0": {
+    "documentation": "`callback: (...any) -> ()`"
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Once/return/0": {
+    "documentation": "`BVScriptConnection`"
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Wait": {
+    "documentation": "Suspends the calling thread until the next fire, then returns the fired arguments.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptSignal.html#wait",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/BVScriptSignal.Wait/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.Wait/return/0": {
+    "documentation": "`...any`"
+  },
+  "@bettervoxel/globaltype/BasePart": {
+    "documentation": "Everything physical: world pose (Position, Rotation, CFrame), Size, appearance (Color, Material, Transparency), collision flags, and the Touched signal.",
+    "keys": {
+      "Anchored": "@bettervoxel/globaltype/BasePart.Anchored",
+      "ApplyImpulse": "@bettervoxel/globaltype/BasePart.ApplyImpulse",
+      "AssemblyLinearVelocity": "@bettervoxel/globaltype/BasePart.AssemblyLinearVelocity",
+      "CFrame": "@bettervoxel/globaltype/BasePart.CFrame",
+      "CanCollide": "@bettervoxel/globaltype/BasePart.CanCollide",
+      "Color": "@bettervoxel/globaltype/BasePart.Color",
+      "Material": "@bettervoxel/globaltype/BasePart.Material",
+      "Position": "@bettervoxel/globaltype/BasePart.Position",
+      "Rotation": "@bettervoxel/globaltype/BasePart.Rotation",
+      "Size": "@bettervoxel/globaltype/BasePart.Size",
+      "Touched": "@bettervoxel/globaltype/BasePart.Touched",
+      "Transparency": "@bettervoxel/globaltype/BasePart.Transparency"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html"
+  },
+  "@bettervoxel/globaltype/BasePart.Anchored": {
+    "documentation": "Whether the part is pinned in place. Anchored parts never simulate — no gravity, no forces — but still collide and fire Touched.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#anchored"
+  },
+  "@bettervoxel/globaltype/BasePart.ApplyImpulse": {
+    "documentation": "Instant velocity change on the assembly's body: delta-v equals impulse divided by the assembly mass. A no-op on anchored (infinite-mass) assemblies.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#applyimpulse",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BasePart.ApplyImpulse/param/0",
+        "name": "impulse"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/BasePart.ApplyImpulse/param/0": {
+    "documentation": "`impulse: Vector3`"
+  },
+  "@bettervoxel/globaltype/BasePart.AssemblyLinearVelocity": {
+    "documentation": "The assembly's linear velocity — welded members answer their assembly root's. Reads are zero without a live body; writes on anchored parts land but the solver ignores them.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#assemblylinearvelocity"
+  },
+  "@bettervoxel/globaltype/BasePart.CFrame": {
+    "documentation": "The full rigid transform as one CFrame. Reads and writes agree with Position and Rotation — three views of the same pose. Welded members refuse the write; move the assembly root instead.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#cframe"
+  },
+  "@bettervoxel/globaltype/BasePart.CanCollide": {
+    "documentation": "Whether the part responds to contacts. false keeps it physical — it falls and fires Touched — but removes the contact response.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#cancollide"
+  },
+  "@bettervoxel/globaltype/BasePart.Color": {
+    "documentation": "The authored surface color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#color"
+  },
+  "@bettervoxel/globaltype/BasePart.Material": {
+    "documentation": "The surface material, as an Enum.Material item; writes accept the item or its string name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#material"
+  },
+  "@bettervoxel/globaltype/BasePart.Position": {
+    "documentation": "The part's world position. Welded members read their world pose, and a write moves the whole assembly with offsets preserved. Explicit writes fire the pose property signals; physics motion does not.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#position"
+  },
+  "@bettervoxel/globaltype/BasePart.Rotation": {
+    "documentation": "The orientation as XYZ Euler angles in degrees. Welded members read their assembly pose; writing a welded member is refused — rotate the assembly root instead.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#rotation"
+  },
+  "@bettervoxel/globaltype/BasePart.Size": {
+    "documentation": "The part's dimensions in studs. The collider and mesh re-derive on write; a MeshPart's geometry scales against its authored MeshSize.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#size"
+  },
+  "@bettervoxel/globaltype/BasePart.Touched": {
+    "documentation": "Fires when another collider starts touching this part, with the other object. Exists on unparented parts too; fires once per contact start.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#touched"
+  },
+  "@bettervoxel/globaltype/BasePart.Transparency": {
+    "documentation": "How see-through the part renders, clamped 0 (opaque) to 1 (invisible).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#transparency"
+  },
+  "@bettervoxel/globaltype/BaseRemoteEvent": {
+    "documentation": "The remote-event layer, kept for ancestry parity with the reference engine.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BaseRemoteEvent.html"
+  },
+  "@bettervoxel/globaltype/BaseScript": {
+    "documentation": "The runnable scripts: the Enabled/Disabled run switch and RunContext, which decides where the code executes.",
+    "keys": {
+      "Disabled": "@bettervoxel/globaltype/BaseScript.Disabled",
+      "Enabled": "@bettervoxel/globaltype/BaseScript.Enabled",
+      "RunContext": "@bettervoxel/globaltype/BaseScript.RunContext"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BaseScript.html"
+  },
+  "@bettervoxel/globaltype/BaseScript.Disabled": {
+    "documentation": "The legacy inverse of Enabled — the two always mirror each other.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BaseScript.html#disabled"
+  },
+  "@bettervoxel/globaltype/BaseScript.Enabled": {
+    "documentation": "The script's run switch. Disabling kills the script's threads and listeners before the next pass; re-enabling restarts it fresh from the top. Writes require a real boolean (the reference engine coerces — a recorded strict-typing divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BaseScript.html#enabled"
+  },
+  "@bettervoxel/globaltype/BaseScript.RunContext": {
+    "documentation": "Where the script runs: Legacy (placement decides), Server, or Client. Writes accept the enum item or its name string and re-derive execution immediately. A LocalScript's stored value is inert — its class decides.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BaseScript.html#runcontext"
+  },
+  "@bettervoxel/globaltype/BillboardGui": {
+    "documentation": "A world-anchored UI root: its elements render at its parent's position, facing the camera.",
+    "keys": {
+      "AnchorPoint": "@bettervoxel/globaltype/BillboardGui.AnchorPoint",
+      "Position": "@bettervoxel/globaltype/BillboardGui.Position",
+      "Size": "@bettervoxel/globaltype/BillboardGui.Size"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BillboardGui.html"
+  },
+  "@bettervoxel/globaltype/BillboardGui.AnchorPoint": {
+    "documentation": "Which point of the billboard (0..1 per axis) its Position pins. The Z component is unused.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BillboardGui.html#anchorpoint"
+  },
+  "@bettervoxel/globaltype/BillboardGui.Position": {
+    "documentation": "The billboard's position as a UDim2 (scale plus pixel offset per axis).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BillboardGui.html#position"
+  },
+  "@bettervoxel/globaltype/BillboardGui.Size": {
+    "documentation": "The billboard's size as a UDim2 (scale plus pixel offset per axis).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BillboardGui.html#size"
+  },
+  "@bettervoxel/globaltype/BindableEvent": {
+    "documentation": "A same-context signal object: Fire queues Event for every listener — script-to-script signaling without the network.",
+    "keys": {
+      "Event": "@bettervoxel/globaltype/BindableEvent.Event",
+      "Fire": "@bettervoxel/globaltype/BindableEvent.Fire"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BindableEvent.html"
+  },
+  "@bettervoxel/globaltype/BindableEvent.Event": {
+    "documentation": "The receiving side of Fire: listeners get the fired arguments. Delivery is deferred to the next script pass; arguments pass by reference within the shared VM (the reference engine deep-copies — a recorded divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BindableEvent.html#event"
+  },
+  "@bettervoxel/globaltype/BindableEvent.Fire": {
+    "documentation": "Queues Event with these arguments for every listener, delivered on the next script pass.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BindableEvent.html#fire",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BindableEvent.Fire/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/BindableEvent.Fire/param/0": {
+    "documentation": "`...: any`"
+  },
+  "@bettervoxel/globaltype/BindableFunction": {
+    "documentation": "A same-context call object: Invoke runs the assigned OnInvoke synchronously and returns its results.",
+    "keys": {
+      "Invoke": "@bettervoxel/globaltype/BindableFunction.Invoke",
+      "OnInvoke": "@bettervoxel/globaltype/BindableFunction.OnInvoke"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BindableFunction.html"
+  },
+  "@bettervoxel/globaltype/BindableFunction.Invoke": {
+    "documentation": "Calls OnInvoke synchronously and returns its results (multiple returns pass through). Errors when OnInvoke is unset (the reference engine blocks forever — a recorded divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BindableFunction.html#invoke",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BindableFunction.Invoke/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/BindableFunction.Invoke/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BindableFunction.Invoke/param/0": {
+    "documentation": "`...: any`"
+  },
+  "@bettervoxel/globaltype/BindableFunction.Invoke/return/0": {
+    "documentation": "`...any`"
+  },
+  "@bettervoxel/globaltype/BindableFunction.OnInvoke": {
+    "documentation": "The handler Invoke calls. Assign a function or nil; unset reads nil, and calling Invoke while unset errors.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BindableFunction.html#oninvoke"
+  },
+  "@bettervoxel/globaltype/BoolValue": {
+    "documentation": "A named container for one boolean.",
+    "keys": {
+      "Value": "@bettervoxel/globaltype/BoolValue.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BoolValue.html"
+  },
+  "@bettervoxel/globaltype/BoolValue.Value": {
+    "documentation": "The stored boolean. Writes require a real boolean.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BoolValue.html#value"
+  },
+  "@bettervoxel/globaltype/CFrame": {
+    "documentation": "An immutable rigid transform: position plus rotation, right-handed and Y-up, with LookVector along -Z. Every operation returns a new value; cf1 * cf2 composes and cf * vector transforms the point.",
+    "keys": {
+      "Inverse": "@bettervoxel/globaltype/CFrame.Inverse",
+      "Lerp": "@bettervoxel/globaltype/CFrame.Lerp",
+      "LookVector": "@bettervoxel/globaltype/CFrame.LookVector",
+      "PointToObjectSpace": "@bettervoxel/globaltype/CFrame.PointToObjectSpace",
+      "PointToWorldSpace": "@bettervoxel/globaltype/CFrame.PointToWorldSpace",
+      "Position": "@bettervoxel/globaltype/CFrame.Position",
+      "RightVector": "@bettervoxel/globaltype/CFrame.RightVector",
+      "Rotation": "@bettervoxel/globaltype/CFrame.Rotation",
+      "ToEulerAnglesXYZ": "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ",
+      "ToObjectSpace": "@bettervoxel/globaltype/CFrame.ToObjectSpace",
+      "ToWorldSpace": "@bettervoxel/globaltype/CFrame.ToWorldSpace",
+      "UpVector": "@bettervoxel/globaltype/CFrame.UpVector",
+      "VectorToObjectSpace": "@bettervoxel/globaltype/CFrame.VectorToObjectSpace",
+      "VectorToWorldSpace": "@bettervoxel/globaltype/CFrame.VectorToWorldSpace",
+      "X": "@bettervoxel/globaltype/CFrame.X",
+      "Y": "@bettervoxel/globaltype/CFrame.Y",
+      "Z": "@bettervoxel/globaltype/CFrame.Z"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html"
+  },
+  "@bettervoxel/globaltype/CFrame.Inverse": {
+    "documentation": "The inverse transform: composing with it yields the identity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#inverse",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.Inverse/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.Inverse/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.Lerp": {
+    "documentation": "Interpolates toward goal: linear on position, slerp on rotation. Alpha is unclamped.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.Lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.Lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.Lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.Lerp/param/0": {
+    "documentation": "`goal: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.Lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/CFrame.Lerp/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.LookVector": {
+    "documentation": "The facing direction: the -Z basis vector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lookvector"
+  },
+  "@bettervoxel/globaltype/CFrame.PointToObjectSpace": {
+    "documentation": "A world-space point as an object-space point.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#pointtoobjectspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.PointToObjectSpace/param/0",
+        "name": "point"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.PointToObjectSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.PointToObjectSpace/param/0": {
+    "documentation": "`point: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.PointToObjectSpace/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.PointToWorldSpace": {
+    "documentation": "An object-space point as a world-space point.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#pointtoworldspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.PointToWorldSpace/param/0",
+        "name": "point"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.PointToWorldSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.PointToWorldSpace/param/0": {
+    "documentation": "`point: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.PointToWorldSpace/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.Position": {
+    "documentation": "The translation component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#position"
+  },
+  "@bettervoxel/globaltype/CFrame.RightVector": {
+    "documentation": "The +X basis vector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#rightvector"
+  },
+  "@bettervoxel/globaltype/CFrame.Rotation": {
+    "documentation": "A rotation-only copy of this CFrame, with the translation stripped.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#rotation"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ": {
+    "documentation": "The rotation as XYZ Euler angles in radians (the same order the instance Rotation property uses, in degrees there).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toeuleranglesxyz",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ/return/0",
+      "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ/return/1",
+      "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ/return/2": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToObjectSpace": {
+    "documentation": "The world transform other, re-expressed relative to this CFrame (self:Inverse() * other).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toobjectspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.ToObjectSpace/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.ToObjectSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.ToObjectSpace/param/0": {
+    "documentation": "`other: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToObjectSpace/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToWorldSpace": {
+    "documentation": "Composes: other, expressed relative to this CFrame, as a world transform (self * other).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toworldspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.ToWorldSpace/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.ToWorldSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.ToWorldSpace/param/0": {
+    "documentation": "`other: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToWorldSpace/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.UpVector": {
+    "documentation": "The +Y basis vector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#upvector"
+  },
+  "@bettervoxel/globaltype/CFrame.VectorToObjectSpace": {
+    "documentation": "Rotates a world direction into object space (no translation).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#vectortoobjectspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.VectorToObjectSpace/param/0",
+        "name": "direction"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.VectorToObjectSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.VectorToObjectSpace/param/0": {
+    "documentation": "`direction: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.VectorToObjectSpace/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.VectorToWorldSpace": {
+    "documentation": "Rotates a direction into world space (no translation).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#vectortoworldspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.VectorToWorldSpace/param/0",
+        "name": "direction"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.VectorToWorldSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.VectorToWorldSpace/param/0": {
+    "documentation": "`direction: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.VectorToWorldSpace/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.X": {
+    "documentation": "The position's X component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#x"
+  },
+  "@bettervoxel/globaltype/CFrame.Y": {
+    "documentation": "The position's Y component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#y"
+  },
+  "@bettervoxel/globaltype/CFrame.Z": {
+    "documentation": "The position's Z component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#z"
+  },
+  "@bettervoxel/globaltype/Character": {
+    "documentation": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. Carries the humanoid surface: Health, WalkSpeed, MoveTo and their signals.",
+    "keys": {
+      "AssemblyLinearVelocity": "@bettervoxel/globaltype/Character.AssemblyLinearVelocity",
+      "CFrame": "@bettervoxel/globaltype/Character.CFrame",
+      "Died": "@bettervoxel/globaltype/Character.Died",
+      "Health": "@bettervoxel/globaltype/Character.Health",
+      "JumpPower": "@bettervoxel/globaltype/Character.JumpPower",
+      "MaxHealth": "@bettervoxel/globaltype/Character.MaxHealth",
+      "Move": "@bettervoxel/globaltype/Character.Move",
+      "MoveTo": "@bettervoxel/globaltype/Character.MoveTo",
+      "MoveToFinished": "@bettervoxel/globaltype/Character.MoveToFinished",
+      "Position": "@bettervoxel/globaltype/Character.Position",
+      "Rotation": "@bettervoxel/globaltype/Character.Rotation",
+      "TakeDamage": "@bettervoxel/globaltype/Character.TakeDamage",
+      "Touched": "@bettervoxel/globaltype/Character.Touched",
+      "WalkSpeed": "@bettervoxel/globaltype/Character.WalkSpeed"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html"
+  },
+  "@bettervoxel/globaltype/Character.AssemblyLinearVelocity": {
+    "documentation": "The character body's linear velocity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#assemblylinearvelocity"
+  },
+  "@bettervoxel/globaltype/Character.CFrame": {
+    "documentation": "The character's full rigid transform as one CFrame value.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#cframe"
+  },
+  "@bettervoxel/globaltype/Character.Died": {
+    "documentation": "Fires once per life, when Health reaches zero.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#died"
+  },
+  "@bettervoxel/globaltype/Character.Health": {
+    "documentation": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died and the respawn pass takes over.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#health"
+  },
+  "@bettervoxel/globaltype/Character.JumpPower": {
+    "documentation": "The upward velocity a jump imparts, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#jumppower"
+  },
+  "@bettervoxel/globaltype/Character.MaxHealth": {
+    "documentation": "The health ceiling. Lowering it pulls current Health down with it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#maxhealth"
+  },
+  "@bettervoxel/globaltype/Character.Move": {
+    "documentation": "Sets a persistent world-space walk direction: the character keeps walking until the next call, and a zero vector stops it. The relativeToCamera flag is client presentation and is ignored here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#move",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Character.Move/param/0",
+        "name": "direction"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Character.Move/param/1",
+        "name": "relativeToCamera"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Character.Move/param/0": {
+    "documentation": "`direction: Vector3`"
+  },
+  "@bettervoxel/globaltype/Character.Move/param/1": {
+    "documentation": "`relativeToCamera: boolean?`"
+  },
+  "@bettervoxel/globaltype/Character.MoveTo": {
+    "documentation": "Walks the character to a point: reached within 1 stud in the horizontal plane, or given up after 8 seconds (every call restarts the timer). MoveToFinished fires with the outcome; a pending MoveTo owns locomotion over Move.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#moveto",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Character.MoveTo/param/0",
+        "name": "target"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Character.MoveTo/param/0": {
+    "documentation": "`target: Vector3`"
+  },
+  "@bettervoxel/globaltype/Character.MoveToFinished": {
+    "documentation": "Fires when a MoveTo ends: true when the target was reached, false on the timeout. A replaced target fires nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#movetofinished"
+  },
+  "@bettervoxel/globaltype/Character.Position": {
+    "documentation": "The character's world position. Writing teleports the character.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#position"
+  },
+  "@bettervoxel/globaltype/Character.Rotation": {
+    "documentation": "The character's orientation as XYZ Euler angles in degrees; writing turns the character.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#rotation"
+  },
+  "@bettervoxel/globaltype/Character.TakeDamage": {
+    "documentation": "Subtracts amount from Health, floored at zero. Reaching zero fires Died and the respawn pass takes over. Negative amounts are ignored.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#takedamage",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Character.TakeDamage/param/0",
+        "name": "amount"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Character.TakeDamage/param/0": {
+    "documentation": "`amount: number`"
+  },
+  "@bettervoxel/globaltype/Character.Touched": {
+    "documentation": "Fires when a collider starts touching the character body, with the other object.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#touched"
+  },
+  "@bettervoxel/globaltype/Character.WalkSpeed": {
+    "documentation": "The character's walk speed in studs per second, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#walkspeed"
+  },
+  "@bettervoxel/globaltype/ClickDetector": {
+    "documentation": "Makes its parent part clickable: MouseClick fires with the clicking player, within MaxActivationDistance.",
+    "keys": {
+      "MaxActivationDistance": "@bettervoxel/globaltype/ClickDetector.MaxActivationDistance",
+      "MouseClick": "@bettervoxel/globaltype/ClickDetector.MouseClick"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ClickDetector.html"
+  },
+  "@bettervoxel/globaltype/ClickDetector.MaxActivationDistance": {
+    "documentation": "How far away (in studs) a player can be and still click, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ClickDetector.html#maxactivationdistance"
+  },
+  "@bettervoxel/globaltype/ClickDetector.MouseClick": {
+    "documentation": "Fires when a player clicks the detector's parent part within MaxActivationDistance, with the clicking player. The signal lives on the detector, never on the part it makes clickable.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ClickDetector.html#mouseclick"
+  },
+  "@bettervoxel/globaltype/CollectionService": {
+    "documentation": "Instance tags: storage is per-instance and survives leaving the tree, while GetTagged and the per-tag Added/Removed signals track tree membership. Tags serialize with the place.",
+    "keys": {
+      "AddTag": "@bettervoxel/globaltype/CollectionService.AddTag",
+      "ClassName": "@bettervoxel/globaltype/CollectionService.ClassName",
+      "GetInstanceAddedSignal": "@bettervoxel/globaltype/CollectionService.GetInstanceAddedSignal",
+      "GetInstanceRemovedSignal": "@bettervoxel/globaltype/CollectionService.GetInstanceRemovedSignal",
+      "GetTagged": "@bettervoxel/globaltype/CollectionService.GetTagged",
+      "GetTags": "@bettervoxel/globaltype/CollectionService.GetTags",
+      "HasTag": "@bettervoxel/globaltype/CollectionService.HasTag",
+      "IsA": "@bettervoxel/globaltype/CollectionService.IsA",
+      "Name": "@bettervoxel/globaltype/CollectionService.Name",
+      "RemoveTag": "@bettervoxel/globaltype/CollectionService.RemoveTag"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html"
+  },
+  "@bettervoxel/globaltype/CollectionService.AddTag": {
+    "documentation": "Tags the instance (idempotent and silent on a duplicate). If it is in the game tree, the tag's Added signal fires.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#addtag",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.AddTag/param/0",
+        "name": "instance"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.AddTag/param/1",
+        "name": "tag"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/CollectionService.AddTag/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/CollectionService.AddTag/param/1": {
+    "documentation": "`tag: string`"
+  },
+  "@bettervoxel/globaltype/CollectionService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#classname"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetInstanceAddedSignal": {
+    "documentation": "The tag's membership signal: fires with each tagged instance that is (or becomes) part of the game tree.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#getinstanceaddedsignal",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.GetInstanceAddedSignal/param/0",
+        "name": "tag"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CollectionService.GetInstanceAddedSignal/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CollectionService.GetInstanceAddedSignal/param/0": {
+    "documentation": "`tag: string`"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetInstanceAddedSignal/return/0": {
+    "documentation": "`BVScriptSignal`"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetInstanceRemovedSignal": {
+    "documentation": "The other half: fires (once) when a tagged instance leaves the tree — tag removed in-tree, detached, or destroyed.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#getinstanceremovedsignal",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.GetInstanceRemovedSignal/param/0",
+        "name": "tag"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CollectionService.GetInstanceRemovedSignal/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CollectionService.GetInstanceRemovedSignal/param/0": {
+    "documentation": "`tag: string`"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetInstanceRemovedSignal/return/0": {
+    "documentation": "`BVScriptSignal`"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetTagged": {
+    "documentation": "Every instance in the game tree carrying the tag — tree membership, not storage: stored instances and husks stay out.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#gettagged",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.GetTagged/param/0",
+        "name": "tag"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CollectionService.GetTagged/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CollectionService.GetTagged/param/0": {
+    "documentation": "`tag: string`"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetTagged/return/0": {
+    "documentation": "`{Instance}`"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetTags": {
+    "documentation": "The instance's tags in add order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#gettags",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.GetTags/param/0",
+        "name": "instance"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CollectionService.GetTags/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CollectionService.GetTags/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/CollectionService.GetTags/return/0": {
+    "documentation": "`{string}`"
+  },
+  "@bettervoxel/globaltype/CollectionService.HasTag": {
+    "documentation": "Whether the instance carries the tag. Storage is per-instance and survives leaving the tree — and Destroy (husks keep their tags).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#hastag",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.HasTag/param/0",
+        "name": "instance"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.HasTag/param/1",
+        "name": "tag"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CollectionService.HasTag/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CollectionService.HasTag/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/CollectionService.HasTag/param/1": {
+    "documentation": "`tag: string`"
+  },
+  "@bettervoxel/globaltype/CollectionService.HasTag/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/CollectionService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CollectionService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CollectionService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/CollectionService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/CollectionService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#name"
+  },
+  "@bettervoxel/globaltype/CollectionService.RemoveTag": {
+    "documentation": "Removes the tag (a no-op when absent). In-tree removals fire the tag's Removed signal.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/CollectionService.html#removetag",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.RemoveTag/param/0",
+        "name": "instance"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/CollectionService.RemoveTag/param/1",
+        "name": "tag"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/CollectionService.RemoveTag/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/CollectionService.RemoveTag/param/1": {
+    "documentation": "`tag: string`"
+  },
+  "@bettervoxel/globaltype/Color3": {
+    "documentation": "An immutable RGB color with sRGB components 0..1. Color properties hand these out; their setters also keep accepting raw RGB vectors.",
+    "keys": {
+      "B": "@bettervoxel/globaltype/Color3.B",
+      "G": "@bettervoxel/globaltype/Color3.G",
+      "Lerp": "@bettervoxel/globaltype/Color3.Lerp",
+      "R": "@bettervoxel/globaltype/Color3.R"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html"
+  },
+  "@bettervoxel/globaltype/Color3.B": {
+    "documentation": "The blue component (sRGB, 0..1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#b"
+  },
+  "@bettervoxel/globaltype/Color3.G": {
+    "documentation": "The green component (sRGB, 0..1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#g"
+  },
+  "@bettervoxel/globaltype/Color3.Lerp": {
+    "documentation": "Interpolates each component toward goal. Alpha is unclamped.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Color3.Lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Color3.Lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Color3.Lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Color3.Lerp/param/0": {
+    "documentation": "`goal: Color3`"
+  },
+  "@bettervoxel/globaltype/Color3.Lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/Color3.Lerp/return/0": {
+    "documentation": "`Color3`"
+  },
+  "@bettervoxel/globaltype/Color3.R": {
+    "documentation": "The red component (sRGB, 0..1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#r"
+  },
+  "@bettervoxel/globaltype/Constraint": {
+    "documentation": "The base of the attachment-anchored constraints: Attachment0, Attachment1 and Enabled. A constraint acts while Enabled and both ends sit under live in-world parts; anything else is inert.",
+    "keys": {
+      "Attachment0": "@bettervoxel/globaltype/Constraint.Attachment0",
+      "Attachment1": "@bettervoxel/globaltype/Constraint.Attachment1",
+      "Enabled": "@bettervoxel/globaltype/Constraint.Enabled"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Constraint.html"
+  },
+  "@bettervoxel/globaltype/Constraint.Attachment0": {
+    "documentation": "One end of the constraint: an Attachment or nil. The constraint acts while Enabled and both ends sit under live in-world parts; anything else is inert, never an error (§16). A destroyed attachment stays referenced.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Constraint.html#attachment0"
+  },
+  "@bettervoxel/globaltype/Constraint.Attachment1": {
+    "documentation": "The other end of the constraint: an Attachment or nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Constraint.html#attachment1"
+  },
+  "@bettervoxel/globaltype/Constraint.Enabled": {
+    "documentation": "Whether the constraint acts. Disabling is inert (the derived joint goes away); re-enabling rebuilds it at the current poses (§16).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Constraint.html#enabled"
+  },
+  "@bettervoxel/globaltype/DataModel": {
+    "documentation": "The `game` global: the service registry at the top of everything (measured ancestry DataModel < ServiceProvider < Instance). GetService hands out the engine services; its Name is the place name (\"Game\" until the engine carries one — a recorded stub).",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/DataModel.ClassName",
+      "GetService": "@bettervoxel/globaltype/DataModel.GetService",
+      "IsA": "@bettervoxel/globaltype/DataModel.IsA",
+      "Name": "@bettervoxel/globaltype/DataModel.Name"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html"
+  },
+  "@bettervoxel/globaltype/DataModel.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#classname"
+  },
+  "@bettervoxel/globaltype/DataModel.GetService": {
+    "documentation": "Hands out an engine service by name (\"Players\", \"RunService\", \"TweenService\", …; \"Workspace\" answers the workspace root). Unknown names error.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#getservice",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataModel.GetService/param/0",
+        "name": "service"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataModel.GetService/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataModel.GetService/param/0": {
+    "documentation": "`service: string`"
+  },
+  "@bettervoxel/globaltype/DataModel.GetService/return/0": {
+    "documentation": "`Instance`"
+  },
+  "@bettervoxel/globaltype/DataModel.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataModel.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataModel.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataModel.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/DataModel.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/DataModel.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#name"
+  },
+  "@bettervoxel/globaltype/Debris": {
+    "documentation": "Scheduled destruction: AddItem destroys an instance after a lifetime on the pause-aware script clock — fire-and-forget cleanup for projectiles and effects.",
+    "keys": {
+      "AddItem": "@bettervoxel/globaltype/Debris.AddItem",
+      "ClassName": "@bettervoxel/globaltype/Debris.ClassName",
+      "IsA": "@bettervoxel/globaltype/Debris.IsA",
+      "Name": "@bettervoxel/globaltype/Debris.Name"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Debris.html"
+  },
+  "@bettervoxel/globaltype/Debris.AddItem": {
+    "documentation": "Schedules the instance's destruction after `lifetime` seconds (default 10, negatives destroy promptly) on the pause-aware script clock. Re-adding an item replaces its timer.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Debris.html#additem",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Debris.AddItem/param/0",
+        "name": "item"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Debris.AddItem/param/1",
+        "name": "lifetime"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Debris.AddItem/param/0": {
+    "documentation": "`item: Instance`"
+  },
+  "@bettervoxel/globaltype/Debris.AddItem/param/1": {
+    "documentation": "`lifetime: number?`"
+  },
+  "@bettervoxel/globaltype/Debris.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Debris.html#classname"
+  },
+  "@bettervoxel/globaltype/Debris.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Debris.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Debris.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Debris.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Debris.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Debris.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Debris.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Debris.html#name"
+  },
+  "@bettervoxel/globaltype/EnumItem": {
+    "documentation": "One `Enum.<Type>.<Item>` value: equality is by item, tostring prints the full path, and enum-valued properties accept the item or its plain name string.",
+    "keys": {
+      "EnumType": "@bettervoxel/globaltype/EnumItem.EnumType",
+      "Name": "@bettervoxel/globaltype/EnumItem.Name",
+      "Value": "@bettervoxel/globaltype/EnumItem.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html"
+  },
+  "@bettervoxel/globaltype/EnumItem.EnumType": {
+    "documentation": "The owning enum's name, as a string (the reference engine answers an Enum object here — a recorded divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#enumtype"
+  },
+  "@bettervoxel/globaltype/EnumItem.Name": {
+    "documentation": "The item's name — the last segment of Enum.Material.Neon.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#name"
+  },
+  "@bettervoxel/globaltype/EnumItem.Value": {
+    "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#value"
+  },
+  "@bettervoxel/globaltype/Folder": {
+    "documentation": "A pure organizational container with no behavior of its own.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Folder.html"
+  },
+  "@bettervoxel/globaltype/FormFactorPart": {
+    "documentation": "A legacy layer between BasePart and Part, kept for ancestry parity with the reference engine; it adds no members of its own.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/FormFactorPart.html"
+  },
+  "@bettervoxel/globaltype/Frame": {
+    "documentation": "The plain rectangular UI element: a background and a parent for other elements.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Frame.html"
+  },
+  "@bettervoxel/globaltype/GuiBase": {
+    "documentation": "The UI root layer, kept for ancestry parity with the reference engine.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiBase.html"
+  },
+  "@bettervoxel/globaltype/GuiBase2d": {
+    "documentation": "The 2D UI layer beneath every on-screen element.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiBase2d.html"
+  },
+  "@bettervoxel/globaltype/GuiButton": {
+    "documentation": "The clickable UI elements: Activated fires on click release.",
+    "keys": {
+      "Activated": "@bettervoxel/globaltype/GuiButton.Activated"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiButton.html"
+  },
+  "@bettervoxel/globaltype/GuiButton.Activated": {
+    "documentation": "Fires (with no arguments) when a click is released over the button.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiButton.html#activated"
+  },
+  "@bettervoxel/globaltype/GuiLabel": {
+    "documentation": "The display-only UI elements — the image and text labels.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiLabel.html"
+  },
+  "@bettervoxel/globaltype/GuiObject": {
+    "documentation": "The visible UI elements: UDim2 Position and Size, AnchorPoint, and the background fill.",
+    "keys": {
+      "AnchorPoint": "@bettervoxel/globaltype/GuiObject.AnchorPoint",
+      "BackgroundColor3": "@bettervoxel/globaltype/GuiObject.BackgroundColor3",
+      "BackgroundTransparency": "@bettervoxel/globaltype/GuiObject.BackgroundTransparency",
+      "Position": "@bettervoxel/globaltype/GuiObject.Position",
+      "Size": "@bettervoxel/globaltype/GuiObject.Size"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html"
+  },
+  "@bettervoxel/globaltype/GuiObject.AnchorPoint": {
+    "documentation": "Which point of the element (0..1 per axis) its Position pins: (0, 0) the top-left corner, (0.5, 0.5) the center. The Z component is unused.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#anchorpoint"
+  },
+  "@bettervoxel/globaltype/GuiObject.BackgroundColor3": {
+    "documentation": "The element's fill color.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#backgroundcolor3"
+  },
+  "@bettervoxel/globaltype/GuiObject.BackgroundTransparency": {
+    "documentation": "How see-through the element's fill renders, clamped 0 (opaque) to 1 (invisible).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#backgroundtransparency"
+  },
+  "@bettervoxel/globaltype/GuiObject.Position": {
+    "documentation": "The element's position as a UDim2 (scale plus pixel offset per axis), relative to the parent element.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#position"
+  },
+  "@bettervoxel/globaltype/GuiObject.Size": {
+    "documentation": "The element's size as a UDim2 (scale plus pixel offset per axis).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#size"
+  },
+  "@bettervoxel/globaltype/HingeConstraint": {
+    "documentation": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html"
+  },
+  "@bettervoxel/globaltype/ImageLabel": {
+    "documentation": "A UI element that displays an image asset.",
+    "keys": {
+      "Image": "@bettervoxel/globaltype/ImageLabel.Image"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ImageLabel.html"
+  },
+  "@bettervoxel/globaltype/ImageLabel.Image": {
+    "documentation": "The displayed image, as a local asset path. Unset reads as the empty string; writing the empty string clears it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ImageLabel.html#image"
+  },
+  "@bettervoxel/globaltype/Instance": {
+    "documentation": "The root of the class tree: identity (Name, ClassName), the Parent tree with its hierarchy signals, attributes, and lifetime (Clone, Destroy). Every scriptable object is an Instance.",
+    "keys": {
+      "AncestryChanged": "@bettervoxel/globaltype/Instance.AncestryChanged",
+      "AttributeChanged": "@bettervoxel/globaltype/Instance.AttributeChanged",
+      "Changed": "@bettervoxel/globaltype/Instance.Changed",
+      "ChildAdded": "@bettervoxel/globaltype/Instance.ChildAdded",
+      "ChildRemoved": "@bettervoxel/globaltype/Instance.ChildRemoved",
+      "ClassName": "@bettervoxel/globaltype/Instance.ClassName",
+      "Clone": "@bettervoxel/globaltype/Instance.Clone",
+      "DescendantAdded": "@bettervoxel/globaltype/Instance.DescendantAdded",
+      "Destroy": "@bettervoxel/globaltype/Instance.Destroy",
+      "Destroying": "@bettervoxel/globaltype/Instance.Destroying",
+      "FindFirstChild": "@bettervoxel/globaltype/Instance.FindFirstChild",
+      "GetAttribute": "@bettervoxel/globaltype/Instance.GetAttribute",
+      "GetAttributeChangedSignal": "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal",
+      "GetChildren": "@bettervoxel/globaltype/Instance.GetChildren",
+      "GetDescendants": "@bettervoxel/globaltype/Instance.GetDescendants",
+      "GetFullName": "@bettervoxel/globaltype/Instance.GetFullName",
+      "GetPropertyChangedSignal": "@bettervoxel/globaltype/Instance.GetPropertyChangedSignal",
+      "IsA": "@bettervoxel/globaltype/Instance.IsA",
+      "Name": "@bettervoxel/globaltype/Instance.Name",
+      "Parent": "@bettervoxel/globaltype/Instance.Parent",
+      "SetAttribute": "@bettervoxel/globaltype/Instance.SetAttribute",
+      "WaitForChild": "@bettervoxel/globaltype/Instance.WaitForChild"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
+  },
+  "@bettervoxel/globaltype/Instance.AncestryChanged": {
+    "documentation": "Fires when this instance or any ancestor is reparented, on every node of the moved subtree (deepest first), with the MOVED instance and its new parent — nil on detach. Destroy fires each destroyed node's own (self, nil).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#ancestrychanged"
+  },
+  "@bettervoxel/globaltype/Instance.AttributeChanged": {
+    "documentation": "Fires with the attribute NAME on every landed attribute write — first set, value changes and removal included; same-value writes stay silent. Delivers once per landed write in write order, before the matching GetAttributeChangedSignal.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#attributechanged"
+  },
+  "@bettervoxel/globaltype/Instance.Changed": {
+    "documentation": "Fires with the property NAME on every landed property write — pose writes fan out to CFrame, Position and Rotation; same-value writes stay silent; attribute writes travel their own AttributeChanged channel; physics motion never fires. The value containers override it entirely: their Changed fires only for Value, with the new VALUE as payload.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#changed"
+  },
+  "@bettervoxel/globaltype/Instance.ChildAdded": {
+    "documentation": "Fires when an instance is parented directly under this one. The listener receives the added child.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#childadded"
+  },
+  "@bettervoxel/globaltype/Instance.ChildRemoved": {
+    "documentation": "Fires when a direct child is unparented from this instance or destroyed. The listener receives the removed child.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#childremoved"
+  },
+  "@bettervoxel/globaltype/Instance.ClassName": {
+    "documentation": "The instance's class, as a string. An instance never changes class. Prefer IsA over comparing ClassName — IsA also matches base classes like BasePart.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#classname"
+  },
+  "@bettervoxel/globaltype/Instance.Clone": {
+    "documentation": "A deep copy of the instance and its subtree: authored state, attributes and tags copy; the copy is detached (Parent is nil) with fresh identity. A destroyed instance clones its husk as a live single-node copy.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#clone",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.Clone/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.Clone/return/0": {
+    "documentation": "`Instance`"
+  },
+  "@bettervoxel/globaltype/Instance.DescendantAdded": {
+    "documentation": "Fires when an instance is added anywhere in this instance's subtree, with the added descendant. When a whole subtree is attached it fires for the attached node itself, not for every instance below it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#descendantadded"
+  },
+  "@bettervoxel/globaltype/Instance.Destroy": {
+    "documentation": "Destroys the instance and its whole subtree, firing Destroying. Destroyed instances stay readable as husks: properties read their last values, Parent reads nil and is locked. Destroying an already-destroyed instance does nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#destroy",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Instance.Destroying": {
+    "documentation": "Fires when the instance is destroyed. The listener sees a husk: properties still read their last values, the tree is severed, and Parent reads nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#destroying"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChild": {
+    "documentation": "The first direct child named name, or nil. The cheap probe when absence is an expected answer — cache the result instead of re-finding it every frame.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstchild",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.FindFirstChild/param/0",
+        "name": "name"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.FindFirstChild/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChild/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChild/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.GetAttribute": {
+    "documentation": "The named attribute — a bare value for primitives, a table of fields for records — or nil when unset. The two-argument form is a BetterVoxel extension: it projects one field of a record as a bare value without building the table — the cheap shape for hot loops (nil on primitives).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getattribute",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.GetAttribute/param/0",
+        "name": "name"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.GetAttribute/param/1",
+        "name": "field"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.GetAttribute/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.GetAttribute/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/Instance.GetAttribute/param/1": {
+    "documentation": "`field: string?`"
+  },
+  "@bettervoxel/globaltype/Instance.GetAttribute/return/0": {
+    "documentation": "`any`"
+  },
+  "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal": {
+    "documentation": "A signal that fires (with no arguments) when the named attribute lands a change on this instance — first set, value changes and removal included; same-value writes stay silent. Any attribute name is legal, set or not. Delivers after the instance-wide AttributeChanged for the same write.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getattributechangedsignal",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal/param/0",
+        "name": "attribute"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal/param/0": {
+    "documentation": "`attribute: string`"
+  },
+  "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal/return/0": {
+    "documentation": "`BVScriptSignal`"
+  },
+  "@bettervoxel/globaltype/Instance.GetChildren": {
+    "documentation": "The direct children, in child order, as an array. A destroyed instance answers an empty array.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getchildren",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.GetChildren/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.GetChildren/return/0": {
+    "documentation": "`{Instance}`"
+  },
+  "@bettervoxel/globaltype/Instance.GetDescendants": {
+    "documentation": "Every instance below this one as an array, in preorder: each node comes before its own children.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getdescendants",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.GetDescendants/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.GetDescendants/return/0": {
+    "documentation": "`{Instance}`"
+  },
+  "@bettervoxel/globaltype/Instance.GetFullName": {
+    "documentation": "The instance's full dot-joined path from the root, Workspace included: 'Workspace.Folder.Part'. A detached instance's full name is just its Name — member errors quote this same spelling.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getfullname",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.GetFullName/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.GetFullName/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/Instance.GetPropertyChangedSignal": {
+    "documentation": "A signal that fires (with no arguments) when the named property changes on this instance. Explicit writes fire it; physics motion never fires the pose properties. Subscribing errors when the property can never fire on this class — the same catch-the-typo philosophy as unknown member names.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getpropertychangedsignal",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.GetPropertyChangedSignal/param/0",
+        "name": "property"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.GetPropertyChangedSignal/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.GetPropertyChangedSignal/param/0": {
+    "documentation": "`property: string`"
+  },
+  "@bettervoxel/globaltype/Instance.GetPropertyChangedSignal/return/0": {
+    "documentation": "`BVScriptSignal`"
+  },
+  "@bettervoxel/globaltype/Instance.IsA": {
+    "documentation": "Whether the instance's class is className or inherits from it: a Part IsA 'BasePart' and IsA 'Instance'. Unknown class names answer false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Instance.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Instance.Name": {
+    "documentation": "The instance's name — the label the Explorer shows and the key FindFirstChild, WaitForChild and dot-child access match on. Names need not be unique among siblings; lookups return the first match in child order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#name"
+  },
+  "@bettervoxel/globaltype/Instance.Parent": {
+    "documentation": "The instance's parent in the object tree, or nil for a detached root. Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#parent"
+  },
+  "@bettervoxel/globaltype/Instance.SetAttribute": {
+    "documentation": "Writes the named attribute: a primitive or datatype (Vector3, Color3, CFrame) stores directly, a table stores a structured record, and nil REMOVES the attribute (also the way to change its type: remove, then set). Writes coerce onto the attribute's declared shape — out-of-range values error, a record write merges field by field with missing fields keeping their values. Every landed write fires AttributeChanged then the per-name signal; same-value writes are silent. Names are capped at 100 characters and cannot be empty; non-finite components refuse.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#setattribute",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.SetAttribute/param/0",
+        "name": "name"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.SetAttribute/param/1",
+        "name": "value"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Instance.SetAttribute/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/Instance.SetAttribute/param/1": {
+    "documentation": "`value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil`"
+  },
+  "@bettervoxel/globaltype/Instance.WaitForChild": {
+    "documentation": "The first direct child named name, suspending the calling thread until one exists. A child already present returns without yielding. With a timeout (in seconds) the wait gives up and returns nil once it elapses; without one it waits forever.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#waitforchild",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.WaitForChild/param/0",
+        "name": "name"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.WaitForChild/param/1",
+        "name": "timeout"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.WaitForChild/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.WaitForChild/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/Instance.WaitForChild/param/1": {
+    "documentation": "`timeout: number?`"
+  },
+  "@bettervoxel/globaltype/Instance.WaitForChild/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/IntValue": {
+    "documentation": "A named container for one integer; number writes round half away from zero.",
+    "keys": {
+      "Value": "@bettervoxel/globaltype/IntValue.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/IntValue.html"
+  },
+  "@bettervoxel/globaltype/IntValue.Value": {
+    "documentation": "The stored integer. Number writes round half away from zero (3.5 becomes 4, -3.7 becomes -4).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/IntValue.html#value"
+  },
+  "@bettervoxel/globaltype/LayerCollector": {
+    "documentation": "The UI roots that collect an element tree: ScreenGui on the screen, BillboardGui in the world.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LayerCollector.html"
+  },
+  "@bettervoxel/globaltype/Light": {
+    "documentation": "The shared light surface: Brightness, Color, Range, Shadows and the Enabled switch, parented under the part that carries the light.",
+    "keys": {
+      "Brightness": "@bettervoxel/globaltype/Light.Brightness",
+      "Color": "@bettervoxel/globaltype/Light.Color",
+      "Enabled": "@bettervoxel/globaltype/Light.Enabled",
+      "Range": "@bettervoxel/globaltype/Light.Range",
+      "Shadows": "@bettervoxel/globaltype/Light.Shadows"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Light.html"
+  },
+  "@bettervoxel/globaltype/Light.Brightness": {
+    "documentation": "The light's intensity, floored at 0. The unit is the renderer's (a default light reads 1000000), not the reference engine's 0..~10 scale — a recorded divergence.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Light.html#brightness"
+  },
+  "@bettervoxel/globaltype/Light.Color": {
+    "documentation": "The light's color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Light.html#color"
+  },
+  "@bettervoxel/globaltype/Light.Enabled": {
+    "documentation": "Whether the light is lit. Disabling removes the derived render light; the authored properties keep their values.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Light.html#enabled"
+  },
+  "@bettervoxel/globaltype/Light.Range": {
+    "documentation": "How far the light reaches, in studs, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Light.html#range"
+  },
+  "@bettervoxel/globaltype/Light.Shadows": {
+    "documentation": "Whether the light casts shadows.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Light.html#shadows"
+  },
+  "@bettervoxel/globaltype/Lighting": {
+    "documentation": "The global lighting state: ambient color, sun brightness, the ClockTime day cycle, and distance fog. The skybox is file-authored in v1 — scripts move the sun, not the sky.",
+    "keys": {
+      "Ambient": "@bettervoxel/globaltype/Lighting.Ambient",
+      "Brightness": "@bettervoxel/globaltype/Lighting.Brightness",
+      "ClassName": "@bettervoxel/globaltype/Lighting.ClassName",
+      "ClockTime": "@bettervoxel/globaltype/Lighting.ClockTime",
+      "FogColor": "@bettervoxel/globaltype/Lighting.FogColor",
+      "FogEnd": "@bettervoxel/globaltype/Lighting.FogEnd",
+      "FogStart": "@bettervoxel/globaltype/Lighting.FogStart",
+      "GetSunDirection": "@bettervoxel/globaltype/Lighting.GetSunDirection",
+      "IsA": "@bettervoxel/globaltype/Lighting.IsA",
+      "Name": "@bettervoxel/globaltype/Lighting.Name"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html"
+  },
+  "@bettervoxel/globaltype/Lighting.Ambient": {
+    "documentation": "The ambient light color, filling in where no light reaches. Accepts a Color3 or a raw RGB vector, like every color setter.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#ambient"
+  },
+  "@bettervoxel/globaltype/Lighting.Brightness": {
+    "documentation": "The sun's intensity, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#brightness"
+  },
+  "@bettervoxel/globaltype/Lighting.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#classname"
+  },
+  "@bettervoxel/globaltype/Lighting.ClockTime": {
+    "documentation": "The time of day in hours, 0..24. Writes wrap onto the day, so a `ClockTime += dt` day cycle needs no bookkeeping; the sun and sky follow.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#clocktime"
+  },
+  "@bettervoxel/globaltype/Lighting.FogColor": {
+    "documentation": "The distance-fog color.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogcolor"
+  },
+  "@bettervoxel/globaltype/Lighting.FogEnd": {
+    "documentation": "The distance where fog fully occludes, in studs, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogend"
+  },
+  "@bettervoxel/globaltype/Lighting.FogStart": {
+    "documentation": "The distance where fog begins, in studs, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogstart"
+  },
+  "@bettervoxel/globaltype/Lighting.GetSunDirection": {
+    "documentation": "The unit direction toward the sun for the current ClockTime.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#getsundirection",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Lighting.GetSunDirection/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Lighting.GetSunDirection/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Lighting.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Lighting.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Lighting.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Lighting.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Lighting.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Lighting.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#name"
+  },
+  "@bettervoxel/globaltype/LocalScript": {
+    "documentation": "A script that runs on each client. Its CLASS decides that — a stored RunContext value is accepted but inert.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LocalScript.html"
+  },
+  "@bettervoxel/globaltype/LuaSourceContainer": {
+    "documentation": "Anything that holds Luau source: the scripts and modules.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LuaSourceContainer.html"
+  },
+  "@bettervoxel/globaltype/MeshPart": {
+    "documentation": "A part whose geometry is an imported mesh. Size scales the mesh against its authored MeshSize; collision comes from the baked CollisionFidelity shapes; the mesh reference itself is immutable.",
+    "keys": {
+      "MeshId": "@bettervoxel/globaltype/MeshPart.MeshId",
+      "MeshSize": "@bettervoxel/globaltype/MeshPart.MeshSize"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html"
+  },
+  "@bettervoxel/globaltype/MeshPart.MeshId": {
+    "documentation": "The mesh asset reference, as the asset's local path — the empty string on a meshless husk. Every write is refused: the mesh reference is immutable after authoring.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#meshid"
+  },
+  "@bettervoxel/globaltype/MeshPart.MeshSize": {
+    "documentation": "The authored mesh bounds, untouched by resizes. Every write is refused; resize through Size, which scales the mesh against these bounds.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#meshsize"
+  },
+  "@bettervoxel/globaltype/Model": {
+    "documentation": "A grouping node for parts: pivots through PrimaryPart (or its bounding-box center without one) and moves as a group via PivotTo.",
+    "keys": {
+      "GetBoundingBox": "@bettervoxel/globaltype/Model.GetBoundingBox",
+      "PrimaryPart": "@bettervoxel/globaltype/Model.PrimaryPart"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Model.html"
+  },
+  "@bettervoxel/globaltype/Model.GetBoundingBox": {
+    "documentation": "The axis-aligned box around the subtree's parts, as (center CFrame, size). Errors when the subtree holds no part.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Model.html#getboundingbox",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Model.GetBoundingBox/return/0",
+      "@bettervoxel/globaltype/Model.GetBoundingBox/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/Model.GetBoundingBox/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/Model.GetBoundingBox/return/1": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Model.PrimaryPart": {
+    "documentation": "The part the model pivots through, or nil. GetPivot and PivotTo use it; without one they fall back to the bounding-box center. A reference to a despawned part reads as nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Model.html#primarypart"
+  },
+  "@bettervoxel/globaltype/ModuleScript": {
+    "documentation": "Reusable code loaded with require: runs once per context, and its return value is cached and shared between requirers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ModuleScript.html"
+  },
+  "@bettervoxel/globaltype/NumberValue": {
+    "documentation": "A named container for one double-precision number.",
+    "keys": {
+      "Value": "@bettervoxel/globaltype/NumberValue.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/NumberValue.html"
+  },
+  "@bettervoxel/globaltype/NumberValue.Value": {
+    "documentation": "The stored double-precision number.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/NumberValue.html#value"
+  },
+  "@bettervoxel/globaltype/ObjectValue": {
+    "documentation": "A named container for one instance reference; references survive Destroy and read back as husks.",
+    "keys": {
+      "Value": "@bettervoxel/globaltype/ObjectValue.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ObjectValue.html"
+  },
+  "@bettervoxel/globaltype/ObjectValue.Value": {
+    "documentation": "The stored instance reference, or nil. References outlive Destroy — a destroyed target reads as its husk; assigning nil clears the slot.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ObjectValue.html#value"
+  },
+  "@bettervoxel/globaltype/PVInstance": {
+    "documentation": "The positioned layer: everything with a pivot — parts and models — answers GetPivot and moves as a group through PivotTo.",
+    "keys": {
+      "GetPivot": "@bettervoxel/globaltype/PVInstance.GetPivot",
+      "PivotTo": "@bettervoxel/globaltype/PVInstance.PivotTo"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PVInstance.html"
+  },
+  "@bettervoxel/globaltype/PVInstance.GetPivot": {
+    "documentation": "The instance's pivot: a Model's PrimaryPart pose (or its bounding-box center without one), an ordinary part's own CFrame.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PVInstance.html#getpivot",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/PVInstance.GetPivot/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/PVInstance.GetPivot/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/PVInstance.PivotTo": {
+    "documentation": "Moves this instance and its logical descendants by ONE rigid transform: the subtree lands with its pivot at the target CFrame, members orbiting the pivot and rotating with it. A plain vector keeps the current rotation. Fires the pose signals for each moved object. A PrimaryPart-less Model pivots about its bounding-box center with identity rotation, so repeated ROTATING pivots compound there — a recorded divergence; give the model a PrimaryPart.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PVInstance.html#pivotto",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/PVInstance.PivotTo/param/0",
+        "name": "target"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/PVInstance.PivotTo/param/0": {
+    "documentation": "`target: CFrame | Vector3`"
+  },
+  "@bettervoxel/globaltype/Part": {
+    "documentation": "The basic building block: a shaped, colored, physically simulated solid. Shape picks the geometry; the mesh and collider re-derive.",
+    "keys": {
+      "GetNetworkOwner": "@bettervoxel/globaltype/Part.GetNetworkOwner",
+      "GetNetworkOwnershipAuto": "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto",
+      "SetNetworkOwner": "@bettervoxel/globaltype/Part.SetNetworkOwner",
+      "SetNetworkOwnershipAuto": "@bettervoxel/globaltype/Part.SetNetworkOwnershipAuto",
+      "Shape": "@bettervoxel/globaltype/Part.Shape"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html"
+  },
+  "@bettervoxel/globaltype/Part.GetNetworkOwner": {
+    "documentation": "Server-only: the player currently simulating this assembly, or nil for the server. Resolved through the assembly root.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#getnetworkowner",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Part.GetNetworkOwner/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Part.GetNetworkOwner/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto": {
+    "documentation": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#getnetworkownershipauto",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Part.SetNetworkOwner": {
+    "documentation": "Server-only: pins which peer simulates this assembly (nil means the server) and turns automatic ownership off. A non-Player instance degrades silently to the server. The part must be an unanchored workspace descendant.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#setnetworkowner",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Part.SetNetworkOwner/param/0",
+        "name": "player"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Part.SetNetworkOwner/param/0": {
+    "documentation": "`player: Instance?`"
+  },
+  "@bettervoxel/globaltype/Part.SetNetworkOwnershipAuto": {
+    "documentation": "Server-only: re-arms automatic (distance-based) ownership without clearing the standing owner.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#setnetworkownershipauto",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Part.Shape": {
+    "documentation": "The part's geometric shape. Writes accept the Enum.PartType item or its string name; the mesh and collider re-derive.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#shape"
+  },
+  "@bettervoxel/globaltype/Player": {
+    "documentation": "A joined player's roster identity: UserId, the current Character and its CharacterAdded signal, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service.",
+    "keys": {
+      "Character": "@bettervoxel/globaltype/Player.Character",
+      "CharacterAdded": "@bettervoxel/globaltype/Player.CharacterAdded",
+      "LoadCharacter": "@bettervoxel/globaltype/Player.LoadCharacter",
+      "RespawnTime": "@bettervoxel/globaltype/Player.RespawnTime",
+      "UserId": "@bettervoxel/globaltype/Player.UserId"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html"
+  },
+  "@bettervoxel/globaltype/Player.Character": {
+    "documentation": "The player's current character body, or nil between spawns. CharacterAdded fires with each new one.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#character"
+  },
+  "@bettervoxel/globaltype/Player.CharacterAdded": {
+    "documentation": "Fires with the new character on every spawn, the first included.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#characteradded"
+  },
+  "@bettervoxel/globaltype/Player.LoadCharacter": {
+    "documentation": "Despawns the player's current character (if any) and spawns a fresh one on the next respawn pass.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#loadcharacter",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Player.RespawnTime": {
+    "documentation": "Seconds between this player's death and their respawn, floored at 0. An engine extension over the Players service's RespawnTime: joins seed it from the service value, and a per-player write wins until the next service-level write (which writes through to the whole roster).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#respawntime"
+  },
+  "@bettervoxel/globaltype/Player.UserId": {
+    "documentation": "The session identity — how a script tells two players apart. Hosts keep it under 2^53 so it survives Luau's number type.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#userid"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab": {
+    "documentation": "The character template: joining players spawn their characters from it, SpawnCharacter builds NPCs from it, and its pose is where they stand.",
+    "keys": {
+      "AssemblyLinearVelocity": "@bettervoxel/globaltype/PlayerPrefab.AssemblyLinearVelocity",
+      "CFrame": "@bettervoxel/globaltype/PlayerPrefab.CFrame",
+      "Position": "@bettervoxel/globaltype/PlayerPrefab.Position",
+      "Rotation": "@bettervoxel/globaltype/PlayerPrefab.Rotation",
+      "SpawnCharacter": "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter",
+      "Touched": "@bettervoxel/globaltype/PlayerPrefab.Touched"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.AssemblyLinearVelocity": {
+    "documentation": "The prefab body's linear velocity (zero without a live body).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#assemblylinearvelocity"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.CFrame": {
+    "documentation": "The prefab's full rigid transform as one CFrame value.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#cframe"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.Position": {
+    "documentation": "The prefab's world position — where characters spawned from it stand.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#position"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.Rotation": {
+    "documentation": "The prefab's orientation as XYZ Euler angles in degrees.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#rotation"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter": {
+    "documentation": "Spawns an unowned (NPC) character from this template and returns it, placed at position or standing on the prefab's own pose. The character answers the humanoid surface (Health, MoveTo, ...).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#spawncharacter",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter/param/0",
+        "name": "position"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter/param/0": {
+    "documentation": "`position: Vector3?`"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter/return/0": {
+    "documentation": "`Instance`"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.Touched": {
+    "documentation": "Fires when a collider starts touching the prefab body, with the other object.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#touched"
+  },
+  "@bettervoxel/globaltype/Players": {
+    "documentation": "The session roster: LocalPlayer, the player list, join/leave signals, and the measured RespawnTime service property (consulted at death; each Player's per-player value seeds from it).",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/Players.ClassName",
+      "GetPlayers": "@bettervoxel/globaltype/Players.GetPlayers",
+      "IsA": "@bettervoxel/globaltype/Players.IsA",
+      "LocalPlayer": "@bettervoxel/globaltype/Players.LocalPlayer",
+      "Name": "@bettervoxel/globaltype/Players.Name",
+      "PlayerAdded": "@bettervoxel/globaltype/Players.PlayerAdded",
+      "PlayerRemoving": "@bettervoxel/globaltype/Players.PlayerRemoving",
+      "RespawnTime": "@bettervoxel/globaltype/Players.RespawnTime"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html"
+  },
+  "@bettervoxel/globaltype/Players.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#classname"
+  },
+  "@bettervoxel/globaltype/Players.GetPlayers": {
+    "documentation": "Every player currently in the session, in unspecified order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#getplayers",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Players.GetPlayers/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Players.GetPlayers/return/0": {
+    "documentation": "`{Player}`"
+  },
+  "@bettervoxel/globaltype/Players.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Players.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Players.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Players.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Players.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Players.LocalPlayer": {
+    "documentation": "This process's own player — nil until they join, and always nil on a dedicated server.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#localplayer"
+  },
+  "@bettervoxel/globaltype/Players.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#name"
+  },
+  "@bettervoxel/globaltype/Players.PlayerAdded": {
+    "documentation": "Fires with each player that joins the session — solo play's auto-created local player included.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#playeradded"
+  },
+  "@bettervoxel/globaltype/Players.PlayerRemoving": {
+    "documentation": "Fires with each player about to leave, while they are still on the roster and resolvable.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#playerremoving"
+  },
+  "@bettervoxel/globaltype/Players.RespawnTime": {
+    "documentation": "Seconds between death and respawn (measured default 3). Stored as given — negatives read back and respawn promptly — and consulted at death: a write reaches players already in the game. Each Player's RespawnTime seeds from it and may override it per player.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#respawntime"
+  },
+  "@bettervoxel/globaltype/PointLight": {
+    "documentation": "A light radiating in every direction from its parent's position.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PointLight.html"
+  },
+  "@bettervoxel/globaltype/RemoteEvent": {
+    "documentation": "The cross-network signal: FireServer and FireClient/FireAllClients queue OnServerEvent and OnClientEvent on the far side, payloads deep-copied through the remote codec.",
+    "keys": {
+      "FireAllClients": "@bettervoxel/globaltype/RemoteEvent.FireAllClients",
+      "FireClient": "@bettervoxel/globaltype/RemoteEvent.FireClient",
+      "FireServer": "@bettervoxel/globaltype/RemoteEvent.FireServer",
+      "OnClientEvent": "@bettervoxel/globaltype/RemoteEvent.OnClientEvent",
+      "OnServerEvent": "@bettervoxel/globaltype/RemoteEvent.OnServerEvent"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteEvent.html"
+  },
+  "@bettervoxel/globaltype/RemoteEvent.FireAllClients": {
+    "documentation": "Server-side only: queues OnClientEvent on every connected client with these arguments.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteEvent.html#fireallclients",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RemoteEvent.FireAllClients/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RemoteEvent.FireAllClients/param/0": {
+    "documentation": "`...: any`"
+  },
+  "@bettervoxel/globaltype/RemoteEvent.FireClient": {
+    "documentation": "Server-side only: queues OnClientEvent on the given player's client with these arguments.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteEvent.html#fireclient",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RemoteEvent.FireClient/param/0",
+        "name": "player"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RemoteEvent.FireClient/param/1",
+        "name": "..."
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RemoteEvent.FireClient/param/0": {
+    "documentation": "`player: Instance`"
+  },
+  "@bettervoxel/globaltype/RemoteEvent.FireClient/param/1": {
+    "documentation": "`...: any`"
+  },
+  "@bettervoxel/globaltype/RemoteEvent.FireServer": {
+    "documentation": "Client-side only: queues OnServerEvent on the server with these arguments. Payloads cross the remote codec — a real deep copy, even solo.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteEvent.html#fireserver",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RemoteEvent.FireServer/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RemoteEvent.FireServer/param/0": {
+    "documentation": "`...: any`"
+  },
+  "@bettervoxel/globaltype/RemoteEvent.OnClientEvent": {
+    "documentation": "Fires on a client when the server calls FireClient or FireAllClients, with the fired arguments. Client-side only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteEvent.html#onclientevent"
+  },
+  "@bettervoxel/globaltype/RemoteEvent.OnServerEvent": {
+    "documentation": "Fires on the server when a client calls FireServer: the listener receives the sending player, then the fired arguments. Server-side only — touching it on a client errors.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteEvent.html#onserverevent"
+  },
+  "@bettervoxel/globaltype/RemoteFunction": {
+    "documentation": "The cross-network call: InvokeServer and InvokeClient suspend the calling thread until the far handler's reply crosses back.",
+    "keys": {
+      "InvokeClient": "@bettervoxel/globaltype/RemoteFunction.InvokeClient",
+      "InvokeServer": "@bettervoxel/globaltype/RemoteFunction.InvokeServer",
+      "OnClientInvoke": "@bettervoxel/globaltype/RemoteFunction.OnClientInvoke",
+      "OnServerInvoke": "@bettervoxel/globaltype/RemoteFunction.OnServerInvoke"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteFunction.html"
+  },
+  "@bettervoxel/globaltype/RemoteFunction.InvokeClient": {
+    "documentation": "Server-side only: calls the given player's OnClientInvoke and suspends until the reply, the player's disconnect (fails fast), or the timeout.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteFunction.html#invokeclient",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RemoteFunction.InvokeClient/param/0",
+        "name": "player"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RemoteFunction.InvokeClient/param/1",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/RemoteFunction.InvokeClient/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RemoteFunction.InvokeClient/param/0": {
+    "documentation": "`player: Instance`"
+  },
+  "@bettervoxel/globaltype/RemoteFunction.InvokeClient/param/1": {
+    "documentation": "`...: any`"
+  },
+  "@bettervoxel/globaltype/RemoteFunction.InvokeClient/return/0": {
+    "documentation": "`...any`"
+  },
+  "@bettervoxel/globaltype/RemoteFunction.InvokeServer": {
+    "documentation": "Client-side only: calls the server's OnServerInvoke and suspends the calling thread until the reply arrives — or an engine timeout errors it (the reference engine blocks forever; a recorded divergence). A handler error re-raises here with its text intact.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteFunction.html#invokeserver",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RemoteFunction.InvokeServer/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/RemoteFunction.InvokeServer/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RemoteFunction.InvokeServer/param/0": {
+    "documentation": "`...: any`"
+  },
+  "@bettervoxel/globaltype/RemoteFunction.InvokeServer/return/0": {
+    "documentation": "`...any`"
+  },
+  "@bettervoxel/globaltype/RemoteFunction.OnClientInvoke": {
+    "documentation": "The client-side handler InvokeClient calls: it receives the arguments and its returns cross back to the server. Assign a function or nil; client-side only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteFunction.html#onclientinvoke"
+  },
+  "@bettervoxel/globaltype/RemoteFunction.OnServerInvoke": {
+    "documentation": "The server-side handler InvokeServer calls: it receives the invoking player, then the arguments, and its returns cross back to the caller. Assign a function or nil; server-side only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteFunction.html#onserverinvoke"
+  },
+  "@bettervoxel/globaltype/RopeConstraint": {
+    "documentation": "A slack-allowed distance cap: the bodies never separate beyond Length, and the rope never pushes.",
+    "keys": {
+      "Length": "@bettervoxel/globaltype/RopeConstraint.Length"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RopeConstraint.html"
+  },
+  "@bettervoxel/globaltype/RopeConstraint.Length": {
+    "documentation": "The rope's maximum separation in studs — slack allowed, it never pushes. The measured default is 5; negative writes clamp to 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RopeConstraint.html#length"
+  },
+  "@bettervoxel/globaltype/RunService": {
+    "documentation": "The frame clock: Heartbeat fires once per scripts pass with the frame's delta time. The one service whose Name (\"Run Service\", measured) differs from its ClassName.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/RunService.ClassName",
+      "Heartbeat": "@bettervoxel/globaltype/RunService.Heartbeat",
+      "IsA": "@bettervoxel/globaltype/RunService.IsA",
+      "Name": "@bettervoxel/globaltype/RunService.Name"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html"
+  },
+  "@bettervoxel/globaltype/RunService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#classname"
+  },
+  "@bettervoxel/globaltype/RunService.Heartbeat": {
+    "documentation": "Fires once per scripts pass with the frame's delta time in script-clock seconds. The workhorse per-frame hook.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#heartbeat"
+  },
+  "@bettervoxel/globaltype/RunService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/RunService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/RunService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#name"
+  },
+  "@bettervoxel/globaltype/ScreenGui": {
+    "documentation": "The screen-space UI root: its element tree renders over the viewport.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ScreenGui.html"
+  },
+  "@bettervoxel/globaltype/Script": {
+    "documentation": "A server-side script by default; RunContext can re-home it. Enabled is its run switch — disabling kills its threads, re-enabling restarts it fresh.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Script.html"
+  },
+  "@bettervoxel/globaltype/Sound": {
+    "documentation": "A playable audio source: Play and Stop drive it, IsPlaying reads back, and volume, speed and looping are properties.",
+    "keys": {
+      "IsPlaying": "@bettervoxel/globaltype/Sound.IsPlaying",
+      "Looped": "@bettervoxel/globaltype/Sound.Looped",
+      "Play": "@bettervoxel/globaltype/Sound.Play",
+      "PlaybackSpeed": "@bettervoxel/globaltype/Sound.PlaybackSpeed",
+      "SoundId": "@bettervoxel/globaltype/Sound.SoundId",
+      "Stop": "@bettervoxel/globaltype/Sound.Stop",
+      "Volume": "@bettervoxel/globaltype/Sound.Volume"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html"
+  },
+  "@bettervoxel/globaltype/Sound.IsPlaying": {
+    "documentation": "Whether the sound is meant to be playing — Play and Stop drive it, and a finished non-looped sound writes it back to false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#isplaying"
+  },
+  "@bettervoxel/globaltype/Sound.Looped": {
+    "documentation": "Whether playback restarts from the top when the clip ends.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#looped"
+  },
+  "@bettervoxel/globaltype/Sound.Play": {
+    "documentation": "Starts playback (IsPlaying becomes true). Calling Play in a loop is harmless — same-state calls are silent.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#play",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Sound.PlaybackSpeed": {
+    "documentation": "Playback rate (1 is normal speed), floored at 0. Pitch follows the rate.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#playbackspeed"
+  },
+  "@bettervoxel/globaltype/Sound.SoundId": {
+    "documentation": "The audio asset, as a local asset path.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#soundid"
+  },
+  "@bettervoxel/globaltype/Sound.Stop": {
+    "documentation": "Stops playback (IsPlaying becomes false).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#stop",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Sound.Volume": {
+    "documentation": "Playback volume, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#volume"
+  },
+  "@bettervoxel/globaltype/SoundService": {
+    "documentation": "Non-positional playback: PlayLocalSound starts a Sound wherever it lives, storage included.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/SoundService.ClassName",
+      "IsA": "@bettervoxel/globaltype/SoundService.IsA",
+      "Name": "@bettervoxel/globaltype/SoundService.Name",
+      "PlayLocalSound": "@bettervoxel/globaltype/SoundService.PlayLocalSound"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/SoundService.html"
+  },
+  "@bettervoxel/globaltype/SoundService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/SoundService.html#classname"
+  },
+  "@bettervoxel/globaltype/SoundService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/SoundService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/SoundService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/SoundService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/SoundService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/SoundService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/SoundService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/SoundService.html#name"
+  },
+  "@bettervoxel/globaltype/SoundService.PlayLocalSound": {
+    "documentation": "Starts a Sound non-positionally, wherever it lives — storage included. Anything but a Sound instance errors.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/SoundService.html#playlocalsound",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/SoundService.PlayLocalSound/param/0",
+        "name": "sound"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/SoundService.PlayLocalSound/param/0": {
+    "documentation": "`sound: Instance`"
+  },
+  "@bettervoxel/globaltype/SpawnLocation": {
+    "documentation": "A Part players spawn on. Otherwise a regular part — every BasePart member applies.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpawnLocation.html"
+  },
+  "@bettervoxel/globaltype/SpotLight": {
+    "documentation": "A cone light aimed along its parent's orientation; Angle is the full cone in degrees.",
+    "keys": {
+      "Angle": "@bettervoxel/globaltype/SpotLight.Angle"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpotLight.html"
+  },
+  "@bettervoxel/globaltype/SpotLight.Angle": {
+    "documentation": "The full cone angle in degrees, clamped 0..180 (writing 200 reads back 180). A default spot light reads 90.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpotLight.html#angle"
+  },
+  "@bettervoxel/globaltype/StringValue": {
+    "documentation": "A named container for one string.",
+    "keys": {
+      "Value": "@bettervoxel/globaltype/StringValue.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/StringValue.html"
+  },
+  "@bettervoxel/globaltype/StringValue.Value": {
+    "documentation": "The stored string.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/StringValue.html#value"
+  },
+  "@bettervoxel/globaltype/TextButton": {
+    "documentation": "A clickable UI element with a text label; Activated fires on click release.",
+    "keys": {
+      "Text": "@bettervoxel/globaltype/TextButton.Text",
+      "TextColor3": "@bettervoxel/globaltype/TextButton.TextColor3",
+      "TextSize": "@bettervoxel/globaltype/TextButton.TextSize"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html"
+  },
+  "@bettervoxel/globaltype/TextButton.Text": {
+    "documentation": "The button's label text. Same-value writes are silent.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#text"
+  },
+  "@bettervoxel/globaltype/TextButton.TextColor3": {
+    "documentation": "The button label's text color.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textcolor3"
+  },
+  "@bettervoxel/globaltype/TextButton.TextSize": {
+    "documentation": "The button label's text size in pixels, floored at 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textsize"
+  },
+  "@bettervoxel/globaltype/TextLabel": {
+    "documentation": "A UI element that displays text.",
+    "keys": {
+      "Text": "@bettervoxel/globaltype/TextLabel.Text",
+      "TextColor3": "@bettervoxel/globaltype/TextLabel.TextColor3",
+      "TextSize": "@bettervoxel/globaltype/TextLabel.TextSize"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html"
+  },
+  "@bettervoxel/globaltype/TextLabel.Text": {
+    "documentation": "The displayed text. Same-value writes are silent — a HUD may rewrite its label every frame without re-triggering layout.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#text"
+  },
+  "@bettervoxel/globaltype/TextLabel.TextColor3": {
+    "documentation": "The text color.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textcolor3"
+  },
+  "@bettervoxel/globaltype/TextLabel.TextSize": {
+    "documentation": "The text size in pixels, floored at 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textsize"
+  },
+  "@bettervoxel/globaltype/TriangleMeshPart": {
+    "documentation": "The mesh-geometry layer: how imported meshes turn into collision shapes (CollisionFidelity).",
+    "keys": {
+      "CollisionFidelity": "@bettervoxel/globaltype/TriangleMeshPart.CollisionFidelity"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TriangleMeshPart.html"
+  },
+  "@bettervoxel/globaltype/TriangleMeshPart.CollisionFidelity": {
+    "documentation": "How the mesh's collision geometry is built: a Box, one convex Hull, or the decomposed convex shapes of Default and PreciseConvexDecomposition. Writes re-bake the collider — what the property says is what collides.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TriangleMeshPart.html#collisionfidelity"
+  },
+  "@bettervoxel/globaltype/Tween": {
+    "documentation": "One running property animation — the handle TweenService:Create returns (identity Tween < TweenBase, measured). Play, Pause and Cancel drive it; Completed fires the final Enum.PlaybackState.",
+    "keys": {
+      "Cancel": "@bettervoxel/globaltype/Tween.Cancel",
+      "ClassName": "@bettervoxel/globaltype/Tween.ClassName",
+      "Completed": "@bettervoxel/globaltype/Tween.Completed",
+      "IsA": "@bettervoxel/globaltype/Tween.IsA",
+      "Name": "@bettervoxel/globaltype/Tween.Name",
+      "Pause": "@bettervoxel/globaltype/Tween.Pause",
+      "Play": "@bettervoxel/globaltype/Tween.Play"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html"
+  },
+  "@bettervoxel/globaltype/Tween.Cancel": {
+    "documentation": "Stops the tween and leaves every property where it stands (the measured shape); Completed fires Cancelled.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html#cancel",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Tween.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html#classname"
+  },
+  "@bettervoxel/globaltype/Tween.Completed": {
+    "documentation": "Fires once when the tween ends — Enum.PlaybackState.Completed on a natural finish, Cancelled after Cancel (or after a later tween claimed a shared property). The handle is spent afterwards.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html#completed"
+  },
+  "@bettervoxel/globaltype/Tween.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Tween.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Tween.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Tween.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Tween.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Tween.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html#name"
+  },
+  "@bettervoxel/globaltype/Tween.Pause": {
+    "documentation": "Freezes a playing tween where it stands; Play resumes from there.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html#pause",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Tween.Play": {
+    "documentation": "Starts (or resumes after Pause) the tween: captures the current values as the from-side and runs on the script clock. A later Play on a shared property cancels the earlier tween.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Tween.html#play",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/TweenInfo": {
+    "documentation": "The parameter bundle TweenService:Create consumes: duration, easing style and direction, repeats, reversal and delay — immutable once built.",
+    "keys": {
+      "DelayTime": "@bettervoxel/globaltype/TweenInfo.DelayTime",
+      "EasingDirection": "@bettervoxel/globaltype/TweenInfo.EasingDirection",
+      "EasingStyle": "@bettervoxel/globaltype/TweenInfo.EasingStyle",
+      "RepeatCount": "@bettervoxel/globaltype/TweenInfo.RepeatCount",
+      "Reverses": "@bettervoxel/globaltype/TweenInfo.Reverses",
+      "Time": "@bettervoxel/globaltype/TweenInfo.Time"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html"
+  },
+  "@bettervoxel/globaltype/TweenInfo.DelayTime": {
+    "documentation": "Seconds to wait before the tween starts playing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html#delaytime"
+  },
+  "@bettervoxel/globaltype/TweenInfo.EasingDirection": {
+    "documentation": "Which end of the curve eases: In, Out, or InOut.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html#easingdirection"
+  },
+  "@bettervoxel/globaltype/TweenInfo.EasingStyle": {
+    "documentation": "The interpolation curve family.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html#easingstyle"
+  },
+  "@bettervoxel/globaltype/TweenInfo.RepeatCount": {
+    "documentation": "How many extra times the tween repeats after the first play; 0 plays once.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html#repeatcount"
+  },
+  "@bettervoxel/globaltype/TweenInfo.Reverses": {
+    "documentation": "Whether the tween plays back to the start after each forward pass.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html#reverses"
+  },
+  "@bettervoxel/globaltype/TweenInfo.Time": {
+    "documentation": "The tween's duration in seconds.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/TweenInfo.html#time"
+  },
+  "@bettervoxel/globaltype/TweenService": {
+    "documentation": "Property animation: Create builds a Tween driving properties to goal values through the reference engine's easing curves (pinned to its live samples); GetValue exposes the curves directly.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/TweenService.ClassName",
+      "Create": "@bettervoxel/globaltype/TweenService.Create",
+      "GetValue": "@bettervoxel/globaltype/TweenService.GetValue",
+      "IsA": "@bettervoxel/globaltype/TweenService.IsA",
+      "Name": "@bettervoxel/globaltype/TweenService.Name"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/TweenService.html"
+  },
+  "@bettervoxel/globaltype/TweenService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/TweenService.html#classname"
+  },
+  "@bettervoxel/globaltype/TweenService.Create": {
+    "documentation": "Builds a Tween driving the given properties of one instance to their goal values (v1 tracks: Transparency, Color, Size, Position, Volume, WalkSpeed — each must exist on the target's class). The handle starts idle; Play starts it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/TweenService.html#create",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/TweenService.Create/param/0",
+        "name": "instance"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/TweenService.Create/param/1",
+        "name": "tweenInfo"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/TweenService.Create/param/2",
+        "name": "properties"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/TweenService.Create/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/TweenService.Create/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/TweenService.Create/param/1": {
+    "documentation": "`tweenInfo: TweenInfo?`"
+  },
+  "@bettervoxel/globaltype/TweenService.Create/param/2": {
+    "documentation": "`properties: {[string]: any}`"
+  },
+  "@bettervoxel/globaltype/TweenService.Create/return/0": {
+    "documentation": "`Tween`"
+  },
+  "@bettervoxel/globaltype/TweenService.GetValue": {
+    "documentation": "The eased interpolation alpha for a raw 0..1 alpha — the same curves the tweens themselves run on, pinned to the reference engine's samples.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/TweenService.html#getvalue",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/TweenService.GetValue/param/0",
+        "name": "alpha"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/TweenService.GetValue/param/1",
+        "name": "easingStyle"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/TweenService.GetValue/param/2",
+        "name": "easingDirection"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/TweenService.GetValue/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/TweenService.GetValue/param/0": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/TweenService.GetValue/param/1": {
+    "documentation": "`easingStyle: Enum.EasingStyle`"
+  },
+  "@bettervoxel/globaltype/TweenService.GetValue/param/2": {
+    "documentation": "`easingDirection: Enum.EasingDirection`"
+  },
+  "@bettervoxel/globaltype/TweenService.GetValue/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/TweenService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/TweenService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/TweenService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/TweenService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/TweenService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/TweenService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/TweenService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/TweenService.html#name"
+  },
+  "@bettervoxel/globaltype/UDim2": {
+    "documentation": "The UI coordinate: a parent-relative scale plus a pixel offset per axis. GuiObject Position and Size speak it.",
+    "keys": {
+      "XOffset": "@bettervoxel/globaltype/UDim2.XOffset",
+      "XScale": "@bettervoxel/globaltype/UDim2.XScale",
+      "YOffset": "@bettervoxel/globaltype/UDim2.YOffset",
+      "YScale": "@bettervoxel/globaltype/UDim2.YScale"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html"
+  },
+  "@bettervoxel/globaltype/UDim2.XOffset": {
+    "documentation": "The X offset component, in pixels.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#xoffset"
+  },
+  "@bettervoxel/globaltype/UDim2.XScale": {
+    "documentation": "The X scale component: a fraction of the parent's width.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#xscale"
+  },
+  "@bettervoxel/globaltype/UDim2.YOffset": {
+    "documentation": "The Y offset component, in pixels.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#yoffset"
+  },
+  "@bettervoxel/globaltype/UDim2.YScale": {
+    "documentation": "The Y scale component: a fraction of the parent's height.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#yscale"
+  },
+  "@bettervoxel/globaltype/UserInputService": {
+    "documentation": "The raw input layer: InputBegan/InputEnded with Enum.KeyCode/Enum.UserInputType payloads, IsKeyDown polling, and the mouse position and per-frame delta. The authored Keybinds layer reads the same input state; this is the Roblox-parity surface underneath it.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/UserInputService.ClassName",
+      "GetMouseDelta": "@bettervoxel/globaltype/UserInputService.GetMouseDelta",
+      "GetMouseLocation": "@bettervoxel/globaltype/UserInputService.GetMouseLocation",
+      "InputBegan": "@bettervoxel/globaltype/UserInputService.InputBegan",
+      "InputEnded": "@bettervoxel/globaltype/UserInputService.InputEnded",
+      "IsA": "@bettervoxel/globaltype/UserInputService.IsA",
+      "IsKeyDown": "@bettervoxel/globaltype/UserInputService.IsKeyDown",
+      "Name": "@bettervoxel/globaltype/UserInputService.Name"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html"
+  },
+  "@bettervoxel/globaltype/UserInputService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#classname"
+  },
+  "@bettervoxel/globaltype/UserInputService.GetMouseDelta": {
+    "documentation": "This frame's mouse motion as (dx, dy, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#getmousedelta",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/UserInputService.GetMouseDelta/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/UserInputService.GetMouseDelta/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/UserInputService.GetMouseLocation": {
+    "documentation": "The cursor's logical position in the player window, as (x, y, 0) — (0, 0, 0) when no window exists.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#getmouselocation",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/UserInputService.GetMouseLocation/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/UserInputService.GetMouseLocation/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/UserInputService.InputBegan": {
+    "documentation": "Fires on every key or mouse-button press with a read-only input table and a gameProcessed flag (always false until UI focus exists). Mouse buttons carry KeyCode Unknown.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#inputbegan"
+  },
+  "@bettervoxel/globaltype/UserInputService.InputEnded": {
+    "documentation": "InputBegan's release half: fires when the key or mouse button comes back up, with the same payload shape.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#inputended"
+  },
+  "@bettervoxel/globaltype/UserInputService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/UserInputService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/UserInputService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/UserInputService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/UserInputService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/UserInputService.IsKeyDown": {
+    "documentation": "Whether the key is held right now. Accepts the enum item or its name; unknown or unmapped keys are simply not down.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#iskeydown",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/UserInputService.IsKeyDown/param/0",
+        "name": "key"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/UserInputService.IsKeyDown/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/UserInputService.IsKeyDown/param/0": {
+    "documentation": "`key: Enum.KeyCode`"
+  },
+  "@bettervoxel/globaltype/UserInputService.IsKeyDown/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/UserInputService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#name"
+  },
+  "@bettervoxel/globaltype/ValueBase": {
+    "documentation": "The value-container family: one typed Value property plus a Changed signal that fires with the new value.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ValueBase.html"
+  },
+  "@bettervoxel/globaltype/Vector3": {
+    "documentation": "Roblox's Vector3 IS Luau's native vector here — one type, two dialects: Vector3.new(1, 2, 3) equals vector.create(1, 2, 3), uppercase X/Y/Z/Magnitude/Unit and the method set ride a type metatable, and lowercase x/y/z stay on the VM fast path. Recorded divergence: typeof says 'vector'. The per-value member surface is not yet in the API model; the constructors below are.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html"
+  },
+  "@bettervoxel/globaltype/WeldConstraint": {
+    "documentation": "Rigidly binds Part0 to Part1: while Enabled the two parts move as one assembly.",
+    "keys": {
+      "Enabled": "@bettervoxel/globaltype/WeldConstraint.Enabled",
+      "Part0": "@bettervoxel/globaltype/WeldConstraint.Part0",
+      "Part1": "@bettervoxel/globaltype/WeldConstraint.Part1"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/WeldConstraint.html"
+  },
+  "@bettervoxel/globaltype/WeldConstraint.Enabled": {
+    "documentation": "Whether the weld holds. Disabling releases the bond without deleting the constraint; re-enabling re-welds at the parts' current poses.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/WeldConstraint.html#enabled"
+  },
+  "@bettervoxel/globaltype/WeldConstraint.Part0": {
+    "documentation": "One end of the weld: an Instance or nil. When both ends are set and Enabled, the parts move as one rigid assembly.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/WeldConstraint.html#part0"
+  },
+  "@bettervoxel/globaltype/WeldConstraint.Part1": {
+    "documentation": "The other end of the weld: an Instance or nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/WeldConstraint.html#part1"
+  },
+  "@bettervoxel/globaltype/Workspace": {
+    "documentation": "The root every world object lives under — the `workspace` global. A real class with Model ancestry (measured): it answers PrimaryPart, GetPivot and GetBoundingBox like a Model, refuses the part pose surface, and carries the world-level members Gravity and Raycast.",
+    "keys": {
+      "Gravity": "@bettervoxel/globaltype/Workspace.Gravity",
+      "Raycast": "@bettervoxel/globaltype/Workspace.Raycast"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html"
+  },
+  "@bettervoxel/globaltype/Workspace.Gravity": {
+    "documentation": "The global gravity magnitude in studs per second squared, applied downward. Parts and the character controller both read it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#gravity"
+  },
+  "@bettervoxel/globaltype/Workspace.Raycast": {
+    "documentation": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil; the optional params table filters by instance list and Enum.RaycastFilterType.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#raycast",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Workspace.Raycast/param/0",
+        "name": "origin"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Workspace.Raycast/param/1",
+        "name": "direction"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Workspace.Raycast/param/2",
+        "name": "raycastParams"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Workspace.Raycast/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Workspace.Raycast/param/0": {
+    "documentation": "`origin: Vector3`"
+  },
+  "@bettervoxel/globaltype/Workspace.Raycast/param/1": {
+    "documentation": "`direction: Vector3`"
+  },
+  "@bettervoxel/globaltype/Workspace.Raycast/param/2": {
+    "documentation": "`raycastParams: {[string]: any}?`"
+  },
+  "@bettervoxel/globaltype/Workspace.Raycast/return/0": {
+    "documentation": "`{[string]: any}?`"
+  },
+  "@bettervoxel/globaltype/WorldRoot": {
+    "documentation": "Workspace's measured parent in the class tree, between Model and the root — it carries no members of its own here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/WorldRoot.html"
+  }
+}

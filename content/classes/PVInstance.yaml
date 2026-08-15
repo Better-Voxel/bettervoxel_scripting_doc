@@ -1,0 +1,19 @@
+members:
+  PivotTo:
+    params:
+      target: >-
+        The destination — a CFrame moves and rotates the whole subtree as
+        one rigid transform; a plain vector keeps the current rotation.
+    remarks: |
+      Members orbit the pivot and take the rotation with them, exactly
+      one rigid delta for the whole logical subtree (welded members
+      follow their assembly root instead of moving twice). Pivoting a
+      PrimaryPart-less Model composes about its bounding-box center with
+      identity rotation, so repeated ROTATING pivots compound there —
+      give the model a PrimaryPart.
+    examples:
+      - title: Turning a model in place
+        code: |
+          local model = workspace:WaitForChild("Windmill")
+          local pivot = model:GetPivot()
+          model:PivotTo(pivot * CFrame.Angles(0, math.rad(90), 0))

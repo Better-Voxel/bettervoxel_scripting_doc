@@ -1,0 +1,6 @@
+# Generated whole by `tool` — never hand-edited, never committed.
+/book/
+# mdBook output.
+/target/
+# The tool's build tree (its Cargo.lock IS committed — it builds a binary).
+/tool/target/

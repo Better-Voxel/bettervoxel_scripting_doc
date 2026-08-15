@@ -1,0 +1,106 @@
+# Rich content for Instance members — additive over the engine's model
+# summaries. Params are keyed by NAME; types live in the model and are
+# rendered from it, never restated here.
+
+members:
+  WaitForChild:
+    params:
+      name: The child name to match — the first match in child order wins.
+      timeout: >-
+        Seconds before the wait gives up and returns nil. Omit it to wait
+        forever.
+    returns: >-
+      The child. A child already present returns in the same scheduler
+      slice, without yielding; a timed-out wait returns nil.
+    remarks: |
+      Prefer `FindFirstChild` when absence is an expected answer you want
+      to branch on now — `WaitForChild` suspends the calling thread, so it
+      is the right shape only when the child is genuinely on its way
+      (a streamed part, something another script is about to create).
+    examples:
+      - title: Waiting for a part another script creates
+        code: |
+          local pad = workspace:WaitForChild("SpawnPad", 5)
+          if pad then
+              print("pad arrived at", pad.Position)
+          else
+              warn("SpawnPad never showed up")
+          end
+
+  FindFirstChild:
+    params:
+      name: The child name to match — the first match in child order wins.
+    returns: The child, or nil when no direct child carries the name.
+    remarks: |
+      The cheap probe. Cache the result instead of re-finding it every
+      frame: names hash-compare, but a find is still a scan of the
+      children.
+    examples:
+      - title: Branching on an optional child
+        code: |
+          local door = workspace:FindFirstChild("Door")
+          if door and door:IsA("BasePart") then
+              door.Transparency = 0.5
+          end
+
+  SetAttribute:
+    params:
+      name: >-
+        The attribute name — at most 100 characters, never empty.
+      value: >-
+        A primitive (boolean, number, string), a datatype (Vector3,
+        Color3, CFrame), a table for a structured record, or nil to
+        REMOVE the attribute.
+    remarks: |
+      Writes coerce onto the attribute's declared shape: out-of-range
+      numbers error rather than silently widening, and a record write
+      merges field by field (missing fields keep their values). Removing
+      first — `SetAttribute(name, nil)` — is the sanctioned way to change
+      an attribute's type. Every landed write fires `AttributeChanged`
+      and the matching `GetAttributeChangedSignal`; same-value writes are
+      silent.
+    examples:
+      - title: A score attribute driving a signal
+        code: |
+          local part = Instance.new("Part")
+          part.Parent = workspace
+          part:GetAttributeChangedSignal("Score"):Connect(function()
+              print("score is now", part:GetAttribute("Score"))
+          end)
+          part:SetAttribute("Score", 1)
+
+  GetAttribute:
+    params:
+      name: The attribute name to read.
+      field: >-
+        BetterVoxel extension — a record field to project as a bare
+        value, skipping the table build (the cheap shape for hot loops).
+        Nil on primitives.
+    returns: >-
+      The value — a bare primitive or datatype, a table of fields for
+      records — or nil when unset.
+    examples:
+      - title: Reading a primitive and projecting a record field
+        code: |
+          local part = Instance.new("Part")
+          part:SetAttribute("Hp", 100)
+          part:SetAttribute("Stats", { level = 3, hero = "voxel" })
+          print(part:GetAttribute("Hp"))
+          print(part:GetAttribute("Stats", "level"))
+
+  new:
+    params:
+      className: >-
+        The class to construct. Only creatable classes are accepted —
+        abstract and engine-spawned classes error exactly like an unknown
+        name.
+    returns: >-
+      The fresh instance, with Parent nil — assign Parent to bring it
+      into the world (derived state appears on attach).
+    examples:
+      - title: Building a part from scratch
+        code: |
+          local part = Instance.new("Part")
+          part.Position = vector.create(0, 10, 0)
+          part.Anchored = true
+          part.Parent = workspace

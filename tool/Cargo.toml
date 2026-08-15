@@ -1,0 +1,12 @@
+[package]
+name = "bvdocs"
+version = "0.1.0"
+edition = "2021"
+description = "The BetterVoxel docs tool: validates hand-authored content against the engine's API dump and generates the book."
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# Archived upstream but stable and ubiquitous; pinned. Revisit if the
+# ecosystem settles on a successor.
+serde_yaml = "0.9"

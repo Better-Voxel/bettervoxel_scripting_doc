@@ -1,0 +1,3519 @@
+{
+  "classes": [
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "CFrame",
+          "summary": "The attachment's LOCAL pose relative to its parent part (§15); the world-space view is WorldCFrame."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Orientation",
+          "summary": "The attachment's LOCAL rotation as XYZ Euler angles in degrees (§15)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Position",
+          "summary": "The attachment's LOCAL position, relative to its parent part (§15). The world-space view is WorldPosition."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Draws the editor's marker gizmo at the attachment's world pose. Purely an authoring aid — nothing at runtime reads it."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "WorldCFrame",
+          "summary": "The attachment's world pose: the parent part's pose composed with the local CFrame — the local values when no posed parent exists. Writing it recomputes the LOCAL pose against the current parent (§15)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "WorldPosition",
+          "summary": "The attachment's world position (parent pose ∘ local). Writing it recomputes the LOCAL position against the current parent (§15)."
+        }
+      ],
+      "name": "Attachment",
+      "parent": "Instance",
+      "summary": "A named point on a part: its CFrame, Position and Orientation are LOCAL to the parent, and the WorldCFrame/WorldPosition pair is the composed world view (writing it recomputes the local). Constraints anchor to attachments; Visible draws the editor marker."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Anchored",
+          "summary": "Whether the part is pinned in place. Anchored parts never simulate — no gravity, no forces — but still collide and fire Touched."
+        },
+        {
+          "decl": "(impulse: Vector3) -> ()",
+          "kind": "Method",
+          "name": "ApplyImpulse",
+          "params": [
+            {
+              "name": "impulse",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [],
+          "summary": "Instant velocity change on the assembly's body: delta-v equals impulse divided by the assembly mass. A no-op on anchored (infinite-mass) assemblies."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "AssemblyLinearVelocity",
+          "summary": "The assembly's linear velocity — welded members answer their assembly root's. Reads are zero without a live body; writes on anchored parts land but the solver ignores them."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "CFrame",
+          "summary": "The full rigid transform as one CFrame. Reads and writes agree with Position and Rotation — three views of the same pose. Welded members refuse the write; move the assembly root instead."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "CanCollide",
+          "summary": "Whether the part responds to contacts. false keeps it physical — it falls and fires Touched — but removes the contact response."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "Color",
+          "summary": "The authored surface color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1)."
+        },
+        {
+          "decl": "Enum.Material",
+          "kind": "ReadWrite",
+          "name": "Material",
+          "summary": "The surface material, as an Enum.Material item; writes accept the item or its string name."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Position",
+          "summary": "The part's world position. Welded members read their world pose, and a write moves the whole assembly with offsets preserved. Explicit writes fire the pose property signals; physics motion does not."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Rotation",
+          "summary": "The orientation as XYZ Euler angles in degrees. Welded members read their assembly pose; writing a welded member is refused — rotate the assembly root instead."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Size",
+          "summary": "The part's dimensions in studs. The collider and mesh re-derive on write; a MeshPart's geometry scales against its authored MeshSize."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "Touched",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires when another collider starts touching this part, with the other object. Exists on unparented parts too; fires once per contact start."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Transparency",
+          "summary": "How see-through the part renders, clamped 0 (opaque) to 1 (invisible)."
+        }
+      ],
+      "name": "BasePart",
+      "parent": "PVInstance",
+      "summary": "Everything physical: world pose (Position, Rotation, CFrame), Size, appearance (Color, Material, Transparency), collision flags, and the Touched signal."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "BaseRemoteEvent",
+      "parent": "Instance",
+      "summary": "The remote-event layer, kept for ancestry parity with the reference engine."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Disabled",
+          "summary": "The legacy inverse of Enabled — the two always mirror each other."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "The script's run switch. Disabling kills the script's threads and listeners before the next pass; re-enabling restarts it fresh from the top. Writes require a real boolean (the reference engine coerces — a recorded strict-typing divergence)."
+        },
+        {
+          "decl": "Enum.RunContext",
+          "kind": "ReadWrite",
+          "name": "RunContext",
+          "summary": "Where the script runs: Legacy (placement decides), Server, or Client. Writes accept the enum item or its name string and re-derive execution immediately. A LocalScript's stored value is inert — its class decides."
+        }
+      ],
+      "name": "BaseScript",
+      "parent": "LuaSourceContainer",
+      "summary": "The runnable scripts: the Enabled/Disabled run switch and RunContext, which decides where the code executes."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "AnchorPoint",
+          "summary": "Which point of the billboard (0..1 per axis) its Position pins. The Z component is unused."
+        },
+        {
+          "decl": "UDim2",
+          "kind": "ReadWrite",
+          "name": "Position",
+          "summary": "The billboard's position as a UDim2 (scale plus pixel offset per axis)."
+        },
+        {
+          "decl": "UDim2",
+          "kind": "ReadWrite",
+          "name": "Size",
+          "summary": "The billboard's size as a UDim2 (scale plus pixel offset per axis)."
+        }
+      ],
+      "name": "BillboardGui",
+      "parent": "LayerCollector",
+      "summary": "A world-anchored UI root: its elements render at its parent's position, facing the camera."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "BVScriptSignal<...any>",
+          "kind": "Signal",
+          "name": "Event",
+          "payloads": [
+            "...any"
+          ],
+          "summary": "The receiving side of Fire: listeners get the fired arguments. Delivery is deferred to the next script pass; arguments pass by reference within the shared VM (the reference engine deep-copies — a recorded divergence)."
+        },
+        {
+          "decl": "(...: any) -> ()",
+          "kind": "Method",
+          "name": "Fire",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [],
+          "summary": "Queues Event with these arguments for every listener, delivered on the next script pass."
+        }
+      ],
+      "name": "BindableEvent",
+      "parent": "Instance",
+      "summary": "A same-context signal object: Fire queues Event for every listener — script-to-script signaling without the network."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "(...: any) -> ...any",
+          "kind": "Method",
+          "name": "Invoke",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...any"
+            }
+          ],
+          "summary": "Calls OnInvoke synchronously and returns its results (multiple returns pass through). Errors when OnInvoke is unset (the reference engine blocks forever — a recorded divergence)."
+        },
+        {
+          "decl": "((...any) -> ...any)?",
+          "kind": "ReadWrite",
+          "name": "OnInvoke",
+          "summary": "The handler Invoke calls. Assign a function or nil; unset reads nil, and calling Invoke while unset errors."
+        }
+      ],
+      "name": "BindableFunction",
+      "parent": "Instance",
+      "summary": "A same-context call object: Invoke runs the assigned OnInvoke synchronously and returns its results."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Value",
+          "summary": "The stored boolean. Writes require a real boolean."
+        }
+      ],
+      "name": "BoolValue",
+      "parent": "ValueBase",
+      "summary": "A named container for one boolean."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "AssemblyLinearVelocity",
+          "summary": "The character body's linear velocity."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "CFrame",
+          "summary": "The character's full rigid transform as one CFrame value."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Died",
+          "payloads": [],
+          "summary": "Fires once per life, when Health reaches zero."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Health",
+          "summary": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died and the respawn pass takes over."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "JumpPower",
+          "summary": "The upward velocity a jump imparts, floored at 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxHealth",
+          "summary": "The health ceiling. Lowering it pulls current Health down with it."
+        },
+        {
+          "decl": "(direction: Vector3, relativeToCamera: boolean?) -> ()",
+          "kind": "Method",
+          "name": "Move",
+          "params": [
+            {
+              "name": "direction",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "relativeToCamera",
+              "optional": true,
+              "type": "boolean?"
+            }
+          ],
+          "returns": [],
+          "summary": "Sets a persistent world-space walk direction: the character keeps walking until the next call, and a zero vector stops it. The relativeToCamera flag is client presentation and is ignored here."
+        },
+        {
+          "decl": "(target: Vector3) -> ()",
+          "kind": "Method",
+          "name": "MoveTo",
+          "params": [
+            {
+              "name": "target",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [],
+          "summary": "Walks the character to a point: reached within 1 stud in the horizontal plane, or given up after 8 seconds (every call restarts the timer). MoveToFinished fires with the outcome; a pending MoveTo owns locomotion over Move."
+        },
+        {
+          "decl": "BVScriptSignal<boolean>",
+          "kind": "Signal",
+          "name": "MoveToFinished",
+          "payloads": [
+            "boolean"
+          ],
+          "summary": "Fires when a MoveTo ends: true when the target was reached, false on the timeout. A replaced target fires nothing."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Position",
+          "summary": "The character's world position. Writing teleports the character."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Rotation",
+          "summary": "The character's orientation as XYZ Euler angles in degrees; writing turns the character."
+        },
+        {
+          "decl": "(amount: number) -> ()",
+          "kind": "Method",
+          "name": "TakeDamage",
+          "params": [
+            {
+              "name": "amount",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [],
+          "summary": "Subtracts amount from Health, floored at zero. Reaching zero fires Died and the respawn pass takes over. Negative amounts are ignored."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "Touched",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires when a collider starts touching the character body, with the other object."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "WalkSpeed",
+          "summary": "The character's walk speed in studs per second, floored at 0."
+        }
+      ],
+      "name": "Character",
+      "parent": "Instance",
+      "summary": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. Carries the humanoid surface: Health, WalkSpeed, MoveTo and their signals."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxActivationDistance",
+          "summary": "How far away (in studs) a player can be and still click, floored at 0."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "MouseClick",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires when a player clicks the detector's parent part within MaxActivationDistance, with the clicking player. The signal lives on the detector, never on the part it makes clickable."
+        }
+      ],
+      "name": "ClickDetector",
+      "parent": "Instance",
+      "summary": "Makes its parent part clickable: MouseClick fires with the clicking player, within MaxActivationDistance."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "Attachment?",
+          "kind": "ReadWrite",
+          "name": "Attachment0",
+          "summary": "One end of the constraint: an Attachment or nil. The constraint acts while Enabled and both ends sit under live in-world parts; anything else is inert, never an error (§16). A destroyed attachment stays referenced."
+        },
+        {
+          "decl": "Attachment?",
+          "kind": "ReadWrite",
+          "name": "Attachment1",
+          "summary": "The other end of the constraint: an Attachment or nil."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the constraint acts. Disabling is inert (the derived joint goes away); re-enabling rebuilds it at the current poses (§16)."
+        }
+      ],
+      "name": "Constraint",
+      "parent": "Instance",
+      "summary": "The base of the attachment-anchored constraints: Attachment0, Attachment1 and Enabled. A constraint acts while Enabled and both ends sit under live in-world parts; anything else is inert."
+    },
+    {
+      "creatable": true,
+      "members": [],
+      "name": "Folder",
+      "parent": "Instance",
+      "summary": "A pure organizational container with no behavior of its own."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "FormFactorPart",
+      "parent": "BasePart",
+      "summary": "A legacy layer between BasePart and Part, kept for ancestry parity with the reference engine; it adds no members of its own."
+    },
+    {
+      "creatable": true,
+      "members": [],
+      "name": "Frame",
+      "parent": "GuiObject",
+      "summary": "The plain rectangular UI element: a background and a parent for other elements."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "GuiBase",
+      "parent": "Instance",
+      "summary": "The UI root layer, kept for ancestry parity with the reference engine."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "GuiBase2d",
+      "parent": "GuiBase",
+      "summary": "The 2D UI layer beneath every on-screen element."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Activated",
+          "payloads": [],
+          "summary": "Fires (with no arguments) when a click is released over the button."
+        }
+      ],
+      "name": "GuiButton",
+      "parent": "GuiObject",
+      "summary": "The clickable UI elements: Activated fires on click release."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "GuiLabel",
+      "parent": "GuiObject",
+      "summary": "The display-only UI elements — the image and text labels."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "AnchorPoint",
+          "summary": "Which point of the element (0..1 per axis) its Position pins: (0, 0) the top-left corner, (0.5, 0.5) the center. The Z component is unused."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "BackgroundColor3",
+          "summary": "The element's fill color."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "BackgroundTransparency",
+          "summary": "How see-through the element's fill renders, clamped 0 (opaque) to 1 (invisible)."
+        },
+        {
+          "decl": "UDim2",
+          "kind": "ReadWrite",
+          "name": "Position",
+          "summary": "The element's position as a UDim2 (scale plus pixel offset per axis), relative to the parent element."
+        },
+        {
+          "decl": "UDim2",
+          "kind": "ReadWrite",
+          "name": "Size",
+          "summary": "The element's size as a UDim2 (scale plus pixel offset per axis)."
+        }
+      ],
+      "name": "GuiObject",
+      "parent": "GuiBase2d",
+      "summary": "The visible UI elements: UDim2 Position and Size, AnchorPoint, and the background fill."
+    },
+    {
+      "creatable": true,
+      "members": [],
+      "name": "HingeConstraint",
+      "parent": "Constraint",
+      "summary": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Image",
+          "summary": "The displayed image, as a local asset path. Unset reads as the empty string; writing the empty string clears it."
+        }
+      ],
+      "name": "ImageLabel",
+      "parent": "GuiLabel",
+      "summary": "A UI element that displays an image asset."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "BVScriptSignal<Instance, Instance?>",
+          "kind": "Signal",
+          "name": "AncestryChanged",
+          "payloads": [
+            "Instance",
+            "Instance?"
+          ],
+          "summary": "Fires when this instance or any ancestor is reparented, on every node of the moved subtree (deepest first), with the MOVED instance and its new parent — nil on detach. Destroy fires each destroyed node's own (self, nil)."
+        },
+        {
+          "decl": "BVScriptSignal<string>",
+          "kind": "Signal",
+          "name": "AttributeChanged",
+          "payloads": [
+            "string"
+          ],
+          "summary": "Fires with the attribute NAME on every landed attribute write — first set, value changes and removal included; same-value writes stay silent. Delivers once per landed write in write order, before the matching GetAttributeChangedSignal."
+        },
+        {
+          "decl": "BVScriptSignal<string>",
+          "kind": "Signal",
+          "name": "Changed",
+          "payloads": [
+            "string"
+          ],
+          "summary": "Fires with the property NAME on every landed property write — pose writes fan out to CFrame, Position and Rotation; same-value writes stay silent; attribute writes travel their own AttributeChanged channel; physics motion never fires. The value containers override it entirely: their Changed fires only for Value, with the new VALUE as payload."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "ChildAdded",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires when an instance is parented directly under this one. The listener receives the added child."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "ChildRemoved",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires when a direct child is unparented from this instance or destroyed. The listener receives the removed child."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The instance's class, as a string. An instance never changes class. Prefer IsA over comparing ClassName — IsA also matches base classes like BasePart."
+        },
+        {
+          "decl": "() -> Instance",
+          "kind": "Method",
+          "name": "Clone",
+          "params": [],
+          "returns": [
+            {
+              "type": "Instance"
+            }
+          ],
+          "summary": "A deep copy of the instance and its subtree: authored state, attributes and tags copy; the copy is detached (Parent is nil) with fresh identity. A destroyed instance clones its husk as a live single-node copy."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "DescendantAdded",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires when an instance is added anywhere in this instance's subtree, with the added descendant. When a whole subtree is attached it fires for the attached node itself, not for every instance below it."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Destroy",
+          "params": [],
+          "returns": [],
+          "summary": "Destroys the instance and its whole subtree, firing Destroying. Destroyed instances stay readable as husks: properties read their last values, Parent reads nil and is locked. Destroying an already-destroyed instance does nothing."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Destroying",
+          "payloads": [],
+          "summary": "Fires when the instance is destroyed. The listener sees a husk: properties still read their last values, the tree is severed, and Parent reads nil."
+        },
+        {
+          "decl": "(name: string) -> Instance?",
+          "kind": "Method",
+          "name": "FindFirstChild",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "The first direct child named name, or nil. The cheap probe when absence is an expected answer — cache the result instead of re-finding it every frame."
+        },
+        {
+          "decl": "(name: string, field: string?) -> any",
+          "kind": "Method",
+          "name": "GetAttribute",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "field",
+              "optional": true,
+              "type": "string?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "any"
+            }
+          ],
+          "summary": "The named attribute — a bare value for primitives, a table of fields for records — or nil when unset. The two-argument form is a BetterVoxel extension: it projects one field of a record as a bare value without building the table — the cheap shape for hot loops (nil on primitives)."
+        },
+        {
+          "decl": "(attribute: string) -> BVScriptSignal",
+          "kind": "Method",
+          "name": "GetAttributeChangedSignal",
+          "params": [
+            {
+              "name": "attribute",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptSignal"
+            }
+          ],
+          "summary": "A signal that fires (with no arguments) when the named attribute lands a change on this instance — first set, value changes and removal included; same-value writes stay silent. Any attribute name is legal, set or not. Delivers after the instance-wide AttributeChanged for the same write."
+        },
+        {
+          "decl": "() -> {Instance}",
+          "kind": "Method",
+          "name": "GetChildren",
+          "params": [],
+          "returns": [
+            {
+              "type": "{Instance}"
+            }
+          ],
+          "summary": "The direct children, in child order, as an array. A destroyed instance answers an empty array."
+        },
+        {
+          "decl": "() -> {Instance}",
+          "kind": "Method",
+          "name": "GetDescendants",
+          "params": [],
+          "returns": [
+            {
+              "type": "{Instance}"
+            }
+          ],
+          "summary": "Every instance below this one as an array, in preorder: each node comes before its own children."
+        },
+        {
+          "decl": "() -> string",
+          "kind": "Method",
+          "name": "GetFullName",
+          "params": [],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "The instance's full dot-joined path from the root, Workspace included: 'Workspace.Folder.Part'. A detached instance's full name is just its Name — member errors quote this same spelling."
+        },
+        {
+          "decl": "(property: string) -> BVScriptSignal",
+          "kind": "Method",
+          "name": "GetPropertyChangedSignal",
+          "params": [
+            {
+              "name": "property",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptSignal"
+            }
+          ],
+          "summary": "A signal that fires (with no arguments) when the named property changes on this instance. Explicit writes fire it; physics motion never fires the pose properties. Subscribing errors when the property can never fire on this class — the same catch-the-typo philosophy as unknown member names."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether the instance's class is className or inherits from it: a Part IsA 'BasePart' and IsA 'Instance'. Unknown class names answer false."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Name",
+          "summary": "The instance's name — the label the Explorer shows and the key FindFirstChild, WaitForChild and dot-child access match on. Names need not be unique among siblings; lookups return the first match in child order."
+        },
+        {
+          "decl": "Instance?",
+          "kind": "ReadWrite",
+          "name": "Parent",
+          "summary": "The instance's parent in the object tree, or nil for a detached root. Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy."
+        },
+        {
+          "decl": "(name: string, value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil) -> ()",
+          "kind": "Method",
+          "name": "SetAttribute",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": "boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil"
+            }
+          ],
+          "returns": [],
+          "summary": "Writes the named attribute: a primitive or datatype (Vector3, Color3, CFrame) stores directly, a table stores a structured record, and nil REMOVES the attribute (also the way to change its type: remove, then set). Writes coerce onto the attribute's declared shape — out-of-range values error, a record write merges field by field with missing fields keeping their values. Every landed write fires AttributeChanged then the per-name signal; same-value writes are silent. Names are capped at 100 characters and cannot be empty; non-finite components refuse."
+        },
+        {
+          "decl": "(name: string, timeout: number?) -> Instance?",
+          "kind": "Method",
+          "name": "WaitForChild",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "timeout",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "The first direct child named name, suspending the calling thread until one exists. A child already present returns without yielding. With a timeout (in seconds) the wait gives up and returns nil once it elapses; without one it waits forever."
+        },
+        {
+          "decl": "(className: string) -> Instance",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance"
+            }
+          ],
+          "summary": "A default-constructed instance of the named class, with Parent nil — assign Parent to bring it into the world (derived state appears on attach). Only creatable classes are accepted; abstract and engine-spawned classes error exactly like an unknown name."
+        }
+      ],
+      "name": "Instance",
+      "parent": null,
+      "summary": "The root of the class tree: identity (Name, ClassName), the Parent tree with its hierarchy signals, attributes, and lifetime (Clone, Destroy). Every scriptable object is an Instance."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Value",
+          "summary": "The stored integer. Number writes round half away from zero (3.5 becomes 4, -3.7 becomes -4)."
+        }
+      ],
+      "name": "IntValue",
+      "parent": "ValueBase",
+      "summary": "A named container for one integer; number writes round half away from zero."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "LayerCollector",
+      "parent": "GuiBase2d",
+      "summary": "The UI roots that collect an element tree: ScreenGui on the screen, BillboardGui in the world."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Brightness",
+          "summary": "The light's intensity, floored at 0. The unit is the renderer's (a default light reads 1000000), not the reference engine's 0..~10 scale — a recorded divergence."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "Color",
+          "summary": "The light's color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the light is lit. Disabling removes the derived render light; the authored properties keep their values."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Range",
+          "summary": "How far the light reaches, in studs, floored at 0."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Shadows",
+          "summary": "Whether the light casts shadows."
+        }
+      ],
+      "name": "Light",
+      "parent": "Instance",
+      "summary": "The shared light surface: Brightness, Color, Range, Shadows and the Enabled switch, parented under the part that carries the light."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "LocalScript",
+      "parent": "Script",
+      "summary": "A script that runs on each client. Its CLASS decides that — a stored RunContext value is accepted but inert."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "LuaSourceContainer",
+      "parent": "Instance",
+      "summary": "Anything that holds Luau source: the scripts and modules."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "MeshId",
+          "summary": "The mesh asset reference, as the asset's local path — the empty string on a meshless husk. Every write is refused: the mesh reference is immutable after authoring."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "MeshSize",
+          "summary": "The authored mesh bounds, untouched by resizes. Every write is refused; resize through Size, which scales the mesh against these bounds."
+        }
+      ],
+      "name": "MeshPart",
+      "parent": "TriangleMeshPart",
+      "summary": "A part whose geometry is an imported mesh. Size scales the mesh against its authored MeshSize; collision comes from the baked CollisionFidelity shapes; the mesh reference itself is immutable."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "() -> (CFrame, Vector3)",
+          "kind": "Method",
+          "name": "GetBoundingBox",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            },
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The axis-aligned box around the subtree's parts, as (center CFrame, size). Errors when the subtree holds no part."
+        },
+        {
+          "decl": "BasePart?",
+          "kind": "ReadWrite",
+          "name": "PrimaryPart",
+          "summary": "The part the model pivots through, or nil. GetPivot and PivotTo use it; without one they fall back to the bounding-box center. A reference to a despawned part reads as nil."
+        }
+      ],
+      "name": "Model",
+      "parent": "PVInstance",
+      "summary": "A grouping node for parts: pivots through PrimaryPart (or its bounding-box center without one) and moves as a group via PivotTo."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "ModuleScript",
+      "parent": "LuaSourceContainer",
+      "summary": "Reusable code loaded with require: runs once per context, and its return value is cached and shared between requirers."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Value",
+          "summary": "The stored double-precision number."
+        }
+      ],
+      "name": "NumberValue",
+      "parent": "ValueBase",
+      "summary": "A named container for one double-precision number."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Instance?",
+          "kind": "ReadWrite",
+          "name": "Value",
+          "summary": "The stored instance reference, or nil. References outlive Destroy — a destroyed target reads as its husk; assigning nil clears the slot."
+        }
+      ],
+      "name": "ObjectValue",
+      "parent": "ValueBase",
+      "summary": "A named container for one instance reference; references survive Destroy and read back as husks."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "() -> CFrame",
+          "kind": "Method",
+          "name": "GetPivot",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "The instance's pivot: a Model's PrimaryPart pose (or its bounding-box center without one), an ordinary part's own CFrame."
+        },
+        {
+          "decl": "(target: CFrame | Vector3) -> ()",
+          "kind": "Method",
+          "name": "PivotTo",
+          "params": [
+            {
+              "name": "target",
+              "optional": false,
+              "type": "CFrame | Vector3"
+            }
+          ],
+          "returns": [],
+          "summary": "Moves this instance and its logical descendants by ONE rigid transform: the subtree lands with its pivot at the target CFrame, members orbiting the pivot and rotating with it. A plain vector keeps the current rotation. Fires the pose signals for each moved object. A PrimaryPart-less Model pivots about its bounding-box center with identity rotation, so repeated ROTATING pivots compound there — a recorded divergence; give the model a PrimaryPart."
+        }
+      ],
+      "name": "PVInstance",
+      "parent": "Instance",
+      "summary": "The positioned layer: everything with a pivot — parts and models — answers GetPivot and moves as a group through PivotTo."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "() -> Instance?",
+          "kind": "Method",
+          "name": "GetNetworkOwner",
+          "params": [],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "Server-only: the player currently simulating this assembly, or nil for the server. Resolved through the assembly root."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "GetNetworkOwnershipAuto",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly."
+        },
+        {
+          "decl": "(player: Instance?) -> ()",
+          "kind": "Method",
+          "name": "SetNetworkOwner",
+          "params": [
+            {
+              "name": "player",
+              "optional": true,
+              "type": "Instance?"
+            }
+          ],
+          "returns": [],
+          "summary": "Server-only: pins which peer simulates this assembly (nil means the server) and turns automatic ownership off. A non-Player instance degrades silently to the server. The part must be an unanchored workspace descendant."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "SetNetworkOwnershipAuto",
+          "params": [],
+          "returns": [],
+          "summary": "Server-only: re-arms automatic (distance-based) ownership without clearing the standing owner."
+        },
+        {
+          "decl": "Enum.PartType",
+          "kind": "ReadWrite",
+          "name": "Shape",
+          "summary": "The part's geometric shape. Writes accept the Enum.PartType item or its string name; the mesh and collider re-derive."
+        }
+      ],
+      "name": "Part",
+      "parent": "FormFactorPart",
+      "summary": "The basic building block: a shaped, colored, physically simulated solid. Shape picks the geometry; the mesh and collider re-derive."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "Instance?",
+          "kind": "ReadOnly",
+          "name": "Character",
+          "summary": "The player's current character body, or nil between spawns. CharacterAdded fires with each new one."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "CharacterAdded",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires with the new character on every spawn, the first included."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "LoadCharacter",
+          "params": [],
+          "returns": [],
+          "summary": "Despawns the player's current character (if any) and spawns a fresh one on the next respawn pass."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "RespawnTime",
+          "summary": "Seconds between this player's death and their respawn, floored at 0. An engine extension over the Players service's RespawnTime: joins seed it from the service value, and a per-player write wins until the next service-level write (which writes through to the whole roster)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "UserId",
+          "summary": "The session identity — how a script tells two players apart. Hosts keep it under 2^53 so it survives Luau's number type."
+        }
+      ],
+      "name": "Player",
+      "parent": "Instance",
+      "summary": "A joined player's roster identity: UserId, the current Character and its CharacterAdded signal, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "AssemblyLinearVelocity",
+          "summary": "The prefab body's linear velocity (zero without a live body)."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "CFrame",
+          "summary": "The prefab's full rigid transform as one CFrame value."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Position",
+          "summary": "The prefab's world position — where characters spawned from it stand."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Rotation",
+          "summary": "The prefab's orientation as XYZ Euler angles in degrees."
+        },
+        {
+          "decl": "(position: Vector3?) -> Instance",
+          "kind": "Method",
+          "name": "SpawnCharacter",
+          "params": [
+            {
+              "name": "position",
+              "optional": true,
+              "type": "Vector3?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance"
+            }
+          ],
+          "summary": "Spawns an unowned (NPC) character from this template and returns it, placed at position or standing on the prefab's own pose. The character answers the humanoid surface (Health, MoveTo, ...)."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "Touched",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires when a collider starts touching the prefab body, with the other object."
+        }
+      ],
+      "name": "PlayerPrefab",
+      "parent": "Instance",
+      "summary": "The character template: joining players spawn their characters from it, SpawnCharacter builds NPCs from it, and its pose is where they stand."
+    },
+    {
+      "creatable": true,
+      "members": [],
+      "name": "PointLight",
+      "parent": "Light",
+      "summary": "A light radiating in every direction from its parent's position."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "(...: any) -> ()",
+          "kind": "Method",
+          "name": "FireAllClients",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [],
+          "summary": "Server-side only: queues OnClientEvent on every connected client with these arguments."
+        },
+        {
+          "decl": "(player: Instance, ...: any) -> ()",
+          "kind": "Method",
+          "name": "FireClient",
+          "params": [
+            {
+              "name": "player",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "...",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [],
+          "summary": "Server-side only: queues OnClientEvent on the given player's client with these arguments."
+        },
+        {
+          "decl": "(...: any) -> ()",
+          "kind": "Method",
+          "name": "FireServer",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [],
+          "summary": "Client-side only: queues OnServerEvent on the server with these arguments. Payloads cross the remote codec — a real deep copy, even solo."
+        },
+        {
+          "decl": "BVScriptSignal<...any>",
+          "kind": "Signal",
+          "name": "OnClientEvent",
+          "payloads": [
+            "...any"
+          ],
+          "summary": "Fires on a client when the server calls FireClient or FireAllClients, with the fired arguments. Client-side only."
+        },
+        {
+          "decl": "BVScriptSignal<Instance, ...any>",
+          "kind": "Signal",
+          "name": "OnServerEvent",
+          "payloads": [
+            "Instance",
+            "...any"
+          ],
+          "summary": "Fires on the server when a client calls FireServer: the listener receives the sending player, then the fired arguments. Server-side only — touching it on a client errors."
+        }
+      ],
+      "name": "RemoteEvent",
+      "parent": "BaseRemoteEvent",
+      "summary": "The cross-network signal: FireServer and FireClient/FireAllClients queue OnServerEvent and OnClientEvent on the far side, payloads deep-copied through the remote codec."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "(player: Instance, ...: any) -> ...any",
+          "kind": "Method",
+          "name": "InvokeClient",
+          "params": [
+            {
+              "name": "player",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "...",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...any"
+            }
+          ],
+          "summary": "Server-side only: calls the given player's OnClientInvoke and suspends until the reply, the player's disconnect (fails fast), or the timeout."
+        },
+        {
+          "decl": "(...: any) -> ...any",
+          "kind": "Method",
+          "name": "InvokeServer",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...any"
+            }
+          ],
+          "summary": "Client-side only: calls the server's OnServerInvoke and suspends the calling thread until the reply arrives — or an engine timeout errors it (the reference engine blocks forever; a recorded divergence). A handler error re-raises here with its text intact."
+        },
+        {
+          "decl": "((...any) -> ...any)?",
+          "kind": "ReadWrite",
+          "name": "OnClientInvoke",
+          "summary": "The client-side handler InvokeClient calls: it receives the arguments and its returns cross back to the server. Assign a function or nil; client-side only."
+        },
+        {
+          "decl": "((player: Instance, ...any) -> ...any)?",
+          "kind": "ReadWrite",
+          "name": "OnServerInvoke",
+          "summary": "The server-side handler InvokeServer calls: it receives the invoking player, then the arguments, and its returns cross back to the caller. Assign a function or nil; server-side only."
+        }
+      ],
+      "name": "RemoteFunction",
+      "parent": "Instance",
+      "summary": "The cross-network call: InvokeServer and InvokeClient suspend the calling thread until the far handler's reply crosses back."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Length",
+          "summary": "The rope's maximum separation in studs — slack allowed, it never pushes. The measured default is 5; negative writes clamp to 0."
+        }
+      ],
+      "name": "RopeConstraint",
+      "parent": "Constraint",
+      "summary": "A slack-allowed distance cap: the bodies never separate beyond Length, and the rope never pushes."
+    },
+    {
+      "creatable": true,
+      "members": [],
+      "name": "ScreenGui",
+      "parent": "LayerCollector",
+      "summary": "The screen-space UI root: its element tree renders over the viewport."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "Script",
+      "parent": "BaseScript",
+      "summary": "A server-side script by default; RunContext can re-home it. Enabled is its run switch — disabling kills its threads, re-enabling restarts it fresh."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "IsPlaying",
+          "summary": "Whether the sound is meant to be playing — Play and Stop drive it, and a finished non-looped sound writes it back to false."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Looped",
+          "summary": "Whether playback restarts from the top when the clip ends."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Play",
+          "params": [],
+          "returns": [],
+          "summary": "Starts playback (IsPlaying becomes true). Calling Play in a loop is harmless — same-state calls are silent."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "PlaybackSpeed",
+          "summary": "Playback rate (1 is normal speed), floored at 0. Pitch follows the rate."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "SoundId",
+          "summary": "The audio asset, as a local asset path."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Stop",
+          "params": [],
+          "returns": [],
+          "summary": "Stops playback (IsPlaying becomes false)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Volume",
+          "summary": "Playback volume, floored at 0."
+        }
+      ],
+      "name": "Sound",
+      "parent": "Instance",
+      "summary": "A playable audio source: Play and Stop drive it, IsPlaying reads back, and volume, speed and looping are properties."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "SpawnLocation",
+      "parent": "Part",
+      "summary": "A Part players spawn on. Otherwise a regular part — every BasePart member applies."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Angle",
+          "summary": "The full cone angle in degrees, clamped 0..180 (writing 200 reads back 180). A default spot light reads 90."
+        }
+      ],
+      "name": "SpotLight",
+      "parent": "Light",
+      "summary": "A cone light aimed along its parent's orientation; Angle is the full cone in degrees."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Value",
+          "summary": "The stored string."
+        }
+      ],
+      "name": "StringValue",
+      "parent": "ValueBase",
+      "summary": "A named container for one string."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Text",
+          "summary": "The button's label text. Same-value writes are silent."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "TextColor3",
+          "summary": "The button label's text color."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TextSize",
+          "summary": "The button label's text size in pixels, floored at 1."
+        }
+      ],
+      "name": "TextButton",
+      "parent": "GuiButton",
+      "summary": "A clickable UI element with a text label; Activated fires on click release."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Text",
+          "summary": "The displayed text. Same-value writes are silent — a HUD may rewrite its label every frame without re-triggering layout."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "TextColor3",
+          "summary": "The text color."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TextSize",
+          "summary": "The text size in pixels, floored at 1."
+        }
+      ],
+      "name": "TextLabel",
+      "parent": "GuiLabel",
+      "summary": "A UI element that displays text."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "Enum.CollisionFidelity",
+          "kind": "ReadWrite",
+          "name": "CollisionFidelity",
+          "summary": "How the mesh's collision geometry is built: a Box, one convex Hull, or the decomposed convex shapes of Default and PreciseConvexDecomposition. Writes re-bake the collider — what the property says is what collides."
+        }
+      ],
+      "name": "TriangleMeshPart",
+      "parent": "BasePart",
+      "summary": "The mesh-geometry layer: how imported meshes turn into collision shapes (CollisionFidelity)."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "ValueBase",
+      "parent": "Instance",
+      "summary": "The value-container family: one typed Value property plus a Changed signal that fires with the new value."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the weld holds. Disabling releases the bond without deleting the constraint; re-enabling re-welds at the parts' current poses."
+        },
+        {
+          "decl": "BasePart?",
+          "kind": "ReadWrite",
+          "name": "Part0",
+          "summary": "One end of the weld: an Instance or nil. When both ends are set and Enabled, the parts move as one rigid assembly."
+        },
+        {
+          "decl": "BasePart?",
+          "kind": "ReadWrite",
+          "name": "Part1",
+          "summary": "The other end of the weld: an Instance or nil."
+        }
+      ],
+      "name": "WeldConstraint",
+      "parent": "Instance",
+      "summary": "Rigidly binds Part0 to Part1: while Enabled the two parts move as one assembly."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Gravity",
+          "summary": "The global gravity magnitude in studs per second squared, applied downward. Parts and the character controller both read it."
+        },
+        {
+          "decl": "(origin: Vector3, direction: Vector3, raycastParams: {[string]: any}?) -> {[string]: any}?",
+          "kind": "Method",
+          "name": "Raycast",
+          "params": [
+            {
+              "name": "origin",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "direction",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "raycastParams",
+              "optional": true,
+              "type": "{[string]: any}?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "{[string]: any}?"
+            }
+          ],
+          "summary": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil; the optional params table filters by instance list and Enum.RaycastFilterType."
+        }
+      ],
+      "name": "Workspace",
+      "parent": "WorldRoot",
+      "summary": "The root every world object lives under — the `workspace` global. A real class with Model ancestry (measured): it answers PrimaryPart, GetPivot and GetBoundingBox like a Model, refuses the part pose surface, and carries the world-level members Gravity and Raycast."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "WorldRoot",
+      "parent": "Model",
+      "summary": "Workspace's measured parent in the class tree, between Model and the root — it carries no members of its own here."
+    }
+  ],
+  "core_version": "0.1.0",
+  "datatypes": [
+    {
+      "members": [
+        {
+          "decl": "(x: number?, y: number?, z: number?) -> Vector3",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "x",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "y",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "z",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "A vector from its components; omitted components default to 0. The result IS a native Luau vector — Vector3.new(1, 2, 3) equals vector.create(1, 2, 3), and typeof says 'vector' (a recorded divergence)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "Static",
+          "name": "one",
+          "summary": "The all-ones vector (1, 1, 1)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "Static",
+          "name": "xAxis",
+          "summary": "The X unit vector (1, 0, 0)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "Static",
+          "name": "yAxis",
+          "summary": "The Y unit vector (0, 1, 0)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "Static",
+          "name": "zAxis",
+          "summary": "The Z unit vector (0, 0, 1)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "Static",
+          "name": "zero",
+          "summary": "The zero vector (0, 0, 0)."
+        }
+      ],
+      "name": "Vector3",
+      "summary": "Roblox's Vector3 IS Luau's native vector here — one type, two dialects: Vector3.new(1, 2, 3) equals vector.create(1, 2, 3), uppercase X/Y/Z/Magnitude/Unit and the method set ride a type metatable, and lowercase x/y/z stay on the VM fast path. Recorded divergence: typeof says 'vector'. The per-value member surface is not yet in the API model; the constructors below are."
+    },
+    {
+      "members": [
+        {
+          "decl": "(rx: number, ry: number, rz: number) -> CFrame",
+          "kind": "Static",
+          "name": "Angles",
+          "params": [
+            {
+              "name": "rx",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "ry",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "rz",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A rotation-only CFrame from XYZ Euler angles in radians — the canonical spelling of fromEulerAnglesXYZ (measured: the X·Y·Z product, matching the reference)."
+        },
+        {
+          "decl": "() -> CFrame",
+          "kind": "Method",
+          "name": "Inverse",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "The inverse transform: composing with it yields the identity."
+        },
+        {
+          "decl": "(goal: CFrame, alpha: number) -> CFrame",
+          "kind": "Method",
+          "name": "Lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "CFrame"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "Interpolates toward goal: linear on position, slerp on rotation. Alpha is unclamped."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "LookVector",
+          "summary": "The facing direction: the -Z basis vector."
+        },
+        {
+          "decl": "(point: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "PointToObjectSpace",
+          "params": [
+            {
+              "name": "point",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "A world-space point as an object-space point."
+        },
+        {
+          "decl": "(point: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "PointToWorldSpace",
+          "params": [
+            {
+              "name": "point",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "An object-space point as a world-space point."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "Position",
+          "summary": "The translation component."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "RightVector",
+          "summary": "The +X basis vector."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadOnly",
+          "name": "Rotation",
+          "summary": "A rotation-only copy of this CFrame, with the translation stripped."
+        },
+        {
+          "decl": "() -> (number, number, number)",
+          "kind": "Method",
+          "name": "ToEulerAnglesXYZ",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The rotation as XYZ Euler angles in radians (the same order the instance Rotation property uses, in degrees there)."
+        },
+        {
+          "decl": "(other: CFrame) -> CFrame",
+          "kind": "Method",
+          "name": "ToObjectSpace",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "CFrame"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "The world transform other, re-expressed relative to this CFrame (self:Inverse() * other)."
+        },
+        {
+          "decl": "(other: CFrame) -> CFrame",
+          "kind": "Method",
+          "name": "ToWorldSpace",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "CFrame"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "Composes: other, expressed relative to this CFrame, as a world transform (self * other)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "UpVector",
+          "summary": "The +Y basis vector."
+        },
+        {
+          "decl": "(direction: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "VectorToObjectSpace",
+          "params": [
+            {
+              "name": "direction",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "Rotates a world direction into object space (no translation)."
+        },
+        {
+          "decl": "(direction: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "VectorToWorldSpace",
+          "params": [
+            {
+              "name": "direction",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "Rotates a direction into world space (no translation)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "X",
+          "summary": "The position's X component."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Y",
+          "summary": "The position's Y component."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Z",
+          "summary": "The position's Z component."
+        },
+        {
+          "decl": "(axis: Vector3, angle: number) -> CFrame",
+          "kind": "Static",
+          "name": "fromAxisAngle",
+          "params": [
+            {
+              "name": "axis",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "angle",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A rotation-only CFrame around axis (a nonzero vector) by angle radians."
+        },
+        {
+          "decl": "(rx: number, ry: number, rz: number) -> CFrame",
+          "kind": "Static",
+          "name": "fromEulerAnglesXYZ",
+          "params": [
+            {
+              "name": "rx",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "ry",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "rz",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A rotation-only CFrame from XYZ Euler angles in radians — the same axis order the instance Rotation property uses (in degrees there)."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "Static",
+          "name": "identity",
+          "summary": "The identity transform: zero position, no rotation."
+        },
+        {
+          "decl": "(position: Vector3, target: Vector3, up: Vector3?) -> CFrame",
+          "kind": "Static",
+          "name": "lookAt",
+          "params": [
+            {
+              "name": "position",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "target",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "up",
+              "optional": true,
+              "type": "Vector3?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A CFrame at position with its LookVector aimed at target; up defaults to the world Y axis."
+        },
+        {
+          "decl": "(() -> CFrame) & ((position: Vector3) -> CFrame) & ((position: Vector3, lookAt: Vector3) -> CFrame) & ((x: number, y: number, z: number) -> CFrame)",
+          "kind": "Static",
+          "name": "new",
+          "overloads": [
+            {
+              "params": [],
+              "returns": [
+                {
+                  "type": "CFrame"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "position",
+                  "optional": false,
+                  "type": "Vector3"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "CFrame"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "position",
+                  "optional": false,
+                  "type": "Vector3"
+                },
+                {
+                  "name": "lookAt",
+                  "optional": false,
+                  "type": "Vector3"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "CFrame"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "x",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "y",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "z",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "CFrame"
+                }
+              ]
+            }
+          ],
+          "summary": "The identity (no arguments), a translation from a position vector or from x, y, z, or the legacy two-vector form: a position looking at a point (Y up)."
+        }
+      ],
+      "name": "CFrame",
+      "summary": "An immutable rigid transform: position plus rotation, right-handed and Y-up, with LookVector along -Z. Every operation returns a new value; cf1 * cf2 composes and cf * vector transforms the point."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "B",
+          "summary": "The blue component (sRGB, 0..1)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "G",
+          "summary": "The green component (sRGB, 0..1)."
+        },
+        {
+          "decl": "(goal: Color3, alpha: number) -> Color3",
+          "kind": "Method",
+          "name": "Lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "Color3"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Color3"
+            }
+          ],
+          "summary": "Interpolates each component toward goal. Alpha is unclamped."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "R",
+          "summary": "The red component (sRGB, 0..1)."
+        },
+        {
+          "decl": "(h: number, s: number, v: number) -> Color3",
+          "kind": "Static",
+          "name": "fromHSV",
+          "params": [
+            {
+              "name": "h",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "s",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "v",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Color3"
+            }
+          ],
+          "summary": "A color from hue, saturation and value, all 0..1; the hue wraps."
+        },
+        {
+          "decl": "(r: number, g: number, b: number) -> Color3",
+          "kind": "Static",
+          "name": "fromRGB",
+          "params": [
+            {
+              "name": "r",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "g",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "b",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Color3"
+            }
+          ],
+          "summary": "A color from byte components, clamped 0..255 — the editor color picker's scale."
+        },
+        {
+          "decl": "(r: number?, g: number?, b: number?) -> Color3",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "r",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "g",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "b",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Color3"
+            }
+          ],
+          "summary": "A color from sRGB components 0..1 (unclamped); omitted components default to 0."
+        }
+      ],
+      "name": "Color3",
+      "summary": "An immutable RGB color with sRGB components 0..1. Color properties hand these out; their setters also keep accepting raw RGB vectors."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "XOffset",
+          "summary": "The X offset component, in pixels."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "XScale",
+          "summary": "The X scale component: a fraction of the parent's width."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "YOffset",
+          "summary": "The Y offset component, in pixels."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "YScale",
+          "summary": "The Y scale component: a fraction of the parent's height."
+        },
+        {
+          "decl": "(x: number, y: number) -> UDim2",
+          "kind": "Static",
+          "name": "fromOffset",
+          "params": [
+            {
+              "name": "x",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "y",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "UDim2"
+            }
+          ],
+          "summary": "A UDim2 with only the pixel offsets set (scales zero)."
+        },
+        {
+          "decl": "(x: number, y: number) -> UDim2",
+          "kind": "Static",
+          "name": "fromScale",
+          "params": [
+            {
+              "name": "x",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "y",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "UDim2"
+            }
+          ],
+          "summary": "A UDim2 with only the scale components set (offsets zero)."
+        },
+        {
+          "decl": "(xScale: number, xOffset: number, yScale: number, yOffset: number) -> UDim2",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "xScale",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "xOffset",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "yScale",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "yOffset",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "UDim2"
+            }
+          ],
+          "summary": "A UDim2 from its four components: per-axis parent fraction plus pixel offset."
+        }
+      ],
+      "name": "UDim2",
+      "summary": "The UI coordinate: a parent-relative scale plus a pixel offset per axis. GuiObject Position and Size speak it."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "EnumType",
+          "summary": "The owning enum's name, as a string (the reference engine answers an Enum object here — a recorded divergence)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The item's name — the last segment of Enum.Material.Neon."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Value",
+          "summary": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value."
+        }
+      ],
+      "name": "EnumItem",
+      "summary": "One `Enum.<Type>.<Item>` value: equality is by item, tostring prints the full path, and enum-valued properties accept the item or its plain name string."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "DelayTime",
+          "summary": "Seconds to wait before the tween starts playing."
+        },
+        {
+          "decl": "Enum.EasingDirection",
+          "kind": "ReadOnly",
+          "name": "EasingDirection",
+          "summary": "Which end of the curve eases: In, Out, or InOut."
+        },
+        {
+          "decl": "Enum.EasingStyle",
+          "kind": "ReadOnly",
+          "name": "EasingStyle",
+          "summary": "The interpolation curve family."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "RepeatCount",
+          "summary": "How many extra times the tween repeats after the first play; 0 plays once."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Reverses",
+          "summary": "Whether the tween plays back to the start after each forward pass."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Time",
+          "summary": "The tween's duration in seconds."
+        },
+        {
+          "decl": "(time: number?, easingStyle: Enum.EasingStyle?, easingDirection: Enum.EasingDirection?, repeatCount: number?, reverses: boolean?, delayTime: number?) -> TweenInfo",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "time",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "easingStyle",
+              "optional": true,
+              "type": "Enum.EasingStyle?"
+            },
+            {
+              "name": "easingDirection",
+              "optional": true,
+              "type": "Enum.EasingDirection?"
+            },
+            {
+              "name": "repeatCount",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "reverses",
+              "optional": true,
+              "type": "boolean?"
+            },
+            {
+              "name": "delayTime",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "TweenInfo"
+            }
+          ],
+          "summary": "Bundles the parameters TweenService:Create consumes. Defaults follow the reference engine: 1 second, Quad, Out, no repeats, no reverse, no delay; time and delay floor at 0."
+        }
+      ],
+      "name": "TweenInfo",
+      "summary": "The parameter bundle TweenService:Create consumes: duration, easing style and direction, repeats, reversal and delay — immutable once built."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Cancel",
+          "params": [],
+          "returns": [],
+          "summary": "Stops the tween and leaves every property where it stands (the measured shape); Completed fires Cancelled."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "BVScriptSignal<Enum.PlaybackState>",
+          "kind": "Signal",
+          "name": "Completed",
+          "payloads": [
+            "Enum.PlaybackState"
+          ],
+          "summary": "Fires once when the tween ends — Enum.PlaybackState.Completed on a natural finish, Cancelled after Cancel (or after a later tween claimed a shared property). The handle is spent afterwards."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Pause",
+          "params": [],
+          "returns": [],
+          "summary": "Freezes a playing tween where it stands; Play resumes from there."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Play",
+          "params": [],
+          "returns": [],
+          "summary": "Starts (or resumes after Pause) the tween: captures the current values as the from-side and runs on the script clock. A later Play on a shared property cancels the earlier tween."
+        }
+      ],
+      "name": "Tween",
+      "summary": "One running property animation — the handle TweenService:Create returns (identity Tween < TweenBase, measured). Play, Pause and Cancel drive it; Completed fires the final Enum.PlaybackState."
+    },
+    {
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Connected",
+          "summary": "Whether the connection is still registered: false after Disconnect, after a Once connection fires, and after the owning script stops."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Disconnect",
+          "params": [],
+          "returns": [],
+          "summary": "Unregisters the callback; Connected reads false afterward. Safe to call more than once."
+        }
+      ],
+      "name": "BVScriptConnection",
+      "summary": "One registered callback on a signal: Disconnect unregisters it, Connected reads back. Connections die with their creating script."
+    },
+    {
+      "members": [
+        {
+          "decl": "(callback: (...any) -> ()) -> BVScriptConnection",
+          "kind": "Method",
+          "name": "Connect",
+          "params": [
+            {
+              "name": "callback",
+              "optional": false,
+              "type": "(...any) -> ()"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptConnection"
+            }
+          ],
+          "summary": "Registers callback for every fire and returns the connection. The callback receives the signal's fired arguments; delivery is deferred to the script pass after the event."
+        },
+        {
+          "decl": "(callback: (...any) -> ()) -> BVScriptConnection",
+          "kind": "Method",
+          "name": "Once",
+          "params": [
+            {
+              "name": "callback",
+              "optional": false,
+              "type": "(...any) -> ()"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptConnection"
+            }
+          ],
+          "summary": "Like Connect, but the connection disconnects itself the moment it fires; the already-queued callback still runs."
+        },
+        {
+          "decl": "() -> ...any",
+          "kind": "Method",
+          "name": "Wait",
+          "params": [],
+          "returns": [
+            {
+              "type": "...any"
+            }
+          ],
+          "summary": "Suspends the calling thread until the next fire, then returns the fired arguments."
+        }
+      ],
+      "name": "BVScriptSignal",
+      "summary": "The event surface (the BV spelling of the reference engine's RBXScriptSignal): Connect and Once register callbacks, Wait suspends until the next fire. Delivery is deferred to the script pass after the event."
+    }
+  ],
+  "dump_format": 1,
+  "enums": {
+    "CollisionFidelity": [
+      "Box",
+      "Default",
+      "Hull",
+      "PreciseConvexDecomposition"
+    ],
+    "EasingDirection": [
+      "In",
+      "InOut",
+      "Out"
+    ],
+    "EasingStyle": [
+      "Back",
+      "Bounce",
+      "Circular",
+      "Cubic",
+      "Elastic",
+      "Exponential",
+      "Linear",
+      "Quad",
+      "Quart",
+      "Quint",
+      "Sine"
+    ],
+    "KeyCode": [
+      "A",
+      "B",
+      "BackSlash",
+      "Backquote",
+      "Backspace",
+      "C",
+      "CapsLock",
+      "Comma",
+      "D",
+      "Delete",
+      "Down",
+      "E",
+      "Eight",
+      "End",
+      "Equals",
+      "Escape",
+      "F",
+      "F1",
+      "F10",
+      "F11",
+      "F12",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7",
+      "F8",
+      "F9",
+      "Five",
+      "Four",
+      "G",
+      "H",
+      "Home",
+      "I",
+      "Insert",
+      "J",
+      "K",
+      "L",
+      "Left",
+      "LeftAlt",
+      "LeftBracket",
+      "LeftControl",
+      "LeftShift",
+      "M",
+      "Minus",
+      "N",
+      "Nine",
+      "O",
+      "One",
+      "P",
+      "PageDown",
+      "PageUp",
+      "Period",
+      "Q",
+      "Quote",
+      "R",
+      "Return",
+      "Right",
+      "RightAlt",
+      "RightBracket",
+      "RightControl",
+      "RightShift",
+      "S",
+      "Semicolon",
+      "Seven",
+      "Six",
+      "Slash",
+      "Space",
+      "T",
+      "Tab",
+      "Three",
+      "Two",
+      "U",
+      "Unknown",
+      "Up",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+      "Zero"
+    ],
+    "Material": [
+      "Brick",
+      "Concrete",
+      "Glass",
+      "Grass",
+      "Metal",
+      "Neon",
+      "Plastic",
+      "Slate",
+      "SmoothPlastic",
+      "Wood"
+    ],
+    "PartType": [
+      "Ball",
+      "Block",
+      "CornerWedge",
+      "Cylinder",
+      "Wedge"
+    ],
+    "PlaybackState": [
+      "Begin",
+      "Cancelled",
+      "Completed",
+      "Delayed",
+      "Paused",
+      "Playing"
+    ],
+    "RaycastFilterType": [
+      "Exclude",
+      "Include"
+    ],
+    "RunContext": [
+      "Client",
+      "Legacy",
+      "Server"
+    ],
+    "UserInputType": [
+      "Keyboard",
+      "MouseButton1",
+      "MouseButton2",
+      "MouseButton3"
+    ]
+  },
+  "globals": [
+    "CFrame",
+    "Color3",
+    "Enum",
+    "Instance",
+    "Keybinds",
+    "Signals",
+    "TweenInfo",
+    "UDim2",
+    "Vector3",
+    "_G",
+    "_VERSION",
+    "assert",
+    "bit32",
+    "collectgarbage",
+    "coroutine",
+    "error",
+    "game",
+    "gcinfo",
+    "getfenv",
+    "getmetatable",
+    "ipairs",
+    "loadstring",
+    "math",
+    "newproxy",
+    "next",
+    "os",
+    "pairs",
+    "pcall",
+    "print",
+    "rawequal",
+    "rawget",
+    "rawlen",
+    "rawset",
+    "require",
+    "select",
+    "setfenv",
+    "setmetatable",
+    "string",
+    "table",
+    "task",
+    "tonumber",
+    "tostring",
+    "type",
+    "typeof",
+    "unpack",
+    "utf8",
+    "vector",
+    "warn",
+    "workspace",
+    "xpcall"
+  ],
+  "services": [
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(service: string) -> Instance",
+          "kind": "Method",
+          "name": "GetService",
+          "params": [
+            {
+              "name": "service",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance"
+            }
+          ],
+          "summary": "Hands out an engine service by name (\"Players\", \"RunService\", \"TweenService\", …; \"Workspace\" answers the workspace root). Unknown names error."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        }
+      ],
+      "name": "DataModel",
+      "summary": "The `game` global: the service registry at the top of everything (measured ancestry DataModel < ServiceProvider < Instance). GetService hands out the engine services; its Name is the place name (\"Game\" until the engine carries one — a recorded stub)."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "Heartbeat",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Fires once per scripts pass with the frame's delta time in script-clock seconds. The workhorse per-frame hook."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        }
+      ],
+      "name": "RunService",
+      "summary": "The frame clock: Heartbeat fires once per scripts pass with the frame's delta time. The one service whose Name (\"Run Service\", measured) differs from its ClassName."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "() -> {Player}",
+          "kind": "Method",
+          "name": "GetPlayers",
+          "params": [],
+          "returns": [
+            {
+              "type": "{Player}"
+            }
+          ],
+          "summary": "Every player currently in the session, in unspecified order."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "Player?",
+          "kind": "ReadOnly",
+          "name": "LocalPlayer",
+          "summary": "This process's own player — nil until they join, and always nil on a dedicated server."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "BVScriptSignal<Player>",
+          "kind": "Signal",
+          "name": "PlayerAdded",
+          "payloads": [
+            "Player"
+          ],
+          "summary": "Fires with each player that joins the session — solo play's auto-created local player included."
+        },
+        {
+          "decl": "BVScriptSignal<Player>",
+          "kind": "Signal",
+          "name": "PlayerRemoving",
+          "payloads": [
+            "Player"
+          ],
+          "summary": "Fires with each player about to leave, while they are still on the roster and resolvable."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "RespawnTime",
+          "summary": "Seconds between death and respawn (measured default 3). Stored as given — negatives read back and respawn promptly — and consulted at death: a write reaches players already in the game. Each Player's RespawnTime seeds from it and may override it per player."
+        }
+      ],
+      "name": "Players",
+      "summary": "The session roster: LocalPlayer, the player list, join/leave signals, and the measured RespawnTime service property (consulted at death; each Player's per-player value seeds from it)."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "GetMouseDelta",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "This frame's mouse motion as (dx, dy, 0)."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "GetMouseLocation",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The cursor's logical position in the player window, as (x, y, 0) — (0, 0, 0) when no window exists."
+        },
+        {
+          "decl": "BVScriptSignal<{ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }, boolean>",
+          "kind": "Signal",
+          "name": "InputBegan",
+          "payloads": [
+            "{ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }",
+            "boolean"
+          ],
+          "summary": "Fires on every key or mouse-button press with a read-only input table and a gameProcessed flag (always false until UI focus exists). Mouse buttons carry KeyCode Unknown."
+        },
+        {
+          "decl": "BVScriptSignal<{ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }, boolean>",
+          "kind": "Signal",
+          "name": "InputEnded",
+          "payloads": [
+            "{ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }",
+            "boolean"
+          ],
+          "summary": "InputBegan's release half: fires when the key or mouse button comes back up, with the same payload shape."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "(key: Enum.KeyCode) -> boolean",
+          "kind": "Method",
+          "name": "IsKeyDown",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "Enum.KeyCode"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether the key is held right now. Accepts the enum item or its name; unknown or unmapped keys are simply not down."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        }
+      ],
+      "name": "UserInputService",
+      "summary": "The raw input layer: InputBegan/InputEnded with Enum.KeyCode/Enum.UserInputType payloads, IsKeyDown polling, and the mouse position and per-frame delta. The authored Keybinds layer reads the same input state; this is the Roblox-parity surface underneath it."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "(sound: Instance) -> ()",
+          "kind": "Method",
+          "name": "PlayLocalSound",
+          "params": [
+            {
+              "name": "sound",
+              "optional": false,
+              "type": "Instance"
+            }
+          ],
+          "returns": [],
+          "summary": "Starts a Sound non-positionally, wherever it lives — storage included. Anything but a Sound instance errors."
+        }
+      ],
+      "name": "SoundService",
+      "summary": "Non-positional playback: PlayLocalSound starts a Sound wherever it lives, storage included."
+    },
+    {
+      "members": [
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "Ambient",
+          "summary": "The ambient light color, filling in where no light reaches. Accepts a Color3 or a raw RGB vector, like every color setter."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Brightness",
+          "summary": "The sun's intensity, floored at 0."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ClockTime",
+          "summary": "The time of day in hours, 0..24. Writes wrap onto the day, so a `ClockTime += dt` day cycle needs no bookkeeping; the sun and sky follow."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "FogColor",
+          "summary": "The distance-fog color."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "FogEnd",
+          "summary": "The distance where fog fully occludes, in studs, floored at 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "FogStart",
+          "summary": "The distance where fog begins, in studs, floored at 0."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "GetSunDirection",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The unit direction toward the sun for the current ClockTime."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        }
+      ],
+      "name": "Lighting",
+      "summary": "The global lighting state: ambient color, sun brightness, the ClockTime day cycle, and distance fog. The skybox is file-authored in v1 — scripts move the sun, not the sky."
+    },
+    {
+      "members": [
+        {
+          "decl": "(item: Instance, lifetime: number?) -> ()",
+          "kind": "Method",
+          "name": "AddItem",
+          "params": [
+            {
+              "name": "item",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "lifetime",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [],
+          "summary": "Schedules the instance's destruction after `lifetime` seconds (default 10, negatives destroy promptly) on the pause-aware script clock. Re-adding an item replaces its timer."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        }
+      ],
+      "name": "Debris",
+      "summary": "Scheduled destruction: AddItem destroys an instance after a lifetime on the pause-aware script clock — fire-and-forget cleanup for projectiles and effects."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(instance: Instance, tweenInfo: TweenInfo?, properties: {[string]: any}) -> Tween",
+          "kind": "Method",
+          "name": "Create",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "tweenInfo",
+              "optional": true,
+              "type": "TweenInfo?"
+            },
+            {
+              "name": "properties",
+              "optional": false,
+              "type": "{[string]: any}"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Tween"
+            }
+          ],
+          "summary": "Builds a Tween driving the given properties of one instance to their goal values (v1 tracks: Transparency, Color, Size, Position, Volume, WalkSpeed — each must exist on the target's class). The handle starts idle; Play starts it."
+        },
+        {
+          "decl": "(alpha: number, easingStyle: Enum.EasingStyle, easingDirection: Enum.EasingDirection) -> number",
+          "kind": "Method",
+          "name": "GetValue",
+          "params": [
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "easingStyle",
+              "optional": false,
+              "type": "Enum.EasingStyle"
+            },
+            {
+              "name": "easingDirection",
+              "optional": false,
+              "type": "Enum.EasingDirection"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The eased interpolation alpha for a raw 0..1 alpha — the same curves the tweens themselves run on, pinned to the reference engine's samples."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        }
+      ],
+      "name": "TweenService",
+      "summary": "Property animation: Create builds a Tween driving properties to goal values through the reference engine's easing curves (pinned to its live samples); GetValue exposes the curves directly."
+    },
+    {
+      "members": [
+        {
+          "decl": "(instance: Instance, tag: string) -> ()",
+          "kind": "Method",
+          "name": "AddTag",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "tag",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "summary": "Tags the instance (idempotent and silent on a duplicate). If it is in the game tree, the tag's Added signal fires."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(tag: string) -> BVScriptSignal",
+          "kind": "Method",
+          "name": "GetInstanceAddedSignal",
+          "params": [
+            {
+              "name": "tag",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptSignal"
+            }
+          ],
+          "summary": "The tag's membership signal: fires with each tagged instance that is (or becomes) part of the game tree."
+        },
+        {
+          "decl": "(tag: string) -> BVScriptSignal",
+          "kind": "Method",
+          "name": "GetInstanceRemovedSignal",
+          "params": [
+            {
+              "name": "tag",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptSignal"
+            }
+          ],
+          "summary": "The other half: fires (once) when a tagged instance leaves the tree — tag removed in-tree, detached, or destroyed."
+        },
+        {
+          "decl": "(tag: string) -> {Instance}",
+          "kind": "Method",
+          "name": "GetTagged",
+          "params": [
+            {
+              "name": "tag",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "{Instance}"
+            }
+          ],
+          "summary": "Every instance in the game tree carrying the tag — tree membership, not storage: stored instances and husks stay out."
+        },
+        {
+          "decl": "(instance: Instance) -> {string}",
+          "kind": "Method",
+          "name": "GetTags",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            }
+          ],
+          "returns": [
+            {
+              "type": "{string}"
+            }
+          ],
+          "summary": "The instance's tags in add order."
+        },
+        {
+          "decl": "(instance: Instance, tag: string) -> boolean",
+          "kind": "Method",
+          "name": "HasTag",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "tag",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether the instance carries the tag. Storage is per-instance and survives leaving the tree — and Destroy (husks keep their tags)."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "(instance: Instance, tag: string) -> ()",
+          "kind": "Method",
+          "name": "RemoveTag",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "tag",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "summary": "Removes the tag (a no-op when absent). In-tree removals fire the tag's Removed signal."
+        }
+      ],
+      "name": "CollectionService",
+      "summary": "Instance tags: storage is per-instance and survives leaving the tree, while GetTagged and the per-tag Added/Removed signals track tree membership. Tags serialize with the place."
+    }
+  ]
+}
