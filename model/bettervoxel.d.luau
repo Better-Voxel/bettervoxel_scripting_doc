@@ -70,6 +70,14 @@ declare extern type UDim2 with
     YScale: number
 end
 
+declare extern type Ray with
+    function ClosestPoint(self, point: Vector3): Vector3
+    Direction: Vector3
+    function Distance(self, point: Vector3): number
+    Origin: Vector3
+    Unit: Ray
+end
+
 declare extern type Instance with
     AncestryChanged: BVScriptSignal -- fires (Instance, Instance?)
     AttributeChanged: BVScriptSignal -- fires (string)
@@ -217,9 +225,13 @@ declare extern type BasePart extends PVInstance with
     CFrame: CFrame
     CanCollide: boolean
     Color: Color3
+    function GetNetworkOwner(self): Instance?
+    function GetNetworkOwnershipAuto(self): boolean
     Material: EnumItem
     Position: Vector3
     Rotation: Vector3
+    function SetNetworkOwner(self, player: Instance?): ()
+    function SetNetworkOwnershipAuto(self): ()
     Size: Vector3
     Touched: BVScriptSignal -- fires (Instance)
     Transparency: number
@@ -233,6 +245,29 @@ end
 
 declare extern type BoolValue extends ValueBase with
     Value: boolean
+end
+
+declare extern type Camera extends PVInstance with
+    CFrame: CFrame
+    CameraSubject: Instance?
+    CameraType: EnumItem
+    DiagonalFieldOfView: number
+    FieldOfView: number
+    FieldOfViewMode: EnumItem
+    Focus: CFrame
+    function GetPartsObscuringTarget(self, castPoints: {Vector3}, ignoreList: {Instance}): {Instance}
+    function GetRenderCFrame(self): CFrame
+    HeadLocked: boolean
+    HeadScale: number
+    MaxAxisFieldOfView: number
+    NearPlaneZ: number
+    function ScreenPointToRay(self, x: number, y: number, depth: number?): Ray
+    VRTiltAndRollEnabled: boolean
+    function ViewportPointToRay(self, x: number, y: number, depth: number?): Ray
+    ViewportSize: Vector3
+    function WorldToScreenPoint(self, worldPoint: Vector3): (Vector3, boolean)
+    function WorldToViewportPoint(self, worldPoint: Vector3): (Vector3, boolean)
+    function ZoomToExtents(self, boundingBoxCFrame: CFrame, boundingBoxSize: Vector3): ()
 end
 
 declare extern type GuiBase2d extends GuiBase with
@@ -333,10 +368,6 @@ declare extern type MeshPart extends TriangleMeshPart with
 end
 
 declare extern type Part extends FormFactorPart with
-    function GetNetworkOwner(self): Instance?
-    function GetNetworkOwnershipAuto(self): boolean
-    function SetNetworkOwner(self, player: Instance?): ()
-    function SetNetworkOwnershipAuto(self): ()
     Shape: EnumItem
 end
 
@@ -344,6 +375,7 @@ declare extern type ScreenGui extends LayerCollector with
 end
 
 declare extern type Workspace extends WorldRoot with
+    CurrentCamera: Camera?
     Gravity: number
     function Raycast(self, origin: Vector3, direction: Vector3, raycastParams: {[string]: any}?): {[string]: any}?
 end
@@ -385,6 +417,7 @@ declare extern type RunService with
 end
 
 declare extern type Players with
+    CharacterAutoLoads: boolean
     ClassName: string
     function GetPlayers(self): {Player}
     function IsA(self, className: string): boolean
@@ -477,7 +510,11 @@ declare Color3: {
 }
 
 declare Instance: {
-    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+}
+
+declare Ray: {
+    new: (origin: Vector3, direction: Vector3) -> Ray,
 }
 
 declare TweenInfo: {
@@ -500,9 +537,11 @@ declare Vector3: {
 }
 
 declare Enum: {
+    CameraType: { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
     CollisionFidelity: { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
     EasingDirection: { In: EnumItem, InOut: EnumItem, Out: EnumItem },
     EasingStyle: { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
+    FieldOfViewMode: { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },
     KeyCode: { A: EnumItem, B: EnumItem, BackSlash: EnumItem, Backquote: EnumItem, Backspace: EnumItem, C: EnumItem, CapsLock: EnumItem, Comma: EnumItem, D: EnumItem, Delete: EnumItem, Down: EnumItem, E: EnumItem, Eight: EnumItem, End: EnumItem, Equals: EnumItem, Escape: EnumItem, F: EnumItem, F1: EnumItem, F10: EnumItem, F11: EnumItem, F12: EnumItem, F2: EnumItem, F3: EnumItem, F4: EnumItem, F5: EnumItem, F6: EnumItem, F7: EnumItem, F8: EnumItem, F9: EnumItem, Five: EnumItem, Four: EnumItem, G: EnumItem, H: EnumItem, Home: EnumItem, I: EnumItem, Insert: EnumItem, J: EnumItem, K: EnumItem, L: EnumItem, Left: EnumItem, LeftAlt: EnumItem, LeftBracket: EnumItem, LeftControl: EnumItem, LeftShift: EnumItem, M: EnumItem, Minus: EnumItem, N: EnumItem, Nine: EnumItem, O: EnumItem, One: EnumItem, P: EnumItem, PageDown: EnumItem, PageUp: EnumItem, Period: EnumItem, Q: EnumItem, Quote: EnumItem, R: EnumItem, Return: EnumItem, Right: EnumItem, RightAlt: EnumItem, RightBracket: EnumItem, RightControl: EnumItem, RightShift: EnumItem, S: EnumItem, Semicolon: EnumItem, Seven: EnumItem, Six: EnumItem, Slash: EnumItem, Space: EnumItem, T: EnumItem, Tab: EnumItem, Three: EnumItem, Two: EnumItem, U: EnumItem, Unknown: EnumItem, Up: EnumItem, V: EnumItem, W: EnumItem, X: EnumItem, Y: EnumItem, Z: EnumItem, Zero: EnumItem },
     Material: { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },
     PartType: { Ball: EnumItem, Block: EnumItem, CornerWedge: EnumItem, Cylinder: EnumItem, Wedge: EnumItem },

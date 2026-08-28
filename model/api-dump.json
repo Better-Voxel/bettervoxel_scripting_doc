@@ -92,6 +92,30 @@
           "summary": "The authored surface color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1)."
         },
         {
+          "decl": "() -> Instance?",
+          "kind": "Method",
+          "name": "GetNetworkOwner",
+          "params": [],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "Server-only: the player currently simulating this assembly, or nil for the server. Resolved through the assembly root."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "GetNetworkOwnershipAuto",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly."
+        },
+        {
           "decl": "Enum.Material",
           "kind": "ReadWrite",
           "name": "Material",
@@ -108,6 +132,28 @@
           "kind": "ReadWrite",
           "name": "Rotation",
           "summary": "The orientation as XYZ Euler angles in degrees. Welded members read their assembly pose; writing a welded member is refused — rotate the assembly root instead."
+        },
+        {
+          "decl": "(player: Instance?) -> ()",
+          "kind": "Method",
+          "name": "SetNetworkOwner",
+          "params": [
+            {
+              "name": "player",
+              "optional": true,
+              "type": "Instance?"
+            }
+          ],
+          "returns": [],
+          "summary": "Server-only: pins which peer simulates this assembly (nil means the server) and turns automatic ownership off. A non-Player instance degrades silently to the server. The part must be an unanchored workspace descendant."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "SetNetworkOwnershipAuto",
+          "params": [],
+          "returns": [],
+          "summary": "Server-only: re-arms automatic (distance-based) ownership without clearing the standing owner."
         },
         {
           "decl": "Vector3",
@@ -270,6 +316,244 @@
       "name": "BoolValue",
       "parent": "ValueBase",
       "summary": "A named container for one boolean."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "CFrame",
+          "summary": "The eye's pose. Live in Custom — the orbit writes it every frame, and a script write re-seats the orbit from the written look direction at the current zoom (measured); authoritative in Scriptable. A script write fires the CFrame signal; the eye's own motion never does."
+        },
+        {
+          "decl": "Instance?",
+          "kind": "ReadWrite",
+          "name": "CameraSubject",
+          "summary": "What the following modes track: any instance, though only one with a world pose (a part, a model, a character) moves the eye. nil restores the default subject — the local player's character, which is also what reads back then (measured)."
+        },
+        {
+          "decl": "Enum.CameraType",
+          "kind": "ReadWrite",
+          "name": "CameraType",
+          "summary": "Who drives the camera. Custom (the play default) and Track are the built-in orbit around CameraSubject; Follow is that orbit swinging behind the subject's movement; Orbital the orbit at a locked zoom that ignores CFrame writes; Attach rides the subject and turns with it; Watch stays put and turns to face it; Fixed stays exactly where scripts put it and leaves Focus alone; Scriptable obeys CFrame writes and nothing else. Writes accept the item or its name."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "DiagonalFieldOfView",
+          "summary": "The view across the viewport's diagonal, derived from FieldOfView and the viewport aspect by the reference engine's measured relation (tan(d/2) = tan²(v/2) + tan²(h/2)); a write sets the vertical that reads back as it."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "FieldOfView",
+          "summary": "The VERTICAL field of view in degrees, clamped 1..120 (measured: 500 reads back 120, 0 reads back 1); default 70. A write fires this name and the two derived views."
+        },
+        {
+          "decl": "Enum.FieldOfViewMode",
+          "kind": "ReadWrite",
+          "name": "FieldOfViewMode",
+          "summary": "Which view a viewport resize preserves — Vertical (the default: FieldOfView itself), Diagonal or MaxAxis — with the vertical recomputed to keep it. FieldOfView always reads the vertical value whatever the mode (measured)."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "Focus",
+          "summary": "The point of interest. The eye keeps it on the subject in every following mode (identity rotation), twenty studs ahead of the eye in Scriptable — where a script's own write is overridden the next frame (measured) — and untouched in Fixed."
+        },
+        {
+          "decl": "(castPoints: {Vector3}, ignoreList: {Instance}) -> {Instance}",
+          "kind": "Method",
+          "name": "GetPartsObscuringTarget",
+          "params": [
+            {
+              "name": "castPoints",
+              "optional": false,
+              "type": "{Vector3}"
+            },
+            {
+              "name": "ignoreList",
+              "optional": false,
+              "type": "{Instance}"
+            }
+          ],
+          "returns": [
+            {
+              "type": "{Instance}"
+            }
+          ],
+          "summary": "Every part between the camera's position and any of the cast points — visible or not, collidable or not, the part around the point included — minus the ignore list with its descendants and the local player's character (measured); each part once."
+        },
+        {
+          "decl": "() -> CFrame",
+          "kind": "Method",
+          "name": "GetRenderCFrame",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "The pose the eye actually renders from — the camera's CFrame (the two differ only under VR head tracking)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "HeadLocked",
+          "summary": "Whether VR head tracking follows the camera (default true). Stored for parity; the engine renders no VR."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "HeadScale",
+          "summary": "The VR head-to-world scale (default 1). Stored for parity; the engine renders no VR."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxAxisFieldOfView",
+          "summary": "The view along the viewport's larger axis — horizontal in landscape, the vertical itself in portrait; a write sets the vertical that reads back as it."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "NearPlaneZ",
+          "summary": "The near clipping plane's z in the camera's own space: the negated near distance (−0.1)."
+        },
+        {
+          "decl": "(x: number, y: number, depth: number?) -> Ray",
+          "kind": "Method",
+          "name": "ScreenPointToRay",
+          "params": [
+            {
+              "name": "x",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "y",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "depth",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Ray"
+            }
+          ],
+          "summary": "The unit ray through a screen pixel, its origin on the near plane pushed depth studs along it. The engine has no GUI inset, so this equals ViewportPointToRay."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "VRTiltAndRollEnabled",
+          "summary": "Whether VR tilt and roll reach the camera (default false). Stored for parity; the engine renders no VR."
+        },
+        {
+          "decl": "(x: number, y: number, depth: number?) -> Ray",
+          "kind": "Method",
+          "name": "ViewportPointToRay",
+          "params": [
+            {
+              "name": "x",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "y",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "depth",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Ray"
+            }
+          ],
+          "summary": "The unit ray through a viewport pixel, its origin on the near plane pushed depth studs along it (default 0)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "ViewportSize",
+          "summary": "The size of the view in pixels, as (width, height, 0) — the engine's Vector2 stand-in. 1×1 for a camera no eye renders through. Fires its signal on a resize."
+        },
+        {
+          "decl": "(worldPoint: Vector3) -> (Vector3, boolean)",
+          "kind": "Method",
+          "name": "WorldToScreenPoint",
+          "params": [
+            {
+              "name": "worldPoint",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            },
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The pixel position of a world point as (x, y, depth) — depth the distance along the look, negative behind the eye — plus whether it is on screen. The engine has no GUI inset, so this equals WorldToViewportPoint."
+        },
+        {
+          "decl": "(worldPoint: Vector3) -> (Vector3, boolean)",
+          "kind": "Method",
+          "name": "WorldToViewportPoint",
+          "params": [
+            {
+              "name": "worldPoint",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            },
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The viewport position of a world point as (x, y, depth) in pixels from the top-left, plus whether it is inside the view and in front of the eye."
+        },
+        {
+          "decl": "(boundingBoxCFrame: CFrame, boundingBoxSize: Vector3) -> ()",
+          "kind": "Method",
+          "name": "ZoomToExtents",
+          "params": [
+            {
+              "name": "boundingBoxCFrame",
+              "optional": false,
+              "type": "CFrame"
+            },
+            {
+              "name": "boundingBoxSize",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [],
+          "summary": "Backs the camera along its current look until the box's bounding sphere fits the view (radius over the sine of half the max-axis view — measured); a CFrame write like any other, so the orbit modes re-seat from it."
+        }
+      ],
+      "name": "Camera",
+      "parent": "PVInstance",
+      "summary": "The eye as an object: workspace.CurrentCamera is the one the process renders through (minted with the local player, none on a dedicated server); Instance.new makes further, inert cameras that CurrentCamera can be assigned. CameraType picks who drives it — the built-in orbit around CameraSubject in its several flavors, or scripts through CFrame — FieldOfView and its mode the lens, and the projection methods map between world and screen. Client-local: never saved or replicated."
     },
     {
       "creatable": false,
@@ -1058,52 +1342,6 @@
       "creatable": true,
       "members": [
         {
-          "decl": "() -> Instance?",
-          "kind": "Method",
-          "name": "GetNetworkOwner",
-          "params": [],
-          "returns": [
-            {
-              "type": "Instance?"
-            }
-          ],
-          "summary": "Server-only: the player currently simulating this assembly, or nil for the server. Resolved through the assembly root."
-        },
-        {
-          "decl": "() -> boolean",
-          "kind": "Method",
-          "name": "GetNetworkOwnershipAuto",
-          "params": [],
-          "returns": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "summary": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly."
-        },
-        {
-          "decl": "(player: Instance?) -> ()",
-          "kind": "Method",
-          "name": "SetNetworkOwner",
-          "params": [
-            {
-              "name": "player",
-              "optional": true,
-              "type": "Instance?"
-            }
-          ],
-          "returns": [],
-          "summary": "Server-only: pins which peer simulates this assembly (nil means the server) and turns automatic ownership off. A non-Player instance degrades silently to the server. The part must be an unanchored workspace descendant."
-        },
-        {
-          "decl": "() -> ()",
-          "kind": "Method",
-          "name": "SetNetworkOwnershipAuto",
-          "params": [],
-          "returns": [],
-          "summary": "Server-only: re-arms automatic (distance-based) ownership without clearing the standing owner."
-        },
-        {
           "decl": "Enum.PartType",
           "kind": "ReadWrite",
           "name": "Shape",
@@ -1577,6 +1815,12 @@
     {
       "creatable": false,
       "members": [
+        {
+          "decl": "Camera?",
+          "kind": "ReadWrite",
+          "name": "CurrentCamera",
+          "summary": "The camera the eye renders through — nil where there is none (a dedicated server). Assigning a Camera parented under the workspace makes it current and DETACHES the previous one (Parent nil, alive); an assignee parented elsewhere is replaced the next frame by a fresh Fixed camera, as is a destroyed current camera (measured). Fires its property signal on every change, the engine's included."
+        },
         {
           "decl": "number",
           "kind": "ReadWrite",
@@ -2334,6 +2578,89 @@
     {
       "members": [
         {
+          "decl": "(point: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "ClosestPoint",
+          "params": [
+            {
+              "name": "point",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The nearest point on the ray to point: the projection onto the direction, clamped at the origin and unbounded ahead (the direction's length is not a limit)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "Direction",
+          "summary": "The direction vector, exactly as constructed — any length."
+        },
+        {
+          "decl": "(point: Vector3) -> number",
+          "kind": "Method",
+          "name": "Distance",
+          "params": [
+            {
+              "name": "point",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The distance from point to its ClosestPoint on the ray."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "Origin",
+          "summary": "The point the ray starts from."
+        },
+        {
+          "decl": "Ray",
+          "kind": "ReadOnly",
+          "name": "Unit",
+          "summary": "The same ray with its direction normalized to unit length."
+        },
+        {
+          "decl": "(origin: Vector3, direction: Vector3) -> Ray",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "origin",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "direction",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Ray"
+            }
+          ],
+          "summary": "A ray from origin along direction (kept at the given length — Unit normalizes it)."
+        }
+      ],
+      "name": "Ray",
+      "summary": "An immutable origin + direction pair, as the camera's ScreenPointToRay/ViewportPointToRay hand out. Its own methods treat it as a half-line: ClosestPoint clamps at the origin and runs unbounded ahead."
+    },
+    {
+      "members": [
+        {
           "decl": "string",
           "kind": "ReadOnly",
           "name": "EnumType",
@@ -2586,6 +2913,16 @@
   ],
   "dump_format": 1,
   "enums": {
+    "CameraType": [
+      "Attach",
+      "Custom",
+      "Fixed",
+      "Follow",
+      "Orbital",
+      "Scriptable",
+      "Track",
+      "Watch"
+    ],
     "CollisionFidelity": [
       "Box",
       "Default",
@@ -2609,6 +2946,11 @@
       "Quart",
       "Quint",
       "Sine"
+    ],
+    "FieldOfViewMode": [
+      "Diagonal",
+      "MaxAxis",
+      "Vertical"
     ],
     "KeyCode": [
       "A",
@@ -2743,6 +3085,7 @@
     "Enum",
     "Instance",
     "Keybinds",
+    "Ray",
     "Signals",
     "TweenInfo",
     "UDim2",
@@ -2891,6 +3234,12 @@
     },
     {
       "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "CharacterAutoLoads",
+          "summary": "Whether characters spawn automatically on join and after death (default true). When false only Player:LoadCharacter spawns one. Consulted as joins and deaths happen — set it at boot."
+        },
         {
           "decl": "string",
           "kind": "ReadOnly",

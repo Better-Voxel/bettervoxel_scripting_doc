@@ -282,6 +282,39 @@
   "@bettervoxel/global/Instance.new/return/0": {
     "documentation": "`Instance`"
   },
+  "@bettervoxel/global/Ray": {
+    "documentation": "The Ray constructors — see the Ray page.",
+    "keys": {
+      "new": "@bettervoxel/global/Ray.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html"
+  },
+  "@bettervoxel/global/Ray.new": {
+    "documentation": "A ray from origin along direction (kept at the given length — Unit normalizes it).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Ray.new/param/0",
+        "name": "origin"
+      },
+      {
+        "documentation": "@bettervoxel/global/Ray.new/param/1",
+        "name": "direction"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Ray.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/Ray.new/param/0": {
+    "documentation": "`origin: Vector3`"
+  },
+  "@bettervoxel/global/Ray.new/param/1": {
+    "documentation": "`direction: Vector3`"
+  },
+  "@bettervoxel/global/Ray.new/return/0": {
+    "documentation": "`Ray`"
+  },
   "@bettervoxel/global/TweenInfo": {
     "documentation": "The TweenInfo constructors — see the TweenInfo page.",
     "keys": {
@@ -646,9 +679,13 @@
       "CFrame": "@bettervoxel/globaltype/BasePart.CFrame",
       "CanCollide": "@bettervoxel/globaltype/BasePart.CanCollide",
       "Color": "@bettervoxel/globaltype/BasePart.Color",
+      "GetNetworkOwner": "@bettervoxel/globaltype/BasePart.GetNetworkOwner",
+      "GetNetworkOwnershipAuto": "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto",
       "Material": "@bettervoxel/globaltype/BasePart.Material",
       "Position": "@bettervoxel/globaltype/BasePart.Position",
       "Rotation": "@bettervoxel/globaltype/BasePart.Rotation",
+      "SetNetworkOwner": "@bettervoxel/globaltype/BasePart.SetNetworkOwner",
+      "SetNetworkOwnershipAuto": "@bettervoxel/globaltype/BasePart.SetNetworkOwnershipAuto",
       "Size": "@bettervoxel/globaltype/BasePart.Size",
       "Touched": "@bettervoxel/globaltype/BasePart.Touched",
       "Transparency": "@bettervoxel/globaltype/BasePart.Transparency"
@@ -689,6 +726,28 @@
     "documentation": "The authored surface color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#color"
   },
+  "@bettervoxel/globaltype/BasePart.GetNetworkOwner": {
+    "documentation": "Server-only: the player currently simulating this assembly, or nil for the server. Resolved through the assembly root.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#getnetworkowner",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/BasePart.GetNetworkOwner/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BasePart.GetNetworkOwner/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto": {
+    "documentation": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#getnetworkownershipauto",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto/return/0": {
+    "documentation": "`boolean`"
+  },
   "@bettervoxel/globaltype/BasePart.Material": {
     "documentation": "The surface material, as an Enum.Material item; writes accept the item or its string name.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#material"
@@ -700,6 +759,26 @@
   "@bettervoxel/globaltype/BasePart.Rotation": {
     "documentation": "The orientation as XYZ Euler angles in degrees. Welded members read their assembly pose; writing a welded member is refused — rotate the assembly root instead.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#rotation"
+  },
+  "@bettervoxel/globaltype/BasePart.SetNetworkOwner": {
+    "documentation": "Server-only: pins which peer simulates this assembly (nil means the server) and turns automatic ownership off. A non-Player instance degrades silently to the server. The part must be an unanchored workspace descendant.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#setnetworkowner",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BasePart.SetNetworkOwner/param/0",
+        "name": "player"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/BasePart.SetNetworkOwner/param/0": {
+    "documentation": "`player: Instance?`"
+  },
+  "@bettervoxel/globaltype/BasePart.SetNetworkOwnershipAuto": {
+    "documentation": "Server-only: re-arms automatic (distance-based) ownership without clearing the standing owner.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#setnetworkownershipauto",
+    "params": [],
+    "returns": []
   },
   "@bettervoxel/globaltype/BasePart.Size": {
     "documentation": "The part's dimensions in studs. The collider and mesh re-derive on write; a MeshPart's geometry scales against its authored MeshSize.",
@@ -1051,6 +1130,254 @@
   "@bettervoxel/globaltype/CFrame.Z": {
     "documentation": "The position's Z component.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#z"
+  },
+  "@bettervoxel/globaltype/Camera": {
+    "documentation": "The eye as an object: workspace.CurrentCamera is the one the process renders through (minted with the local player, none on a dedicated server); Instance.new makes further, inert cameras that CurrentCamera can be assigned. CameraType picks who drives it — the built-in orbit around CameraSubject in its several flavors, or scripts through CFrame — FieldOfView and its mode the lens, and the projection methods map between world and screen. Client-local: never saved or replicated.",
+    "keys": {
+      "CFrame": "@bettervoxel/globaltype/Camera.CFrame",
+      "CameraSubject": "@bettervoxel/globaltype/Camera.CameraSubject",
+      "CameraType": "@bettervoxel/globaltype/Camera.CameraType",
+      "DiagonalFieldOfView": "@bettervoxel/globaltype/Camera.DiagonalFieldOfView",
+      "FieldOfView": "@bettervoxel/globaltype/Camera.FieldOfView",
+      "FieldOfViewMode": "@bettervoxel/globaltype/Camera.FieldOfViewMode",
+      "Focus": "@bettervoxel/globaltype/Camera.Focus",
+      "GetPartsObscuringTarget": "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget",
+      "GetRenderCFrame": "@bettervoxel/globaltype/Camera.GetRenderCFrame",
+      "HeadLocked": "@bettervoxel/globaltype/Camera.HeadLocked",
+      "HeadScale": "@bettervoxel/globaltype/Camera.HeadScale",
+      "MaxAxisFieldOfView": "@bettervoxel/globaltype/Camera.MaxAxisFieldOfView",
+      "NearPlaneZ": "@bettervoxel/globaltype/Camera.NearPlaneZ",
+      "ScreenPointToRay": "@bettervoxel/globaltype/Camera.ScreenPointToRay",
+      "VRTiltAndRollEnabled": "@bettervoxel/globaltype/Camera.VRTiltAndRollEnabled",
+      "ViewportPointToRay": "@bettervoxel/globaltype/Camera.ViewportPointToRay",
+      "ViewportSize": "@bettervoxel/globaltype/Camera.ViewportSize",
+      "WorldToScreenPoint": "@bettervoxel/globaltype/Camera.WorldToScreenPoint",
+      "WorldToViewportPoint": "@bettervoxel/globaltype/Camera.WorldToViewportPoint",
+      "ZoomToExtents": "@bettervoxel/globaltype/Camera.ZoomToExtents"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html"
+  },
+  "@bettervoxel/globaltype/Camera.CFrame": {
+    "documentation": "The eye's pose. Live in Custom — the orbit writes it every frame, and a script write re-seats the orbit from the written look direction at the current zoom (measured); authoritative in Scriptable. A script write fires the CFrame signal; the eye's own motion never does.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#cframe"
+  },
+  "@bettervoxel/globaltype/Camera.CameraSubject": {
+    "documentation": "What the following modes track: any instance, though only one with a world pose (a part, a model, a character) moves the eye. nil restores the default subject — the local player's character, which is also what reads back then (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#camerasubject"
+  },
+  "@bettervoxel/globaltype/Camera.CameraType": {
+    "documentation": "Who drives the camera. Custom (the play default) and Track are the built-in orbit around CameraSubject; Follow is that orbit swinging behind the subject's movement; Orbital the orbit at a locked zoom that ignores CFrame writes; Attach rides the subject and turns with it; Watch stays put and turns to face it; Fixed stays exactly where scripts put it and leaves Focus alone; Scriptable obeys CFrame writes and nothing else. Writes accept the item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#cameratype"
+  },
+  "@bettervoxel/globaltype/Camera.DiagonalFieldOfView": {
+    "documentation": "The view across the viewport's diagonal, derived from FieldOfView and the viewport aspect by the reference engine's measured relation (tan(d/2) = tan²(v/2) + tan²(h/2)); a write sets the vertical that reads back as it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#diagonalfieldofview"
+  },
+  "@bettervoxel/globaltype/Camera.FieldOfView": {
+    "documentation": "The VERTICAL field of view in degrees, clamped 1..120 (measured: 500 reads back 120, 0 reads back 1); default 70. A write fires this name and the two derived views.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#fieldofview"
+  },
+  "@bettervoxel/globaltype/Camera.FieldOfViewMode": {
+    "documentation": "Which view a viewport resize preserves — Vertical (the default: FieldOfView itself), Diagonal or MaxAxis — with the vertical recomputed to keep it. FieldOfView always reads the vertical value whatever the mode (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#fieldofviewmode"
+  },
+  "@bettervoxel/globaltype/Camera.Focus": {
+    "documentation": "The point of interest. The eye keeps it on the subject in every following mode (identity rotation), twenty studs ahead of the eye in Scriptable — where a script's own write is overridden the next frame (measured) — and untouched in Fixed.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#focus"
+  },
+  "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget": {
+    "documentation": "Every part between the camera's position and any of the cast points — visible or not, collidable or not, the part around the point included — minus the ignore list with its descendants and the local player's character (measured); each part once.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#getpartsobscuringtarget",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget/param/0",
+        "name": "castPoints"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget/param/1",
+        "name": "ignoreList"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget/param/0": {
+    "documentation": "`castPoints: {Vector3}`"
+  },
+  "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget/param/1": {
+    "documentation": "`ignoreList: {Instance}`"
+  },
+  "@bettervoxel/globaltype/Camera.GetPartsObscuringTarget/return/0": {
+    "documentation": "`{Instance}`"
+  },
+  "@bettervoxel/globaltype/Camera.GetRenderCFrame": {
+    "documentation": "The pose the eye actually renders from — the camera's CFrame (the two differ only under VR head tracking).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#getrendercframe",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Camera.GetRenderCFrame/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Camera.GetRenderCFrame/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/Camera.HeadLocked": {
+    "documentation": "Whether VR head tracking follows the camera (default true). Stored for parity; the engine renders no VR.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#headlocked"
+  },
+  "@bettervoxel/globaltype/Camera.HeadScale": {
+    "documentation": "The VR head-to-world scale (default 1). Stored for parity; the engine renders no VR.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#headscale"
+  },
+  "@bettervoxel/globaltype/Camera.MaxAxisFieldOfView": {
+    "documentation": "The view along the viewport's larger axis — horizontal in landscape, the vertical itself in portrait; a write sets the vertical that reads back as it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#maxaxisfieldofview"
+  },
+  "@bettervoxel/globaltype/Camera.NearPlaneZ": {
+    "documentation": "The near clipping plane's z in the camera's own space: the negated near distance (−0.1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#nearplanez"
+  },
+  "@bettervoxel/globaltype/Camera.ScreenPointToRay": {
+    "documentation": "The unit ray through a screen pixel, its origin on the near plane pushed depth studs along it. The engine has no GUI inset, so this equals ViewportPointToRay.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#screenpointtoray",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ScreenPointToRay/param/0",
+        "name": "x"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ScreenPointToRay/param/1",
+        "name": "y"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ScreenPointToRay/param/2",
+        "name": "depth"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Camera.ScreenPointToRay/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Camera.ScreenPointToRay/param/0": {
+    "documentation": "`x: number`"
+  },
+  "@bettervoxel/globaltype/Camera.ScreenPointToRay/param/1": {
+    "documentation": "`y: number`"
+  },
+  "@bettervoxel/globaltype/Camera.ScreenPointToRay/param/2": {
+    "documentation": "`depth: number?`"
+  },
+  "@bettervoxel/globaltype/Camera.ScreenPointToRay/return/0": {
+    "documentation": "`Ray`"
+  },
+  "@bettervoxel/globaltype/Camera.VRTiltAndRollEnabled": {
+    "documentation": "Whether VR tilt and roll reach the camera (default false). Stored for parity; the engine renders no VR.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#vrtiltandrollenabled"
+  },
+  "@bettervoxel/globaltype/Camera.ViewportPointToRay": {
+    "documentation": "The unit ray through a viewport pixel, its origin on the near plane pushed depth studs along it (default 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#viewportpointtoray",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ViewportPointToRay/param/0",
+        "name": "x"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ViewportPointToRay/param/1",
+        "name": "y"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ViewportPointToRay/param/2",
+        "name": "depth"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Camera.ViewportPointToRay/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Camera.ViewportPointToRay/param/0": {
+    "documentation": "`x: number`"
+  },
+  "@bettervoxel/globaltype/Camera.ViewportPointToRay/param/1": {
+    "documentation": "`y: number`"
+  },
+  "@bettervoxel/globaltype/Camera.ViewportPointToRay/param/2": {
+    "documentation": "`depth: number?`"
+  },
+  "@bettervoxel/globaltype/Camera.ViewportPointToRay/return/0": {
+    "documentation": "`Ray`"
+  },
+  "@bettervoxel/globaltype/Camera.ViewportSize": {
+    "documentation": "The size of the view in pixels, as (width, height, 0) — the engine's Vector2 stand-in. 1×1 for a camera no eye renders through. Fires its signal on a resize.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#viewportsize"
+  },
+  "@bettervoxel/globaltype/Camera.WorldToScreenPoint": {
+    "documentation": "The pixel position of a world point as (x, y, depth) — depth the distance along the look, negative behind the eye — plus whether it is on screen. The engine has no GUI inset, so this equals WorldToViewportPoint.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#worldtoscreenpoint",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.WorldToScreenPoint/param/0",
+        "name": "worldPoint"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Camera.WorldToScreenPoint/return/0",
+      "@bettervoxel/globaltype/Camera.WorldToScreenPoint/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/Camera.WorldToScreenPoint/param/0": {
+    "documentation": "`worldPoint: Vector3`"
+  },
+  "@bettervoxel/globaltype/Camera.WorldToScreenPoint/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Camera.WorldToScreenPoint/return/1": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Camera.WorldToViewportPoint": {
+    "documentation": "The viewport position of a world point as (x, y, depth) in pixels from the top-left, plus whether it is inside the view and in front of the eye.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#worldtoviewportpoint",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.WorldToViewportPoint/param/0",
+        "name": "worldPoint"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Camera.WorldToViewportPoint/return/0",
+      "@bettervoxel/globaltype/Camera.WorldToViewportPoint/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/Camera.WorldToViewportPoint/param/0": {
+    "documentation": "`worldPoint: Vector3`"
+  },
+  "@bettervoxel/globaltype/Camera.WorldToViewportPoint/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Camera.WorldToViewportPoint/return/1": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Camera.ZoomToExtents": {
+    "documentation": "Backs the camera along its current look until the box's bounding sphere fits the view (radius over the sine of half the max-axis view — measured); a CFrame write like any other, so the orbit modes re-seat from it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#zoomtoextents",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ZoomToExtents/param/0",
+        "name": "boundingBoxCFrame"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Camera.ZoomToExtents/param/1",
+        "name": "boundingBoxSize"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Camera.ZoomToExtents/param/0": {
+    "documentation": "`boundingBoxCFrame: CFrame`"
+  },
+  "@bettervoxel/globaltype/Camera.ZoomToExtents/param/1": {
+    "documentation": "`boundingBoxSize: Vector3`"
   },
   "@bettervoxel/globaltype/Character": {
     "documentation": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. Carries the humanoid surface: Health, WalkSpeed, MoveTo and their signals.",
@@ -2157,55 +2484,9 @@
   "@bettervoxel/globaltype/Part": {
     "documentation": "The basic building block: a shaped, colored, physically simulated solid. Shape picks the geometry; the mesh and collider re-derive.",
     "keys": {
-      "GetNetworkOwner": "@bettervoxel/globaltype/Part.GetNetworkOwner",
-      "GetNetworkOwnershipAuto": "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto",
-      "SetNetworkOwner": "@bettervoxel/globaltype/Part.SetNetworkOwner",
-      "SetNetworkOwnershipAuto": "@bettervoxel/globaltype/Part.SetNetworkOwnershipAuto",
       "Shape": "@bettervoxel/globaltype/Part.Shape"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html"
-  },
-  "@bettervoxel/globaltype/Part.GetNetworkOwner": {
-    "documentation": "Server-only: the player currently simulating this assembly, or nil for the server. Resolved through the assembly root.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#getnetworkowner",
-    "params": [],
-    "returns": [
-      "@bettervoxel/globaltype/Part.GetNetworkOwner/return/0"
-    ]
-  },
-  "@bettervoxel/globaltype/Part.GetNetworkOwner/return/0": {
-    "documentation": "`Instance?`"
-  },
-  "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto": {
-    "documentation": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#getnetworkownershipauto",
-    "params": [],
-    "returns": [
-      "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto/return/0"
-    ]
-  },
-  "@bettervoxel/globaltype/Part.GetNetworkOwnershipAuto/return/0": {
-    "documentation": "`boolean`"
-  },
-  "@bettervoxel/globaltype/Part.SetNetworkOwner": {
-    "documentation": "Server-only: pins which peer simulates this assembly (nil means the server) and turns automatic ownership off. A non-Player instance degrades silently to the server. The part must be an unanchored workspace descendant.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#setnetworkowner",
-    "params": [
-      {
-        "documentation": "@bettervoxel/globaltype/Part.SetNetworkOwner/param/0",
-        "name": "player"
-      }
-    ],
-    "returns": []
-  },
-  "@bettervoxel/globaltype/Part.SetNetworkOwner/param/0": {
-    "documentation": "`player: Instance?`"
-  },
-  "@bettervoxel/globaltype/Part.SetNetworkOwnershipAuto": {
-    "documentation": "Server-only: re-arms automatic (distance-based) ownership without clearing the standing owner.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#setnetworkownershipauto",
-    "params": [],
-    "returns": []
   },
   "@bettervoxel/globaltype/Part.Shape": {
     "documentation": "The part's geometric shape. Writes accept the Enum.PartType item or its string name; the mesh and collider re-derive.",
@@ -2298,6 +2579,7 @@
   "@bettervoxel/globaltype/Players": {
     "documentation": "The session roster: LocalPlayer, the player list, join/leave signals, and the measured RespawnTime service property (consulted at death; each Player's per-player value seeds from it).",
     "keys": {
+      "CharacterAutoLoads": "@bettervoxel/globaltype/Players.CharacterAutoLoads",
       "ClassName": "@bettervoxel/globaltype/Players.ClassName",
       "GetPlayers": "@bettervoxel/globaltype/Players.GetPlayers",
       "IsA": "@bettervoxel/globaltype/Players.IsA",
@@ -2308,6 +2590,10 @@
       "RespawnTime": "@bettervoxel/globaltype/Players.RespawnTime"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html"
+  },
+  "@bettervoxel/globaltype/Players.CharacterAutoLoads": {
+    "documentation": "Whether characters spawn automatically on join and after death (default true). When false only Player:LoadCharacter spawns one. Consulted as joins and deaths happen — set it at boot.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#characterautoloads"
   },
   "@bettervoxel/globaltype/Players.ClassName": {
     "documentation": "The class name — the first name IsA answers.",
@@ -2366,6 +2652,67 @@
   "@bettervoxel/globaltype/PointLight": {
     "documentation": "A light radiating in every direction from its parent's position.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PointLight.html"
+  },
+  "@bettervoxel/globaltype/Ray": {
+    "documentation": "An immutable origin + direction pair, as the camera's ScreenPointToRay/ViewportPointToRay hand out. Its own methods treat it as a half-line: ClosestPoint clamps at the origin and runs unbounded ahead.",
+    "keys": {
+      "ClosestPoint": "@bettervoxel/globaltype/Ray.ClosestPoint",
+      "Direction": "@bettervoxel/globaltype/Ray.Direction",
+      "Distance": "@bettervoxel/globaltype/Ray.Distance",
+      "Origin": "@bettervoxel/globaltype/Ray.Origin",
+      "Unit": "@bettervoxel/globaltype/Ray.Unit"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html"
+  },
+  "@bettervoxel/globaltype/Ray.ClosestPoint": {
+    "documentation": "The nearest point on the ray to point: the projection onto the direction, clamped at the origin and unbounded ahead (the direction's length is not a limit).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html#closestpoint",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Ray.ClosestPoint/param/0",
+        "name": "point"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Ray.ClosestPoint/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Ray.ClosestPoint/param/0": {
+    "documentation": "`point: Vector3`"
+  },
+  "@bettervoxel/globaltype/Ray.ClosestPoint/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Ray.Direction": {
+    "documentation": "The direction vector, exactly as constructed — any length.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html#direction"
+  },
+  "@bettervoxel/globaltype/Ray.Distance": {
+    "documentation": "The distance from point to its ClosestPoint on the ray.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html#distance",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Ray.Distance/param/0",
+        "name": "point"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Ray.Distance/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Ray.Distance/param/0": {
+    "documentation": "`point: Vector3`"
+  },
+  "@bettervoxel/globaltype/Ray.Distance/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Ray.Origin": {
+    "documentation": "The point the ray starts from.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html#origin"
+  },
+  "@bettervoxel/globaltype/Ray.Unit": {
+    "documentation": "The same ray with its direction normalized to unit length.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html#unit"
   },
   "@bettervoxel/globaltype/RemoteEvent": {
     "documentation": "The cross-network signal: FireServer and FireClient/FireAllClients queue OnServerEvent and OnClientEvent on the far side, payloads deep-copied through the remote codec.",
@@ -3083,10 +3430,15 @@
   "@bettervoxel/globaltype/Workspace": {
     "documentation": "The root every world object lives under — the `workspace` global. A real class with Model ancestry (measured): it answers PrimaryPart, GetPivot and GetBoundingBox like a Model, refuses the part pose surface, and carries the world-level members Gravity and Raycast.",
     "keys": {
+      "CurrentCamera": "@bettervoxel/globaltype/Workspace.CurrentCamera",
       "Gravity": "@bettervoxel/globaltype/Workspace.Gravity",
       "Raycast": "@bettervoxel/globaltype/Workspace.Raycast"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html"
+  },
+  "@bettervoxel/globaltype/Workspace.CurrentCamera": {
+    "documentation": "The camera the eye renders through — nil where there is none (a dedicated server). Assigning a Camera parented under the workspace makes it current and DETACHES the previous one (Parent nil, alive); an assignee parented elsewhere is replaced the next frame by a fresh Fixed camera, as is a destroyed current camera (measured). Fires its property signal on every change, the engine's included.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#currentcamera"
   },
   "@bettervoxel/globaltype/Workspace.Gravity": {
     "documentation": "The global gravity magnitude in studs per second squared, applied downward. Parts and the character controller both read it.",
