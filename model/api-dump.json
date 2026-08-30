@@ -184,6 +184,13 @@
     {
       "creatable": false,
       "members": [],
+      "name": "BasePlayerGui",
+      "parent": "Instance",
+      "summary": "The per-player UI container layer; no members of its own here."
+    },
+    {
+      "creatable": false,
+      "members": [],
       "name": "BaseRemoteEvent",
       "parent": "Instance",
       "summary": "The remote-event layer, kept for ancestry parity with the reference engine."
@@ -811,6 +818,12 @@
           "summary": "How see-through the element's fill renders, clamped 0 (opaque) to 1 (invisible)."
         },
         {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "LayoutOrder",
+          "summary": "The sibling sort key a parent's UIListLayout orders by (SortOrder.LayoutOrder); lower comes first. Ignored without a layout."
+        },
+        {
           "decl": "UDim2",
           "kind": "ReadWrite",
           "name": "Position",
@@ -821,6 +834,12 @@
           "kind": "ReadWrite",
           "name": "Size",
           "summary": "The element's size as a UDim2 (scale plus pixel offset per axis)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Whether the element renders. A hidden element hides its whole subtree and occupies no layout space."
         }
       ],
       "name": "GuiObject",
@@ -842,6 +861,18 @@
           "kind": "ReadWrite",
           "name": "Image",
           "summary": "The displayed image, as a local asset path. Unset reads as the empty string; writing the empty string clears it."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "ImageColor3",
+          "summary": "Tints the image: each texel is multiplied by this color. White (the default) draws the image as authored."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ImageTransparency",
+          "summary": "How see-through the image itself renders (the background has its own transparency), clamped 0 (opaque) to 1 (invisible)."
         }
       ],
       "name": "ImageLabel",
@@ -1379,6 +1410,12 @@
           "summary": "Despawns the player's current character (if any) and spawns a fresh one on the next respawn pass."
         },
         {
+          "decl": "PlayerGui?",
+          "kind": "ReadOnly",
+          "name": "PlayerGui",
+          "summary": "The player's per-player UI container, engine-spawned at join and despawned with the player. Resolved by class, so renaming it does not hide it. Contents are client-local in v1 — UI neither serializes nor replicates."
+        },
+        {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "RespawnTime",
@@ -1394,6 +1431,13 @@
       "name": "Player",
       "parent": "Instance",
       "summary": "A joined player's roster identity: UserId, the current Character and its CharacterAdded signal, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "PlayerGui",
+      "parent": "BasePlayerGui",
+      "summary": "A player's UI container, engine-spawned under each Player at join. ScreenGuis parented here render for the LOCAL player only; contents are client-local (never saved, never replicated in v1)."
     },
     {
       "creatable": false,
@@ -1612,10 +1656,29 @@
     },
     {
       "creatable": true,
-      "members": [],
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "DisplayOrder",
+          "summary": "Stacking among ScreenGuis: higher draws on top; equal orders stack by creation."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the ScreenGui's whole tree renders and receives input (true by default). Elements keep their state while disabled."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "IgnoreGuiInset",
+          "summary": "Extends the tree under the reference engine's top inset. A recorded no-op here: the engine draws no inset, so the value stores and changes nothing."
+        }
+      ],
       "name": "ScreenGui",
       "parent": "LayerCollector",
-      "summary": "The screen-space UI root: its element tree renders over the viewport."
+      "summary": "The screen-space UI root: its element tree renders over the viewport while Enabled."
     },
     {
       "creatable": false,
@@ -1717,6 +1780,154 @@
       "creatable": true,
       "members": [
         {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "CaptureFocus",
+          "params": [],
+          "returns": [],
+          "summary": "Gives this box keyboard focus, releasing any other focused box (its FocusLost fires with false)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ClearTextOnFocus",
+          "summary": "Empties Text when the box gains focus (true by default)."
+        },
+        {
+          "decl": "BVScriptSignal<boolean>",
+          "kind": "Signal",
+          "name": "FocusLost",
+          "payloads": [
+            "boolean"
+          ],
+          "summary": "Fires when the box loses focus, with enterPressed: true for Return, false for Escape, a click elsewhere, or ReleaseFocus."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Focused",
+          "payloads": [],
+          "summary": "Fires (with no arguments) when the box gains keyboard focus — a click or CaptureFocus."
+        },
+        {
+          "decl": "Font",
+          "kind": "ReadWrite",
+          "name": "FontFace",
+          "summary": "The typed text's typeface as a Font value (see TextLabel)."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "IsFocused",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether this box holds keyboard focus right now."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "MultiLine",
+          "summary": "Return inserts a newline instead of releasing focus."
+        },
+        {
+          "decl": "(submitted: boolean?) -> ()",
+          "kind": "Method",
+          "name": "ReleaseFocus",
+          "params": [
+            {
+              "name": "submitted",
+              "optional": true,
+              "type": "boolean?"
+            }
+          ],
+          "returns": [],
+          "summary": "Releases this box's focus; FocusLost fires with the submitted flag (false when omitted). A no-op while unfocused."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "RichText",
+          "summary": "Renders the typed Text as rich-text markup (see TextLabel)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Text",
+          "summary": "The typed content. Keystrokes edit it while the box holds focus; writes land like any property."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "TextColor3",
+          "summary": "The typed text's color."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "TextEditable",
+          "summary": "Whether keystrokes edit Text. A non-editable box still focuses."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "TextScaled",
+          "summary": "Scales the typed text to fill the box (capped at 100 px)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TextSize",
+          "summary": "The typed text's size in pixels, clamped to 1..100."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "TextStrokeColor3",
+          "summary": "The typed text's outline color (see TextLabel)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TextStrokeTransparency",
+          "summary": "The typed text outline's transparency (1 by default)."
+        },
+        {
+          "decl": "Enum.TextXAlignment",
+          "kind": "ReadWrite",
+          "name": "TextXAlignment",
+          "summary": "How the typed lines sit horizontally (Center by default)."
+        },
+        {
+          "decl": "Enum.TextYAlignment",
+          "kind": "ReadWrite",
+          "name": "TextYAlignment",
+          "summary": "Where the typed text block sits vertically (Center by default)."
+        }
+      ],
+      "name": "TextBox",
+      "parent": "GuiObject",
+      "summary": "Typed text input: click (or CaptureFocus) to focus, keystrokes edit Text, Enter or clicking away releases — FocusLost says which. ClearTextOnFocus, TextEditable and MultiLine behave like the reference engine; no cursor or selection yet (v1)."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Font",
+          "kind": "ReadWrite",
+          "name": "FontFace",
+          "summary": "The label's typeface as a Font value (see TextLabel)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "RichText",
+          "summary": "Renders the label's Text as rich-text markup (see TextLabel)."
+        },
+        {
           "decl": "string",
           "kind": "ReadWrite",
           "name": "Text",
@@ -1729,10 +1940,40 @@
           "summary": "The button label's text color."
         },
         {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "TextScaled",
+          "summary": "Scales the label's text to fill the button (capped at 100 px); TextSize is ignored while set."
+        },
+        {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "TextSize",
-          "summary": "The button label's text size in pixels, floored at 1."
+          "summary": "The button label's text size in pixels, clamped to 1..100."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "TextStrokeColor3",
+          "summary": "The label's outline color (see TextLabel)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TextStrokeTransparency",
+          "summary": "The label outline's transparency (1, invisible, by default)."
+        },
+        {
+          "decl": "Enum.TextXAlignment",
+          "kind": "ReadWrite",
+          "name": "TextXAlignment",
+          "summary": "How the label's lines sit horizontally: Left, Center (the default) or Right. Writes accept the enum item or its name."
+        },
+        {
+          "decl": "Enum.TextYAlignment",
+          "kind": "ReadWrite",
+          "name": "TextYAlignment",
+          "summary": "Where the label's text block sits vertically: Top, Center (the default) or Bottom. Writes accept the enum item or its name."
         }
       ],
       "name": "TextButton",
@@ -1743,10 +1984,22 @@
       "creatable": true,
       "members": [
         {
+          "decl": "Font",
+          "kind": "ReadWrite",
+          "name": "FontFace",
+          "summary": "The typeface as a Font value: Family is a local font asset path (.ttf/.otf; the empty string is the engine default face), Weight and Style the reference enums. Reads are copies; only a Font can be assigned."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "RichText",
+          "summary": "Renders Text as rich-text markup: <b> <i> <u> <s>, <font color/size/face>, <br/> and the XML escapes. Malformed markup renders raw."
+        },
+        {
           "decl": "string",
           "kind": "ReadWrite",
           "name": "Text",
-          "summary": "The displayed text. Same-value writes are silent — a HUD may rewrite its label every frame without re-triggering layout."
+          "summary": "The displayed text (\"Label\" on a fresh instance, as measured). Same-value writes are silent — a HUD may rewrite its label every frame without re-triggering layout."
         },
         {
           "decl": "Color3",
@@ -1755,10 +2008,40 @@
           "summary": "The text color."
         },
         {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "TextScaled",
+          "summary": "Scales the rendered text to fill the element (capped at 100 px); TextSize is ignored while set."
+        },
+        {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "TextSize",
-          "summary": "The text size in pixels, floored at 1."
+          "summary": "The text size in pixels, clamped to 1..100 (the reference range; 8 on a fresh instance, as measured; TextScaled ignores it)."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "TextStrokeColor3",
+          "summary": "The outline color behind the glyphs (black by default; invisible until TextStrokeTransparency drops below 1)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TextStrokeTransparency",
+          "summary": "How see-through the outline renders, clamped 0 (opaque) to 1 (invisible — the default)."
+        },
+        {
+          "decl": "Enum.TextXAlignment",
+          "kind": "ReadWrite",
+          "name": "TextXAlignment",
+          "summary": "How lines sit horizontally in the element: Left, Center (the default) or Right. Writes accept the enum item or its name."
+        },
+        {
+          "decl": "Enum.TextYAlignment",
+          "kind": "ReadWrite",
+          "name": "TextYAlignment",
+          "summary": "Where the text block sits vertically in the element: Top, Center (the default) or Bottom. Writes accept the enum item or its name."
         }
       ],
       "name": "TextLabel",
@@ -1778,6 +2061,176 @@
       "name": "TriangleMeshPart",
       "parent": "BasePart",
       "summary": "The mesh-geometry layer: how imported meshes turn into collision shapes (CollisionFidelity)."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "UIBase",
+      "parent": "Instance",
+      "summary": "The root of the UI modifier family; it adds no members of its own."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "UIComponent",
+      "parent": "UIBase",
+      "summary": "A modifier instance: parented under a GuiObject, it restyles that PARENT element and renders nothing itself."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "UDim",
+          "kind": "ReadWrite",
+          "name": "CornerRadius",
+          "summary": "How far the parent element's corners round: a fraction of the shorter side plus pixels. The measured default is (0, 8)."
+        }
+      ],
+      "name": "UICorner",
+      "parent": "UIComponent",
+      "summary": "Rounds its parent element's corners by CornerRadius — a UDim: a fraction of the shorter side plus pixels."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "ColorSequence",
+          "kind": "ReadWrite",
+          "name": "Color",
+          "summary": "The color ramp multiplied into the parent element's fill."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Rotation",
+          "summary": "The ramp's direction in degrees: 0 runs left to right, 90 top to bottom."
+        },
+        {
+          "decl": "NumberSequence",
+          "kind": "ReadWrite",
+          "name": "Transparency",
+          "summary": "A transparency ramp multiplied into the fill's alpha."
+        }
+      ],
+      "name": "UIGradient",
+      "parent": "UIComponent",
+      "summary": "Tints its parent element's fill with a color ramp: Color (a ColorSequence), Transparency (a NumberSequence) and Rotation in degrees (0 = left to right)."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "UIGridStyleLayout",
+      "parent": "UILayout",
+      "summary": "The grid-style layout layer (list and grid layouts descend from it); no members of its own here."
+    },
+    {
+      "creatable": false,
+      "members": [],
+      "name": "UILayout",
+      "parent": "UIComponent",
+      "summary": "The layout-modifier layer of the UIComponent family; it adds no members of its own."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Enum.FillDirection",
+          "kind": "ReadWrite",
+          "name": "FillDirection",
+          "summary": "The line's axis: Vertical (the default) or Horizontal."
+        },
+        {
+          "decl": "Enum.HorizontalAlignment",
+          "kind": "ReadWrite",
+          "name": "HorizontalAlignment",
+          "summary": "Where the line sits horizontally in the parent: Left (the default), Center or Right."
+        },
+        {
+          "decl": "UDim",
+          "kind": "ReadWrite",
+          "name": "Padding",
+          "summary": "The gap between laid-out items."
+        },
+        {
+          "decl": "Enum.SortOrder",
+          "kind": "ReadWrite",
+          "name": "SortOrder",
+          "summary": "What orders the siblings: Name (the default, as measured) or LayoutOrder (Custom is the legacy alias)."
+        },
+        {
+          "decl": "Enum.VerticalAlignment",
+          "kind": "ReadWrite",
+          "name": "VerticalAlignment",
+          "summary": "Where the line sits vertically in the parent: Top (the default), Center or Bottom."
+        }
+      ],
+      "name": "UIListLayout",
+      "parent": "UIGridStyleLayout",
+      "summary": "Lays its parent's children out in a line: FillDirection, Padding between items, the alignment pair, and SortOrder (Name by default, or LayoutOrder). A laid-out child's Position and AnchorPoint are ignored."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "UDim",
+          "kind": "ReadWrite",
+          "name": "PaddingBottom",
+          "summary": "The inset from the parent element's bottom edge."
+        },
+        {
+          "decl": "UDim",
+          "kind": "ReadWrite",
+          "name": "PaddingLeft",
+          "summary": "The inset from the parent element's left edge."
+        },
+        {
+          "decl": "UDim",
+          "kind": "ReadWrite",
+          "name": "PaddingRight",
+          "summary": "The inset from the parent element's right edge."
+        },
+        {
+          "decl": "UDim",
+          "kind": "ReadWrite",
+          "name": "PaddingTop",
+          "summary": "The inset from the parent element's top edge."
+        }
+      ],
+      "name": "UIPadding",
+      "parent": "UIComponent",
+      "summary": "Insets its parent element's content box per side (PaddingTop, PaddingBottom, PaddingLeft, PaddingRight — each a UDim)."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Enum.ApplyStrokeMode",
+          "kind": "ReadWrite",
+          "name": "ApplyStrokeMode",
+          "summary": "What the stroke outlines: Contextual (the default) or Border. v1 renders both as the box outline (the reference engine's Contextual strokes TEXT on text elements — recorded divergence; the TextStroke properties cover that need)."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "Color",
+          "summary": "The outline color (black by default)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Thickness",
+          "summary": "The outline width in pixels, floored at 0 (the default is 1)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Transparency",
+          "summary": "How see-through the outline renders, clamped 0 (opaque, the default) to 1 (invisible)."
+        }
+      ],
+      "name": "UIStroke",
+      "parent": "UIComponent",
+      "summary": "Outlines its parent element: Color, Thickness, Transparency and ApplyStrokeMode. v1 renders both modes as the box outline (the reference engine's Contextual strokes text on text elements)."
     },
     {
       "creatable": false,
@@ -2578,6 +3031,268 @@
     {
       "members": [
         {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Offset",
+          "summary": "The offset component, in pixels."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Scale",
+          "summary": "The scale component: a fraction of the relevant parent dimension."
+        },
+        {
+          "decl": "(scale: number?, offset: number?) -> UDim",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "scale",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "offset",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "UDim"
+            }
+          ],
+          "summary": "A UDim from its two components, each 0 when omitted: parent fraction plus pixel offset."
+        }
+      ],
+      "name": "UDim",
+      "summary": "The one-axis UI coordinate: a parent-relative scale plus a pixel offset. The UI modifier instances (UICorner, UIPadding) speak it."
+    },
+    {
+      "members": [
+        {
+          "decl": "{ColorSequenceKeypoint}",
+          "kind": "ReadOnly",
+          "name": "Keypoints",
+          "summary": "The keypoints, ascending in time from 0 to 1."
+        },
+        {
+          "decl": "(value: Color3 | {ColorSequenceKeypoint}, endColor: Color3?) -> ColorSequence",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "Color3 | {ColorSequenceKeypoint}"
+            },
+            {
+              "name": "endColor",
+              "optional": true,
+              "type": "Color3?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "ColorSequence"
+            }
+          ],
+          "summary": "A constant sequence from one color, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1)."
+        }
+      ],
+      "name": "ColorSequence",
+      "summary": "An immutable color ramp over 0..1: at least two keypoints, times ascending from 0 to 1. UIGradient.Color speaks it."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Time",
+          "summary": "Where on the 0..1 ramp this keypoint sits."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadOnly",
+          "name": "Value",
+          "summary": "The color at this keypoint."
+        },
+        {
+          "decl": "(time: number, color: Color3) -> ColorSequenceKeypoint",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "time",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "color",
+              "optional": false,
+              "type": "Color3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "ColorSequenceKeypoint"
+            }
+          ],
+          "summary": "A keypoint at `time` (0..1) with the given color."
+        }
+      ],
+      "name": "ColorSequenceKeypoint",
+      "summary": "One point of a ColorSequence: a Time in 0..1 and its Color3 Value."
+    },
+    {
+      "members": [
+        {
+          "decl": "{NumberSequenceKeypoint}",
+          "kind": "ReadOnly",
+          "name": "Keypoints",
+          "summary": "The keypoints, ascending in time from 0 to 1."
+        },
+        {
+          "decl": "(value: number | {NumberSequenceKeypoint}, endValue: number?) -> NumberSequence",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "number | {NumberSequenceKeypoint}"
+            },
+            {
+              "name": "endValue",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "NumberSequence"
+            }
+          ],
+          "summary": "A constant sequence from one number, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1)."
+        }
+      ],
+      "name": "NumberSequence",
+      "summary": "An immutable number ramp over 0..1, same keypoint rules as ColorSequence. UIGradient.Transparency speaks it."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Envelope",
+          "summary": "The random spread around Value (stored for parity; nothing consumes it yet)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Time",
+          "summary": "Where on the 0..1 ramp this keypoint sits."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Value",
+          "summary": "The value at this keypoint."
+        },
+        {
+          "decl": "(time: number, value: number, envelope: number?) -> NumberSequenceKeypoint",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "time",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "envelope",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "NumberSequenceKeypoint"
+            }
+          ],
+          "summary": "A keypoint at `time` (0..1) with the given value (and optional envelope)."
+        }
+      ],
+      "name": "NumberSequenceKeypoint",
+      "summary": "One point of a NumberSequence: Time, Value, and an Envelope kept for parity (nothing consumes it yet)."
+    },
+    {
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Bold",
+          "summary": "Whether the weight is SemiBold or heavier; writing true sets Bold, false Regular (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Family",
+          "summary": "The typeface as a local font asset path (a .ttf/.otf under the assets root); the empty string is the engine default face. Recorded divergence: the reference engine's Family is a cloud font-family URL."
+        },
+        {
+          "decl": "Enum.FontStyle",
+          "kind": "ReadWrite",
+          "name": "Style",
+          "summary": "Normal (the default) or Italic. An enum item only."
+        },
+        {
+          "decl": "Enum.FontWeight",
+          "kind": "ReadWrite",
+          "name": "Weight",
+          "summary": "The weight, Thin (100) to Heavy (900); Regular by default. An enum item only."
+        },
+        {
+          "decl": "(family: string, weight: Enum.FontWeight?, style: Enum.FontStyle?) -> Font",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "family",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "weight",
+              "optional": true,
+              "type": "Enum.FontWeight?"
+            },
+            {
+              "name": "style",
+              "optional": true,
+              "type": "Enum.FontStyle?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Font"
+            }
+          ],
+          "summary": "A Font from a local font asset path — Regular and Normal unless given. Weight and style must be enum items (a name string is refused, as measured)."
+        }
+      ],
+      "name": "Font",
+      "summary": "A typeface value: Family (a local font asset path; the empty string is the engine default face), Weight (Enum.FontWeight, Thin 100 to Heavy 900), Style (Normal or Italic) and Bold. The fields write, like the reference engine's; FontFace speaks it."
+    },
+    {
+      "members": [
+        {
           "decl": "(point: Vector3) -> Vector3",
           "kind": "Method",
           "name": "ClosestPoint",
@@ -2676,7 +3391,7 @@
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Value",
-          "summary": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value."
+          "summary": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight, whose items carry the reference's 100..900."
         }
       ],
       "name": "EnumItem",
@@ -2913,6 +3628,10 @@
   ],
   "dump_format": 1,
   "enums": {
+    "ApplyStrokeMode": [
+      "Border",
+      "Contextual"
+    ],
     "CameraType": [
       "Attach",
       "Custom",
@@ -2951,6 +3670,30 @@
       "Diagonal",
       "MaxAxis",
       "Vertical"
+    ],
+    "FillDirection": [
+      "Horizontal",
+      "Vertical"
+    ],
+    "FontStyle": [
+      "Italic",
+      "Normal"
+    ],
+    "FontWeight": [
+      "Bold",
+      "ExtraBold",
+      "ExtraLight",
+      "Heavy",
+      "Light",
+      "Medium",
+      "Regular",
+      "SemiBold",
+      "Thin"
+    ],
+    "HorizontalAlignment": [
+      "Center",
+      "Left",
+      "Right"
     ],
     "KeyCode": [
       "A",
@@ -3072,22 +3815,48 @@
       "Legacy",
       "Server"
     ],
+    "SortOrder": [
+      "Custom",
+      "LayoutOrder",
+      "Name"
+    ],
+    "TextXAlignment": [
+      "Center",
+      "Left",
+      "Right"
+    ],
+    "TextYAlignment": [
+      "Bottom",
+      "Center",
+      "Top"
+    ],
     "UserInputType": [
       "Keyboard",
       "MouseButton1",
       "MouseButton2",
       "MouseButton3"
+    ],
+    "VerticalAlignment": [
+      "Bottom",
+      "Center",
+      "Top"
     ]
   },
   "globals": [
     "CFrame",
     "Color3",
+    "ColorSequence",
+    "ColorSequenceKeypoint",
     "Enum",
+    "Font",
     "Instance",
     "Keybinds",
+    "NumberSequence",
+    "NumberSequenceKeypoint",
     "Ray",
     "Signals",
     "TweenInfo",
+    "UDim",
     "UDim2",
     "Vector3",
     "_G",
@@ -3323,6 +4092,18 @@
           "kind": "ReadOnly",
           "name": "ClassName",
           "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "() -> TextBox?",
+          "kind": "Method",
+          "name": "GetFocusedTextBox",
+          "params": [],
+          "returns": [
+            {
+              "type": "TextBox?"
+            }
+          ],
+          "summary": "The TextBox currently holding keyboard focus, or nil. The guard for raw polling (IsKeyDown) while the player types; the InputBegan path already reports gameProcessed instead."
         },
         {
           "decl": "() -> Vector3",

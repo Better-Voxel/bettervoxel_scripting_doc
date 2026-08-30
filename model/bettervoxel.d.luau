@@ -70,6 +70,37 @@ declare extern type UDim2 with
     YScale: number
 end
 
+declare extern type UDim with
+    Offset: number
+    Scale: number
+end
+
+declare extern type ColorSequence with
+    Keypoints: {ColorSequenceKeypoint}
+end
+
+declare extern type ColorSequenceKeypoint with
+    Time: number
+    Value: Color3
+end
+
+declare extern type NumberSequence with
+    Keypoints: {NumberSequenceKeypoint}
+end
+
+declare extern type NumberSequenceKeypoint with
+    Envelope: number
+    Time: number
+    Value: number
+end
+
+declare extern type Font with
+    Bold: boolean
+    Family: string
+    Style: EnumItem
+    Weight: EnumItem
+end
+
 declare extern type Ray with
     function ClosestPoint(self, point: Vector3): Vector3
     Direction: Vector3
@@ -110,6 +141,9 @@ declare extern type Attachment extends Instance with
     Visible: boolean
     WorldCFrame: CFrame
     WorldPosition: Vector3
+end
+
+declare extern type BasePlayerGui extends Instance with
 end
 
 declare extern type BaseRemoteEvent extends Instance with
@@ -179,6 +213,7 @@ declare extern type Player extends Instance with
     Character: Instance?
     CharacterAdded: BVScriptSignal -- fires (Instance)
     function LoadCharacter(self): ()
+    PlayerGui: PlayerGui?
     RespawnTime: number
     UserId: number
 end
@@ -207,6 +242,9 @@ declare extern type Sound extends Instance with
     SoundId: string
     function Stop(self): ()
     Volume: number
+end
+
+declare extern type UIBase extends Instance with
 end
 
 declare extern type ValueBase extends Instance with
@@ -296,6 +334,9 @@ declare extern type ObjectValue extends ValueBase with
     Value: Instance?
 end
 
+declare extern type PlayerGui extends BasePlayerGui with
+end
+
 declare extern type PointLight extends Light with
 end
 
@@ -319,6 +360,9 @@ declare extern type StringValue extends ValueBase with
     Value: string
 end
 
+declare extern type UIComponent extends UIBase with
+end
+
 declare extern type FormFactorPart extends BasePart with
 end
 
@@ -326,8 +370,10 @@ declare extern type GuiObject extends GuiBase2d with
     AnchorPoint: Vector3
     BackgroundColor3: Color3
     BackgroundTransparency: number
+    LayoutOrder: number
     Position: UDim2
     Size: UDim2
+    Visible: boolean
 end
 
 declare extern type LayerCollector extends GuiBase2d with
@@ -338,6 +384,33 @@ end
 
 declare extern type TriangleMeshPart extends BasePart with
     CollisionFidelity: EnumItem
+end
+
+declare extern type UICorner extends UIComponent with
+    CornerRadius: UDim
+end
+
+declare extern type UIGradient extends UIComponent with
+    Color: ColorSequence
+    Rotation: number
+    Transparency: NumberSequence
+end
+
+declare extern type UILayout extends UIComponent with
+end
+
+declare extern type UIPadding extends UIComponent with
+    PaddingBottom: UDim
+    PaddingLeft: UDim
+    PaddingRight: UDim
+    PaddingTop: UDim
+end
+
+declare extern type UIStroke extends UIComponent with
+    ApplyStrokeMode: EnumItem
+    Color: Color3
+    Thickness: number
+    Transparency: number
 end
 
 declare extern type WorldRoot extends Model with
@@ -372,6 +445,33 @@ declare extern type Part extends FormFactorPart with
 end
 
 declare extern type ScreenGui extends LayerCollector with
+    DisplayOrder: number
+    Enabled: boolean
+    IgnoreGuiInset: boolean
+end
+
+declare extern type TextBox extends GuiObject with
+    function CaptureFocus(self): ()
+    ClearTextOnFocus: boolean
+    FocusLost: BVScriptSignal -- fires (boolean)
+    Focused: BVScriptSignal -- fires ()
+    FontFace: Font
+    function IsFocused(self): boolean
+    MultiLine: boolean
+    function ReleaseFocus(self, submitted: boolean?): ()
+    RichText: boolean
+    Text: string
+    TextColor3: Color3
+    TextEditable: boolean
+    TextScaled: boolean
+    TextSize: number
+    TextStrokeColor3: Color3
+    TextStrokeTransparency: number
+    TextXAlignment: EnumItem
+    TextYAlignment: EnumItem
+end
+
+declare extern type UIGridStyleLayout extends UILayout with
 end
 
 declare extern type Workspace extends WorldRoot with
@@ -382,21 +482,45 @@ end
 
 declare extern type ImageLabel extends GuiLabel with
     Image: string
+    ImageColor3: Color3
+    ImageTransparency: number
 end
 
 declare extern type SpawnLocation extends Part with
 end
 
 declare extern type TextButton extends GuiButton with
+    FontFace: Font
+    RichText: boolean
     Text: string
     TextColor3: Color3
+    TextScaled: boolean
     TextSize: number
+    TextStrokeColor3: Color3
+    TextStrokeTransparency: number
+    TextXAlignment: EnumItem
+    TextYAlignment: EnumItem
 end
 
 declare extern type TextLabel extends GuiLabel with
+    FontFace: Font
+    RichText: boolean
     Text: string
     TextColor3: Color3
+    TextScaled: boolean
     TextSize: number
+    TextStrokeColor3: Color3
+    TextStrokeTransparency: number
+    TextXAlignment: EnumItem
+    TextYAlignment: EnumItem
+end
+
+declare extern type UIListLayout extends UIGridStyleLayout with
+    FillDirection: EnumItem
+    HorizontalAlignment: EnumItem
+    Padding: UDim
+    SortOrder: EnumItem
+    VerticalAlignment: EnumItem
 end
 
 declare extern type Tween with
@@ -430,6 +554,7 @@ end
 
 declare extern type UserInputService with
     ClassName: string
+    function GetFocusedTextBox(self): TextBox?
     function GetMouseDelta(self): Vector3
     function GetMouseLocation(self): Vector3
     InputBegan: BVScriptSignal -- fires ({ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }, boolean)
@@ -511,8 +636,28 @@ declare Color3: {
     new: (r: number?, g: number?, b: number?) -> Color3,
 }
 
+declare ColorSequence: {
+    new: (value: Color3 | {ColorSequenceKeypoint}, endColor: Color3?) -> ColorSequence,
+}
+
+declare ColorSequenceKeypoint: {
+    new: (time: number, color: Color3) -> ColorSequenceKeypoint,
+}
+
+declare Font: {
+    new: (family: string, weight: EnumItem?, style: EnumItem?) -> Font,
+}
+
 declare Instance: {
-    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+}
+
+declare NumberSequence: {
+    new: (value: number | {NumberSequenceKeypoint}, endValue: number?) -> NumberSequence,
+}
+
+declare NumberSequenceKeypoint: {
+    new: (time: number, value: number, envelope: number?) -> NumberSequenceKeypoint,
 }
 
 declare Ray: {
@@ -521,6 +666,10 @@ declare Ray: {
 
 declare TweenInfo: {
     new: (time: number?, easingStyle: EnumItem?, easingDirection: EnumItem?, repeatCount: number?, reverses: boolean?, delayTime: number?) -> TweenInfo,
+}
+
+declare UDim: {
+    new: (scale: number?, offset: number?) -> UDim,
 }
 
 declare UDim2: {
@@ -539,18 +688,27 @@ declare Vector3: {
 }
 
 declare Enum: {
+    ApplyStrokeMode: { Border: EnumItem, Contextual: EnumItem },
     CameraType: { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
     CollisionFidelity: { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
     EasingDirection: { In: EnumItem, InOut: EnumItem, Out: EnumItem },
     EasingStyle: { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
     FieldOfViewMode: { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },
+    FillDirection: { Horizontal: EnumItem, Vertical: EnumItem },
+    FontStyle: { Italic: EnumItem, Normal: EnumItem },
+    FontWeight: { Bold: EnumItem, ExtraBold: EnumItem, ExtraLight: EnumItem, Heavy: EnumItem, Light: EnumItem, Medium: EnumItem, Regular: EnumItem, SemiBold: EnumItem, Thin: EnumItem },
+    HorizontalAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
     KeyCode: { A: EnumItem, B: EnumItem, BackSlash: EnumItem, Backquote: EnumItem, Backspace: EnumItem, C: EnumItem, CapsLock: EnumItem, Comma: EnumItem, D: EnumItem, Delete: EnumItem, Down: EnumItem, E: EnumItem, Eight: EnumItem, End: EnumItem, Equals: EnumItem, Escape: EnumItem, F: EnumItem, F1: EnumItem, F10: EnumItem, F11: EnumItem, F12: EnumItem, F2: EnumItem, F3: EnumItem, F4: EnumItem, F5: EnumItem, F6: EnumItem, F7: EnumItem, F8: EnumItem, F9: EnumItem, Five: EnumItem, Four: EnumItem, G: EnumItem, H: EnumItem, Home: EnumItem, I: EnumItem, Insert: EnumItem, J: EnumItem, K: EnumItem, L: EnumItem, Left: EnumItem, LeftAlt: EnumItem, LeftBracket: EnumItem, LeftControl: EnumItem, LeftShift: EnumItem, M: EnumItem, Minus: EnumItem, N: EnumItem, Nine: EnumItem, O: EnumItem, One: EnumItem, P: EnumItem, PageDown: EnumItem, PageUp: EnumItem, Period: EnumItem, Q: EnumItem, Quote: EnumItem, R: EnumItem, Return: EnumItem, Right: EnumItem, RightAlt: EnumItem, RightBracket: EnumItem, RightControl: EnumItem, RightShift: EnumItem, S: EnumItem, Semicolon: EnumItem, Seven: EnumItem, Six: EnumItem, Slash: EnumItem, Space: EnumItem, T: EnumItem, Tab: EnumItem, Three: EnumItem, Two: EnumItem, U: EnumItem, Unknown: EnumItem, Up: EnumItem, V: EnumItem, W: EnumItem, X: EnumItem, Y: EnumItem, Z: EnumItem, Zero: EnumItem },
     Material: { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },
     PartType: { Ball: EnumItem, Block: EnumItem, CornerWedge: EnumItem, Cylinder: EnumItem, Wedge: EnumItem },
     PlaybackState: { Begin: EnumItem, Cancelled: EnumItem, Completed: EnumItem, Delayed: EnumItem, Paused: EnumItem, Playing: EnumItem },
     RaycastFilterType: { Exclude: EnumItem, Include: EnumItem },
     RunContext: { Client: EnumItem, Legacy: EnumItem, Server: EnumItem },
+    SortOrder: { Custom: EnumItem, LayoutOrder: EnumItem, Name: EnumItem },
+    TextXAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
+    TextYAlignment: { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
     UserInputType: { Keyboard: EnumItem, MouseButton1: EnumItem, MouseButton2: EnumItem, MouseButton3: EnumItem },
+    VerticalAlignment: { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
 }
 
 declare function warn(...: any): ()

@@ -252,9 +252,115 @@
   "@bettervoxel/global/Color3.new/return/0": {
     "documentation": "`Color3`"
   },
+  "@bettervoxel/global/ColorSequence": {
+    "documentation": "The ColorSequence constructors — see the ColorSequence page.",
+    "keys": {
+      "new": "@bettervoxel/global/ColorSequence.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html"
+  },
+  "@bettervoxel/global/ColorSequence.new": {
+    "documentation": "A constant sequence from one color, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/ColorSequence.new/param/0",
+        "name": "value"
+      },
+      {
+        "documentation": "@bettervoxel/global/ColorSequence.new/param/1",
+        "name": "endColor"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/ColorSequence.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/ColorSequence.new/param/0": {
+    "documentation": "`value: Color3 | {ColorSequenceKeypoint}`"
+  },
+  "@bettervoxel/global/ColorSequence.new/param/1": {
+    "documentation": "`endColor: Color3?`"
+  },
+  "@bettervoxel/global/ColorSequence.new/return/0": {
+    "documentation": "`ColorSequence`"
+  },
+  "@bettervoxel/global/ColorSequenceKeypoint": {
+    "documentation": "The ColorSequenceKeypoint constructors — see the ColorSequenceKeypoint page.",
+    "keys": {
+      "new": "@bettervoxel/global/ColorSequenceKeypoint.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html"
+  },
+  "@bettervoxel/global/ColorSequenceKeypoint.new": {
+    "documentation": "A keypoint at `time` (0..1) with the given color.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/ColorSequenceKeypoint.new/param/0",
+        "name": "time"
+      },
+      {
+        "documentation": "@bettervoxel/global/ColorSequenceKeypoint.new/param/1",
+        "name": "color"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/ColorSequenceKeypoint.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/ColorSequenceKeypoint.new/param/0": {
+    "documentation": "`time: number`"
+  },
+  "@bettervoxel/global/ColorSequenceKeypoint.new/param/1": {
+    "documentation": "`color: Color3`"
+  },
+  "@bettervoxel/global/ColorSequenceKeypoint.new/return/0": {
+    "documentation": "`ColorSequenceKeypoint`"
+  },
   "@bettervoxel/global/Enum": {
     "documentation": "The enum families; every item is an EnumItem.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/enums.html"
+  },
+  "@bettervoxel/global/Font": {
+    "documentation": "The Font constructors — see the Font page.",
+    "keys": {
+      "new": "@bettervoxel/global/Font.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html"
+  },
+  "@bettervoxel/global/Font.new": {
+    "documentation": "A Font from a local font asset path — Regular and Normal unless given. Weight and style must be enum items (a name string is refused, as measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Font.new/param/0",
+        "name": "family"
+      },
+      {
+        "documentation": "@bettervoxel/global/Font.new/param/1",
+        "name": "weight"
+      },
+      {
+        "documentation": "@bettervoxel/global/Font.new/param/2",
+        "name": "style"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Font.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/Font.new/param/0": {
+    "documentation": "`family: string`"
+  },
+  "@bettervoxel/global/Font.new/param/1": {
+    "documentation": "`weight: Enum.FontWeight?`"
+  },
+  "@bettervoxel/global/Font.new/param/2": {
+    "documentation": "`style: Enum.FontStyle?`"
+  },
+  "@bettervoxel/global/Font.new/return/0": {
+    "documentation": "`Font`"
   },
   "@bettervoxel/global/Instance": {
     "documentation": "The Instance constructors — see the Instance page.",
@@ -281,6 +387,79 @@
   },
   "@bettervoxel/global/Instance.new/return/0": {
     "documentation": "`Instance`"
+  },
+  "@bettervoxel/global/NumberSequence": {
+    "documentation": "The NumberSequence constructors — see the NumberSequence page.",
+    "keys": {
+      "new": "@bettervoxel/global/NumberSequence.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html"
+  },
+  "@bettervoxel/global/NumberSequence.new": {
+    "documentation": "A constant sequence from one number, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/NumberSequence.new/param/0",
+        "name": "value"
+      },
+      {
+        "documentation": "@bettervoxel/global/NumberSequence.new/param/1",
+        "name": "endValue"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/NumberSequence.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/NumberSequence.new/param/0": {
+    "documentation": "`value: number | {NumberSequenceKeypoint}`"
+  },
+  "@bettervoxel/global/NumberSequence.new/param/1": {
+    "documentation": "`endValue: number?`"
+  },
+  "@bettervoxel/global/NumberSequence.new/return/0": {
+    "documentation": "`NumberSequence`"
+  },
+  "@bettervoxel/global/NumberSequenceKeypoint": {
+    "documentation": "The NumberSequenceKeypoint constructors — see the NumberSequenceKeypoint page.",
+    "keys": {
+      "new": "@bettervoxel/global/NumberSequenceKeypoint.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html"
+  },
+  "@bettervoxel/global/NumberSequenceKeypoint.new": {
+    "documentation": "A keypoint at `time` (0..1) with the given value (and optional envelope).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/NumberSequenceKeypoint.new/param/0",
+        "name": "time"
+      },
+      {
+        "documentation": "@bettervoxel/global/NumberSequenceKeypoint.new/param/1",
+        "name": "value"
+      },
+      {
+        "documentation": "@bettervoxel/global/NumberSequenceKeypoint.new/param/2",
+        "name": "envelope"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/NumberSequenceKeypoint.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/NumberSequenceKeypoint.new/param/0": {
+    "documentation": "`time: number`"
+  },
+  "@bettervoxel/global/NumberSequenceKeypoint.new/param/1": {
+    "documentation": "`value: number`"
+  },
+  "@bettervoxel/global/NumberSequenceKeypoint.new/param/2": {
+    "documentation": "`envelope: number?`"
+  },
+  "@bettervoxel/global/NumberSequenceKeypoint.new/return/0": {
+    "documentation": "`NumberSequenceKeypoint`"
   },
   "@bettervoxel/global/Ray": {
     "documentation": "The Ray constructors — see the Ray page.",
@@ -375,6 +554,39 @@
   },
   "@bettervoxel/global/TweenInfo.new/return/0": {
     "documentation": "`TweenInfo`"
+  },
+  "@bettervoxel/global/UDim": {
+    "documentation": "The UDim constructors — see the UDim page.",
+    "keys": {
+      "new": "@bettervoxel/global/UDim.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim.html"
+  },
+  "@bettervoxel/global/UDim.new": {
+    "documentation": "A UDim from its two components, each 0 when omitted: parent fraction plus pixel offset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/UDim.new/param/0",
+        "name": "scale"
+      },
+      {
+        "documentation": "@bettervoxel/global/UDim.new/param/1",
+        "name": "offset"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/UDim.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/UDim.new/param/0": {
+    "documentation": "`scale: number?`"
+  },
+  "@bettervoxel/global/UDim.new/param/1": {
+    "documentation": "`offset: number?`"
+  },
+  "@bettervoxel/global/UDim.new/return/0": {
+    "documentation": "`UDim`"
   },
   "@bettervoxel/global/UDim2": {
     "documentation": "The UDim2 constructors — see the UDim2 page.",
@@ -791,6 +1003,10 @@
   "@bettervoxel/globaltype/BasePart.Transparency": {
     "documentation": "How see-through the part renders, clamped 0 (opaque) to 1 (invisible).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#transparency"
+  },
+  "@bettervoxel/globaltype/BasePlayerGui": {
+    "documentation": "The per-player UI container layer; no members of its own here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePlayerGui.html"
   },
   "@bettervoxel/globaltype/BaseRemoteEvent": {
     "documentation": "The remote-event layer, kept for ancestry parity with the reference engine.",
@@ -1743,6 +1959,33 @@
     "documentation": "The red component (sRGB, 0..1).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#r"
   },
+  "@bettervoxel/globaltype/ColorSequence": {
+    "documentation": "An immutable color ramp over 0..1: at least two keypoints, times ascending from 0 to 1. UIGradient.Color speaks it.",
+    "keys": {
+      "Keypoints": "@bettervoxel/globaltype/ColorSequence.Keypoints"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html"
+  },
+  "@bettervoxel/globaltype/ColorSequence.Keypoints": {
+    "documentation": "The keypoints, ascending in time from 0 to 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html#keypoints"
+  },
+  "@bettervoxel/globaltype/ColorSequenceKeypoint": {
+    "documentation": "One point of a ColorSequence: a Time in 0..1 and its Color3 Value.",
+    "keys": {
+      "Time": "@bettervoxel/globaltype/ColorSequenceKeypoint.Time",
+      "Value": "@bettervoxel/globaltype/ColorSequenceKeypoint.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html"
+  },
+  "@bettervoxel/globaltype/ColorSequenceKeypoint.Time": {
+    "documentation": "Where on the 0..1 ramp this keypoint sits.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html#time"
+  },
+  "@bettervoxel/globaltype/ColorSequenceKeypoint.Value": {
+    "documentation": "The color at this keypoint.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html#value"
+  },
   "@bettervoxel/globaltype/Constraint": {
     "documentation": "The base of the attachment-anchored constraints: Attachment0, Attachment1 and Enabled. A constraint acts while Enabled and both ends sit under live in-world parts; anything else is inert.",
     "keys": {
@@ -1896,12 +2139,38 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#name"
   },
   "@bettervoxel/globaltype/EnumItem.Value": {
-    "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value.",
+    "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight, whose items carry the reference's 100..900.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#value"
   },
   "@bettervoxel/globaltype/Folder": {
     "documentation": "A pure organizational container with no behavior of its own.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Folder.html"
+  },
+  "@bettervoxel/globaltype/Font": {
+    "documentation": "A typeface value: Family (a local font asset path; the empty string is the engine default face), Weight (Enum.FontWeight, Thin 100 to Heavy 900), Style (Normal or Italic) and Bold. The fields write, like the reference engine's; FontFace speaks it.",
+    "keys": {
+      "Bold": "@bettervoxel/globaltype/Font.Bold",
+      "Family": "@bettervoxel/globaltype/Font.Family",
+      "Style": "@bettervoxel/globaltype/Font.Style",
+      "Weight": "@bettervoxel/globaltype/Font.Weight"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html"
+  },
+  "@bettervoxel/globaltype/Font.Bold": {
+    "documentation": "Whether the weight is SemiBold or heavier; writing true sets Bold, false Regular (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#bold"
+  },
+  "@bettervoxel/globaltype/Font.Family": {
+    "documentation": "The typeface as a local font asset path (a .ttf/.otf under the assets root); the empty string is the engine default face. Recorded divergence: the reference engine's Family is a cloud font-family URL.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#family"
+  },
+  "@bettervoxel/globaltype/Font.Style": {
+    "documentation": "Normal (the default) or Italic. An enum item only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#style"
+  },
+  "@bettervoxel/globaltype/Font.Weight": {
+    "documentation": "The weight, Thin (100) to Heavy (900); Regular by default. An enum item only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#weight"
   },
   "@bettervoxel/globaltype/FormFactorPart": {
     "documentation": "A legacy layer between BasePart and Part, kept for ancestry parity with the reference engine; it adds no members of its own.",
@@ -1940,8 +2209,10 @@
       "AnchorPoint": "@bettervoxel/globaltype/GuiObject.AnchorPoint",
       "BackgroundColor3": "@bettervoxel/globaltype/GuiObject.BackgroundColor3",
       "BackgroundTransparency": "@bettervoxel/globaltype/GuiObject.BackgroundTransparency",
+      "LayoutOrder": "@bettervoxel/globaltype/GuiObject.LayoutOrder",
       "Position": "@bettervoxel/globaltype/GuiObject.Position",
-      "Size": "@bettervoxel/globaltype/GuiObject.Size"
+      "Size": "@bettervoxel/globaltype/GuiObject.Size",
+      "Visible": "@bettervoxel/globaltype/GuiObject.Visible"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html"
   },
@@ -1957,6 +2228,10 @@
     "documentation": "How see-through the element's fill renders, clamped 0 (opaque) to 1 (invisible).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#backgroundtransparency"
   },
+  "@bettervoxel/globaltype/GuiObject.LayoutOrder": {
+    "documentation": "The sibling sort key a parent's UIListLayout orders by (SortOrder.LayoutOrder); lower comes first. Ignored without a layout.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#layoutorder"
+  },
   "@bettervoxel/globaltype/GuiObject.Position": {
     "documentation": "The element's position as a UDim2 (scale plus pixel offset per axis), relative to the parent element.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#position"
@@ -1965,6 +2240,10 @@
     "documentation": "The element's size as a UDim2 (scale plus pixel offset per axis).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#size"
   },
+  "@bettervoxel/globaltype/GuiObject.Visible": {
+    "documentation": "Whether the element renders. A hidden element hides its whole subtree and occupies no layout space.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#visible"
+  },
   "@bettervoxel/globaltype/HingeConstraint": {
     "documentation": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html"
@@ -1972,13 +2251,23 @@
   "@bettervoxel/globaltype/ImageLabel": {
     "documentation": "A UI element that displays an image asset.",
     "keys": {
-      "Image": "@bettervoxel/globaltype/ImageLabel.Image"
+      "Image": "@bettervoxel/globaltype/ImageLabel.Image",
+      "ImageColor3": "@bettervoxel/globaltype/ImageLabel.ImageColor3",
+      "ImageTransparency": "@bettervoxel/globaltype/ImageLabel.ImageTransparency"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ImageLabel.html"
   },
   "@bettervoxel/globaltype/ImageLabel.Image": {
     "documentation": "The displayed image, as a local asset path. Unset reads as the empty string; writing the empty string clears it.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ImageLabel.html#image"
+  },
+  "@bettervoxel/globaltype/ImageLabel.ImageColor3": {
+    "documentation": "Tints the image: each texel is multiplied by this color. White (the default) draws the image as authored.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ImageLabel.html#imagecolor3"
+  },
+  "@bettervoxel/globaltype/ImageLabel.ImageTransparency": {
+    "documentation": "How see-through the image itself renders (the background has its own transparency), clamped 0 (opaque) to 1 (invisible).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ImageLabel.html#imagetransparency"
   },
   "@bettervoxel/globaltype/Instance": {
     "documentation": "The root of the class tree: identity (Name, ClassName), the Parent tree with its hierarchy signals, attributes, and lifetime (Clone, Destroy). Every scriptable object is an Instance.",
@@ -2436,6 +2725,38 @@
     "documentation": "Reusable code loaded with require: runs once per context, and its return value is cached and shared between requirers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ModuleScript.html"
   },
+  "@bettervoxel/globaltype/NumberSequence": {
+    "documentation": "An immutable number ramp over 0..1, same keypoint rules as ColorSequence. UIGradient.Transparency speaks it.",
+    "keys": {
+      "Keypoints": "@bettervoxel/globaltype/NumberSequence.Keypoints"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html"
+  },
+  "@bettervoxel/globaltype/NumberSequence.Keypoints": {
+    "documentation": "The keypoints, ascending in time from 0 to 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html#keypoints"
+  },
+  "@bettervoxel/globaltype/NumberSequenceKeypoint": {
+    "documentation": "One point of a NumberSequence: Time, Value, and an Envelope kept for parity (nothing consumes it yet).",
+    "keys": {
+      "Envelope": "@bettervoxel/globaltype/NumberSequenceKeypoint.Envelope",
+      "Time": "@bettervoxel/globaltype/NumberSequenceKeypoint.Time",
+      "Value": "@bettervoxel/globaltype/NumberSequenceKeypoint.Value"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html"
+  },
+  "@bettervoxel/globaltype/NumberSequenceKeypoint.Envelope": {
+    "documentation": "The random spread around Value (stored for parity; nothing consumes it yet).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html#envelope"
+  },
+  "@bettervoxel/globaltype/NumberSequenceKeypoint.Time": {
+    "documentation": "Where on the 0..1 ramp this keypoint sits.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html#time"
+  },
+  "@bettervoxel/globaltype/NumberSequenceKeypoint.Value": {
+    "documentation": "The value at this keypoint.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html#value"
+  },
   "@bettervoxel/globaltype/NumberValue": {
     "documentation": "A named container for one double-precision number.",
     "keys": {
@@ -2508,6 +2829,7 @@
       "Character": "@bettervoxel/globaltype/Player.Character",
       "CharacterAdded": "@bettervoxel/globaltype/Player.CharacterAdded",
       "LoadCharacter": "@bettervoxel/globaltype/Player.LoadCharacter",
+      "PlayerGui": "@bettervoxel/globaltype/Player.PlayerGui",
       "RespawnTime": "@bettervoxel/globaltype/Player.RespawnTime",
       "UserId": "@bettervoxel/globaltype/Player.UserId"
     },
@@ -2527,6 +2849,10 @@
     "params": [],
     "returns": []
   },
+  "@bettervoxel/globaltype/Player.PlayerGui": {
+    "documentation": "The player's per-player UI container, engine-spawned at join and despawned with the player. Resolved by class, so renaming it does not hide it. Contents are client-local in v1 — UI neither serializes nor replicates.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#playergui"
+  },
   "@bettervoxel/globaltype/Player.RespawnTime": {
     "documentation": "Seconds between this player's death and their respawn, floored at 0. An engine extension over the Players service's RespawnTime: joins seed it from the service value, and a per-player write wins until the next service-level write (which writes through to the whole roster).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#respawntime"
@@ -2534,6 +2860,10 @@
   "@bettervoxel/globaltype/Player.UserId": {
     "documentation": "The session identity — how a script tells two players apart. Hosts keep it under 2^53 so it survives Luau's number type.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#userid"
+  },
+  "@bettervoxel/globaltype/PlayerGui": {
+    "documentation": "A player's UI container, engine-spawned under each Player at join. ScreenGuis parented here render for the LOCAL player only; contents are client-local (never saved, never replicated in v1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerGui.html"
   },
   "@bettervoxel/globaltype/PlayerPrefab": {
     "documentation": "The character template: joining players spawn their characters from it, SpawnCharacter builds NPCs from it, and its pose is where they stand.",
@@ -2908,8 +3238,25 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#name"
   },
   "@bettervoxel/globaltype/ScreenGui": {
-    "documentation": "The screen-space UI root: its element tree renders over the viewport.",
+    "documentation": "The screen-space UI root: its element tree renders over the viewport while Enabled.",
+    "keys": {
+      "DisplayOrder": "@bettervoxel/globaltype/ScreenGui.DisplayOrder",
+      "Enabled": "@bettervoxel/globaltype/ScreenGui.Enabled",
+      "IgnoreGuiInset": "@bettervoxel/globaltype/ScreenGui.IgnoreGuiInset"
+    },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ScreenGui.html"
+  },
+  "@bettervoxel/globaltype/ScreenGui.DisplayOrder": {
+    "documentation": "Stacking among ScreenGuis: higher draws on top; equal orders stack by creation.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ScreenGui.html#displayorder"
+  },
+  "@bettervoxel/globaltype/ScreenGui.Enabled": {
+    "documentation": "Whether the ScreenGui's whole tree renders and receives input (true by default). Elements keep their state while disabled.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ScreenGui.html#enabled"
+  },
+  "@bettervoxel/globaltype/ScreenGui.IgnoreGuiInset": {
+    "documentation": "Extends the tree under the reference engine's top inset. A recorded no-op here: the engine draws no inset, so the value stores and changes nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ScreenGui.html#ignoreguiinset"
   },
   "@bettervoxel/globaltype/Script": {
     "documentation": "A server-side script by default; RunContext can re-home it. Enabled is its run switch — disabling kills its threads, re-enabling restarts it fresh.",
@@ -3037,14 +3384,144 @@
     "documentation": "The stored string.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/StringValue.html#value"
   },
+  "@bettervoxel/globaltype/TextBox": {
+    "documentation": "Typed text input: click (or CaptureFocus) to focus, keystrokes edit Text, Enter or clicking away releases — FocusLost says which. ClearTextOnFocus, TextEditable and MultiLine behave like the reference engine; no cursor or selection yet (v1).",
+    "keys": {
+      "CaptureFocus": "@bettervoxel/globaltype/TextBox.CaptureFocus",
+      "ClearTextOnFocus": "@bettervoxel/globaltype/TextBox.ClearTextOnFocus",
+      "FocusLost": "@bettervoxel/globaltype/TextBox.FocusLost",
+      "Focused": "@bettervoxel/globaltype/TextBox.Focused",
+      "FontFace": "@bettervoxel/globaltype/TextBox.FontFace",
+      "IsFocused": "@bettervoxel/globaltype/TextBox.IsFocused",
+      "MultiLine": "@bettervoxel/globaltype/TextBox.MultiLine",
+      "ReleaseFocus": "@bettervoxel/globaltype/TextBox.ReleaseFocus",
+      "RichText": "@bettervoxel/globaltype/TextBox.RichText",
+      "Text": "@bettervoxel/globaltype/TextBox.Text",
+      "TextColor3": "@bettervoxel/globaltype/TextBox.TextColor3",
+      "TextEditable": "@bettervoxel/globaltype/TextBox.TextEditable",
+      "TextScaled": "@bettervoxel/globaltype/TextBox.TextScaled",
+      "TextSize": "@bettervoxel/globaltype/TextBox.TextSize",
+      "TextStrokeColor3": "@bettervoxel/globaltype/TextBox.TextStrokeColor3",
+      "TextStrokeTransparency": "@bettervoxel/globaltype/TextBox.TextStrokeTransparency",
+      "TextXAlignment": "@bettervoxel/globaltype/TextBox.TextXAlignment",
+      "TextYAlignment": "@bettervoxel/globaltype/TextBox.TextYAlignment"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html"
+  },
+  "@bettervoxel/globaltype/TextBox.CaptureFocus": {
+    "documentation": "Gives this box keyboard focus, releasing any other focused box (its FocusLost fires with false).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#capturefocus",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/TextBox.ClearTextOnFocus": {
+    "documentation": "Empties Text when the box gains focus (true by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#cleartextonfocus"
+  },
+  "@bettervoxel/globaltype/TextBox.FocusLost": {
+    "documentation": "Fires when the box loses focus, with enterPressed: true for Return, false for Escape, a click elsewhere, or ReleaseFocus.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#focuslost"
+  },
+  "@bettervoxel/globaltype/TextBox.Focused": {
+    "documentation": "Fires (with no arguments) when the box gains keyboard focus — a click or CaptureFocus.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#focused"
+  },
+  "@bettervoxel/globaltype/TextBox.FontFace": {
+    "documentation": "The typed text's typeface as a Font value (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#fontface"
+  },
+  "@bettervoxel/globaltype/TextBox.IsFocused": {
+    "documentation": "Whether this box holds keyboard focus right now.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#isfocused",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/TextBox.IsFocused/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/TextBox.IsFocused/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/TextBox.MultiLine": {
+    "documentation": "Return inserts a newline instead of releasing focus.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#multiline"
+  },
+  "@bettervoxel/globaltype/TextBox.ReleaseFocus": {
+    "documentation": "Releases this box's focus; FocusLost fires with the submitted flag (false when omitted). A no-op while unfocused.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#releasefocus",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/TextBox.ReleaseFocus/param/0",
+        "name": "submitted"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/TextBox.ReleaseFocus/param/0": {
+    "documentation": "`submitted: boolean?`"
+  },
+  "@bettervoxel/globaltype/TextBox.RichText": {
+    "documentation": "Renders the typed Text as rich-text markup (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#richtext"
+  },
+  "@bettervoxel/globaltype/TextBox.Text": {
+    "documentation": "The typed content. Keystrokes edit it while the box holds focus; writes land like any property.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#text"
+  },
+  "@bettervoxel/globaltype/TextBox.TextColor3": {
+    "documentation": "The typed text's color.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textcolor3"
+  },
+  "@bettervoxel/globaltype/TextBox.TextEditable": {
+    "documentation": "Whether keystrokes edit Text. A non-editable box still focuses.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#texteditable"
+  },
+  "@bettervoxel/globaltype/TextBox.TextScaled": {
+    "documentation": "Scales the typed text to fill the box (capped at 100 px).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textscaled"
+  },
+  "@bettervoxel/globaltype/TextBox.TextSize": {
+    "documentation": "The typed text's size in pixels, clamped to 1..100.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textsize"
+  },
+  "@bettervoxel/globaltype/TextBox.TextStrokeColor3": {
+    "documentation": "The typed text's outline color (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textstrokecolor3"
+  },
+  "@bettervoxel/globaltype/TextBox.TextStrokeTransparency": {
+    "documentation": "The typed text outline's transparency (1 by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textstroketransparency"
+  },
+  "@bettervoxel/globaltype/TextBox.TextXAlignment": {
+    "documentation": "How the typed lines sit horizontally (Center by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textxalignment"
+  },
+  "@bettervoxel/globaltype/TextBox.TextYAlignment": {
+    "documentation": "Where the typed text block sits vertically (Center by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textyalignment"
+  },
   "@bettervoxel/globaltype/TextButton": {
     "documentation": "A clickable UI element with a text label; Activated fires on click release.",
     "keys": {
+      "FontFace": "@bettervoxel/globaltype/TextButton.FontFace",
+      "RichText": "@bettervoxel/globaltype/TextButton.RichText",
       "Text": "@bettervoxel/globaltype/TextButton.Text",
       "TextColor3": "@bettervoxel/globaltype/TextButton.TextColor3",
-      "TextSize": "@bettervoxel/globaltype/TextButton.TextSize"
+      "TextScaled": "@bettervoxel/globaltype/TextButton.TextScaled",
+      "TextSize": "@bettervoxel/globaltype/TextButton.TextSize",
+      "TextStrokeColor3": "@bettervoxel/globaltype/TextButton.TextStrokeColor3",
+      "TextStrokeTransparency": "@bettervoxel/globaltype/TextButton.TextStrokeTransparency",
+      "TextXAlignment": "@bettervoxel/globaltype/TextButton.TextXAlignment",
+      "TextYAlignment": "@bettervoxel/globaltype/TextButton.TextYAlignment"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html"
+  },
+  "@bettervoxel/globaltype/TextButton.FontFace": {
+    "documentation": "The label's typeface as a Font value (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#fontface"
+  },
+  "@bettervoxel/globaltype/TextButton.RichText": {
+    "documentation": "Renders the label's Text as rich-text markup (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#richtext"
   },
   "@bettervoxel/globaltype/TextButton.Text": {
     "documentation": "The button's label text. Same-value writes are silent.",
@@ -3054,30 +3531,85 @@
     "documentation": "The button label's text color.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textcolor3"
   },
+  "@bettervoxel/globaltype/TextButton.TextScaled": {
+    "documentation": "Scales the label's text to fill the button (capped at 100 px); TextSize is ignored while set.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textscaled"
+  },
   "@bettervoxel/globaltype/TextButton.TextSize": {
-    "documentation": "The button label's text size in pixels, floored at 1.",
+    "documentation": "The button label's text size in pixels, clamped to 1..100.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textsize"
+  },
+  "@bettervoxel/globaltype/TextButton.TextStrokeColor3": {
+    "documentation": "The label's outline color (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textstrokecolor3"
+  },
+  "@bettervoxel/globaltype/TextButton.TextStrokeTransparency": {
+    "documentation": "The label outline's transparency (1, invisible, by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textstroketransparency"
+  },
+  "@bettervoxel/globaltype/TextButton.TextXAlignment": {
+    "documentation": "How the label's lines sit horizontally: Left, Center (the default) or Right. Writes accept the enum item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textxalignment"
+  },
+  "@bettervoxel/globaltype/TextButton.TextYAlignment": {
+    "documentation": "Where the label's text block sits vertically: Top, Center (the default) or Bottom. Writes accept the enum item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#textyalignment"
   },
   "@bettervoxel/globaltype/TextLabel": {
     "documentation": "A UI element that displays text.",
     "keys": {
+      "FontFace": "@bettervoxel/globaltype/TextLabel.FontFace",
+      "RichText": "@bettervoxel/globaltype/TextLabel.RichText",
       "Text": "@bettervoxel/globaltype/TextLabel.Text",
       "TextColor3": "@bettervoxel/globaltype/TextLabel.TextColor3",
-      "TextSize": "@bettervoxel/globaltype/TextLabel.TextSize"
+      "TextScaled": "@bettervoxel/globaltype/TextLabel.TextScaled",
+      "TextSize": "@bettervoxel/globaltype/TextLabel.TextSize",
+      "TextStrokeColor3": "@bettervoxel/globaltype/TextLabel.TextStrokeColor3",
+      "TextStrokeTransparency": "@bettervoxel/globaltype/TextLabel.TextStrokeTransparency",
+      "TextXAlignment": "@bettervoxel/globaltype/TextLabel.TextXAlignment",
+      "TextYAlignment": "@bettervoxel/globaltype/TextLabel.TextYAlignment"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html"
   },
+  "@bettervoxel/globaltype/TextLabel.FontFace": {
+    "documentation": "The typeface as a Font value: Family is a local font asset path (.ttf/.otf; the empty string is the engine default face), Weight and Style the reference enums. Reads are copies; only a Font can be assigned.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#fontface"
+  },
+  "@bettervoxel/globaltype/TextLabel.RichText": {
+    "documentation": "Renders Text as rich-text markup: <b> <i> <u> <s>, <font color/size/face>, <br/> and the XML escapes. Malformed markup renders raw.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#richtext"
+  },
   "@bettervoxel/globaltype/TextLabel.Text": {
-    "documentation": "The displayed text. Same-value writes are silent — a HUD may rewrite its label every frame without re-triggering layout.",
+    "documentation": "The displayed text (\"Label\" on a fresh instance, as measured). Same-value writes are silent — a HUD may rewrite its label every frame without re-triggering layout.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#text"
   },
   "@bettervoxel/globaltype/TextLabel.TextColor3": {
     "documentation": "The text color.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textcolor3"
   },
+  "@bettervoxel/globaltype/TextLabel.TextScaled": {
+    "documentation": "Scales the rendered text to fill the element (capped at 100 px); TextSize is ignored while set.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textscaled"
+  },
   "@bettervoxel/globaltype/TextLabel.TextSize": {
-    "documentation": "The text size in pixels, floored at 1.",
+    "documentation": "The text size in pixels, clamped to 1..100 (the reference range; 8 on a fresh instance, as measured; TextScaled ignores it).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textsize"
+  },
+  "@bettervoxel/globaltype/TextLabel.TextStrokeColor3": {
+    "documentation": "The outline color behind the glyphs (black by default; invisible until TextStrokeTransparency drops below 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textstrokecolor3"
+  },
+  "@bettervoxel/globaltype/TextLabel.TextStrokeTransparency": {
+    "documentation": "How see-through the outline renders, clamped 0 (opaque) to 1 (invisible — the default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textstroketransparency"
+  },
+  "@bettervoxel/globaltype/TextLabel.TextXAlignment": {
+    "documentation": "How lines sit horizontally in the element: Left, Center (the default) or Right. Writes accept the enum item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textxalignment"
+  },
+  "@bettervoxel/globaltype/TextLabel.TextYAlignment": {
+    "documentation": "Where the text block sits vertically in the element: Top, Center (the default) or Bottom. Writes accept the enum item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textyalignment"
   },
   "@bettervoxel/globaltype/TriangleMeshPart": {
     "documentation": "The mesh-geometry layer: how imported meshes turn into collision shapes (CollisionFidelity).",
@@ -3292,6 +3824,22 @@
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/TweenService.html#name"
   },
+  "@bettervoxel/globaltype/UDim": {
+    "documentation": "The one-axis UI coordinate: a parent-relative scale plus a pixel offset. The UI modifier instances (UICorner, UIPadding) speak it.",
+    "keys": {
+      "Offset": "@bettervoxel/globaltype/UDim.Offset",
+      "Scale": "@bettervoxel/globaltype/UDim.Scale"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim.html"
+  },
+  "@bettervoxel/globaltype/UDim.Offset": {
+    "documentation": "The offset component, in pixels.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim.html#offset"
+  },
+  "@bettervoxel/globaltype/UDim.Scale": {
+    "documentation": "The scale component: a fraction of the relevant parent dimension.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim.html#scale"
+  },
   "@bettervoxel/globaltype/UDim2": {
     "documentation": "The UI coordinate: a parent-relative scale plus a pixel offset per axis. GuiObject Position and Size speak it.",
     "keys": {
@@ -3318,10 +3866,142 @@
     "documentation": "The Y scale component: a fraction of the parent's height.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#yscale"
   },
+  "@bettervoxel/globaltype/UIBase": {
+    "documentation": "The root of the UI modifier family; it adds no members of its own.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIBase.html"
+  },
+  "@bettervoxel/globaltype/UIComponent": {
+    "documentation": "A modifier instance: parented under a GuiObject, it restyles that PARENT element and renders nothing itself.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIComponent.html"
+  },
+  "@bettervoxel/globaltype/UICorner": {
+    "documentation": "Rounds its parent element's corners by CornerRadius — a UDim: a fraction of the shorter side plus pixels.",
+    "keys": {
+      "CornerRadius": "@bettervoxel/globaltype/UICorner.CornerRadius"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UICorner.html"
+  },
+  "@bettervoxel/globaltype/UICorner.CornerRadius": {
+    "documentation": "How far the parent element's corners round: a fraction of the shorter side plus pixels. The measured default is (0, 8).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UICorner.html#cornerradius"
+  },
+  "@bettervoxel/globaltype/UIGradient": {
+    "documentation": "Tints its parent element's fill with a color ramp: Color (a ColorSequence), Transparency (a NumberSequence) and Rotation in degrees (0 = left to right).",
+    "keys": {
+      "Color": "@bettervoxel/globaltype/UIGradient.Color",
+      "Rotation": "@bettervoxel/globaltype/UIGradient.Rotation",
+      "Transparency": "@bettervoxel/globaltype/UIGradient.Transparency"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIGradient.html"
+  },
+  "@bettervoxel/globaltype/UIGradient.Color": {
+    "documentation": "The color ramp multiplied into the parent element's fill.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIGradient.html#color"
+  },
+  "@bettervoxel/globaltype/UIGradient.Rotation": {
+    "documentation": "The ramp's direction in degrees: 0 runs left to right, 90 top to bottom.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIGradient.html#rotation"
+  },
+  "@bettervoxel/globaltype/UIGradient.Transparency": {
+    "documentation": "A transparency ramp multiplied into the fill's alpha.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIGradient.html#transparency"
+  },
+  "@bettervoxel/globaltype/UIGridStyleLayout": {
+    "documentation": "The grid-style layout layer (list and grid layouts descend from it); no members of its own here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIGridStyleLayout.html"
+  },
+  "@bettervoxel/globaltype/UILayout": {
+    "documentation": "The layout-modifier layer of the UIComponent family; it adds no members of its own.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UILayout.html"
+  },
+  "@bettervoxel/globaltype/UIListLayout": {
+    "documentation": "Lays its parent's children out in a line: FillDirection, Padding between items, the alignment pair, and SortOrder (Name by default, or LayoutOrder). A laid-out child's Position and AnchorPoint are ignored.",
+    "keys": {
+      "FillDirection": "@bettervoxel/globaltype/UIListLayout.FillDirection",
+      "HorizontalAlignment": "@bettervoxel/globaltype/UIListLayout.HorizontalAlignment",
+      "Padding": "@bettervoxel/globaltype/UIListLayout.Padding",
+      "SortOrder": "@bettervoxel/globaltype/UIListLayout.SortOrder",
+      "VerticalAlignment": "@bettervoxel/globaltype/UIListLayout.VerticalAlignment"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIListLayout.html"
+  },
+  "@bettervoxel/globaltype/UIListLayout.FillDirection": {
+    "documentation": "The line's axis: Vertical (the default) or Horizontal.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIListLayout.html#filldirection"
+  },
+  "@bettervoxel/globaltype/UIListLayout.HorizontalAlignment": {
+    "documentation": "Where the line sits horizontally in the parent: Left (the default), Center or Right.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIListLayout.html#horizontalalignment"
+  },
+  "@bettervoxel/globaltype/UIListLayout.Padding": {
+    "documentation": "The gap between laid-out items.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIListLayout.html#padding"
+  },
+  "@bettervoxel/globaltype/UIListLayout.SortOrder": {
+    "documentation": "What orders the siblings: Name (the default, as measured) or LayoutOrder (Custom is the legacy alias).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIListLayout.html#sortorder"
+  },
+  "@bettervoxel/globaltype/UIListLayout.VerticalAlignment": {
+    "documentation": "Where the line sits vertically in the parent: Top (the default), Center or Bottom.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIListLayout.html#verticalalignment"
+  },
+  "@bettervoxel/globaltype/UIPadding": {
+    "documentation": "Insets its parent element's content box per side (PaddingTop, PaddingBottom, PaddingLeft, PaddingRight — each a UDim).",
+    "keys": {
+      "PaddingBottom": "@bettervoxel/globaltype/UIPadding.PaddingBottom",
+      "PaddingLeft": "@bettervoxel/globaltype/UIPadding.PaddingLeft",
+      "PaddingRight": "@bettervoxel/globaltype/UIPadding.PaddingRight",
+      "PaddingTop": "@bettervoxel/globaltype/UIPadding.PaddingTop"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIPadding.html"
+  },
+  "@bettervoxel/globaltype/UIPadding.PaddingBottom": {
+    "documentation": "The inset from the parent element's bottom edge.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIPadding.html#paddingbottom"
+  },
+  "@bettervoxel/globaltype/UIPadding.PaddingLeft": {
+    "documentation": "The inset from the parent element's left edge.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIPadding.html#paddingleft"
+  },
+  "@bettervoxel/globaltype/UIPadding.PaddingRight": {
+    "documentation": "The inset from the parent element's right edge.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIPadding.html#paddingright"
+  },
+  "@bettervoxel/globaltype/UIPadding.PaddingTop": {
+    "documentation": "The inset from the parent element's top edge.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIPadding.html#paddingtop"
+  },
+  "@bettervoxel/globaltype/UIStroke": {
+    "documentation": "Outlines its parent element: Color, Thickness, Transparency and ApplyStrokeMode. v1 renders both modes as the box outline (the reference engine's Contextual strokes text on text elements).",
+    "keys": {
+      "ApplyStrokeMode": "@bettervoxel/globaltype/UIStroke.ApplyStrokeMode",
+      "Color": "@bettervoxel/globaltype/UIStroke.Color",
+      "Thickness": "@bettervoxel/globaltype/UIStroke.Thickness",
+      "Transparency": "@bettervoxel/globaltype/UIStroke.Transparency"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIStroke.html"
+  },
+  "@bettervoxel/globaltype/UIStroke.ApplyStrokeMode": {
+    "documentation": "What the stroke outlines: Contextual (the default) or Border. v1 renders both as the box outline (the reference engine's Contextual strokes TEXT on text elements — recorded divergence; the TextStroke properties cover that need).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIStroke.html#applystrokemode"
+  },
+  "@bettervoxel/globaltype/UIStroke.Color": {
+    "documentation": "The outline color (black by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIStroke.html#color"
+  },
+  "@bettervoxel/globaltype/UIStroke.Thickness": {
+    "documentation": "The outline width in pixels, floored at 0 (the default is 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIStroke.html#thickness"
+  },
+  "@bettervoxel/globaltype/UIStroke.Transparency": {
+    "documentation": "How see-through the outline renders, clamped 0 (opaque, the default) to 1 (invisible).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/UIStroke.html#transparency"
+  },
   "@bettervoxel/globaltype/UserInputService": {
     "documentation": "The raw input layer: InputBegan/InputEnded with Enum.KeyCode/Enum.UserInputType payloads, IsKeyDown polling, and the mouse position and per-frame delta. The authored Keybinds layer reads the same input state; this is the Roblox-parity surface underneath it.",
     "keys": {
       "ClassName": "@bettervoxel/globaltype/UserInputService.ClassName",
+      "GetFocusedTextBox": "@bettervoxel/globaltype/UserInputService.GetFocusedTextBox",
       "GetMouseDelta": "@bettervoxel/globaltype/UserInputService.GetMouseDelta",
       "GetMouseLocation": "@bettervoxel/globaltype/UserInputService.GetMouseLocation",
       "InputBegan": "@bettervoxel/globaltype/UserInputService.InputBegan",
@@ -3335,6 +4015,17 @@
   "@bettervoxel/globaltype/UserInputService.ClassName": {
     "documentation": "The class name — the first name IsA answers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#classname"
+  },
+  "@bettervoxel/globaltype/UserInputService.GetFocusedTextBox": {
+    "documentation": "The TextBox currently holding keyboard focus, or nil. The guard for raw polling (IsKeyDown) while the player types; the InputBegan path already reports gameProcessed instead.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#getfocusedtextbox",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/UserInputService.GetFocusedTextBox/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/UserInputService.GetFocusedTextBox/return/0": {
+    "documentation": "`TextBox?`"
   },
   "@bettervoxel/globaltype/UserInputService.GetMouseDelta": {
     "documentation": "This frame's mouse motion as (dx, dy, 0).",
