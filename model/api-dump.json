@@ -3509,6 +3509,12 @@
           "summary": "The distance where fog begins, in studs, floored at 0."
         },
         {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "GeographicLatitude",
+          "summary": "Degrees north; tilts the sun's path off the east/up plane, so ClockTime and latitude together aim the sun anywhere. 0 (the engine default) keeps the noon sun overhead."
+        },
+        {
           "decl": "() -> Vector3",
           "kind": "Method",
           "name": "GetSunDirection",
@@ -3519,6 +3525,12 @@
             }
           ],
           "summary": "The unit direction toward the sun for the current ClockTime."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "GlobalShadows",
+          "summary": "Whether the sun casts shadows. Turn it off (with Brightness 0) for a fully unlit look."
         },
         {
           "decl": "(className: string) -> boolean",

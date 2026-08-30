@@ -454,7 +454,9 @@ declare extern type Lighting with
     FogColor: Color3
     FogEnd: number
     FogStart: number
+    GeographicLatitude: number
     function GetSunDirection(self): Vector3
+    GlobalShadows: boolean
     function IsA(self, className: string): boolean
     Name: string
 end

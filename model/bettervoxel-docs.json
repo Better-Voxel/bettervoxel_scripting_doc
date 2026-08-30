@@ -2303,7 +2303,9 @@
       "FogColor": "@bettervoxel/globaltype/Lighting.FogColor",
       "FogEnd": "@bettervoxel/globaltype/Lighting.FogEnd",
       "FogStart": "@bettervoxel/globaltype/Lighting.FogStart",
+      "GeographicLatitude": "@bettervoxel/globaltype/Lighting.GeographicLatitude",
       "GetSunDirection": "@bettervoxel/globaltype/Lighting.GetSunDirection",
+      "GlobalShadows": "@bettervoxel/globaltype/Lighting.GlobalShadows",
       "IsA": "@bettervoxel/globaltype/Lighting.IsA",
       "Name": "@bettervoxel/globaltype/Lighting.Name"
     },
@@ -2337,6 +2339,10 @@
     "documentation": "The distance where fog begins, in studs, floored at 0.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogstart"
   },
+  "@bettervoxel/globaltype/Lighting.GeographicLatitude": {
+    "documentation": "Degrees north; tilts the sun's path off the east/up plane, so ClockTime and latitude together aim the sun anywhere. 0 (the engine default) keeps the noon sun overhead.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#geographiclatitude"
+  },
   "@bettervoxel/globaltype/Lighting.GetSunDirection": {
     "documentation": "The unit direction toward the sun for the current ClockTime.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#getsundirection",
@@ -2347,6 +2353,10 @@
   },
   "@bettervoxel/globaltype/Lighting.GetSunDirection/return/0": {
     "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Lighting.GlobalShadows": {
+    "documentation": "Whether the sun casts shadows. Turn it off (with Brightness 0) for a fully unlit look.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#globalshadows"
   },
   "@bettervoxel/globaltype/Lighting.IsA": {
     "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
