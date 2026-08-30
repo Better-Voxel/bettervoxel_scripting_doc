@@ -2223,7 +2223,7 @@
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "RichText",
-          "summary": "Renders Text as rich-text markup: <b> <i> <u> <s>, <font color/size/face>, <br/> and the XML escapes. Malformed markup renders raw."
+          "summary": "Renders Text as rich-text markup: `<b>` `<i>` `<u>` `<s>`, `<font color/size/face>`, `<br/>` and the XML escapes. Malformed markup renders raw."
         },
         {
           "decl": "string",

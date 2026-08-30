@@ -3810,7 +3810,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#fontface"
   },
   "@bettervoxel/globaltype/TextLabel.RichText": {
-    "documentation": "Renders Text as rich-text markup: <b> <i> <u> <s>, <font color/size/face>, <br/> and the XML escapes. Malformed markup renders raw.",
+    "documentation": "Renders Text as rich-text markup: `<b>` `<i>` `<u>` `<s>`, `<font color/size/face>`, `<br/>` and the XML escapes. Malformed markup renders raw.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#richtext"
   },
   "@bettervoxel/globaltype/TextLabel.Text": {
