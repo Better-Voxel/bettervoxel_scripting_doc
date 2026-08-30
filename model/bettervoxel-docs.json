@@ -260,30 +260,8 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html"
   },
   "@bettervoxel/global/ColorSequence.new": {
-    "documentation": "A constant sequence from one color, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1).",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html#new",
-    "params": [
-      {
-        "documentation": "@bettervoxel/global/ColorSequence.new/param/0",
-        "name": "value"
-      },
-      {
-        "documentation": "@bettervoxel/global/ColorSequence.new/param/1",
-        "name": "endColor"
-      }
-    ],
-    "returns": [
-      "@bettervoxel/global/ColorSequence.new/return/0"
-    ]
-  },
-  "@bettervoxel/global/ColorSequence.new/param/0": {
-    "documentation": "`value: Color3 | {ColorSequenceKeypoint}`"
-  },
-  "@bettervoxel/global/ColorSequence.new/param/1": {
-    "documentation": "`endColor: Color3?`"
-  },
-  "@bettervoxel/global/ColorSequence.new/return/0": {
-    "documentation": "`ColorSequence`"
+    "documentation": "A constant color, a straight ramp between two colors, or the given keypoints — 2 to 20 of them, the first at time 0, the last at time 1, in time order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html#new"
   },
   "@bettervoxel/global/ColorSequenceKeypoint": {
     "documentation": "The ColorSequenceKeypoint constructors — see the ColorSequenceKeypoint page.",
@@ -293,7 +271,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html"
   },
   "@bettervoxel/global/ColorSequenceKeypoint.new": {
-    "documentation": "A keypoint at `time` (0..1) with the given color.",
+    "documentation": "A keypoint at time (0..1) holding a color.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html#new",
     "params": [
       {
@@ -388,6 +366,17 @@
   "@bettervoxel/global/Instance.new/return/0": {
     "documentation": "`Instance`"
   },
+  "@bettervoxel/global/NumberRange": {
+    "documentation": "The NumberRange constructors — see the NumberRange page.",
+    "keys": {
+      "new": "@bettervoxel/global/NumberRange.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberRange.html"
+  },
+  "@bettervoxel/global/NumberRange.new": {
+    "documentation": "A range from its ends (min must not exceed max), or a single value as both ends.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberRange.html#new"
+  },
   "@bettervoxel/global/NumberSequence": {
     "documentation": "The NumberSequence constructors — see the NumberSequence page.",
     "keys": {
@@ -396,30 +385,8 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html"
   },
   "@bettervoxel/global/NumberSequence.new": {
-    "documentation": "A constant sequence from one number, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1).",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html#new",
-    "params": [
-      {
-        "documentation": "@bettervoxel/global/NumberSequence.new/param/0",
-        "name": "value"
-      },
-      {
-        "documentation": "@bettervoxel/global/NumberSequence.new/param/1",
-        "name": "endValue"
-      }
-    ],
-    "returns": [
-      "@bettervoxel/global/NumberSequence.new/return/0"
-    ]
-  },
-  "@bettervoxel/global/NumberSequence.new/param/0": {
-    "documentation": "`value: number | {NumberSequenceKeypoint}`"
-  },
-  "@bettervoxel/global/NumberSequence.new/param/1": {
-    "documentation": "`endValue: number?`"
-  },
-  "@bettervoxel/global/NumberSequence.new/return/0": {
-    "documentation": "`NumberSequence`"
+    "documentation": "A constant sequence, a straight line between two values, or the given keypoints — 2 to 20 of them, the first at time 0, the last at time 1, in time order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html#new"
   },
   "@bettervoxel/global/NumberSequenceKeypoint": {
     "documentation": "The NumberSequenceKeypoint constructors — see the NumberSequenceKeypoint page.",
@@ -429,7 +396,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html"
   },
   "@bettervoxel/global/NumberSequenceKeypoint.new": {
-    "documentation": "A keypoint at `time` (0..1) with the given value (and optional envelope).",
+    "documentation": "A keypoint at time (0..1) with a value and an optional random envelope (default 0).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html#new",
     "params": [
       {
@@ -688,6 +655,59 @@
   },
   "@bettervoxel/global/UDim2.new/return/0": {
     "documentation": "`UDim2`"
+  },
+  "@bettervoxel/global/Vector2": {
+    "documentation": "The Vector2 constructors — see the Vector2 page.",
+    "keys": {
+      "new": "@bettervoxel/global/Vector2.new",
+      "one": "@bettervoxel/global/Vector2.one",
+      "xAxis": "@bettervoxel/global/Vector2.xAxis",
+      "yAxis": "@bettervoxel/global/Vector2.yAxis",
+      "zero": "@bettervoxel/global/Vector2.zero"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html"
+  },
+  "@bettervoxel/global/Vector2.new": {
+    "documentation": "A Vector2 from its components; a missing component is zero.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Vector2.new/param/0",
+        "name": "x"
+      },
+      {
+        "documentation": "@bettervoxel/global/Vector2.new/param/1",
+        "name": "y"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Vector2.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/Vector2.new/param/0": {
+    "documentation": "`x: number?`"
+  },
+  "@bettervoxel/global/Vector2.new/param/1": {
+    "documentation": "`y: number?`"
+  },
+  "@bettervoxel/global/Vector2.new/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/global/Vector2.one": {
+    "documentation": "The vector (1, 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#one"
+  },
+  "@bettervoxel/global/Vector2.xAxis": {
+    "documentation": "The unit X axis (1, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#xaxis"
+  },
+  "@bettervoxel/global/Vector2.yAxis": {
+    "documentation": "The unit Y axis (0, 1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#yaxis"
+  },
+  "@bettervoxel/global/Vector2.zero": {
+    "documentation": "The zero vector (0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#zero"
   },
   "@bettervoxel/global/Vector3": {
     "documentation": "The Vector3 constructors — see the Vector3 page.",
@@ -1960,18 +1980,18 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#r"
   },
   "@bettervoxel/globaltype/ColorSequence": {
-    "documentation": "An immutable color ramp over 0..1: at least two keypoints, times ascending from 0 to 1. UIGradient.Color speaks it.",
+    "documentation": "A piecewise-linear color ramp over a unit time span, built from 2 to 20 keypoints under the same rules as NumberSequence — the particle Color.",
     "keys": {
       "Keypoints": "@bettervoxel/globaltype/ColorSequence.Keypoints"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html"
   },
   "@bettervoxel/globaltype/ColorSequence.Keypoints": {
-    "documentation": "The keypoints, ascending in time from 0 to 1.",
+    "documentation": "The keypoints in time order — a fresh table on every read, as the reference hands out.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequence.html#keypoints"
   },
   "@bettervoxel/globaltype/ColorSequenceKeypoint": {
-    "documentation": "One point of a ColorSequence: a Time in 0..1 and its Color3 Value.",
+    "documentation": "One ColorSequence keypoint: Time and its Color3 Value.",
     "keys": {
       "Time": "@bettervoxel/globaltype/ColorSequenceKeypoint.Time",
       "Value": "@bettervoxel/globaltype/ColorSequenceKeypoint.Value"
@@ -1979,7 +1999,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html"
   },
   "@bettervoxel/globaltype/ColorSequenceKeypoint.Time": {
-    "documentation": "Where on the 0..1 ramp this keypoint sits.",
+    "documentation": "The keypoint's position along the sequence, 0..1.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html#time"
   },
   "@bettervoxel/globaltype/ColorSequenceKeypoint.Value": {
@@ -2725,19 +2745,35 @@
     "documentation": "Reusable code loaded with require: runs once per context, and its return value is cached and shared between requirers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ModuleScript.html"
   },
+  "@bettervoxel/globaltype/NumberRange": {
+    "documentation": "An immutable min..max pair — the constructor refuses an inverted range. The particle ranges (Lifetime, Speed, Rotation, RotSpeed, FlipbookFramerate) speak it.",
+    "keys": {
+      "Max": "@bettervoxel/globaltype/NumberRange.Max",
+      "Min": "@bettervoxel/globaltype/NumberRange.Min"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberRange.html"
+  },
+  "@bettervoxel/globaltype/NumberRange.Max": {
+    "documentation": "The upper end.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberRange.html#max"
+  },
+  "@bettervoxel/globaltype/NumberRange.Min": {
+    "documentation": "The lower end.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberRange.html#min"
+  },
   "@bettervoxel/globaltype/NumberSequence": {
-    "documentation": "An immutable number ramp over 0..1, same keypoint rules as ColorSequence. UIGradient.Transparency speaks it.",
+    "documentation": "A piecewise-linear curve over a unit time span, built from 2 to 20 keypoints (the first at time 0, the last at time 1, in time order) — the particle curves Size, Squash and Transparency. Each keypoint's Envelope is a random half-width every particle samples its own offset within.",
     "keys": {
       "Keypoints": "@bettervoxel/globaltype/NumberSequence.Keypoints"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html"
   },
   "@bettervoxel/globaltype/NumberSequence.Keypoints": {
-    "documentation": "The keypoints, ascending in time from 0 to 1.",
+    "documentation": "The keypoints in time order — a fresh table on every read, as the reference hands out.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequence.html#keypoints"
   },
   "@bettervoxel/globaltype/NumberSequenceKeypoint": {
-    "documentation": "One point of a NumberSequence: Time, Value, and an Envelope kept for parity (nothing consumes it yet).",
+    "documentation": "One NumberSequence keypoint: Time, Value and the random Envelope.",
     "keys": {
       "Envelope": "@bettervoxel/globaltype/NumberSequenceKeypoint.Envelope",
       "Time": "@bettervoxel/globaltype/NumberSequenceKeypoint.Time",
@@ -2746,11 +2782,11 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html"
   },
   "@bettervoxel/globaltype/NumberSequenceKeypoint.Envelope": {
-    "documentation": "The random spread around Value (stored for parity; nothing consumes it yet).",
+    "documentation": "The half-width of the random band around the value (each particle picks its own offset within it).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html#envelope"
   },
   "@bettervoxel/globaltype/NumberSequenceKeypoint.Time": {
-    "documentation": "Where on the 0..1 ramp this keypoint sits.",
+    "documentation": "The keypoint's position along the sequence, 0..1.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/NumberSequenceKeypoint.html#time"
   },
   "@bettervoxel/globaltype/NumberSequenceKeypoint.Value": {
@@ -2822,6 +2858,204 @@
   "@bettervoxel/globaltype/Part.Shape": {
     "documentation": "The part's geometric shape. Writes accept the Enum.PartType item or its string name; the mesh and collider re-derive.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Part.html#shape"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter": {
+    "documentation": "A particle emitter under a part or an attachment: the flat property set (Rate, Lifetime, Speed, the Size/Transparency/Color sequences, the shape and flipbook enums, …) describes the effect, and each client's particle system realizes it — a headless server holds the description only. Emit, Clear and FastForward are local to the calling context. Enabled, Brightness, Color, Transparency, Shape, Size, Rotation and Orientation are the names it shares with other classes, each with its own particle-typed meaning here (docs/particle-system.md).",
+    "keys": {
+      "Acceleration": "@bettervoxel/globaltype/ParticleEmitter.Acceleration",
+      "Brightness": "@bettervoxel/globaltype/ParticleEmitter.Brightness",
+      "Clear": "@bettervoxel/globaltype/ParticleEmitter.Clear",
+      "Color": "@bettervoxel/globaltype/ParticleEmitter.Color",
+      "Drag": "@bettervoxel/globaltype/ParticleEmitter.Drag",
+      "EmissionDirection": "@bettervoxel/globaltype/ParticleEmitter.EmissionDirection",
+      "Emit": "@bettervoxel/globaltype/ParticleEmitter.Emit",
+      "Enabled": "@bettervoxel/globaltype/ParticleEmitter.Enabled",
+      "FastForward": "@bettervoxel/globaltype/ParticleEmitter.FastForward",
+      "FlipbookFramerate": "@bettervoxel/globaltype/ParticleEmitter.FlipbookFramerate",
+      "FlipbookLayout": "@bettervoxel/globaltype/ParticleEmitter.FlipbookLayout",
+      "FlipbookMode": "@bettervoxel/globaltype/ParticleEmitter.FlipbookMode",
+      "FlipbookStartRandom": "@bettervoxel/globaltype/ParticleEmitter.FlipbookStartRandom",
+      "Lifetime": "@bettervoxel/globaltype/ParticleEmitter.Lifetime",
+      "LightEmission": "@bettervoxel/globaltype/ParticleEmitter.LightEmission",
+      "LightInfluence": "@bettervoxel/globaltype/ParticleEmitter.LightInfluence",
+      "LockedToPart": "@bettervoxel/globaltype/ParticleEmitter.LockedToPart",
+      "Orientation": "@bettervoxel/globaltype/ParticleEmitter.Orientation",
+      "Rate": "@bettervoxel/globaltype/ParticleEmitter.Rate",
+      "RotSpeed": "@bettervoxel/globaltype/ParticleEmitter.RotSpeed",
+      "Rotation": "@bettervoxel/globaltype/ParticleEmitter.Rotation",
+      "Shape": "@bettervoxel/globaltype/ParticleEmitter.Shape",
+      "ShapeInOut": "@bettervoxel/globaltype/ParticleEmitter.ShapeInOut",
+      "ShapePartial": "@bettervoxel/globaltype/ParticleEmitter.ShapePartial",
+      "ShapeStyle": "@bettervoxel/globaltype/ParticleEmitter.ShapeStyle",
+      "Size": "@bettervoxel/globaltype/ParticleEmitter.Size",
+      "Speed": "@bettervoxel/globaltype/ParticleEmitter.Speed",
+      "SpreadAngle": "@bettervoxel/globaltype/ParticleEmitter.SpreadAngle",
+      "Squash": "@bettervoxel/globaltype/ParticleEmitter.Squash",
+      "Texture": "@bettervoxel/globaltype/ParticleEmitter.Texture",
+      "TimeScale": "@bettervoxel/globaltype/ParticleEmitter.TimeScale",
+      "Transparency": "@bettervoxel/globaltype/ParticleEmitter.Transparency",
+      "VelocityInheritance": "@bettervoxel/globaltype/ParticleEmitter.VelocityInheritance",
+      "ZOffset": "@bettervoxel/globaltype/ParticleEmitter.ZOffset"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Acceleration": {
+    "documentation": "A constant acceleration applied to every particle, in studs per second squared (gravity is not applied on its own).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#acceleration"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Brightness": {
+    "documentation": "A multiplier on the particle color (1 is unchanged; stored as written).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#brightness"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Clear": {
+    "documentation": "Removes every live particle of this emitter now.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#clear",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Color": {
+    "documentation": "The particle color over its lifetime, as a ColorSequence (a Color3 is refused — wrap it in ColorSequence.new).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#color"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Drag": {
+    "documentation": "Velocity damping per second (0 is none); stored as written.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#drag"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.EmissionDirection": {
+    "documentation": "The face of the parent part particles leave from. Writes accept the Enum.NormalId item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#emissiondirection"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Emit": {
+    "documentation": "Spawns particleCount particles at once (default 16), Enabled or not — local to the calling context, never replicated. A negative count is a no-op; a string refuses.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#emit",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/ParticleEmitter.Emit/param/0",
+        "name": "particleCount"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Emit/param/0": {
+    "documentation": "`particleCount: number?`"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Enabled": {
+    "documentation": "Whether the emitter spawns at its Rate. Live particles finish their lives either way; Emit works while disabled.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#enabled"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.FastForward": {
+    "documentation": "Advances the emitter as if seconds had already passed — the steady state without the warm-up. Public here (an engine extension); zero or negative is a no-op.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#fastforward",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/ParticleEmitter.FastForward/param/0",
+        "name": "seconds"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.FastForward/param/0": {
+    "documentation": "`seconds: number`"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.FlipbookFramerate": {
+    "documentation": "Frames per second of the flipbook, picked uniformly within the range per particle.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#flipbookframerate"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.FlipbookLayout": {
+    "documentation": "The sprite grid the Texture holds: None, Grid2x2, Grid4x4 or Grid8x8 (Custom is refused — the engine has no custom grids).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#flipbooklayout"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.FlipbookMode": {
+    "documentation": "How the grid plays over a particle's life: Loop, OneShot, PingPong or Random.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#flipbookmode"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.FlipbookStartRandom": {
+    "documentation": "Whether each particle starts the flipbook on a random frame.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#flipbookstartrandom"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Lifetime": {
+    "documentation": "Each particle's life in seconds, picked uniformly within the range.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#lifetime"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.LightEmission": {
+    "documentation": "The blend from normal (0) to additive (1) — glowing particles lighten what is behind them; stored as written.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#lightemission"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.LightInfluence": {
+    "documentation": "How much the scene's lighting affects the particles (0 unlit, 1 lit like a surface); stored as written.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#lightinfluence"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.LockedToPart": {
+    "documentation": "Whether particles move with the parent after spawning (local space) instead of staying where they were born (world space).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#lockedtopart"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Orientation": {
+    "documentation": "How the particle quad faces: the camera, the camera about the world up, or along/across its velocity (the emitter branch of the dual-typed name).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#orientation"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Rate": {
+    "documentation": "Particles spawned per second while Enabled. Stored as written (the reference accepts any number); a negative rate spawns nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#rate"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.RotSpeed": {
+    "documentation": "The spin in degrees per second, picked uniformly within the range.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#rotspeed"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Rotation": {
+    "documentation": "The initial spin angle in degrees, picked uniformly within the range (the emitter branch of the dual-typed name).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#rotation"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Shape": {
+    "documentation": "The emission volume: Box, Sphere, Cylinder or Disc. Writes accept the Enum.ParticleEmitterShape item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#shape"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.ShapeInOut": {
+    "documentation": "Which way particles leave the Shape: Outward, Inward or both.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#shapeinout"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.ShapePartial": {
+    "documentation": "How much of the Shape emits (1 is all of it); stored as written.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#shapepartial"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.ShapeStyle": {
+    "documentation": "Whether particles spawn throughout the Shape (Volume) or on its boundary (Surface).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#shapestyle"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Size": {
+    "documentation": "The particle size in studs over its lifetime, as a NumberSequence (the emitter branch of the dual-typed name).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#size"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Speed": {
+    "documentation": "The initial speed in studs per second, picked uniformly within the range.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#speed"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.SpreadAngle": {
+    "documentation": "The emission cone half-angles in degrees, per axis, around the EmissionDirection.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#spreadangle"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Squash": {
+    "documentation": "The particle's stretch over its lifetime: positive squashes along the velocity, negative stretches (0 is round).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#squash"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Texture": {
+    "documentation": "The particle image, as a local asset path; the empty string is the engine's built-in soft disc. Strictly a string.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#texture"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.TimeScale": {
+    "documentation": "A multiplier on this emitter's clock (1 is real time), floored at 0 — the one particle property the reference clamps.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#timescale"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.Transparency": {
+    "documentation": "The particle transparency over its lifetime, as a NumberSequence (0 opaque, 1 invisible).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#transparency"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.VelocityInheritance": {
+    "documentation": "How much of the parent's velocity a new particle inherits (0 none, 1 all).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#velocityinheritance"
+  },
+  "@bettervoxel/globaltype/ParticleEmitter.ZOffset": {
+    "documentation": "A render offset toward the camera in studs (positive is closer) — the ordering knob, since particles are not depth-sorted.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#zoffset"
   },
   "@bettervoxel/globaltype/Player": {
     "documentation": "A joined player's roster identity: UserId, the current Character and its CharacterAdded signal, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service.",
@@ -4102,6 +4336,256 @@
   "@bettervoxel/globaltype/ValueBase": {
     "documentation": "The value-container family: one typed Value property plus a Changed signal that fires with the new value.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ValueBase.html"
+  },
+  "@bettervoxel/globaltype/Vector2": {
+    "documentation": "An immutable 2D vector (a userdata, unlike Vector3): X/Y in both casings, Magnitude and Unit, the arithmetic operators against a Vector2 or a number (the operators are not listed below — they are metamethods, like CFrame's `*`), and the method set. SpreadAngle speaks it.",
+    "keys": {
+      "Abs": "@bettervoxel/globaltype/Vector2.Abs",
+      "Angle": "@bettervoxel/globaltype/Vector2.Angle",
+      "Ceil": "@bettervoxel/globaltype/Vector2.Ceil",
+      "Cross": "@bettervoxel/globaltype/Vector2.Cross",
+      "Dot": "@bettervoxel/globaltype/Vector2.Dot",
+      "Floor": "@bettervoxel/globaltype/Vector2.Floor",
+      "FuzzyEq": "@bettervoxel/globaltype/Vector2.FuzzyEq",
+      "Lerp": "@bettervoxel/globaltype/Vector2.Lerp",
+      "Magnitude": "@bettervoxel/globaltype/Vector2.Magnitude",
+      "Max": "@bettervoxel/globaltype/Vector2.Max",
+      "Min": "@bettervoxel/globaltype/Vector2.Min",
+      "Sign": "@bettervoxel/globaltype/Vector2.Sign",
+      "Unit": "@bettervoxel/globaltype/Vector2.Unit",
+      "X": "@bettervoxel/globaltype/Vector2.X",
+      "Y": "@bettervoxel/globaltype/Vector2.Y",
+      "magnitude": "@bettervoxel/globaltype/Vector2.magnitude",
+      "x": "@bettervoxel/globaltype/Vector2.x",
+      "y": "@bettervoxel/globaltype/Vector2.y"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html"
+  },
+  "@bettervoxel/globaltype/Vector2.Abs": {
+    "documentation": "The component-wise absolute value.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#abs",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Abs/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Abs/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Angle": {
+    "documentation": "The angle to other in radians: unsigned (0..π) by default, signed (-π..π, counter-clockwise positive) when isSigned is true.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#angle",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Angle/param/0",
+        "name": "other"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Angle/param/1",
+        "name": "isSigned"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Angle/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Angle/param/0": {
+    "documentation": "`other: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Angle/param/1": {
+    "documentation": "`isSigned: boolean?`"
+  },
+  "@bettervoxel/globaltype/Vector2.Angle/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Vector2.Ceil": {
+    "documentation": "Each component rounded up to an integer.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#ceil",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Ceil/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Ceil/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Cross": {
+    "documentation": "The 2D cross product with other — a scalar, the signed area of the parallelogram the two vectors span.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#cross",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Cross/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Cross/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Cross/param/0": {
+    "documentation": "`other: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Cross/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Vector2.Dot": {
+    "documentation": "The dot product with other.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#dot",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Dot/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Dot/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Dot/param/0": {
+    "documentation": "`other: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Dot/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Vector2.Floor": {
+    "documentation": "Each component rounded down to an integer.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#floor",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Floor/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Floor/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.FuzzyEq": {
+    "documentation": "Whether every component is within epsilon (default 1e-5) of other's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#fuzzyeq",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.FuzzyEq/param/0",
+        "name": "other"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.FuzzyEq/param/1",
+        "name": "epsilon"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.FuzzyEq/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.FuzzyEq/param/0": {
+    "documentation": "`other: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.FuzzyEq/param/1": {
+    "documentation": "`epsilon: number?`"
+  },
+  "@bettervoxel/globaltype/Vector2.FuzzyEq/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Vector2.Lerp": {
+    "documentation": "The linear interpolation toward goal by alpha (0 = this vector, 1 = goal).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Lerp/param/0": {
+    "documentation": "`goal: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/Vector2.Lerp/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Magnitude": {
+    "documentation": "The length of the vector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#magnitude"
+  },
+  "@bettervoxel/globaltype/Vector2.Max": {
+    "documentation": "The component-wise maximum with other.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#max",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Max/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Max/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Max/param/0": {
+    "documentation": "`other: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Max/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Min": {
+    "documentation": "The component-wise minimum with other.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#min",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.Min/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Min/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Min/param/0": {
+    "documentation": "`other: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Min/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Sign": {
+    "documentation": "The sign of each component: -1, 0 or 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#sign",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.Sign/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.Sign/return/0": {
+    "documentation": "`Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.Unit": {
+    "documentation": "The same direction at unit length (NaN components for the zero vector, the native vector's answer).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#unit"
+  },
+  "@bettervoxel/globaltype/Vector2.X": {
+    "documentation": "The X component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#x"
+  },
+  "@bettervoxel/globaltype/Vector2.Y": {
+    "documentation": "The Y component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#y"
+  },
+  "@bettervoxel/globaltype/Vector2.magnitude": {
+    "documentation": "The length of the vector, lowercase dialect.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#magnitude"
+  },
+  "@bettervoxel/globaltype/Vector2.x": {
+    "documentation": "The X component, lowercase dialect (the reference answers both).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#x"
+  },
+  "@bettervoxel/globaltype/Vector2.y": {
+    "documentation": "The Y component, lowercase dialect (the reference answers both).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#y"
   },
   "@bettervoxel/globaltype/Vector3": {
     "documentation": "Roblox's Vector3 IS Luau's native vector here — one type, two dialects: Vector3.new(1, 2, 3) equals vector.create(1, 2, 3), uppercase X/Y/Z/Magnitude/Unit and the method set ride a type metatable, and lowercase x/y/z stay on the VM fast path. Recorded divergence: typeof says 'vector'. The per-value member surface is not yet in the API model; the constructors below are.",

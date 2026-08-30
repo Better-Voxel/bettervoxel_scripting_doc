@@ -1384,6 +1384,236 @@
       "summary": "The basic building block: a shaped, colored, physically simulated solid. Shape picks the geometry; the mesh and collider re-derive."
     },
     {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Acceleration",
+          "summary": "A constant acceleration applied to every particle, in studs per second squared (gravity is not applied on its own)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Brightness",
+          "summary": "A multiplier on the particle color (1 is unchanged; stored as written)."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Clear",
+          "params": [],
+          "returns": [],
+          "summary": "Removes every live particle of this emitter now."
+        },
+        {
+          "decl": "ColorSequence",
+          "kind": "ReadWrite",
+          "name": "Color",
+          "summary": "The particle color over its lifetime, as a ColorSequence (a Color3 is refused — wrap it in ColorSequence.new)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Drag",
+          "summary": "Velocity damping per second (0 is none); stored as written."
+        },
+        {
+          "decl": "Enum.NormalId",
+          "kind": "ReadWrite",
+          "name": "EmissionDirection",
+          "summary": "The face of the parent part particles leave from. Writes accept the Enum.NormalId item or its name."
+        },
+        {
+          "decl": "(particleCount: number?) -> ()",
+          "kind": "Method",
+          "name": "Emit",
+          "params": [
+            {
+              "name": "particleCount",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [],
+          "summary": "Spawns particleCount particles at once (default 16), Enabled or not — local to the calling context, never replicated. A negative count is a no-op; a string refuses."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the emitter spawns at its Rate. Live particles finish their lives either way; Emit works while disabled."
+        },
+        {
+          "decl": "(seconds: number) -> ()",
+          "kind": "Method",
+          "name": "FastForward",
+          "params": [
+            {
+              "name": "seconds",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [],
+          "summary": "Advances the emitter as if seconds had already passed — the steady state without the warm-up. Public here (an engine extension); zero or negative is a no-op."
+        },
+        {
+          "decl": "NumberRange",
+          "kind": "ReadWrite",
+          "name": "FlipbookFramerate",
+          "summary": "Frames per second of the flipbook, picked uniformly within the range per particle."
+        },
+        {
+          "decl": "Enum.ParticleFlipbookLayout",
+          "kind": "ReadWrite",
+          "name": "FlipbookLayout",
+          "summary": "The sprite grid the Texture holds: None, Grid2x2, Grid4x4 or Grid8x8 (Custom is refused — the engine has no custom grids)."
+        },
+        {
+          "decl": "Enum.ParticleFlipbookMode",
+          "kind": "ReadWrite",
+          "name": "FlipbookMode",
+          "summary": "How the grid plays over a particle's life: Loop, OneShot, PingPong or Random."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "FlipbookStartRandom",
+          "summary": "Whether each particle starts the flipbook on a random frame."
+        },
+        {
+          "decl": "NumberRange",
+          "kind": "ReadWrite",
+          "name": "Lifetime",
+          "summary": "Each particle's life in seconds, picked uniformly within the range."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "LightEmission",
+          "summary": "The blend from normal (0) to additive (1) — glowing particles lighten what is behind them; stored as written."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "LightInfluence",
+          "summary": "How much the scene's lighting affects the particles (0 unlit, 1 lit like a surface); stored as written."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "LockedToPart",
+          "summary": "Whether particles move with the parent after spawning (local space) instead of staying where they were born (world space)."
+        },
+        {
+          "decl": "Enum.ParticleOrientation",
+          "kind": "ReadWrite",
+          "name": "Orientation",
+          "summary": "How the particle quad faces: the camera, the camera about the world up, or along/across its velocity (the emitter branch of the dual-typed name)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Rate",
+          "summary": "Particles spawned per second while Enabled. Stored as written (the reference accepts any number); a negative rate spawns nothing."
+        },
+        {
+          "decl": "NumberRange",
+          "kind": "ReadWrite",
+          "name": "RotSpeed",
+          "summary": "The spin in degrees per second, picked uniformly within the range."
+        },
+        {
+          "decl": "NumberRange",
+          "kind": "ReadWrite",
+          "name": "Rotation",
+          "summary": "The initial spin angle in degrees, picked uniformly within the range (the emitter branch of the dual-typed name)."
+        },
+        {
+          "decl": "Enum.ParticleEmitterShape",
+          "kind": "ReadWrite",
+          "name": "Shape",
+          "summary": "The emission volume: Box, Sphere, Cylinder or Disc. Writes accept the Enum.ParticleEmitterShape item or its name."
+        },
+        {
+          "decl": "Enum.ParticleEmitterShapeInOut",
+          "kind": "ReadWrite",
+          "name": "ShapeInOut",
+          "summary": "Which way particles leave the Shape: Outward, Inward or both."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ShapePartial",
+          "summary": "How much of the Shape emits (1 is all of it); stored as written."
+        },
+        {
+          "decl": "Enum.ParticleEmitterShapeStyle",
+          "kind": "ReadWrite",
+          "name": "ShapeStyle",
+          "summary": "Whether particles spawn throughout the Shape (Volume) or on its boundary (Surface)."
+        },
+        {
+          "decl": "NumberSequence",
+          "kind": "ReadWrite",
+          "name": "Size",
+          "summary": "The particle size in studs over its lifetime, as a NumberSequence (the emitter branch of the dual-typed name)."
+        },
+        {
+          "decl": "NumberRange",
+          "kind": "ReadWrite",
+          "name": "Speed",
+          "summary": "The initial speed in studs per second, picked uniformly within the range."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "ReadWrite",
+          "name": "SpreadAngle",
+          "summary": "The emission cone half-angles in degrees, per axis, around the EmissionDirection."
+        },
+        {
+          "decl": "NumberSequence",
+          "kind": "ReadWrite",
+          "name": "Squash",
+          "summary": "The particle's stretch over its lifetime: positive squashes along the velocity, negative stretches (0 is round)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Texture",
+          "summary": "The particle image, as a local asset path; the empty string is the engine's built-in soft disc. Strictly a string."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TimeScale",
+          "summary": "A multiplier on this emitter's clock (1 is real time), floored at 0 — the one particle property the reference clamps."
+        },
+        {
+          "decl": "NumberSequence",
+          "kind": "ReadWrite",
+          "name": "Transparency",
+          "summary": "The particle transparency over its lifetime, as a NumberSequence (0 opaque, 1 invisible)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "VelocityInheritance",
+          "summary": "How much of the parent's velocity a new particle inherits (0 none, 1 all)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ZOffset",
+          "summary": "A render offset toward the camera in studs (positive is closer) — the ordering knob, since particles are not depth-sorted."
+        }
+      ],
+      "name": "ParticleEmitter",
+      "parent": "Instance",
+      "summary": "A particle emitter under a part or an attachment: the flat property set (Rate, Lifetime, Speed, the Size/Transparency/Color sequences, the shape and flipbook enums, …) describes the effect, and each client's particle system realizes it — a headless server holds the description only. Emit, Clear and FastForward are local to the calling context. Enabled, Brightness, Color, Transparency, Shape, Size, Rotation and Orientation are the names it shares with other classes, each with its own particle-typed meaning here (docs/particle-system.md)."
+    },
+    {
       "creatable": false,
       "members": [
         {
@@ -2390,6 +2620,290 @@
     {
       "members": [
         {
+          "decl": "() -> Vector2",
+          "kind": "Method",
+          "name": "Abs",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "The component-wise absolute value."
+        },
+        {
+          "decl": "(other: Vector2, isSigned: boolean?) -> number",
+          "kind": "Method",
+          "name": "Angle",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector2"
+            },
+            {
+              "name": "isSigned",
+              "optional": true,
+              "type": "boolean?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The angle to other in radians: unsigned (0..π) by default, signed (-π..π, counter-clockwise positive) when isSigned is true."
+        },
+        {
+          "decl": "() -> Vector2",
+          "kind": "Method",
+          "name": "Ceil",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "Each component rounded up to an integer."
+        },
+        {
+          "decl": "(other: Vector2) -> number",
+          "kind": "Method",
+          "name": "Cross",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector2"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The 2D cross product with other — a scalar, the signed area of the parallelogram the two vectors span."
+        },
+        {
+          "decl": "(other: Vector2) -> number",
+          "kind": "Method",
+          "name": "Dot",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector2"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The dot product with other."
+        },
+        {
+          "decl": "() -> Vector2",
+          "kind": "Method",
+          "name": "Floor",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "Each component rounded down to an integer."
+        },
+        {
+          "decl": "(other: Vector2, epsilon: number?) -> boolean",
+          "kind": "Method",
+          "name": "FuzzyEq",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector2"
+            },
+            {
+              "name": "epsilon",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether every component is within epsilon (default 1e-5) of other's."
+        },
+        {
+          "decl": "(goal: Vector2, alpha: number) -> Vector2",
+          "kind": "Method",
+          "name": "Lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "Vector2"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "The linear interpolation toward goal by alpha (0 = this vector, 1 = goal)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Magnitude",
+          "summary": "The length of the vector."
+        },
+        {
+          "decl": "(other: Vector2) -> Vector2",
+          "kind": "Method",
+          "name": "Max",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector2"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "The component-wise maximum with other."
+        },
+        {
+          "decl": "(other: Vector2) -> Vector2",
+          "kind": "Method",
+          "name": "Min",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector2"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "The component-wise minimum with other."
+        },
+        {
+          "decl": "() -> Vector2",
+          "kind": "Method",
+          "name": "Sign",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "The sign of each component: -1, 0 or 1."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "ReadOnly",
+          "name": "Unit",
+          "summary": "The same direction at unit length (NaN components for the zero vector, the native vector's answer)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "X",
+          "summary": "The X component."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Y",
+          "summary": "The Y component."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "magnitude",
+          "summary": "The length of the vector, lowercase dialect."
+        },
+        {
+          "decl": "(x: number?, y: number?) -> Vector2",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "x",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "y",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "A Vector2 from its components; a missing component is zero."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "Static",
+          "name": "one",
+          "summary": "The vector (1, 1)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "x",
+          "summary": "The X component, lowercase dialect (the reference answers both)."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "Static",
+          "name": "xAxis",
+          "summary": "The unit X axis (1, 0)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "y",
+          "summary": "The Y component, lowercase dialect (the reference answers both)."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "Static",
+          "name": "yAxis",
+          "summary": "The unit Y axis (0, 1)."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "Static",
+          "name": "zero",
+          "summary": "The zero vector (0, 0)."
+        }
+      ],
+      "name": "Vector2",
+      "summary": "An immutable 2D vector (a userdata, unlike Vector3): X/Y in both casings, Magnitude and Unit, the arithmetic operators against a Vector2 or a number (the operators are not listed below — they are metamethods, like CFrame's `*`), and the method set. SpreadAngle speaks it."
+    },
+    {
+      "members": [
+        {
           "decl": "(rx: number, ry: number, rz: number) -> CFrame",
           "kind": "Static",
           "name": "Angles",
@@ -3072,169 +3586,6 @@
     {
       "members": [
         {
-          "decl": "{ColorSequenceKeypoint}",
-          "kind": "ReadOnly",
-          "name": "Keypoints",
-          "summary": "The keypoints, ascending in time from 0 to 1."
-        },
-        {
-          "decl": "(value: Color3 | {ColorSequenceKeypoint}, endColor: Color3?) -> ColorSequence",
-          "kind": "Static",
-          "name": "new",
-          "params": [
-            {
-              "name": "value",
-              "optional": false,
-              "type": "Color3 | {ColorSequenceKeypoint}"
-            },
-            {
-              "name": "endColor",
-              "optional": true,
-              "type": "Color3?"
-            }
-          ],
-          "returns": [
-            {
-              "type": "ColorSequence"
-            }
-          ],
-          "summary": "A constant sequence from one color, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1)."
-        }
-      ],
-      "name": "ColorSequence",
-      "summary": "An immutable color ramp over 0..1: at least two keypoints, times ascending from 0 to 1. UIGradient.Color speaks it."
-    },
-    {
-      "members": [
-        {
-          "decl": "number",
-          "kind": "ReadOnly",
-          "name": "Time",
-          "summary": "Where on the 0..1 ramp this keypoint sits."
-        },
-        {
-          "decl": "Color3",
-          "kind": "ReadOnly",
-          "name": "Value",
-          "summary": "The color at this keypoint."
-        },
-        {
-          "decl": "(time: number, color: Color3) -> ColorSequenceKeypoint",
-          "kind": "Static",
-          "name": "new",
-          "params": [
-            {
-              "name": "time",
-              "optional": false,
-              "type": "number"
-            },
-            {
-              "name": "color",
-              "optional": false,
-              "type": "Color3"
-            }
-          ],
-          "returns": [
-            {
-              "type": "ColorSequenceKeypoint"
-            }
-          ],
-          "summary": "A keypoint at `time` (0..1) with the given color."
-        }
-      ],
-      "name": "ColorSequenceKeypoint",
-      "summary": "One point of a ColorSequence: a Time in 0..1 and its Color3 Value."
-    },
-    {
-      "members": [
-        {
-          "decl": "{NumberSequenceKeypoint}",
-          "kind": "ReadOnly",
-          "name": "Keypoints",
-          "summary": "The keypoints, ascending in time from 0 to 1."
-        },
-        {
-          "decl": "(value: number | {NumberSequenceKeypoint}, endValue: number?) -> NumberSequence",
-          "kind": "Static",
-          "name": "new",
-          "params": [
-            {
-              "name": "value",
-              "optional": false,
-              "type": "number | {NumberSequenceKeypoint}"
-            },
-            {
-              "name": "endValue",
-              "optional": true,
-              "type": "number?"
-            }
-          ],
-          "returns": [
-            {
-              "type": "NumberSequence"
-            }
-          ],
-          "summary": "A constant sequence from one number, a two-endpoint ramp from two, or a full keypoint list (times ascending, 0 to 1)."
-        }
-      ],
-      "name": "NumberSequence",
-      "summary": "An immutable number ramp over 0..1, same keypoint rules as ColorSequence. UIGradient.Transparency speaks it."
-    },
-    {
-      "members": [
-        {
-          "decl": "number",
-          "kind": "ReadOnly",
-          "name": "Envelope",
-          "summary": "The random spread around Value (stored for parity; nothing consumes it yet)."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadOnly",
-          "name": "Time",
-          "summary": "Where on the 0..1 ramp this keypoint sits."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadOnly",
-          "name": "Value",
-          "summary": "The value at this keypoint."
-        },
-        {
-          "decl": "(time: number, value: number, envelope: number?) -> NumberSequenceKeypoint",
-          "kind": "Static",
-          "name": "new",
-          "params": [
-            {
-              "name": "time",
-              "optional": false,
-              "type": "number"
-            },
-            {
-              "name": "value",
-              "optional": false,
-              "type": "number"
-            },
-            {
-              "name": "envelope",
-              "optional": true,
-              "type": "number?"
-            }
-          ],
-          "returns": [
-            {
-              "type": "NumberSequenceKeypoint"
-            }
-          ],
-          "summary": "A keypoint at `time` (0..1) with the given value (and optional envelope)."
-        }
-      ],
-      "name": "NumberSequenceKeypoint",
-      "summary": "One point of a NumberSequence: Time, Value, and an Envelope kept for parity (nothing consumes it yet)."
-    },
-    {
-      "members": [
-        {
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "Bold",
@@ -3372,6 +3723,292 @@
       ],
       "name": "Ray",
       "summary": "An immutable origin + direction pair, as the camera's ScreenPointToRay/ViewportPointToRay hand out. Its own methods treat it as a half-line: ClosestPoint clamps at the origin and runs unbounded ahead."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Max",
+          "summary": "The upper end."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Min",
+          "summary": "The lower end."
+        },
+        {
+          "decl": "((value: number) -> NumberRange) & ((min: number, max: number) -> NumberRange)",
+          "kind": "Static",
+          "name": "new",
+          "overloads": [
+            {
+              "params": [
+                {
+                  "name": "value",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "NumberRange"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "min",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "max",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "NumberRange"
+                }
+              ]
+            }
+          ],
+          "summary": "A range from its ends (min must not exceed max), or a single value as both ends."
+        }
+      ],
+      "name": "NumberRange",
+      "summary": "An immutable min..max pair — the constructor refuses an inverted range. The particle ranges (Lifetime, Speed, Rotation, RotSpeed, FlipbookFramerate) speak it."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Envelope",
+          "summary": "The half-width of the random band around the value (each particle picks its own offset within it)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Time",
+          "summary": "The keypoint's position along the sequence, 0..1."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Value",
+          "summary": "The value at this keypoint."
+        },
+        {
+          "decl": "(time: number, value: number, envelope: number?) -> NumberSequenceKeypoint",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "time",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "envelope",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "NumberSequenceKeypoint"
+            }
+          ],
+          "summary": "A keypoint at time (0..1) with a value and an optional random envelope (default 0)."
+        }
+      ],
+      "name": "NumberSequenceKeypoint",
+      "summary": "One NumberSequence keypoint: Time, Value and the random Envelope."
+    },
+    {
+      "members": [
+        {
+          "decl": "{NumberSequenceKeypoint}",
+          "kind": "ReadOnly",
+          "name": "Keypoints",
+          "summary": "The keypoints in time order — a fresh table on every read, as the reference hands out."
+        },
+        {
+          "decl": "((value: number) -> NumberSequence) & ((value0: number, value1: number) -> NumberSequence) & ((keypoints: {NumberSequenceKeypoint}) -> NumberSequence)",
+          "kind": "Static",
+          "name": "new",
+          "overloads": [
+            {
+              "params": [
+                {
+                  "name": "value",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "NumberSequence"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "value0",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "value1",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "NumberSequence"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "keypoints",
+                  "optional": false,
+                  "type": "{NumberSequenceKeypoint}"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "NumberSequence"
+                }
+              ]
+            }
+          ],
+          "summary": "A constant sequence, a straight line between two values, or the given keypoints — 2 to 20 of them, the first at time 0, the last at time 1, in time order."
+        }
+      ],
+      "name": "NumberSequence",
+      "summary": "A piecewise-linear curve over a unit time span, built from 2 to 20 keypoints (the first at time 0, the last at time 1, in time order) — the particle curves Size, Squash and Transparency. Each keypoint's Envelope is a random half-width every particle samples its own offset within."
+    },
+    {
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Time",
+          "summary": "The keypoint's position along the sequence, 0..1."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadOnly",
+          "name": "Value",
+          "summary": "The color at this keypoint."
+        },
+        {
+          "decl": "(time: number, color: Color3) -> ColorSequenceKeypoint",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "time",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "color",
+              "optional": false,
+              "type": "Color3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "ColorSequenceKeypoint"
+            }
+          ],
+          "summary": "A keypoint at time (0..1) holding a color."
+        }
+      ],
+      "name": "ColorSequenceKeypoint",
+      "summary": "One ColorSequence keypoint: Time and its Color3 Value."
+    },
+    {
+      "members": [
+        {
+          "decl": "{ColorSequenceKeypoint}",
+          "kind": "ReadOnly",
+          "name": "Keypoints",
+          "summary": "The keypoints in time order — a fresh table on every read, as the reference hands out."
+        },
+        {
+          "decl": "((color: Color3) -> ColorSequence) & ((color0: Color3, color1: Color3) -> ColorSequence) & ((keypoints: {ColorSequenceKeypoint}) -> ColorSequence)",
+          "kind": "Static",
+          "name": "new",
+          "overloads": [
+            {
+              "params": [
+                {
+                  "name": "color",
+                  "optional": false,
+                  "type": "Color3"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "ColorSequence"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "color0",
+                  "optional": false,
+                  "type": "Color3"
+                },
+                {
+                  "name": "color1",
+                  "optional": false,
+                  "type": "Color3"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "ColorSequence"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "keypoints",
+                  "optional": false,
+                  "type": "{ColorSequenceKeypoint}"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "ColorSequence"
+                }
+              ]
+            }
+          ],
+          "summary": "A constant color, a straight ramp between two colors, or the given keypoints — 2 to 20 of them, the first at time 0, the last at time 1, in time order."
+        }
+      ],
+      "name": "ColorSequence",
+      "summary": "A piecewise-linear color ramp over a unit time span, built from 2 to 20 keypoints under the same rules as NumberSequence — the particle Color."
     },
     {
       "members": [
@@ -3791,12 +4428,54 @@
       "SmoothPlastic",
       "Wood"
     ],
+    "NormalId": [
+      "Back",
+      "Bottom",
+      "Front",
+      "Left",
+      "Right",
+      "Top"
+    ],
     "PartType": [
       "Ball",
       "Block",
       "CornerWedge",
       "Cylinder",
       "Wedge"
+    ],
+    "ParticleEmitterShape": [
+      "Box",
+      "Cylinder",
+      "Disc",
+      "Sphere"
+    ],
+    "ParticleEmitterShapeInOut": [
+      "InAndOut",
+      "Inward",
+      "Outward"
+    ],
+    "ParticleEmitterShapeStyle": [
+      "Surface",
+      "Volume"
+    ],
+    "ParticleFlipbookLayout": [
+      "Custom",
+      "Grid2x2",
+      "Grid4x4",
+      "Grid8x8",
+      "None"
+    ],
+    "ParticleFlipbookMode": [
+      "Loop",
+      "OneShot",
+      "PingPong",
+      "Random"
+    ],
+    "ParticleOrientation": [
+      "FacingCamera",
+      "FacingCameraWorldUp",
+      "VelocityParallel",
+      "VelocityPerpendicular"
     ],
     "PlaybackState": [
       "Begin",
@@ -3851,6 +4530,7 @@
     "Font",
     "Instance",
     "Keybinds",
+    "NumberRange",
     "NumberSequence",
     "NumberSequenceKeypoint",
     "Ray",
@@ -3858,6 +4538,7 @@
     "TweenInfo",
     "UDim",
     "UDim2",
+    "Vector2",
     "Vector3",
     "_G",
     "_VERSION",

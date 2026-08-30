@@ -75,25 +75,6 @@ declare extern type UDim with
     Scale: number
 end
 
-declare extern type ColorSequence with
-    Keypoints: {ColorSequenceKeypoint}
-end
-
-declare extern type ColorSequenceKeypoint with
-    Time: number
-    Value: Color3
-end
-
-declare extern type NumberSequence with
-    Keypoints: {NumberSequenceKeypoint}
-end
-
-declare extern type NumberSequenceKeypoint with
-    Envelope: number
-    Time: number
-    Value: number
-end
-
 declare extern type Font with
     Bold: boolean
     Family: string
@@ -107,6 +88,51 @@ declare extern type Ray with
     function Distance(self, point: Vector3): number
     Origin: Vector3
     Unit: Ray
+end
+
+declare extern type Vector2 with
+    function Abs(self): Vector2
+    function Angle(self, other: Vector2, isSigned: boolean?): number
+    function Ceil(self): Vector2
+    function Cross(self, other: Vector2): number
+    function Dot(self, other: Vector2): number
+    function Floor(self): Vector2
+    function FuzzyEq(self, other: Vector2, epsilon: number?): boolean
+    function Lerp(self, goal: Vector2, alpha: number): Vector2
+    Magnitude: number
+    function Max(self, other: Vector2): Vector2
+    function Min(self, other: Vector2): Vector2
+    function Sign(self): Vector2
+    Unit: Vector2
+    X: number
+    Y: number
+    magnitude: number
+    x: number
+    y: number
+end
+
+declare extern type NumberRange with
+    Max: number
+    Min: number
+end
+
+declare extern type NumberSequenceKeypoint with
+    Envelope: number
+    Time: number
+    Value: number
+end
+
+declare extern type NumberSequence with
+    Keypoints: {NumberSequenceKeypoint}
+end
+
+declare extern type ColorSequenceKeypoint with
+    Time: number
+    Value: Color3
+end
+
+declare extern type ColorSequence with
+    Keypoints: {ColorSequenceKeypoint}
 end
 
 declare extern type Instance with
@@ -207,6 +233,43 @@ end
 declare extern type PVInstance extends Instance with
     function GetPivot(self): CFrame
     function PivotTo(self, target: CFrame | Vector3): ()
+end
+
+declare extern type ParticleEmitter extends Instance with
+    Acceleration: Vector3
+    Brightness: number
+    function Clear(self): ()
+    Color: ColorSequence
+    Drag: number
+    EmissionDirection: EnumItem
+    function Emit(self, particleCount: number?): ()
+    Enabled: boolean
+    function FastForward(self, seconds: number): ()
+    FlipbookFramerate: NumberRange
+    FlipbookLayout: EnumItem
+    FlipbookMode: EnumItem
+    FlipbookStartRandom: boolean
+    Lifetime: NumberRange
+    LightEmission: number
+    LightInfluence: number
+    LockedToPart: boolean
+    Orientation: EnumItem
+    Rate: number
+    RotSpeed: NumberRange
+    Rotation: NumberRange
+    Shape: EnumItem
+    ShapeInOut: EnumItem
+    ShapePartial: number
+    ShapeStyle: EnumItem
+    Size: NumberSequence
+    Speed: NumberRange
+    SpreadAngle: Vector2
+    Squash: NumberSequence
+    Texture: string
+    TimeScale: number
+    Transparency: NumberSequence
+    VelocityInheritance: number
+    ZOffset: number
 end
 
 declare extern type Player extends Instance with
@@ -637,7 +700,7 @@ declare Color3: {
 }
 
 declare ColorSequence: {
-    new: (value: Color3 | {ColorSequenceKeypoint}, endColor: Color3?) -> ColorSequence,
+    new: ((color: Color3) -> ColorSequence) & ((color0: Color3, color1: Color3) -> ColorSequence) & ((keypoints: {ColorSequenceKeypoint}) -> ColorSequence),
 }
 
 declare ColorSequenceKeypoint: {
@@ -649,11 +712,15 @@ declare Font: {
 }
 
 declare Instance: {
-    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+}
+
+declare NumberRange: {
+    new: ((value: number) -> NumberRange) & ((min: number, max: number) -> NumberRange),
 }
 
 declare NumberSequence: {
-    new: (value: number | {NumberSequenceKeypoint}, endValue: number?) -> NumberSequence,
+    new: ((value: number) -> NumberSequence) & ((value0: number, value1: number) -> NumberSequence) & ((keypoints: {NumberSequenceKeypoint}) -> NumberSequence),
 }
 
 declare NumberSequenceKeypoint: {
@@ -678,6 +745,14 @@ declare UDim2: {
     new: (xScale: number, xOffset: number, yScale: number, yOffset: number) -> UDim2,
 }
 
+declare Vector2: {
+    new: (x: number?, y: number?) -> Vector2,
+    one: Vector2,
+    xAxis: Vector2,
+    yAxis: Vector2,
+    zero: Vector2,
+}
+
 declare Vector3: {
     new: (x: number?, y: number?, z: number?) -> Vector3,
     one: Vector3,
@@ -700,7 +775,14 @@ declare Enum: {
     HorizontalAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
     KeyCode: { A: EnumItem, B: EnumItem, BackSlash: EnumItem, Backquote: EnumItem, Backspace: EnumItem, C: EnumItem, CapsLock: EnumItem, Comma: EnumItem, D: EnumItem, Delete: EnumItem, Down: EnumItem, E: EnumItem, Eight: EnumItem, End: EnumItem, Equals: EnumItem, Escape: EnumItem, F: EnumItem, F1: EnumItem, F10: EnumItem, F11: EnumItem, F12: EnumItem, F2: EnumItem, F3: EnumItem, F4: EnumItem, F5: EnumItem, F6: EnumItem, F7: EnumItem, F8: EnumItem, F9: EnumItem, Five: EnumItem, Four: EnumItem, G: EnumItem, H: EnumItem, Home: EnumItem, I: EnumItem, Insert: EnumItem, J: EnumItem, K: EnumItem, L: EnumItem, Left: EnumItem, LeftAlt: EnumItem, LeftBracket: EnumItem, LeftControl: EnumItem, LeftShift: EnumItem, M: EnumItem, Minus: EnumItem, N: EnumItem, Nine: EnumItem, O: EnumItem, One: EnumItem, P: EnumItem, PageDown: EnumItem, PageUp: EnumItem, Period: EnumItem, Q: EnumItem, Quote: EnumItem, R: EnumItem, Return: EnumItem, Right: EnumItem, RightAlt: EnumItem, RightBracket: EnumItem, RightControl: EnumItem, RightShift: EnumItem, S: EnumItem, Semicolon: EnumItem, Seven: EnumItem, Six: EnumItem, Slash: EnumItem, Space: EnumItem, T: EnumItem, Tab: EnumItem, Three: EnumItem, Two: EnumItem, U: EnumItem, Unknown: EnumItem, Up: EnumItem, V: EnumItem, W: EnumItem, X: EnumItem, Y: EnumItem, Z: EnumItem, Zero: EnumItem },
     Material: { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },
+    NormalId: { Back: EnumItem, Bottom: EnumItem, Front: EnumItem, Left: EnumItem, Right: EnumItem, Top: EnumItem },
     PartType: { Ball: EnumItem, Block: EnumItem, CornerWedge: EnumItem, Cylinder: EnumItem, Wedge: EnumItem },
+    ParticleEmitterShape: { Box: EnumItem, Cylinder: EnumItem, Disc: EnumItem, Sphere: EnumItem },
+    ParticleEmitterShapeInOut: { InAndOut: EnumItem, Inward: EnumItem, Outward: EnumItem },
+    ParticleEmitterShapeStyle: { Surface: EnumItem, Volume: EnumItem },
+    ParticleFlipbookLayout: { Custom: EnumItem, Grid2x2: EnumItem, Grid4x4: EnumItem, Grid8x8: EnumItem, None: EnumItem },
+    ParticleFlipbookMode: { Loop: EnumItem, OneShot: EnumItem, PingPong: EnumItem, Random: EnumItem },
+    ParticleOrientation: { FacingCamera: EnumItem, FacingCameraWorldUp: EnumItem, VelocityParallel: EnumItem, VelocityPerpendicular: EnumItem },
     PlaybackState: { Begin: EnumItem, Cancelled: EnumItem, Completed: EnumItem, Delayed: EnumItem, Paused: EnumItem, Playing: EnumItem },
     RaycastFilterType: { Exclude: EnumItem, Include: EnumItem },
     RunContext: { Client: EnumItem, Legacy: EnumItem, Server: EnumItem },
