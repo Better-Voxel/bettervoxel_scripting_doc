@@ -2649,11 +2649,11 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogstart"
   },
   "@bettervoxel/globaltype/Lighting.GeographicLatitude": {
-    "documentation": "Degrees north; tilts the sun's path off the east/up plane, so ClockTime and latitude together aim the sun anywhere. 0 (the engine default) keeps the noon sun overhead.",
+    "documentation": "Degrees north, clamped to -90..90; tilts the sun's path off the east/up plane, so ClockTime and latitude together aim the sun anywhere. 0 (the engine default, where Roblox defaults to 41.733) keeps the noon sun overhead.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#geographiclatitude"
   },
   "@bettervoxel/globaltype/Lighting.GetSunDirection": {
-    "documentation": "The unit direction toward the sun for the current ClockTime.",
+    "documentation": "The unit direction toward the sun for the current ClockTime and GeographicLatitude.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#getsundirection",
     "params": [],
     "returns": [
