@@ -1921,10 +1921,43 @@
       "creatable": true,
       "members": [
         {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "DidLoop",
+          "payloads": [],
+          "summary": "Fires per looped wrap with the SoundId and the loop count since Play — the engine clock's estimate, once the clip duration is known from the audio container's header."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Ended",
+          "payloads": [],
+          "summary": "Fires with the SoundId when a non-looped sound reaches its natural end (never on Stop). Playback ends where audio plays: on a dedicated server this signal never fires."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "IsPaused",
+          "summary": "The measured pause latch: set by Pause (even on a stopped sound), cleared by Play and Resume, untouched by Stop."
+        },
+        {
           "decl": "boolean",
           "kind": "ReadOnly",
           "name": "IsPlaying",
-          "summary": "Whether the sound is meant to be playing — Play and Stop drive it, and a finished non-looped sound writes it back to false."
+          "summary": "Whether the sound is audibly playing — Play/Stop/Pause/Resume drive it, a finished non-looped sound writes it back to false, and a paused sound reads false."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Loaded",
+          "payloads": [],
+          "summary": "Fires with the SoundId when the audio asset finishes loading. Assets load where audio plays: on a dedicated server this signal never fires."
+        },
+        {
+          "decl": "NumberRange",
+          "kind": "ReadWrite",
+          "name": "LoopRegion",
+          "summary": "The span a looped sound loops inside while PlaybackRegionsEnabled — play through once, then wrap from its max back to its min (the intro-then-loop music shape)."
         },
         {
           "decl": "boolean",
@@ -1935,16 +1968,89 @@
         {
           "decl": "() -> ()",
           "kind": "Method",
+          "name": "Pause",
+          "params": [],
+          "returns": [],
+          "summary": "Freezes playback in place: IsPlaying reads false, TimePosition holds, and the latch shows in IsPaused. Play restarts from the top; Resume continues from here. The measured contract."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Paused",
+          "payloads": [],
+          "summary": "Fires with the SoundId when the pause latch engages."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
           "name": "Play",
           "params": [],
           "returns": [],
-          "summary": "Starts playback (IsPlaying becomes true). Calling Play in a loop is harmless — same-state calls are silent."
+          "summary": "Starts playback (IsPlaying becomes true) — from a still-pending explicit TimePosition write (the authored value included), otherwise from 0. Calling Play on a playing sound restarts it from the top. The measured reference contract."
+        },
+        {
+          "decl": "NumberRange",
+          "kind": "ReadWrite",
+          "name": "PlaybackRegion",
+          "summary": "The playable span in seconds while PlaybackRegionsEnabled: playback starts at its min and a one-shot ends at its max (the measured fresh range is 0..60000)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "PlaybackRegionsEnabled",
+          "summary": "Whether the playback regions apply: playback then starts at PlaybackRegion's min, a one-shot ends at its max, and a looped sound loops inside LoopRegion."
         },
         {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "PlaybackSpeed",
-          "summary": "Playback rate (1 is normal speed), floored at 0. Pitch follows the rate."
+          "summary": "Playback rate (1 is normal speed), clamped to 0..20 — the measured reference range. Pitch follows the rate."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Played",
+          "payloads": [],
+          "summary": "Fires with the SoundId on every acted Play — restarts included, and remotely applied plays too."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Resume",
+          "params": [],
+          "returns": [],
+          "summary": "Plays from the CURRENT TimePosition with no rewind — a paused sound continues, and (measured) even a stopped sound starts where it stands."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Resumed",
+          "payloads": [],
+          "summary": "Fires with the SoundId when the latch releases into playback (Resume; a fresh Play fires Played instead)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "RollOffMaxDistance",
+          "summary": "Positional playback is silent at and beyond this distance in studs (floored at 0), whatever the roll-off mode."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "RollOffMinDistance",
+          "summary": "Positional playback holds full volume within this distance in studs (floored at 0); attenuation starts beyond it."
+        },
+        {
+          "decl": "Enum.RollOffMode",
+          "kind": "ReadWrite",
+          "name": "RollOffMode",
+          "summary": "The attenuation curve between RollOffMinDistance and RollOffMaxDistance: Inverse (the default), Linear, LinearSquare, or InverseTapered. Writes accept the Enum.RollOffMode item or its string name."
+        },
+        {
+          "decl": "SoundGroup?",
+          "kind": "ReadWrite",
+          "name": "SoundGroup",
+          "summary": "The volume bus this sound plays through: a SoundGroup instance or nil. Assigning anything else errors."
         },
         {
           "decl": "string",
@@ -1958,18 +2064,51 @@
           "name": "Stop",
           "params": [],
           "returns": [],
-          "summary": "Stops playback (IsPlaying becomes false)."
+          "summary": "Stops a playing sound and rewinds TimePosition to 0 (IsPlaying becomes false). On a sound that is not playing it is a no-op — a pending TimePosition write survives. The measured contract."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Stopped",
+          "payloads": [],
+          "summary": "Fires with the SoundId when Stop acts (a no-op Stop is silent; the natural end fires Ended instead)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "TimeLength",
+          "summary": "The clip length in seconds, 0 until the engine knows it — resolved from the audio container's header under the host's asset root (the reference also reads 0 before load)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TimePosition",
+          "summary": "Playback position in seconds, stored as written (playback treats a negative as 0). Advances while the sound plays (an engine-side estimate); writing it seeks a playing sound, and a written position still pending when Play is called is where playback starts (measured)."
         },
         {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "Volume",
-          "summary": "Playback volume, floored at 0."
+          "summary": "Playback volume, clamped to 0..10 (the measured reference range). The effective loudness multiplies in the assigned SoundGroup's Volume."
         }
       ],
       "name": "Sound",
       "parent": "Instance",
       "summary": "A playable audio source: Play and Stop drive it, IsPlaying reads back, and volume, speed and looping are properties."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Volume",
+          "summary": "The bus multiplier, clamped to 0..10 like Sound.Volume: every Sound in the group plays at its own Volume times this."
+        }
+      ],
+      "name": "SoundGroup",
+      "parent": "Instance",
+      "summary": "A volume bus: every Sound whose SoundGroup points here plays at its own Volume multiplied by the group's."
     },
     {
       "creatable": false,
@@ -4489,6 +4628,12 @@
       "Exclude",
       "Include"
     ],
+    "RollOffMode": [
+      "Inverse",
+      "InverseTapered",
+      "Linear",
+      "LinearSquare"
+    ],
     "RunContext": [
       "Client",
       "Legacy",
@@ -4950,7 +5095,7 @@
           "decl": "number",
           "kind": "ReadWrite",
           "name": "ClockTime",
-          "summary": "The time of day in hours, 0..24. Writes wrap onto the day, so a `ClockTime += dt` day cycle needs no bookkeeping; the sun and sky follow."
+          "summary": "The time of day in hours: writes clamp onto 0..24 and 24 reads back as 0 (the measured reference contract); the sun and sky follow."
         },
         {
           "decl": "Color3",
@@ -4974,7 +5119,7 @@
           "decl": "number",
           "kind": "ReadWrite",
           "name": "GeographicLatitude",
-          "summary": "Degrees north, clamped to -90..90; tilts the sun's path off the east/up plane, so ClockTime and latitude together aim the sun anywhere. 0 (the engine default, where Roblox defaults to 41.733) keeps the noon sun overhead."
+          "summary": "Degrees north, clamped to -90..90. The sun follows the reference's measured model — the day circle plus a tan(latitude - 23.5) north-lean — so at the engine default 0 (Roblox defaults to 41.733) the noon sun leans 23.5 degrees south, and latitude 23.5 puts it overhead."
         },
         {
           "decl": "() -> Vector3",

@@ -2633,7 +2633,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#classname"
   },
   "@bettervoxel/globaltype/Lighting.ClockTime": {
-    "documentation": "The time of day in hours, 0..24. Writes wrap onto the day, so a `ClockTime += dt` day cycle needs no bookkeeping; the sun and sky follow.",
+    "documentation": "The time of day in hours: writes clamp onto 0..24 and 24 reads back as 0 (the measured reference contract); the sun and sky follow.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#clocktime"
   },
   "@bettervoxel/globaltype/Lighting.FogColor": {
@@ -2649,7 +2649,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogstart"
   },
   "@bettervoxel/globaltype/Lighting.GeographicLatitude": {
-    "documentation": "Degrees north, clamped to -90..90; tilts the sun's path off the east/up plane, so ClockTime and latitude together aim the sun anywhere. 0 (the engine default, where Roblox defaults to 41.733) keeps the noon sun overhead.",
+    "documentation": "Degrees north, clamped to -90..90. The sun follows the reference's measured model — the day circle plus a tan(latitude - 23.5) north-lean — so at the engine default 0 (Roblox defaults to 41.733) the noon sun leans 23.5 degrees south, and latitude 23.5 puts it overhead.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#geographiclatitude"
   },
   "@bettervoxel/globaltype/Lighting.GetSunDirection": {
@@ -3499,47 +3499,157 @@
   "@bettervoxel/globaltype/Sound": {
     "documentation": "A playable audio source: Play and Stop drive it, IsPlaying reads back, and volume, speed and looping are properties.",
     "keys": {
+      "DidLoop": "@bettervoxel/globaltype/Sound.DidLoop",
+      "Ended": "@bettervoxel/globaltype/Sound.Ended",
+      "IsPaused": "@bettervoxel/globaltype/Sound.IsPaused",
       "IsPlaying": "@bettervoxel/globaltype/Sound.IsPlaying",
+      "Loaded": "@bettervoxel/globaltype/Sound.Loaded",
+      "LoopRegion": "@bettervoxel/globaltype/Sound.LoopRegion",
       "Looped": "@bettervoxel/globaltype/Sound.Looped",
+      "Pause": "@bettervoxel/globaltype/Sound.Pause",
+      "Paused": "@bettervoxel/globaltype/Sound.Paused",
       "Play": "@bettervoxel/globaltype/Sound.Play",
+      "PlaybackRegion": "@bettervoxel/globaltype/Sound.PlaybackRegion",
+      "PlaybackRegionsEnabled": "@bettervoxel/globaltype/Sound.PlaybackRegionsEnabled",
       "PlaybackSpeed": "@bettervoxel/globaltype/Sound.PlaybackSpeed",
+      "Played": "@bettervoxel/globaltype/Sound.Played",
+      "Resume": "@bettervoxel/globaltype/Sound.Resume",
+      "Resumed": "@bettervoxel/globaltype/Sound.Resumed",
+      "RollOffMaxDistance": "@bettervoxel/globaltype/Sound.RollOffMaxDistance",
+      "RollOffMinDistance": "@bettervoxel/globaltype/Sound.RollOffMinDistance",
+      "RollOffMode": "@bettervoxel/globaltype/Sound.RollOffMode",
+      "SoundGroup": "@bettervoxel/globaltype/Sound.SoundGroup",
       "SoundId": "@bettervoxel/globaltype/Sound.SoundId",
       "Stop": "@bettervoxel/globaltype/Sound.Stop",
+      "Stopped": "@bettervoxel/globaltype/Sound.Stopped",
+      "TimeLength": "@bettervoxel/globaltype/Sound.TimeLength",
+      "TimePosition": "@bettervoxel/globaltype/Sound.TimePosition",
       "Volume": "@bettervoxel/globaltype/Sound.Volume"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html"
   },
+  "@bettervoxel/globaltype/Sound.DidLoop": {
+    "documentation": "Fires per looped wrap with the SoundId and the loop count since Play — the engine clock's estimate, once the clip duration is known from the audio container's header.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#didloop"
+  },
+  "@bettervoxel/globaltype/Sound.Ended": {
+    "documentation": "Fires with the SoundId when a non-looped sound reaches its natural end (never on Stop). Playback ends where audio plays: on a dedicated server this signal never fires.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#ended"
+  },
+  "@bettervoxel/globaltype/Sound.IsPaused": {
+    "documentation": "The measured pause latch: set by Pause (even on a stopped sound), cleared by Play and Resume, untouched by Stop.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#ispaused"
+  },
   "@bettervoxel/globaltype/Sound.IsPlaying": {
-    "documentation": "Whether the sound is meant to be playing — Play and Stop drive it, and a finished non-looped sound writes it back to false.",
+    "documentation": "Whether the sound is audibly playing — Play/Stop/Pause/Resume drive it, a finished non-looped sound writes it back to false, and a paused sound reads false.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#isplaying"
+  },
+  "@bettervoxel/globaltype/Sound.Loaded": {
+    "documentation": "Fires with the SoundId when the audio asset finishes loading. Assets load where audio plays: on a dedicated server this signal never fires.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#loaded"
+  },
+  "@bettervoxel/globaltype/Sound.LoopRegion": {
+    "documentation": "The span a looped sound loops inside while PlaybackRegionsEnabled — play through once, then wrap from its max back to its min (the intro-then-loop music shape).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#loopregion"
   },
   "@bettervoxel/globaltype/Sound.Looped": {
     "documentation": "Whether playback restarts from the top when the clip ends.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#looped"
   },
+  "@bettervoxel/globaltype/Sound.Pause": {
+    "documentation": "Freezes playback in place: IsPlaying reads false, TimePosition holds, and the latch shows in IsPaused. Play restarts from the top; Resume continues from here. The measured contract.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#pause",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Sound.Paused": {
+    "documentation": "Fires with the SoundId when the pause latch engages.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#paused"
+  },
   "@bettervoxel/globaltype/Sound.Play": {
-    "documentation": "Starts playback (IsPlaying becomes true). Calling Play in a loop is harmless — same-state calls are silent.",
+    "documentation": "Starts playback (IsPlaying becomes true) — from a still-pending explicit TimePosition write (the authored value included), otherwise from 0. Calling Play on a playing sound restarts it from the top. The measured reference contract.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#play",
     "params": [],
     "returns": []
   },
+  "@bettervoxel/globaltype/Sound.PlaybackRegion": {
+    "documentation": "The playable span in seconds while PlaybackRegionsEnabled: playback starts at its min and a one-shot ends at its max (the measured fresh range is 0..60000).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#playbackregion"
+  },
+  "@bettervoxel/globaltype/Sound.PlaybackRegionsEnabled": {
+    "documentation": "Whether the playback regions apply: playback then starts at PlaybackRegion's min, a one-shot ends at its max, and a looped sound loops inside LoopRegion.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#playbackregionsenabled"
+  },
   "@bettervoxel/globaltype/Sound.PlaybackSpeed": {
-    "documentation": "Playback rate (1 is normal speed), floored at 0. Pitch follows the rate.",
+    "documentation": "Playback rate (1 is normal speed), clamped to 0..20 — the measured reference range. Pitch follows the rate.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#playbackspeed"
+  },
+  "@bettervoxel/globaltype/Sound.Played": {
+    "documentation": "Fires with the SoundId on every acted Play — restarts included, and remotely applied plays too.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#played"
+  },
+  "@bettervoxel/globaltype/Sound.Resume": {
+    "documentation": "Plays from the CURRENT TimePosition with no rewind — a paused sound continues, and (measured) even a stopped sound starts where it stands.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#resume",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Sound.Resumed": {
+    "documentation": "Fires with the SoundId when the latch releases into playback (Resume; a fresh Play fires Played instead).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#resumed"
+  },
+  "@bettervoxel/globaltype/Sound.RollOffMaxDistance": {
+    "documentation": "Positional playback is silent at and beyond this distance in studs (floored at 0), whatever the roll-off mode.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#rolloffmaxdistance"
+  },
+  "@bettervoxel/globaltype/Sound.RollOffMinDistance": {
+    "documentation": "Positional playback holds full volume within this distance in studs (floored at 0); attenuation starts beyond it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#rolloffmindistance"
+  },
+  "@bettervoxel/globaltype/Sound.RollOffMode": {
+    "documentation": "The attenuation curve between RollOffMinDistance and RollOffMaxDistance: Inverse (the default), Linear, LinearSquare, or InverseTapered. Writes accept the Enum.RollOffMode item or its string name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#rolloffmode"
+  },
+  "@bettervoxel/globaltype/Sound.SoundGroup": {
+    "documentation": "The volume bus this sound plays through: a SoundGroup instance or nil. Assigning anything else errors.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#soundgroup"
   },
   "@bettervoxel/globaltype/Sound.SoundId": {
     "documentation": "The audio asset, as a local asset path.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#soundid"
   },
   "@bettervoxel/globaltype/Sound.Stop": {
-    "documentation": "Stops playback (IsPlaying becomes false).",
+    "documentation": "Stops a playing sound and rewinds TimePosition to 0 (IsPlaying becomes false). On a sound that is not playing it is a no-op — a pending TimePosition write survives. The measured contract.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#stop",
     "params": [],
     "returns": []
   },
+  "@bettervoxel/globaltype/Sound.Stopped": {
+    "documentation": "Fires with the SoundId when Stop acts (a no-op Stop is silent; the natural end fires Ended instead).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#stopped"
+  },
+  "@bettervoxel/globaltype/Sound.TimeLength": {
+    "documentation": "The clip length in seconds, 0 until the engine knows it — resolved from the audio container's header under the host's asset root (the reference also reads 0 before load).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#timelength"
+  },
+  "@bettervoxel/globaltype/Sound.TimePosition": {
+    "documentation": "Playback position in seconds, stored as written (playback treats a negative as 0). Advances while the sound plays (an engine-side estimate); writing it seeks a playing sound, and a written position still pending when Play is called is where playback starts (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#timeposition"
+  },
   "@bettervoxel/globaltype/Sound.Volume": {
-    "documentation": "Playback volume, floored at 0.",
+    "documentation": "Playback volume, clamped to 0..10 (the measured reference range). The effective loudness multiplies in the assigned SoundGroup's Volume.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Sound.html#volume"
+  },
+  "@bettervoxel/globaltype/SoundGroup": {
+    "documentation": "A volume bus: every Sound whose SoundGroup points here plays at its own Volume multiplied by the group's.",
+    "keys": {
+      "Volume": "@bettervoxel/globaltype/SoundGroup.Volume"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SoundGroup.html"
+  },
+  "@bettervoxel/globaltype/SoundGroup.Volume": {
+    "documentation": "The bus multiplier, clamped to 0..10 like Sound.Volume: every Sound in the group plays at its own Volume times this.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SoundGroup.html#volume"
   },
   "@bettervoxel/globaltype/SoundService": {
     "documentation": "Non-positional playback: PlayLocalSound starts a Sound wherever it lives, storage included.",
