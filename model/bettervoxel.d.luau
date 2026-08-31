@@ -275,6 +275,7 @@ end
 declare extern type Player extends Instance with
     Character: Instance?
     CharacterAdded: BVScriptSignal -- fires (Instance)
+    function GetNetworkPing(self): number
     function LoadCharacter(self): ()
     PlayerGui: PlayerGui?
     RespawnTime: number
@@ -623,6 +624,9 @@ declare extern type RunService with
     ClassName: string
     Heartbeat: BVScriptSignal -- fires (number)
     function IsA(self, className: string): boolean
+    function IsClient(self): boolean
+    function IsServer(self): boolean
+    function IsStudio(self): boolean
     Name: string
 end
 

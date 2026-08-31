@@ -1632,6 +1632,18 @@
           "summary": "Fires with the new character on every spawn, the first included."
         },
         {
+          "decl": "() -> number",
+          "kind": "Method",
+          "name": "GetNetworkPing",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "One-way network latency to this player's machine in seconds (half the measured round trip). The server answers it for any connected player; a client only for its LocalPlayer — a remote player reads -1 (measured: the reference's no-measurement sentinel), and any player in solo play reads 0 (no transport). Sampled, not instantaneous: it averages the transport's last five probes (one every ~5 s) off frame-boundary clock reads, so it floors near a frame's latency on a local link and trails a link that has just degraded."
+        },
+        {
           "decl": "() -> ()",
           "kind": "Method",
           "name": "LoadCharacter",
@@ -4816,6 +4828,42 @@
             }
           ],
           "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "IsClient",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True when this call runs on the client side: a connected client, or a LocalScript / RunContext Client script in solo play. A call with no script behind it answers false in solo, since an unattributed call is read as the server's. Exclusive with IsServer — no context answers both true."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "IsServer",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True when this call runs on the server side: a dedicated server, or a server-kind script (legacy or RunContext Server) in solo play. A call with no script behind it — the command bar, a host-side call — answers true as well. Exclusive with IsClient — no context answers both true."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "IsStudio",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True in the editor and in the server/client processes its multiplayer session runner launches; false in a standalone runtime. The test-only-code guard."
         },
         {
           "decl": "string",
