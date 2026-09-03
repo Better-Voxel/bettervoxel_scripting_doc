@@ -225,10 +225,10 @@
       "creatable": true,
       "members": [
         {
-          "decl": "Vector3",
+          "decl": "Vector2",
           "kind": "ReadWrite",
           "name": "AnchorPoint",
-          "summary": "Which point of the billboard (0..1 per axis) its Position pins. The Z component is unused."
+          "summary": "Which point of the billboard (0..1 per axis) its Position pins. A Vector2, like every GuiObject's."
         },
         {
           "decl": "UDim2",
@@ -491,10 +491,10 @@
           "summary": "The unit ray through a viewport pixel, its origin on the near plane pushed depth studs along it (default 0)."
         },
         {
-          "decl": "Vector3",
+          "decl": "Vector2",
           "kind": "ReadOnly",
           "name": "ViewportSize",
-          "summary": "The size of the view in pixels, as (width, height, 0) — the engine's Vector2 stand-in. 1×1 for a camera no eye renders through. Fires its signal on a resize."
+          "summary": "The size of the view in pixels as a Vector2 (width, height). 1×1 for a camera no eye renders through. Fires its signal on a resize."
         },
         {
           "decl": "(worldPoint: Vector3) -> (Vector3, boolean)",
@@ -800,10 +800,10 @@
       "creatable": false,
       "members": [
         {
-          "decl": "Vector3",
+          "decl": "Vector2",
           "kind": "ReadWrite",
           "name": "AnchorPoint",
-          "summary": "Which point of the element (0..1 per axis) its Position pins: (0, 0) the top-left corner, (0.5, 0.5) the center. The Z component is unused."
+          "summary": "Which point of the element (0..1 per axis) its Position pins: (0, 0) the top-left corner, (0.5, 0.5) the center. A Vector2 — assigning anything else refuses (measured)."
         },
         {
           "decl": "Color3",
@@ -973,6 +973,60 @@
         {
           "decl": "(name: string) -> Instance?",
           "kind": "Method",
+          "name": "FindFirstAncestor",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "The nearest ancestor named name, or nil. The chain ends at the DataModel: game's Name matches last (measured)."
+        },
+        {
+          "decl": "(className: string) -> Instance?",
+          "kind": "Method",
+          "name": "FindFirstAncestorOfClass",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "The nearest ancestor whose ClassName is exactly className, or nil. FindFirstAncestorOfClass(\"DataModel\") answers game from any rooted instance (measured)."
+        },
+        {
+          "decl": "(className: string) -> Instance?",
+          "kind": "Method",
+          "name": "FindFirstAncestorWhichIsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "The nearest ancestor that IsA(className), or nil — game answers for DataModel, ServiceProvider and (with no nearer match) Instance, its measured ancestry."
+        },
+        {
+          "decl": "(name: string) -> Instance?",
+          "kind": "Method",
           "name": "FindFirstChild",
           "params": [
             {
@@ -987,6 +1041,47 @@
             }
           ],
           "summary": "The first direct child named name, or nil. The cheap probe when absence is an expected answer — cache the result instead of re-finding it every frame."
+        },
+        {
+          "decl": "(className: string) -> Instance?",
+          "kind": "Method",
+          "name": "FindFirstChildOfClass",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "The first direct child whose ClassName is exactly className, or nil. Never recursive (measured: a second argument is ignored) — FindFirstChildWhichIsA is the one that descends."
+        },
+        {
+          "decl": "(className: string, recursive: boolean?) -> Instance?",
+          "kind": "Method",
+          "name": "FindFirstChildWhichIsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "recursive",
+              "optional": true,
+              "type": "boolean?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "The first direct child that IsA(className), or nil; with recursive true the whole subtree is searched in GetDescendants order."
         },
         {
           "decl": "(name: string, field: string?) -> any",
@@ -1100,6 +1195,42 @@
             }
           ],
           "summary": "Whether the instance's class is className or inherits from it: a Part IsA 'BasePart' and IsA 'Instance'. Unknown class names answer false."
+        },
+        {
+          "decl": "(descendant: Instance?) -> boolean",
+          "kind": "Method",
+          "name": "IsAncestorOf",
+          "params": [
+            {
+              "name": "descendant",
+              "optional": true,
+              "type": "Instance?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether this instance sits anywhere above descendant (self does not count; nil answers false — measured, asymmetric with IsDescendantOf)."
+        },
+        {
+          "decl": "(ancestor: Instance?) -> boolean",
+          "kind": "Method",
+          "name": "IsDescendantOf",
+          "params": [
+            {
+              "name": "ancestor",
+              "optional": true,
+              "type": "Instance?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether ancestor sits anywhere above this instance (self does not count). game counts for every rooted instance, and nil answers TRUE — the measured quirk: every chain ends at nil."
         },
         {
           "decl": "string",
@@ -4980,28 +5111,28 @@
           "summary": "The TextBox currently holding keyboard focus, or nil. The guard for raw polling (IsKeyDown) while the player types; the InputBegan path already reports gameProcessed instead."
         },
         {
-          "decl": "() -> Vector3",
+          "decl": "() -> Vector2",
           "kind": "Method",
           "name": "GetMouseDelta",
           "params": [],
           "returns": [
             {
-              "type": "Vector3"
+              "type": "Vector2"
             }
           ],
-          "summary": "This frame's mouse motion as (dx, dy, 0)."
+          "summary": "This frame's mouse motion as a Vector2 (dx, dy)."
         },
         {
-          "decl": "() -> Vector3",
+          "decl": "() -> Vector2",
           "kind": "Method",
           "name": "GetMouseLocation",
           "params": [],
           "returns": [
             {
-              "type": "Vector3"
+              "type": "Vector2"
             }
           ],
-          "summary": "The cursor's logical position in the player window, as (x, y, 0) — (0, 0, 0) when no window exists."
+          "summary": "The cursor's logical position in the player window as a Vector2 — (0, 0) when no window exists."
         },
         {
           "decl": "BVScriptSignal<{ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }, boolean>",

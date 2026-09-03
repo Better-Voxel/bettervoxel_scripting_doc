@@ -146,7 +146,12 @@ declare extern type Instance with
     DescendantAdded: BVScriptSignal -- fires (Instance)
     function Destroy(self): ()
     Destroying: BVScriptSignal -- fires ()
+    function FindFirstAncestor(self, name: string): Instance?
+    function FindFirstAncestorOfClass(self, className: string): Instance?
+    function FindFirstAncestorWhichIsA(self, className: string): Instance?
     function FindFirstChild(self, name: string): Instance?
+    function FindFirstChildOfClass(self, className: string): Instance?
+    function FindFirstChildWhichIsA(self, className: string, recursive: boolean?): Instance?
     function GetAttribute(self, name: string, field: string?): any
     function GetAttributeChangedSignal(self, attribute: string): BVScriptSignal
     function GetChildren(self): {Instance}
@@ -154,6 +159,8 @@ declare extern type Instance with
     function GetFullName(self): string
     function GetPropertyChangedSignal(self, property: string): BVScriptSignal
     function IsA(self, className: string): boolean
+    function IsAncestorOf(self, descendant: Instance?): boolean
+    function IsDescendantOf(self, ancestor: Instance?): boolean
     Name: string
     Parent: Instance?
     function SetAttribute(self, name: string, value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil): ()
@@ -389,7 +396,7 @@ declare extern type Camera extends PVInstance with
     function ScreenPointToRay(self, x: number, y: number, depth: number?): Ray
     VRTiltAndRollEnabled: boolean
     function ViewportPointToRay(self, x: number, y: number, depth: number?): Ray
-    ViewportSize: Vector3
+    ViewportSize: Vector2
     function WorldToScreenPoint(self, worldPoint: Vector3): (Vector3, boolean)
     function WorldToViewportPoint(self, worldPoint: Vector3): (Vector3, boolean)
     function ZoomToExtents(self, boundingBoxCFrame: CFrame, boundingBoxSize: Vector3): ()
@@ -454,7 +461,7 @@ declare extern type FormFactorPart extends BasePart with
 end
 
 declare extern type GuiObject extends GuiBase2d with
-    AnchorPoint: Vector3
+    AnchorPoint: Vector2
     BackgroundColor3: Color3
     BackgroundTransparency: number
     LayoutOrder: number
@@ -504,7 +511,7 @@ declare extern type WorldRoot extends Model with
 end
 
 declare extern type BillboardGui extends LayerCollector with
-    AnchorPoint: Vector3
+    AnchorPoint: Vector2
     Position: UDim2
     Size: UDim2
 end
@@ -645,8 +652,8 @@ end
 declare extern type UserInputService with
     ClassName: string
     function GetFocusedTextBox(self): TextBox?
-    function GetMouseDelta(self): Vector3
-    function GetMouseLocation(self): Vector3
+    function GetMouseDelta(self): Vector2
+    function GetMouseLocation(self): Vector2
     InputBegan: BVScriptSignal -- fires ({ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }, boolean)
     InputEnded: BVScriptSignal -- fires ({ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }, boolean)
     function IsA(self, className: string): boolean

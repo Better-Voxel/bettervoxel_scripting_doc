@@ -1063,7 +1063,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BillboardGui.html"
   },
   "@bettervoxel/globaltype/BillboardGui.AnchorPoint": {
-    "documentation": "Which point of the billboard (0..1 per axis) its Position pins. The Z component is unused.",
+    "documentation": "Which point of the billboard (0..1 per axis) its Position pins. A Vector2, like every GuiObject's.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BillboardGui.html#anchorpoint"
   },
   "@bettervoxel/globaltype/BillboardGui.Position": {
@@ -1545,7 +1545,7 @@
     "documentation": "`Ray`"
   },
   "@bettervoxel/globaltype/Camera.ViewportSize": {
-    "documentation": "The size of the view in pixels, as (width, height, 0) — the engine's Vector2 stand-in. 1×1 for a camera no eye renders through. Fires its signal on a resize.",
+    "documentation": "The size of the view in pixels as a Vector2 (width, height). 1×1 for a camera no eye renders through. Fires its signal on a resize.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#viewportsize"
   },
   "@bettervoxel/globaltype/Camera.WorldToScreenPoint": {
@@ -2237,7 +2237,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html"
   },
   "@bettervoxel/globaltype/GuiObject.AnchorPoint": {
-    "documentation": "Which point of the element (0..1 per axis) its Position pins: (0, 0) the top-left corner, (0.5, 0.5) the center. The Z component is unused.",
+    "documentation": "Which point of the element (0..1 per axis) its Position pins: (0, 0) the top-left corner, (0.5, 0.5) the center. A Vector2 — assigning anything else refuses (measured).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#anchorpoint"
   },
   "@bettervoxel/globaltype/GuiObject.BackgroundColor3": {
@@ -2302,7 +2302,12 @@
       "DescendantAdded": "@bettervoxel/globaltype/Instance.DescendantAdded",
       "Destroy": "@bettervoxel/globaltype/Instance.Destroy",
       "Destroying": "@bettervoxel/globaltype/Instance.Destroying",
+      "FindFirstAncestor": "@bettervoxel/globaltype/Instance.FindFirstAncestor",
+      "FindFirstAncestorOfClass": "@bettervoxel/globaltype/Instance.FindFirstAncestorOfClass",
+      "FindFirstAncestorWhichIsA": "@bettervoxel/globaltype/Instance.FindFirstAncestorWhichIsA",
       "FindFirstChild": "@bettervoxel/globaltype/Instance.FindFirstChild",
+      "FindFirstChildOfClass": "@bettervoxel/globaltype/Instance.FindFirstChildOfClass",
+      "FindFirstChildWhichIsA": "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA",
       "GetAttribute": "@bettervoxel/globaltype/Instance.GetAttribute",
       "GetAttributeChangedSignal": "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal",
       "GetChildren": "@bettervoxel/globaltype/Instance.GetChildren",
@@ -2310,6 +2315,8 @@
       "GetFullName": "@bettervoxel/globaltype/Instance.GetFullName",
       "GetPropertyChangedSignal": "@bettervoxel/globaltype/Instance.GetPropertyChangedSignal",
       "IsA": "@bettervoxel/globaltype/Instance.IsA",
+      "IsAncestorOf": "@bettervoxel/globaltype/Instance.IsAncestorOf",
+      "IsDescendantOf": "@bettervoxel/globaltype/Instance.IsDescendantOf",
       "Name": "@bettervoxel/globaltype/Instance.Name",
       "Parent": "@bettervoxel/globaltype/Instance.Parent",
       "SetAttribute": "@bettervoxel/globaltype/Instance.SetAttribute",
@@ -2366,6 +2373,63 @@
     "documentation": "Fires when the instance is destroyed. The listener sees a husk: properties still read their last values, the tree is severed, and Parent reads nil.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#destroying"
   },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestor": {
+    "documentation": "The nearest ancestor named name, or nil. The chain ends at the DataModel: game's Name matches last (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstancestor",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.FindFirstAncestor/param/0",
+        "name": "name"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.FindFirstAncestor/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestor/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestor/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestorOfClass": {
+    "documentation": "The nearest ancestor whose ClassName is exactly className, or nil. FindFirstAncestorOfClass(\"DataModel\") answers game from any rooted instance (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstancestorofclass",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.FindFirstAncestorOfClass/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.FindFirstAncestorOfClass/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestorOfClass/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestorOfClass/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestorWhichIsA": {
+    "documentation": "The nearest ancestor that IsA(className), or nil — game answers for DataModel, ServiceProvider and (with no nearer match) Instance, its measured ancestry.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstancestorwhichisa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.FindFirstAncestorWhichIsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.FindFirstAncestorWhichIsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestorWhichIsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstAncestorWhichIsA/return/0": {
+    "documentation": "`Instance?`"
+  },
   "@bettervoxel/globaltype/Instance.FindFirstChild": {
     "documentation": "The first direct child named name, or nil. The cheap probe when absence is an expected answer — cache the result instead of re-finding it every frame.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstchild",
@@ -2383,6 +2447,51 @@
     "documentation": "`name: string`"
   },
   "@bettervoxel/globaltype/Instance.FindFirstChild/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChildOfClass": {
+    "documentation": "The first direct child whose ClassName is exactly className, or nil. Never recursive (measured: a second argument is ignored) — FindFirstChildWhichIsA is the one that descends.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstchildofclass",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.FindFirstChildOfClass/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.FindFirstChildOfClass/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChildOfClass/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChildOfClass/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA": {
+    "documentation": "The first direct child that IsA(className), or nil; with recursive true the whole subtree is searched in GetDescendants order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstchildwhichisa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA/param/0",
+        "name": "className"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA/param/1",
+        "name": "recursive"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA/param/1": {
+    "documentation": "`recursive: boolean?`"
+  },
+  "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA/return/0": {
     "documentation": "`Instance?`"
   },
   "@bettervoxel/globaltype/Instance.GetAttribute": {
@@ -2499,6 +2608,44 @@
     "documentation": "`className: string`"
   },
   "@bettervoxel/globaltype/Instance.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Instance.IsAncestorOf": {
+    "documentation": "Whether this instance sits anywhere above descendant (self does not count; nil answers false — measured, asymmetric with IsDescendantOf).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#isancestorof",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.IsAncestorOf/param/0",
+        "name": "descendant"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.IsAncestorOf/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.IsAncestorOf/param/0": {
+    "documentation": "`descendant: Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.IsAncestorOf/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Instance.IsDescendantOf": {
+    "documentation": "Whether ancestor sits anywhere above this instance (self does not count). game counts for every rooted instance, and nil answers TRUE — the measured quirk: every chain ends at nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#isdescendantof",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.IsDescendantOf/param/0",
+        "name": "ancestor"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.IsDescendantOf/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.IsDescendantOf/param/0": {
+    "documentation": "`ancestor: Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.IsDescendantOf/return/0": {
     "documentation": "`boolean`"
   },
   "@bettervoxel/globaltype/Instance.Name": {
@@ -4420,7 +4567,7 @@
     "documentation": "`TextBox?`"
   },
   "@bettervoxel/globaltype/UserInputService.GetMouseDelta": {
-    "documentation": "This frame's mouse motion as (dx, dy, 0).",
+    "documentation": "This frame's mouse motion as a Vector2 (dx, dy).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#getmousedelta",
     "params": [],
     "returns": [
@@ -4428,10 +4575,10 @@
     ]
   },
   "@bettervoxel/globaltype/UserInputService.GetMouseDelta/return/0": {
-    "documentation": "`Vector3`"
+    "documentation": "`Vector2`"
   },
   "@bettervoxel/globaltype/UserInputService.GetMouseLocation": {
-    "documentation": "The cursor's logical position in the player window, as (x, y, 0) — (0, 0, 0) when no window exists.",
+    "documentation": "The cursor's logical position in the player window as a Vector2 — (0, 0) when no window exists.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#getmouselocation",
     "params": [],
     "returns": [
@@ -4439,7 +4586,7 @@
     ]
   },
   "@bettervoxel/globaltype/UserInputService.GetMouseLocation/return/0": {
-    "documentation": "`Vector3`"
+    "documentation": "`Vector2`"
   },
   "@bettervoxel/globaltype/UserInputService.InputBegan": {
     "documentation": "Fires on every key or mouse-button press with a read-only input table and a gameProcessed flag (always false until UI focus exists). Mouse buttons carry KeyCode Unknown.",
