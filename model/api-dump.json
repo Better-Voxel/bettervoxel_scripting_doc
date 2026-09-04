@@ -56,6 +56,20 @@
         {
           "decl": "(impulse: Vector3) -> ()",
           "kind": "Method",
+          "name": "ApplyAngularImpulse",
+          "params": [
+            {
+              "name": "impulse",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [],
+          "summary": "Instant spin change on the assembly's body: the angular impulse in world axes through the assembly's inertia (delta-omega = I⁻¹ · impulse). Wakes a resting body. A no-op on anchored assemblies."
+        },
+        {
+          "decl": "(impulse: Vector3) -> ()",
+          "kind": "Method",
           "name": "ApplyImpulse",
           "params": [
             {
@@ -65,13 +79,50 @@
             }
           ],
           "returns": [],
-          "summary": "Instant velocity change on the assembly's body: delta-v equals impulse divided by the assembly mass. A no-op on anchored (infinite-mass) assemblies."
+          "summary": "Instant velocity change on the assembly's body: delta-v equals impulse divided by the assembly mass. Wakes a resting body. A no-op on anchored (infinite-mass) assemblies."
+        },
+        {
+          "decl": "(impulse: Vector3, position: Vector3) -> ()",
+          "kind": "Method",
+          "name": "ApplyImpulseAtPosition",
+          "params": [
+            {
+              "name": "impulse",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "position",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [],
+          "summary": "An impulse applied at a world position: the linear change of ApplyImpulse plus the spin its torque arm from the assembly's center of mass gives ((position - center) × impulse). Wakes a resting body. A no-op on anchored assemblies."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "AssemblyAngularVelocity",
+          "summary": "The assembly's angular velocity in radians per second about the world axes — welded members answer, and set, their assembly root's. A write reads back at once; on an anchored assembly it lands in the property and the solver ignores it."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "AssemblyCenterOfMass",
+          "summary": "The assembly's center of mass in WORLD space: the mass-weighted center of every welded member, carried by the root's pose. Read only."
         },
         {
           "decl": "Vector3",
           "kind": "ReadWrite",
           "name": "AssemblyLinearVelocity",
           "summary": "The assembly's linear velocity — welded members answer their assembly root's. Reads are zero without a live body; writes on anchored parts land but the solver ignores them."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "AssemblyMass",
+          "summary": "The whole assembly's mass, every welded member's own summed; infinity for an anchored assembly. Read only."
         },
         {
           "decl": "CFrame",
@@ -86,10 +137,28 @@
           "summary": "Whether the part responds to contacts. false keeps it physical — it falls and fires Touched — but removes the contact response."
         },
         {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "CenterOfMass",
+          "summary": "The part's own center of mass in its LOCAL frame — the origin for every symmetric shape. Read only."
+        },
+        {
           "decl": "Color3",
           "kind": "ReadWrite",
           "name": "Color",
           "summary": "The authored surface color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1)."
+        },
+        {
+          "decl": "() -> number",
+          "kind": "Method",
+          "name": "GetMass",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The part's own mass — the Mass property as a method."
         },
         {
           "decl": "() -> Instance?",
@@ -114,6 +183,12 @@
             }
           ],
           "summary": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Mass",
+          "summary": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume. Read only."
         },
         {
           "decl": "Enum.Material",
@@ -568,14 +643,38 @@
         {
           "decl": "Vector3",
           "kind": "ReadWrite",
+          "name": "AssemblyAngularVelocity",
+          "summary": "The character body's angular velocity."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "AssemblyCenterOfMass",
+          "summary": "The character body's center of mass in world space."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
           "name": "AssemblyLinearVelocity",
           "summary": "The character body's linear velocity."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "AssemblyMass",
+          "summary": "The character body's mass."
         },
         {
           "decl": "CFrame",
           "kind": "ReadWrite",
           "name": "CFrame",
           "summary": "The character's full rigid transform as one CFrame value."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "CenterOfMass",
+          "summary": "The character body's local center of mass."
         },
         {
           "decl": "BVScriptSignal",
@@ -595,6 +694,12 @@
           "kind": "ReadWrite",
           "name": "JumpPower",
           "summary": "The upward velocity a jump imparts, floored at 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Mass",
+          "summary": "The character body's mass."
         },
         {
           "decl": "number",
@@ -1818,14 +1923,44 @@
         {
           "decl": "Vector3",
           "kind": "ReadWrite",
+          "name": "AssemblyAngularVelocity",
+          "summary": "The prefab body's angular velocity (zero without a live body)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "AssemblyCenterOfMass",
+          "summary": "The prefab body's center of mass in world space."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
           "name": "AssemblyLinearVelocity",
           "summary": "The prefab body's linear velocity (zero without a live body)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "AssemblyMass",
+          "summary": "The prefab body's mass (zero without a live body)."
         },
         {
           "decl": "CFrame",
           "kind": "ReadWrite",
           "name": "CFrame",
           "summary": "The prefab's full rigid transform as one CFrame value."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "CenterOfMass",
+          "summary": "The prefab body's local center of mass."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Mass",
+          "summary": "The prefab body's mass (zero without a live body)."
         },
         {
           "decl": "Vector3",

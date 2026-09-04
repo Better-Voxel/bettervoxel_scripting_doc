@@ -193,11 +193,16 @@ declare extern type BindableFunction extends Instance with
 end
 
 declare extern type Character extends Instance with
+    AssemblyAngularVelocity: Vector3
+    AssemblyCenterOfMass: Vector3
     AssemblyLinearVelocity: Vector3
+    AssemblyMass: number
     CFrame: CFrame
+    CenterOfMass: Vector3
     Died: BVScriptSignal -- fires ()
     Health: number
     JumpPower: number
+    Mass: number
     MaxHealth: number
     function Move(self, direction: Vector3, relativeToCamera: boolean?): ()
     function MoveTo(self, target: Vector3): ()
@@ -290,8 +295,13 @@ declare extern type Player extends Instance with
 end
 
 declare extern type PlayerPrefab extends Instance with
+    AssemblyAngularVelocity: Vector3
+    AssemblyCenterOfMass: Vector3
     AssemblyLinearVelocity: Vector3
+    AssemblyMass: number
     CFrame: CFrame
+    CenterOfMass: Vector3
+    Mass: number
     Position: Vector3
     Rotation: Vector3
     function SpawnCharacter(self, position: Vector3?): Instance
@@ -352,13 +362,21 @@ end
 
 declare extern type BasePart extends PVInstance with
     Anchored: boolean
+    function ApplyAngularImpulse(self, impulse: Vector3): ()
     function ApplyImpulse(self, impulse: Vector3): ()
+    function ApplyImpulseAtPosition(self, impulse: Vector3, position: Vector3): ()
+    AssemblyAngularVelocity: Vector3
+    AssemblyCenterOfMass: Vector3
     AssemblyLinearVelocity: Vector3
+    AssemblyMass: number
     CFrame: CFrame
     CanCollide: boolean
+    CenterOfMass: Vector3
     Color: Color3
+    function GetMass(self): number
     function GetNetworkOwner(self): Instance?
     function GetNetworkOwnershipAuto(self): boolean
+    Mass: number
     Material: EnumItem
     Position: Vector3
     Rotation: Vector3

@@ -906,13 +906,21 @@
     "documentation": "Everything physical: world pose (Position, Rotation, CFrame), Size, appearance (Color, Material, Transparency), collision flags, and the Touched signal.",
     "keys": {
       "Anchored": "@bettervoxel/globaltype/BasePart.Anchored",
+      "ApplyAngularImpulse": "@bettervoxel/globaltype/BasePart.ApplyAngularImpulse",
       "ApplyImpulse": "@bettervoxel/globaltype/BasePart.ApplyImpulse",
+      "ApplyImpulseAtPosition": "@bettervoxel/globaltype/BasePart.ApplyImpulseAtPosition",
+      "AssemblyAngularVelocity": "@bettervoxel/globaltype/BasePart.AssemblyAngularVelocity",
+      "AssemblyCenterOfMass": "@bettervoxel/globaltype/BasePart.AssemblyCenterOfMass",
       "AssemblyLinearVelocity": "@bettervoxel/globaltype/BasePart.AssemblyLinearVelocity",
+      "AssemblyMass": "@bettervoxel/globaltype/BasePart.AssemblyMass",
       "CFrame": "@bettervoxel/globaltype/BasePart.CFrame",
       "CanCollide": "@bettervoxel/globaltype/BasePart.CanCollide",
+      "CenterOfMass": "@bettervoxel/globaltype/BasePart.CenterOfMass",
       "Color": "@bettervoxel/globaltype/BasePart.Color",
+      "GetMass": "@bettervoxel/globaltype/BasePart.GetMass",
       "GetNetworkOwner": "@bettervoxel/globaltype/BasePart.GetNetworkOwner",
       "GetNetworkOwnershipAuto": "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto",
+      "Mass": "@bettervoxel/globaltype/BasePart.Mass",
       "Material": "@bettervoxel/globaltype/BasePart.Material",
       "Position": "@bettervoxel/globaltype/BasePart.Position",
       "Rotation": "@bettervoxel/globaltype/BasePart.Rotation",
@@ -928,8 +936,22 @@
     "documentation": "Whether the part is pinned in place. Anchored parts never simulate — no gravity, no forces — but still collide and fire Touched.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#anchored"
   },
+  "@bettervoxel/globaltype/BasePart.ApplyAngularImpulse": {
+    "documentation": "Instant spin change on the assembly's body: the angular impulse in world axes through the assembly's inertia (delta-omega = I⁻¹ · impulse). Wakes a resting body. A no-op on anchored assemblies.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#applyangularimpulse",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BasePart.ApplyAngularImpulse/param/0",
+        "name": "impulse"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/BasePart.ApplyAngularImpulse/param/0": {
+    "documentation": "`impulse: Vector3`"
+  },
   "@bettervoxel/globaltype/BasePart.ApplyImpulse": {
-    "documentation": "Instant velocity change on the assembly's body: delta-v equals impulse divided by the assembly mass. A no-op on anchored (infinite-mass) assemblies.",
+    "documentation": "Instant velocity change on the assembly's body: delta-v equals impulse divided by the assembly mass. Wakes a resting body. A no-op on anchored (infinite-mass) assemblies.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#applyimpulse",
     "params": [
       {
@@ -942,9 +964,42 @@
   "@bettervoxel/globaltype/BasePart.ApplyImpulse/param/0": {
     "documentation": "`impulse: Vector3`"
   },
+  "@bettervoxel/globaltype/BasePart.ApplyImpulseAtPosition": {
+    "documentation": "An impulse applied at a world position: the linear change of ApplyImpulse plus the spin its torque arm from the assembly's center of mass gives ((position - center) × impulse). Wakes a resting body. A no-op on anchored assemblies.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#applyimpulseatposition",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BasePart.ApplyImpulseAtPosition/param/0",
+        "name": "impulse"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/BasePart.ApplyImpulseAtPosition/param/1",
+        "name": "position"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/BasePart.ApplyImpulseAtPosition/param/0": {
+    "documentation": "`impulse: Vector3`"
+  },
+  "@bettervoxel/globaltype/BasePart.ApplyImpulseAtPosition/param/1": {
+    "documentation": "`position: Vector3`"
+  },
+  "@bettervoxel/globaltype/BasePart.AssemblyAngularVelocity": {
+    "documentation": "The assembly's angular velocity in radians per second about the world axes — welded members answer, and set, their assembly root's. A write reads back at once; on an anchored assembly it lands in the property and the solver ignores it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#assemblyangularvelocity"
+  },
+  "@bettervoxel/globaltype/BasePart.AssemblyCenterOfMass": {
+    "documentation": "The assembly's center of mass in WORLD space: the mass-weighted center of every welded member, carried by the root's pose. Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#assemblycenterofmass"
+  },
   "@bettervoxel/globaltype/BasePart.AssemblyLinearVelocity": {
     "documentation": "The assembly's linear velocity — welded members answer their assembly root's. Reads are zero without a live body; writes on anchored parts land but the solver ignores them.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#assemblylinearvelocity"
+  },
+  "@bettervoxel/globaltype/BasePart.AssemblyMass": {
+    "documentation": "The whole assembly's mass, every welded member's own summed; infinity for an anchored assembly. Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#assemblymass"
   },
   "@bettervoxel/globaltype/BasePart.CFrame": {
     "documentation": "The full rigid transform as one CFrame. Reads and writes agree with Position and Rotation — three views of the same pose. Welded members refuse the write; move the assembly root instead.",
@@ -954,9 +1009,24 @@
     "documentation": "Whether the part responds to contacts. false keeps it physical — it falls and fires Touched — but removes the contact response.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#cancollide"
   },
+  "@bettervoxel/globaltype/BasePart.CenterOfMass": {
+    "documentation": "The part's own center of mass in its LOCAL frame — the origin for every symmetric shape. Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#centerofmass"
+  },
   "@bettervoxel/globaltype/BasePart.Color": {
     "documentation": "The authored surface color. Writes accept a Color3 or a raw RGB vector (sRGB components 0..1).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#color"
+  },
+  "@bettervoxel/globaltype/BasePart.GetMass": {
+    "documentation": "The part's own mass — the Mass property as a method.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#getmass",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/BasePart.GetMass/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BasePart.GetMass/return/0": {
+    "documentation": "`number`"
   },
   "@bettervoxel/globaltype/BasePart.GetNetworkOwner": {
     "documentation": "Server-only: the player currently simulating this assembly, or nil for the server. Resolved through the assembly root.",
@@ -979,6 +1049,10 @@
   },
   "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto/return/0": {
     "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/BasePart.Mass": {
+    "documentation": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume. Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#mass"
   },
   "@bettervoxel/globaltype/BasePart.Material": {
     "documentation": "The surface material, as an Enum.Material item; writes accept the item or its string name.",
@@ -1618,11 +1692,16 @@
   "@bettervoxel/globaltype/Character": {
     "documentation": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. Carries the humanoid surface: Health, WalkSpeed, MoveTo and their signals.",
     "keys": {
+      "AssemblyAngularVelocity": "@bettervoxel/globaltype/Character.AssemblyAngularVelocity",
+      "AssemblyCenterOfMass": "@bettervoxel/globaltype/Character.AssemblyCenterOfMass",
       "AssemblyLinearVelocity": "@bettervoxel/globaltype/Character.AssemblyLinearVelocity",
+      "AssemblyMass": "@bettervoxel/globaltype/Character.AssemblyMass",
       "CFrame": "@bettervoxel/globaltype/Character.CFrame",
+      "CenterOfMass": "@bettervoxel/globaltype/Character.CenterOfMass",
       "Died": "@bettervoxel/globaltype/Character.Died",
       "Health": "@bettervoxel/globaltype/Character.Health",
       "JumpPower": "@bettervoxel/globaltype/Character.JumpPower",
+      "Mass": "@bettervoxel/globaltype/Character.Mass",
       "MaxHealth": "@bettervoxel/globaltype/Character.MaxHealth",
       "Move": "@bettervoxel/globaltype/Character.Move",
       "MoveTo": "@bettervoxel/globaltype/Character.MoveTo",
@@ -1635,13 +1714,29 @@
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html"
   },
+  "@bettervoxel/globaltype/Character.AssemblyAngularVelocity": {
+    "documentation": "The character body's angular velocity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#assemblyangularvelocity"
+  },
+  "@bettervoxel/globaltype/Character.AssemblyCenterOfMass": {
+    "documentation": "The character body's center of mass in world space.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#assemblycenterofmass"
+  },
   "@bettervoxel/globaltype/Character.AssemblyLinearVelocity": {
     "documentation": "The character body's linear velocity.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#assemblylinearvelocity"
   },
+  "@bettervoxel/globaltype/Character.AssemblyMass": {
+    "documentation": "The character body's mass.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#assemblymass"
+  },
   "@bettervoxel/globaltype/Character.CFrame": {
     "documentation": "The character's full rigid transform as one CFrame value.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#cframe"
+  },
+  "@bettervoxel/globaltype/Character.CenterOfMass": {
+    "documentation": "The character body's local center of mass.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#centerofmass"
   },
   "@bettervoxel/globaltype/Character.Died": {
     "documentation": "Fires once per life, when Health reaches zero.",
@@ -1654,6 +1749,10 @@
   "@bettervoxel/globaltype/Character.JumpPower": {
     "documentation": "The upward velocity a jump imparts, floored at 0.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#jumppower"
+  },
+  "@bettervoxel/globaltype/Character.Mass": {
+    "documentation": "The character body's mass.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#mass"
   },
   "@bettervoxel/globaltype/Character.MaxHealth": {
     "documentation": "The health ceiling. Lowering it pulls current Health down with it.",
@@ -3261,8 +3360,13 @@
   "@bettervoxel/globaltype/PlayerPrefab": {
     "documentation": "The character template: joining players spawn their characters from it, SpawnCharacter builds NPCs from it, and its pose is where they stand.",
     "keys": {
+      "AssemblyAngularVelocity": "@bettervoxel/globaltype/PlayerPrefab.AssemblyAngularVelocity",
+      "AssemblyCenterOfMass": "@bettervoxel/globaltype/PlayerPrefab.AssemblyCenterOfMass",
       "AssemblyLinearVelocity": "@bettervoxel/globaltype/PlayerPrefab.AssemblyLinearVelocity",
+      "AssemblyMass": "@bettervoxel/globaltype/PlayerPrefab.AssemblyMass",
       "CFrame": "@bettervoxel/globaltype/PlayerPrefab.CFrame",
+      "CenterOfMass": "@bettervoxel/globaltype/PlayerPrefab.CenterOfMass",
+      "Mass": "@bettervoxel/globaltype/PlayerPrefab.Mass",
       "Position": "@bettervoxel/globaltype/PlayerPrefab.Position",
       "Rotation": "@bettervoxel/globaltype/PlayerPrefab.Rotation",
       "SpawnCharacter": "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter",
@@ -3270,13 +3374,33 @@
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html"
   },
+  "@bettervoxel/globaltype/PlayerPrefab.AssemblyAngularVelocity": {
+    "documentation": "The prefab body's angular velocity (zero without a live body).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#assemblyangularvelocity"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.AssemblyCenterOfMass": {
+    "documentation": "The prefab body's center of mass in world space.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#assemblycenterofmass"
+  },
   "@bettervoxel/globaltype/PlayerPrefab.AssemblyLinearVelocity": {
     "documentation": "The prefab body's linear velocity (zero without a live body).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#assemblylinearvelocity"
   },
+  "@bettervoxel/globaltype/PlayerPrefab.AssemblyMass": {
+    "documentation": "The prefab body's mass (zero without a live body).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#assemblymass"
+  },
   "@bettervoxel/globaltype/PlayerPrefab.CFrame": {
     "documentation": "The prefab's full rigid transform as one CFrame value.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#cframe"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.CenterOfMass": {
+    "documentation": "The prefab body's local center of mass.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#centerofmass"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.Mass": {
+    "documentation": "The prefab body's mass (zero without a live body).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#mass"
   },
   "@bettervoxel/globaltype/PlayerPrefab.Position": {
     "documentation": "The prefab's world position — where characters spawned from it stand.",
