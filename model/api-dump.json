@@ -4310,7 +4310,7 @@
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Value",
-          "summary": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight, whose items carry the reference's 100..900."
+          "summary": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight (the reference's 100..900) and RenderPriority (its 0..2000, the numbers BindToRenderStep takes)."
         }
       ],
       "name": "EnumItem",
@@ -4771,6 +4771,13 @@
       "Exclude",
       "Include"
     ],
+    "RenderPriority": [
+      "Camera",
+      "Character",
+      "First",
+      "Input",
+      "Last"
+    ],
     "RollOffMode": [
       "Inverse",
       "InverseTapered",
@@ -4928,6 +4935,30 @@
     {
       "members": [
         {
+          "decl": "(name: string, priority: number, callback: (deltaTime: number) -> ()) -> ()",
+          "kind": "Method",
+          "name": "BindToRenderStep",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "priority",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "callback",
+              "optional": false,
+              "type": "(deltaTime: number) -> ()"
+            }
+          ],
+          "returns": [],
+          "summary": "Client only: runs callback every frame in the render step, before RenderStepped, in ascending priority (Enum.RenderPriority values; bind order among equals), with the frame's delta time. Binding a name again adds a second binding, each running at its own priority (measured) — unbind before rebinding. A binding ends with UnbindFromRenderStep or the script. Accepted and never run from the server side."
+        },
+        {
           "decl": "string",
           "kind": "ReadOnly",
           "name": "ClassName",
@@ -4940,7 +4971,7 @@
           "payloads": [
             "number"
           ],
-          "summary": "Fires once per scripts pass with the frame's delta time in script-clock seconds. The workhorse per-frame hook."
+          "summary": "Fires once per frame after the physics step with the frame's delta time in script-clock seconds. The workhorse per-frame hook; a write here renders this frame."
         },
         {
           "decl": "(className: string) -> boolean",
@@ -5001,6 +5032,75 @@
           "kind": "ReadOnly",
           "name": "Name",
           "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "PostSimulation",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Fires with Heartbeat, after the physics step, carrying the simulation's fixed step in seconds (Heartbeat carries the frame's real delta) — the reference's modern name for the same point."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "PreAnimation",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Fires first in the frame, just before Stepped, with the simulation's fixed step in seconds. The engine has no animation pass between the two yet; the hook exists so the reference's per-frame order holds."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "PreRender",
+          "payloads": [
+            "number"
+          ],
+          "summary": "The reference's modern name for RenderStepped: fires at the same point with the same delta, as its own signal (PreRender ~= RenderStepped). A server-side connection is accepted and never fires."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "PreSimulation",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Fires with Stepped, before the physics step, carrying the simulation's fixed step in seconds — the reference's modern name for the same point."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "RenderStepped",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Client only: fires every frame after Heartbeat and after the BindToRenderStep bindings, just before the frame renders, with the frame's delta time. A camera written here is what this frame shows. Connecting from the server side errors: \"RenderStepped event can only be used from local scripts\"."
+        },
+        {
+          "decl": "BVScriptSignal<number, number>",
+          "kind": "Signal",
+          "name": "Stepped",
+          "payloads": [
+            "number",
+            "number"
+          ],
+          "summary": "Fires once per frame before the physics step with (time, step): the seconds since the run started and the simulation's fixed step. A pose or force written here is what this frame simulates."
+        },
+        {
+          "decl": "(name: string) -> ()",
+          "kind": "Method",
+          "name": "UnbindFromRenderStep",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "summary": "Removes every binding under name; an unknown name is a silent no-op."
         }
       ],
       "name": "RunService",

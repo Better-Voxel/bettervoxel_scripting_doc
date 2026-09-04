@@ -628,6 +628,7 @@ declare extern type Tween with
 end
 
 declare extern type RunService with
+    function BindToRenderStep(self, name: string, priority: number, callback: (deltaTime: number) -> ()): ()
     ClassName: string
     Heartbeat: BVScriptSignal -- fires (number)
     function IsA(self, className: string): boolean
@@ -635,6 +636,13 @@ declare extern type RunService with
     function IsServer(self): boolean
     function IsStudio(self): boolean
     Name: string
+    PostSimulation: BVScriptSignal -- fires (number)
+    PreAnimation: BVScriptSignal -- fires (number)
+    PreRender: BVScriptSignal -- fires (number)
+    PreSimulation: BVScriptSignal -- fires (number)
+    RenderStepped: BVScriptSignal -- fires (number)
+    Stepped: BVScriptSignal -- fires (number, number)
+    function UnbindFromRenderStep(self, name: string): ()
 end
 
 declare extern type Players with
@@ -819,6 +827,7 @@ declare Enum: {
     ParticleOrientation: { FacingCamera: EnumItem, FacingCameraWorldUp: EnumItem, VelocityParallel: EnumItem, VelocityPerpendicular: EnumItem },
     PlaybackState: { Begin: EnumItem, Cancelled: EnumItem, Completed: EnumItem, Delayed: EnumItem, Paused: EnumItem, Playing: EnumItem },
     RaycastFilterType: { Exclude: EnumItem, Include: EnumItem },
+    RenderPriority: { Camera: EnumItem, Character: EnumItem, First: EnumItem, Input: EnumItem, Last: EnumItem },
     RollOffMode: { Inverse: EnumItem, InverseTapered: EnumItem, Linear: EnumItem, LinearSquare: EnumItem },
     RunContext: { Client: EnumItem, Legacy: EnumItem, Server: EnumItem },
     SortOrder: { Custom: EnumItem, LayoutOrder: EnumItem, Name: EnumItem },

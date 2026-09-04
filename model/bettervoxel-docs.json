@@ -2159,7 +2159,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#name"
   },
   "@bettervoxel/globaltype/EnumItem.Value": {
-    "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight, whose items carry the reference's 100..900.",
+    "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight (the reference's 100..900) and RenderPriority (its 0..2000, the numbers BindToRenderStep takes).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#value"
   },
   "@bettervoxel/globaltype/Folder": {
@@ -3592,22 +3592,58 @@
   "@bettervoxel/globaltype/RunService": {
     "documentation": "The frame clock: Heartbeat fires once per scripts pass with the frame's delta time. The one service whose Name (\"Run Service\", measured) differs from its ClassName.",
     "keys": {
+      "BindToRenderStep": "@bettervoxel/globaltype/RunService.BindToRenderStep",
       "ClassName": "@bettervoxel/globaltype/RunService.ClassName",
       "Heartbeat": "@bettervoxel/globaltype/RunService.Heartbeat",
       "IsA": "@bettervoxel/globaltype/RunService.IsA",
       "IsClient": "@bettervoxel/globaltype/RunService.IsClient",
       "IsServer": "@bettervoxel/globaltype/RunService.IsServer",
       "IsStudio": "@bettervoxel/globaltype/RunService.IsStudio",
-      "Name": "@bettervoxel/globaltype/RunService.Name"
+      "Name": "@bettervoxel/globaltype/RunService.Name",
+      "PostSimulation": "@bettervoxel/globaltype/RunService.PostSimulation",
+      "PreAnimation": "@bettervoxel/globaltype/RunService.PreAnimation",
+      "PreRender": "@bettervoxel/globaltype/RunService.PreRender",
+      "PreSimulation": "@bettervoxel/globaltype/RunService.PreSimulation",
+      "RenderStepped": "@bettervoxel/globaltype/RunService.RenderStepped",
+      "Stepped": "@bettervoxel/globaltype/RunService.Stepped",
+      "UnbindFromRenderStep": "@bettervoxel/globaltype/RunService.UnbindFromRenderStep"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html"
+  },
+  "@bettervoxel/globaltype/RunService.BindToRenderStep": {
+    "documentation": "Client only: runs callback every frame in the render step, before RenderStepped, in ascending priority (Enum.RenderPriority values; bind order among equals), with the frame's delta time. Binding a name again adds a second binding, each running at its own priority (measured) — unbind before rebinding. A binding ends with UnbindFromRenderStep or the script. Accepted and never run from the server side.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#bindtorenderstep",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.BindToRenderStep/param/0",
+        "name": "name"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.BindToRenderStep/param/1",
+        "name": "priority"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.BindToRenderStep/param/2",
+        "name": "callback"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RunService.BindToRenderStep/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/RunService.BindToRenderStep/param/1": {
+    "documentation": "`priority: number`"
+  },
+  "@bettervoxel/globaltype/RunService.BindToRenderStep/param/2": {
+    "documentation": "`callback: (deltaTime: number) -> ()`"
   },
   "@bettervoxel/globaltype/RunService.ClassName": {
     "documentation": "The class name — the first name IsA answers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#classname"
   },
   "@bettervoxel/globaltype/RunService.Heartbeat": {
-    "documentation": "Fires once per scripts pass with the frame's delta time in script-clock seconds. The workhorse per-frame hook.",
+    "documentation": "Fires once per frame after the physics step with the frame's delta time in script-clock seconds. The workhorse per-frame hook; a write here renders this frame.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#heartbeat"
   },
   "@bettervoxel/globaltype/RunService.IsA": {
@@ -3665,6 +3701,44 @@
   "@bettervoxel/globaltype/RunService.Name": {
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#name"
+  },
+  "@bettervoxel/globaltype/RunService.PostSimulation": {
+    "documentation": "Fires with Heartbeat, after the physics step, carrying the simulation's fixed step in seconds (Heartbeat carries the frame's real delta) — the reference's modern name for the same point.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#postsimulation"
+  },
+  "@bettervoxel/globaltype/RunService.PreAnimation": {
+    "documentation": "Fires first in the frame, just before Stepped, with the simulation's fixed step in seconds. The engine has no animation pass between the two yet; the hook exists so the reference's per-frame order holds.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#preanimation"
+  },
+  "@bettervoxel/globaltype/RunService.PreRender": {
+    "documentation": "The reference's modern name for RenderStepped: fires at the same point with the same delta, as its own signal (PreRender ~= RenderStepped). A server-side connection is accepted and never fires.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#prerender"
+  },
+  "@bettervoxel/globaltype/RunService.PreSimulation": {
+    "documentation": "Fires with Stepped, before the physics step, carrying the simulation's fixed step in seconds — the reference's modern name for the same point.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#presimulation"
+  },
+  "@bettervoxel/globaltype/RunService.RenderStepped": {
+    "documentation": "Client only: fires every frame after Heartbeat and after the BindToRenderStep bindings, just before the frame renders, with the frame's delta time. A camera written here is what this frame shows. Connecting from the server side errors: \"RenderStepped event can only be used from local scripts\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#renderstepped"
+  },
+  "@bettervoxel/globaltype/RunService.Stepped": {
+    "documentation": "Fires once per frame before the physics step with (time, step): the seconds since the run started and the simulation's fixed step. A pose or force written here is what this frame simulates.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#stepped"
+  },
+  "@bettervoxel/globaltype/RunService.UnbindFromRenderStep": {
+    "documentation": "Removes every binding under name; an unknown name is a silent no-op.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#unbindfromrenderstep",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.UnbindFromRenderStep/param/0",
+        "name": "name"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RunService.UnbindFromRenderStep/param/0": {
+    "documentation": "`name: string`"
   },
   "@bettervoxel/globaltype/ScreenGui": {
     "documentation": "The screen-space UI root: its element tree renders over the viewport while Enabled.",
