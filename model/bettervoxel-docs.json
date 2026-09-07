@@ -3717,10 +3717,12 @@
     "documentation": "The frame clock: Heartbeat fires once per scripts pass with the frame's delta time. The one service whose Name (\"Run Service\", measured) differs from its ClassName.",
     "keys": {
       "BindToRenderStep": "@bettervoxel/globaltype/RunService.BindToRenderStep",
+      "BindToSimulation": "@bettervoxel/globaltype/RunService.BindToSimulation",
       "ClassName": "@bettervoxel/globaltype/RunService.ClassName",
       "Heartbeat": "@bettervoxel/globaltype/RunService.Heartbeat",
       "IsA": "@bettervoxel/globaltype/RunService.IsA",
       "IsClient": "@bettervoxel/globaltype/RunService.IsClient",
+      "IsResimulating": "@bettervoxel/globaltype/RunService.IsResimulating",
       "IsServer": "@bettervoxel/globaltype/RunService.IsServer",
       "IsStudio": "@bettervoxel/globaltype/RunService.IsStudio",
       "Name": "@bettervoxel/globaltype/RunService.Name",
@@ -3762,6 +3764,39 @@
   "@bettervoxel/globaltype/RunService.BindToRenderStep/param/2": {
     "documentation": "`callback: (deltaTime: number) -> ()`"
   },
+  "@bettervoxel/globaltype/RunService.BindToSimulation": {
+    "documentation": "Runs callback inside the fixed simulation loop, once per step its frequency divides (Hz30 by default: every second 60 Hz step — the simulation tick; Hz60 every step, down to Hz1), ahead of that step's physics, on the server and the client alike, in ascending priority (2000 by default; bind order among equals). deltaTime is the frequency's period exactly (1/30 for Hz30). A write here is what the step simulates. The returned connection is the unbind; a binding also ends with its script.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#bindtosimulation",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.BindToSimulation/param/0",
+        "name": "callback"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.BindToSimulation/param/1",
+        "name": "frequency"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.BindToSimulation/param/2",
+        "name": "priority"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.BindToSimulation/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.BindToSimulation/param/0": {
+    "documentation": "`callback: (deltaTime: number) -> ()`"
+  },
+  "@bettervoxel/globaltype/RunService.BindToSimulation/param/1": {
+    "documentation": "`frequency: Enum.StepFrequency?`"
+  },
+  "@bettervoxel/globaltype/RunService.BindToSimulation/param/2": {
+    "documentation": "`priority: number?`"
+  },
+  "@bettervoxel/globaltype/RunService.BindToSimulation/return/0": {
+    "documentation": "`BVScriptConnection`"
+  },
   "@bettervoxel/globaltype/RunService.ClassName": {
     "documentation": "The class name — the first name IsA answers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#classname"
@@ -3798,6 +3833,17 @@
     ]
   },
   "@bettervoxel/globaltype/RunService.IsClient/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/RunService.IsResimulating": {
+    "documentation": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise. Nothing rolls back yet, so it reads false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isresimulating",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.IsResimulating/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.IsResimulating/return/0": {
     "documentation": "`boolean`"
   },
   "@bettervoxel/globaltype/RunService.IsServer": {

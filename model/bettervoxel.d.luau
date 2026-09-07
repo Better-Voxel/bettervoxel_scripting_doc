@@ -647,10 +647,12 @@ end
 
 declare extern type RunService with
     function BindToRenderStep(self, name: string, priority: number, callback: (deltaTime: number) -> ()): ()
+    function BindToSimulation(self, callback: (deltaTime: number) -> (), frequency: EnumItem?, priority: number?): BVScriptConnection
     ClassName: string
     Heartbeat: BVScriptSignal -- fires (number)
     function IsA(self, className: string): boolean
     function IsClient(self): boolean
+    function IsResimulating(self): boolean
     function IsServer(self): boolean
     function IsStudio(self): boolean
     Name: string
@@ -849,6 +851,7 @@ declare Enum: {
     RollOffMode: { Inverse: EnumItem, InverseTapered: EnumItem, Linear: EnumItem, LinearSquare: EnumItem },
     RunContext: { Client: EnumItem, Legacy: EnumItem, Server: EnumItem },
     SortOrder: { Custom: EnumItem, LayoutOrder: EnumItem, Name: EnumItem },
+    StepFrequency: { Hz1: EnumItem, Hz10: EnumItem, Hz15: EnumItem, Hz30: EnumItem, Hz5: EnumItem, Hz60: EnumItem },
     TextXAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
     TextYAlignment: { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
     UserInputType: { Keyboard: EnumItem, MouseButton1: EnumItem, MouseButton2: EnumItem, MouseButton3: EnumItem },

@@ -4929,6 +4929,14 @@
       "LayoutOrder",
       "Name"
     ],
+    "StepFrequency": [
+      "Hz1",
+      "Hz10",
+      "Hz15",
+      "Hz30",
+      "Hz5",
+      "Hz60"
+    ],
     "TextXAlignment": [
       "Center",
       "Left",
@@ -5094,6 +5102,34 @@
           "summary": "Client only: runs callback every frame in the render step, before RenderStepped, in ascending priority (Enum.RenderPriority values; bind order among equals), with the frame's delta time. Binding a name again adds a second binding, each running at its own priority (measured) — unbind before rebinding. A binding ends with UnbindFromRenderStep or the script. Accepted and never run from the server side."
         },
         {
+          "decl": "(callback: (deltaTime: number) -> (), frequency: Enum.StepFrequency?, priority: number?) -> BVScriptConnection",
+          "kind": "Method",
+          "name": "BindToSimulation",
+          "params": [
+            {
+              "name": "callback",
+              "optional": false,
+              "type": "(deltaTime: number) -> ()"
+            },
+            {
+              "name": "frequency",
+              "optional": true,
+              "type": "Enum.StepFrequency?"
+            },
+            {
+              "name": "priority",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptConnection"
+            }
+          ],
+          "summary": "Runs callback inside the fixed simulation loop, once per step its frequency divides (Hz30 by default: every second 60 Hz step — the simulation tick; Hz60 every step, down to Hz1), ahead of that step's physics, on the server and the client alike, in ascending priority (2000 by default; bind order among equals). deltaTime is the frequency's period exactly (1/30 for Hz30). A write here is what the step simulates. The returned connection is the unbind; a binding also ends with its script."
+        },
+        {
           "decl": "string",
           "kind": "ReadOnly",
           "name": "ClassName",
@@ -5137,6 +5173,18 @@
             }
           ],
           "summary": "True when this call runs on the client side: a connected client, or a LocalScript / RunContext Client script in solo play. A call with no script behind it answers false in solo, since an unattributed call is read as the server's. Exclusive with IsServer — no context answers both true."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "IsResimulating",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise. Nothing rolls back yet, so it reads false."
         },
         {
           "decl": "() -> boolean",
