@@ -661,6 +661,7 @@ declare extern type RunService with
     PreRender: BVScriptSignal -- fires (number)
     PreSimulation: BVScriptSignal -- fires (number)
     RenderStepped: BVScriptSignal -- fires (number)
+    Rollback: BVScriptSignal -- fires (number)
     Stepped: BVScriptSignal -- fires (number, number)
     function UnbindFromRenderStep(self, name: string): ()
 end

@@ -5262,6 +5262,15 @@
           "summary": "Client only: fires every frame after Heartbeat and after the BindToRenderStep bindings, just before the frame renders, with the frame's delta time. A camera written here is what this frame shows. Connecting from the server side errors: \"RenderStepped event can only be used from local scripts\"."
         },
         {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "Rollback",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Fires when the simulation rolls back to an earlier tick, before that tick and the ones since are re-simulated, with the fixed clock's seconds at the tick's start. Discard custom state kept past that time here; attributes of simulated instances are restored by the engine."
+        },
+        {
           "decl": "BVScriptSignal<number, number>",
           "kind": "Signal",
           "name": "Stepped",

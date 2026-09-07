@@ -3731,6 +3731,7 @@
       "PreRender": "@bettervoxel/globaltype/RunService.PreRender",
       "PreSimulation": "@bettervoxel/globaltype/RunService.PreSimulation",
       "RenderStepped": "@bettervoxel/globaltype/RunService.RenderStepped",
+      "Rollback": "@bettervoxel/globaltype/RunService.Rollback",
       "Stepped": "@bettervoxel/globaltype/RunService.Stepped",
       "UnbindFromRenderStep": "@bettervoxel/globaltype/RunService.UnbindFromRenderStep"
     },
@@ -3891,6 +3892,10 @@
   "@bettervoxel/globaltype/RunService.RenderStepped": {
     "documentation": "Client only: fires every frame after Heartbeat and after the BindToRenderStep bindings, just before the frame renders, with the frame's delta time. A camera written here is what this frame shows. Connecting from the server side errors: \"RenderStepped event can only be used from local scripts\".",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#renderstepped"
+  },
+  "@bettervoxel/globaltype/RunService.Rollback": {
+    "documentation": "Fires when the simulation rolls back to an earlier tick, before that tick and the ones since are re-simulated, with the fixed clock's seconds at the tick's start. Discard custom state kept past that time here; attributes of simulated instances are restored by the engine.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#rollback"
   },
   "@bettervoxel/globaltype/RunService.Stepped": {
     "documentation": "Fires once per frame before the physics step with (time, step): the seconds since the run started and the simulation's fixed step. A pose or force written here is what this frame simulates.",
