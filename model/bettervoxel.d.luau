@@ -231,6 +231,38 @@ end
 declare extern type GuiBase extends Instance with
 end
 
+declare extern type InputAction extends Instance with
+    Enabled: boolean
+    function Fire(self, state: any): ()
+    function GetState(self): any
+    Pressed: BVScriptSignal -- fires (boolean)
+    Released: BVScriptSignal -- fires (boolean)
+    StateChanged: BVScriptSignal -- fires (any)
+    Type: EnumItem
+end
+
+declare extern type InputBinding extends Instance with
+    Backward: EnumItem
+    ClampMagnitudeToOne: boolean
+    Down: EnumItem
+    Forward: EnumItem
+    KeyCode: EnumItem
+    Left: EnumItem
+    PrimaryModifier: EnumItem
+    Right: EnumItem
+    Scale: number
+    SecondaryModifier: EnumItem
+    Up: EnumItem
+    Vector2Scale: Vector2
+    Vector3Scale: Vector3
+end
+
+declare extern type InputContext extends Instance with
+    Enabled: boolean
+    Priority: number
+    Sink: boolean
+end
+
 declare extern type Light extends Instance with
     Brightness: number
     Color: Color3
@@ -775,7 +807,7 @@ declare Font: {
 }
 
 declare Instance: {
-    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
 }
 
 declare NumberRange: {
@@ -836,6 +868,7 @@ declare Enum: {
     FontStyle: { Italic: EnumItem, Normal: EnumItem },
     FontWeight: { Bold: EnumItem, ExtraBold: EnumItem, ExtraLight: EnumItem, Heavy: EnumItem, Light: EnumItem, Medium: EnumItem, Regular: EnumItem, SemiBold: EnumItem, Thin: EnumItem },
     HorizontalAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
+    InputActionType: { Bool: EnumItem, Direction1D: EnumItem, Direction2D: EnumItem, Direction3D: EnumItem },
     KeyCode: { A: EnumItem, B: EnumItem, BackSlash: EnumItem, Backquote: EnumItem, Backspace: EnumItem, C: EnumItem, CapsLock: EnumItem, Comma: EnumItem, D: EnumItem, Delete: EnumItem, Down: EnumItem, E: EnumItem, Eight: EnumItem, End: EnumItem, Equals: EnumItem, Escape: EnumItem, F: EnumItem, F1: EnumItem, F10: EnumItem, F11: EnumItem, F12: EnumItem, F2: EnumItem, F3: EnumItem, F4: EnumItem, F5: EnumItem, F6: EnumItem, F7: EnumItem, F8: EnumItem, F9: EnumItem, Five: EnumItem, Four: EnumItem, G: EnumItem, H: EnumItem, Home: EnumItem, I: EnumItem, Insert: EnumItem, J: EnumItem, K: EnumItem, L: EnumItem, Left: EnumItem, LeftAlt: EnumItem, LeftBracket: EnumItem, LeftControl: EnumItem, LeftShift: EnumItem, M: EnumItem, Minus: EnumItem, N: EnumItem, Nine: EnumItem, O: EnumItem, One: EnumItem, P: EnumItem, PageDown: EnumItem, PageUp: EnumItem, Period: EnumItem, Q: EnumItem, Quote: EnumItem, R: EnumItem, Return: EnumItem, Right: EnumItem, RightAlt: EnumItem, RightBracket: EnumItem, RightControl: EnumItem, RightShift: EnumItem, S: EnumItem, Semicolon: EnumItem, Seven: EnumItem, Six: EnumItem, Slash: EnumItem, Space: EnumItem, T: EnumItem, Tab: EnumItem, Three: EnumItem, Two: EnumItem, U: EnumItem, Unknown: EnumItem, Up: EnumItem, V: EnumItem, W: EnumItem, X: EnumItem, Y: EnumItem, Z: EnumItem, Zero: EnumItem },
     Material: { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },
     NormalId: { Back: EnumItem, Bottom: EnumItem, Front: EnumItem, Left: EnumItem, Right: EnumItem, Top: EnumItem },

@@ -2388,6 +2388,156 @@
     "documentation": "How see-through the image itself renders (the background has its own transparency), clamped 0 (opaque) to 1 (invisible).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ImageLabel.html#imagetransparency"
   },
+  "@bettervoxel/globaltype/InputAction": {
+    "documentation": "One typed input under an InputContext — Bool, Direction1D, Direction2D or Direction3D — driven by its InputBinding children every frame; GetState reads it, StateChanged/Pressed/Released fire on change.",
+    "keys": {
+      "Enabled": "@bettervoxel/globaltype/InputAction.Enabled",
+      "Fire": "@bettervoxel/globaltype/InputAction.Fire",
+      "GetState": "@bettervoxel/globaltype/InputAction.GetState",
+      "Pressed": "@bettervoxel/globaltype/InputAction.Pressed",
+      "Released": "@bettervoxel/globaltype/InputAction.Released",
+      "StateChanged": "@bettervoxel/globaltype/InputAction.StateChanged",
+      "Type": "@bettervoxel/globaltype/InputAction.Type"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html"
+  },
+  "@bettervoxel/globaltype/InputAction.Enabled": {
+    "documentation": "Whether the action is driven by its bindings and Fire (true by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html#enabled"
+  },
+  "@bettervoxel/globaltype/InputAction.Fire": {
+    "documentation": "Writes the state from a script — a boolean, a number, a Vector2 or a Vector3 by the Type — firing StateChanged (and Pressed/Released for a Bool) on a real change. The way an action with no bindings is driven; bound actions are overwritten by their keys next frame.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html#fire",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/InputAction.Fire/param/0",
+        "name": "state"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/InputAction.Fire/param/0": {
+    "documentation": "`state: any`"
+  },
+  "@bettervoxel/globaltype/InputAction.GetState": {
+    "documentation": "The current state as the Type reads it: a boolean, a number in -1..1, a Vector2 or a Vector3 — driven every frame by the InputBinding children, or by Fire when there are none.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html#getstate",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/InputAction.GetState/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/InputAction.GetState/return/0": {
+    "documentation": "`any`"
+  },
+  "@bettervoxel/globaltype/InputAction.Pressed": {
+    "documentation": "Bool actions: fires with true when the state goes from released to pressed.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html#pressed"
+  },
+  "@bettervoxel/globaltype/InputAction.Released": {
+    "documentation": "Bool actions: fires with false when the state goes from pressed to released.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html#released"
+  },
+  "@bettervoxel/globaltype/InputAction.StateChanged": {
+    "documentation": "Fires with the new state whenever it changes, never for a same-state write; a held direction fires once, so poll GetState for continuous input.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html#statechanged"
+  },
+  "@bettervoxel/globaltype/InputAction.Type": {
+    "documentation": "What the action carries: Bool (a press), Direction1D (a number), Direction2D (a Vector2) or Direction3D (a Vector3). Writes accept the item or its name and reset the state.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputAction.html#type"
+  },
+  "@bettervoxel/globaltype/InputBinding": {
+    "documentation": "One key binding under an InputAction: KeyCode for a Bool or Direction1D action, the Up/Down/Left/Right/Forward/Backward keys for a directional one, modifiers that must be held, the output scales and the unit-length clamp.",
+    "keys": {
+      "Backward": "@bettervoxel/globaltype/InputBinding.Backward",
+      "ClampMagnitudeToOne": "@bettervoxel/globaltype/InputBinding.ClampMagnitudeToOne",
+      "Down": "@bettervoxel/globaltype/InputBinding.Down",
+      "Forward": "@bettervoxel/globaltype/InputBinding.Forward",
+      "KeyCode": "@bettervoxel/globaltype/InputBinding.KeyCode",
+      "Left": "@bettervoxel/globaltype/InputBinding.Left",
+      "PrimaryModifier": "@bettervoxel/globaltype/InputBinding.PrimaryModifier",
+      "Right": "@bettervoxel/globaltype/InputBinding.Right",
+      "Scale": "@bettervoxel/globaltype/InputBinding.Scale",
+      "SecondaryModifier": "@bettervoxel/globaltype/InputBinding.SecondaryModifier",
+      "Up": "@bettervoxel/globaltype/InputBinding.Up",
+      "Vector2Scale": "@bettervoxel/globaltype/InputBinding.Vector2Scale",
+      "Vector3Scale": "@bettervoxel/globaltype/InputBinding.Vector3Scale"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html"
+  },
+  "@bettervoxel/globaltype/InputBinding.Backward": {
+    "documentation": "The composite key for +Z; Unknown when unset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#backward"
+  },
+  "@bettervoxel/globaltype/InputBinding.ClampMagnitudeToOne": {
+    "documentation": "Whether a composite direction longer than 1 (two keys at once) is clamped to unit length before the scales (true by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#clampmagnitudetoone"
+  },
+  "@bettervoxel/globaltype/InputBinding.Down": {
+    "documentation": "The composite key for -Y; Unknown when unset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#down"
+  },
+  "@bettervoxel/globaltype/InputBinding.Forward": {
+    "documentation": "The composite key for -Z (a Direction3D's (0, 0, -1)); Unknown when unset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#forward"
+  },
+  "@bettervoxel/globaltype/InputBinding.KeyCode": {
+    "documentation": "The key driving a Bool action (pressed) or a Direction1D one (+1); Unknown when unset. Writes accept the item, its name, or Unknown to clear.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#keycode"
+  },
+  "@bettervoxel/globaltype/InputBinding.Left": {
+    "documentation": "The composite key for -X (a Direction2D's (-1, 0)); Unknown when unset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#left"
+  },
+  "@bettervoxel/globaltype/InputBinding.PrimaryModifier": {
+    "documentation": "A key that must be held for the binding to count; Unknown (the default) requires none.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#primarymodifier"
+  },
+  "@bettervoxel/globaltype/InputBinding.Right": {
+    "documentation": "The composite key for +X; Unknown when unset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#right"
+  },
+  "@bettervoxel/globaltype/InputBinding.Scale": {
+    "documentation": "A multiplier on every component of a directional action's output (1 by default), applied after the clamp.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#scale"
+  },
+  "@bettervoxel/globaltype/InputBinding.SecondaryModifier": {
+    "documentation": "A second key that must be held for the binding to count; Unknown (the default) requires none.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#secondarymodifier"
+  },
+  "@bettervoxel/globaltype/InputBinding.Up": {
+    "documentation": "The composite key for +Y (a Direction1D's +1, a Direction2D's (0, 1), a Direction3D's (0, 1, 0)); Unknown when unset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#up"
+  },
+  "@bettervoxel/globaltype/InputBinding.Vector2Scale": {
+    "documentation": "A per-component multiplier on a Direction2D action's output ((1, 1) by default), applied after the clamp.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#vector2scale"
+  },
+  "@bettervoxel/globaltype/InputBinding.Vector3Scale": {
+    "documentation": "A per-component multiplier on a Direction3D action's output ((1, 1, 1) by default), applied after the clamp.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#vector3scale"
+  },
+  "@bettervoxel/globaltype/InputContext": {
+    "documentation": "A group of InputActions: contexts are read in descending Priority, and a Sink context consumes the keys its bindings use before lower-priority contexts see them. Under a Player, its actions' states reach the server.",
+    "keys": {
+      "Enabled": "@bettervoxel/globaltype/InputContext.Enabled",
+      "Priority": "@bettervoxel/globaltype/InputContext.Priority",
+      "Sink": "@bettervoxel/globaltype/InputContext.Sink"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputContext.html"
+  },
+  "@bettervoxel/globaltype/InputContext.Enabled": {
+    "documentation": "Whether the context's actions are read at all (true by default). A disabled context's actions hold their last state.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputContext.html#enabled"
+  },
+  "@bettervoxel/globaltype/InputContext.Priority": {
+    "documentation": "Contexts are read in descending priority (0 by default; an integer, a fraction truncates): a higher context's Sink consumes keys before a lower one sees them.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputContext.html#priority"
+  },
+  "@bettervoxel/globaltype/InputContext.Sink": {
+    "documentation": "When true, the keys this context's bindings read are consumed at its priority and never reach lower-priority contexts (false by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputContext.html#sink"
+  },
   "@bettervoxel/globaltype/Instance": {
     "documentation": "The root of the class tree: identity (Name, ClassName), the Parent tree with its hierarchy signals, attributes, and lifetime (Clone, Destroy). Every scriptable object is an Instance.",
     "keys": {

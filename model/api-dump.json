@@ -985,6 +985,191 @@
       "summary": "A UI element that displays an image asset."
     },
     {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the action is driven by its bindings and Fire (true by default)."
+        },
+        {
+          "decl": "(state: any) -> ()",
+          "kind": "Method",
+          "name": "Fire",
+          "params": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [],
+          "summary": "Writes the state from a script — a boolean, a number, a Vector2 or a Vector3 by the Type — firing StateChanged (and Pressed/Released for a Bool) on a real change. The way an action with no bindings is driven; bound actions are overwritten by their keys next frame."
+        },
+        {
+          "decl": "() -> any",
+          "kind": "Method",
+          "name": "GetState",
+          "params": [],
+          "returns": [
+            {
+              "type": "any"
+            }
+          ],
+          "summary": "The current state as the Type reads it: a boolean, a number in -1..1, a Vector2 or a Vector3 — driven every frame by the InputBinding children, or by Fire when there are none."
+        },
+        {
+          "decl": "BVScriptSignal<boolean>",
+          "kind": "Signal",
+          "name": "Pressed",
+          "payloads": [
+            "boolean"
+          ],
+          "summary": "Bool actions: fires with true when the state goes from released to pressed."
+        },
+        {
+          "decl": "BVScriptSignal<boolean>",
+          "kind": "Signal",
+          "name": "Released",
+          "payloads": [
+            "boolean"
+          ],
+          "summary": "Bool actions: fires with false when the state goes from pressed to released."
+        },
+        {
+          "decl": "BVScriptSignal<any>",
+          "kind": "Signal",
+          "name": "StateChanged",
+          "payloads": [
+            "any"
+          ],
+          "summary": "Fires with the new state whenever it changes, never for a same-state write; a held direction fires once, so poll GetState for continuous input."
+        },
+        {
+          "decl": "Enum.InputActionType",
+          "kind": "ReadWrite",
+          "name": "Type",
+          "summary": "What the action carries: Bool (a press), Direction1D (a number), Direction2D (a Vector2) or Direction3D (a Vector3). Writes accept the item or its name and reset the state."
+        }
+      ],
+      "name": "InputAction",
+      "parent": "Instance",
+      "summary": "One typed input under an InputContext — Bool, Direction1D, Direction2D or Direction3D — driven by its InputBinding children every frame; GetState reads it, StateChanged/Pressed/Released fire on change."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "Backward",
+          "summary": "The composite key for +Z; Unknown when unset."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ClampMagnitudeToOne",
+          "summary": "Whether a composite direction longer than 1 (two keys at once) is clamped to unit length before the scales (true by default)."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "Down",
+          "summary": "The composite key for -Y; Unknown when unset."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "Forward",
+          "summary": "The composite key for -Z (a Direction3D's (0, 0, -1)); Unknown when unset."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "KeyCode",
+          "summary": "The key driving a Bool action (pressed) or a Direction1D one (+1); Unknown when unset. Writes accept the item, its name, or Unknown to clear."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "Left",
+          "summary": "The composite key for -X (a Direction2D's (-1, 0)); Unknown when unset."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "PrimaryModifier",
+          "summary": "A key that must be held for the binding to count; Unknown (the default) requires none."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "Right",
+          "summary": "The composite key for +X; Unknown when unset."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Scale",
+          "summary": "A multiplier on every component of a directional action's output (1 by default), applied after the clamp."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "SecondaryModifier",
+          "summary": "A second key that must be held for the binding to count; Unknown (the default) requires none."
+        },
+        {
+          "decl": "Enum.KeyCode",
+          "kind": "ReadWrite",
+          "name": "Up",
+          "summary": "The composite key for +Y (a Direction1D's +1, a Direction2D's (0, 1), a Direction3D's (0, 1, 0)); Unknown when unset."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "ReadWrite",
+          "name": "Vector2Scale",
+          "summary": "A per-component multiplier on a Direction2D action's output ((1, 1) by default), applied after the clamp."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Vector3Scale",
+          "summary": "A per-component multiplier on a Direction3D action's output ((1, 1, 1) by default), applied after the clamp."
+        }
+      ],
+      "name": "InputBinding",
+      "parent": "Instance",
+      "summary": "One key binding under an InputAction: KeyCode for a Bool or Direction1D action, the Up/Down/Left/Right/Forward/Backward keys for a directional one, modifiers that must be held, the output scales and the unit-length clamp."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the context's actions are read at all (true by default). A disabled context's actions hold their last state."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Priority",
+          "summary": "Contexts are read in descending priority (0 by default; an integer, a fraction truncates): a higher context's Sink consumes keys before a lower one sees them."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Sink",
+          "summary": "When true, the keys this context's bindings read are consumed at its priority and never reach lower-priority contexts (false by default)."
+        }
+      ],
+      "name": "InputContext",
+      "parent": "Instance",
+      "summary": "A group of InputActions: contexts are read in descending Priority, and a Sink context consumes the keys its bindings use before lower-priority contexts see them. Under a Player, its actions' states reach the server."
+    },
+    {
       "creatable": false,
       "members": [
         {
@@ -4748,6 +4933,12 @@
       "Center",
       "Left",
       "Right"
+    ],
+    "InputActionType": [
+      "Bool",
+      "Direction1D",
+      "Direction2D",
+      "Direction3D"
     ],
     "KeyCode": [
       "A",
