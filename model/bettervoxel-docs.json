@@ -2568,6 +2568,7 @@
       "IsDescendantOf": "@bettervoxel/globaltype/Instance.IsDescendantOf",
       "Name": "@bettervoxel/globaltype/Instance.Name",
       "Parent": "@bettervoxel/globaltype/Instance.Parent",
+      "PredictionMode": "@bettervoxel/globaltype/Instance.PredictionMode",
       "SetAttribute": "@bettervoxel/globaltype/Instance.SetAttribute",
       "WaitForChild": "@bettervoxel/globaltype/Instance.WaitForChild"
     },
@@ -2904,6 +2905,10 @@
   "@bettervoxel/globaltype/Instance.Parent": {
     "documentation": "The instance's parent in the object tree, or nil for a detached root. Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#parent"
+  },
+  "@bettervoxel/globaltype/Instance.PredictionMode": {
+    "documentation": "Whether a client predicts this instance under server authority (net-sync-v2 §2.9): Automatic unless RunService:SetPredictionMode forced it On or Off on this client. Read-only; the reference shows it in Studio only under server authority.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#predictionmode"
   },
   "@bettervoxel/globaltype/Instance.SetAttribute": {
     "documentation": "Writes the named attribute: a primitive or datatype (Vector3, Color3, CFrame) stores directly, a table stores a structured record, and nil REMOVES the attribute (also the way to change its type: remove, then set). Writes coerce onto the attribute's declared shape — out-of-range values error, a record write merges field by field with missing fields keeping their values. Every landed write fires AttributeChanged then the per-name signal; same-value writes are silent. Names are capped at 100 characters and cannot be empty; non-finite components refuse.",
@@ -3869,12 +3874,14 @@
       "BindToRenderStep": "@bettervoxel/globaltype/RunService.BindToRenderStep",
       "BindToSimulation": "@bettervoxel/globaltype/RunService.BindToSimulation",
       "ClassName": "@bettervoxel/globaltype/RunService.ClassName",
+      "GetPredictionStatus": "@bettervoxel/globaltype/RunService.GetPredictionStatus",
       "Heartbeat": "@bettervoxel/globaltype/RunService.Heartbeat",
       "IsA": "@bettervoxel/globaltype/RunService.IsA",
       "IsClient": "@bettervoxel/globaltype/RunService.IsClient",
       "IsResimulating": "@bettervoxel/globaltype/RunService.IsResimulating",
       "IsServer": "@bettervoxel/globaltype/RunService.IsServer",
       "IsStudio": "@bettervoxel/globaltype/RunService.IsStudio",
+      "Misprediction": "@bettervoxel/globaltype/RunService.Misprediction",
       "Name": "@bettervoxel/globaltype/RunService.Name",
       "PostSimulation": "@bettervoxel/globaltype/RunService.PostSimulation",
       "PreAnimation": "@bettervoxel/globaltype/RunService.PreAnimation",
@@ -3882,6 +3889,7 @@
       "PreSimulation": "@bettervoxel/globaltype/RunService.PreSimulation",
       "RenderStepped": "@bettervoxel/globaltype/RunService.RenderStepped",
       "Rollback": "@bettervoxel/globaltype/RunService.Rollback",
+      "SetPredictionMode": "@bettervoxel/globaltype/RunService.SetPredictionMode",
       "Stepped": "@bettervoxel/globaltype/RunService.Stepped",
       "UnbindFromRenderStep": "@bettervoxel/globaltype/RunService.UnbindFromRenderStep"
     },
@@ -3952,6 +3960,25 @@
     "documentation": "The class name — the first name IsA answers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#classname"
   },
+  "@bettervoxel/globaltype/RunService.GetPredictionStatus": {
+    "documentation": "What instance is to this end: Authoritative on the server, Predicted on a client that predicts it under server authority, None otherwise (the classic rules apply). Readable inside a BindToSimulation callback, so one bound module can run on both ends and skip what neither end simulates.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#getpredictionstatus",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.GetPredictionStatus/param/0",
+        "name": "instance"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.GetPredictionStatus/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.GetPredictionStatus/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/RunService.GetPredictionStatus/return/0": {
+    "documentation": "`Enum.PredictionStatus`"
+  },
   "@bettervoxel/globaltype/RunService.Heartbeat": {
     "documentation": "Fires once per frame after the physics step with the frame's delta time in script-clock seconds. The workhorse per-frame hook; a write here renders this frame.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#heartbeat"
@@ -3987,7 +4014,7 @@
     "documentation": "`boolean`"
   },
   "@bettervoxel/globaltype/RunService.IsResimulating": {
-    "documentation": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise. Nothing rolls back yet, so it reads false.",
+    "documentation": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isresimulating",
     "params": [],
     "returns": [
@@ -4019,6 +4046,10 @@
   "@bettervoxel/globaltype/RunService.IsStudio/return/0": {
     "documentation": "`boolean`"
   },
+  "@bettervoxel/globaltype/RunService.Misprediction": {
+    "documentation": "Client only: fires after a received authoritative state differed from the predicted one and the simulation was rolled back and re-run — with the fixed clock's seconds at the tick that diverged, the instances that did (each with the mismatched properties and attributes as { Predicted, Authoritative }, captured at that tick) and the stats ({ ResimulationTime } in seconds). Meant for debugging; a server-side connection never fires.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#misprediction"
+  },
   "@bettervoxel/globaltype/RunService.Name": {
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#name"
@@ -4046,6 +4077,27 @@
   "@bettervoxel/globaltype/RunService.Rollback": {
     "documentation": "Fires when the simulation rolls back to an earlier tick, before that tick and the ones since are re-simulated, with the fixed clock's seconds at the tick's start. Discard custom state kept past that time here; attributes of simulated instances are restored by the engine.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#rollback"
+  },
+  "@bettervoxel/globaltype/RunService.SetPredictionMode": {
+    "documentation": "Client only: forces prediction of instance On or Off, or hands it back to the engine (Automatic — v1 predicts the local character alone). Under server authority a predicted instance's pose, velocities and attributes are checked against every authoritative tick and a mismatch rolls back and re-simulates; under the classic model the mode is kept and nothing predicts. Errors on the server (\"SetPredictionMode can only be called on the client\") and inside a BindToSimulation callback.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#setpredictionmode",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.SetPredictionMode/param/0",
+        "name": "instance"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.SetPredictionMode/param/1",
+        "name": "mode"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RunService.SetPredictionMode/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/RunService.SetPredictionMode/param/1": {
+    "documentation": "`mode: Enum.PredictionMode`"
   },
   "@bettervoxel/globaltype/RunService.Stepped": {
     "documentation": "Fires once per frame before the physics step with (time, step): the seconds since the run started and the simulation's fixed step. A pose or force written here is what this frame simulates.",
@@ -5319,11 +5371,16 @@
   "@bettervoxel/globaltype/Workspace": {
     "documentation": "The root every world object lives under — the `workspace` global. A real class with Model ancestry (measured): it answers PrimaryPart, GetPivot and GetBoundingBox like a Model, refuses the part pose surface, and carries the world-level members Gravity and Raycast.",
     "keys": {
+      "AuthorityMode": "@bettervoxel/globaltype/Workspace.AuthorityMode",
       "CurrentCamera": "@bettervoxel/globaltype/Workspace.CurrentCamera",
       "Gravity": "@bettervoxel/globaltype/Workspace.Gravity",
       "Raycast": "@bettervoxel/globaltype/Workspace.Raycast"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html"
+  },
+  "@bettervoxel/globaltype/Workspace.AuthorityMode": {
+    "documentation": "The place's networking model for this run: Server (the server simulates everything, clients send inputs, predict and roll back) or Automatic (the classic model, an owner per assembly). Authored in the place file's world section; read-only here as in the reference.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#authoritymode"
   },
   "@bettervoxel/globaltype/Workspace.CurrentCamera": {
     "documentation": "The camera the eye renders through — nil where there is none (a dedicated server). Assigning a Camera parented under the workspace makes it current and DETACHES the previous one (Parent nil, alive); an assignee parented elsewhere is replaced the next frame by a fresh Fixed camera, as is a destroyed current camera (measured). Fires its property signal on every change, the engine's included.",

@@ -1535,6 +1535,12 @@
           "summary": "The instance's parent in the object tree, or nil for a detached root. Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy."
         },
         {
+          "decl": "Enum.PredictionMode",
+          "kind": "ReadOnly",
+          "name": "PredictionMode",
+          "summary": "Whether a client predicts this instance under server authority (net-sync-v2 §2.9): Automatic unless RunService:SetPredictionMode forced it On or Off on this client. Read-only; the reference shows it in Studio only under server authority."
+        },
+        {
           "decl": "(name: string, value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil) -> ()",
           "kind": "Method",
           "name": "SetAttribute",
@@ -3100,6 +3106,12 @@
     {
       "creatable": false,
       "members": [
+        {
+          "decl": "Enum.AuthorityMode",
+          "kind": "ReadOnly",
+          "name": "AuthorityMode",
+          "summary": "The place's networking model for this run: Server (the server simulates everything, clients send inputs, predict and roll back) or Automatic (the classic model, an owner per assembly). Authored in the place file's world section; read-only here as in the reference."
+        },
         {
           "decl": "Camera?",
           "kind": "ReadWrite",
@@ -4871,6 +4883,10 @@
       "Border",
       "Contextual"
     ],
+    "AuthorityMode": [
+      "Automatic",
+      "Server"
+    ],
     "CameraType": [
       "Attach",
       "Custom",
@@ -5092,6 +5108,16 @@
       "Delayed",
       "Paused",
       "Playing"
+    ],
+    "PredictionMode": [
+      "Automatic",
+      "Off",
+      "On"
+    ],
+    "PredictionStatus": [
+      "Authoritative",
+      "None",
+      "Predicted"
     ],
     "RaycastFilterType": [
       "Exclude",
@@ -5327,6 +5353,24 @@
           "summary": "The class name — the first name IsA answers."
         },
         {
+          "decl": "(instance: Instance) -> Enum.PredictionStatus",
+          "kind": "Method",
+          "name": "GetPredictionStatus",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Enum.PredictionStatus"
+            }
+          ],
+          "summary": "What instance is to this end: Authoritative on the server, Predicted on a client that predicts it under server authority, None otherwise (the classic rules apply). Readable inside a BindToSimulation callback, so one bound module can run on both ends and skip what neither end simulates."
+        },
+        {
           "decl": "BVScriptSignal<number>",
           "kind": "Signal",
           "name": "Heartbeat",
@@ -5375,7 +5419,7 @@
               "type": "boolean"
             }
           ],
-          "summary": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise. Nothing rolls back yet, so it reads false."
+          "summary": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise."
         },
         {
           "decl": "() -> boolean",
@@ -5400,6 +5444,17 @@
             }
           ],
           "summary": "True in the editor and in the server/client processes its multiplayer session runner launches; false in a standalone runtime. The test-only-code guard."
+        },
+        {
+          "decl": "BVScriptSignal<number, { { Instance: Instance, Properties: { [string]: { Predicted: any, Authoritative: any } }?, Attributes: { [string]: { Predicted: any, Authoritative: any } }? } }, { ResimulationTime: number }>",
+          "kind": "Signal",
+          "name": "Misprediction",
+          "payloads": [
+            "number",
+            "{ { Instance: Instance, Properties: { [string]: { Predicted: any, Authoritative: any } }?, Attributes: { [string]: { Predicted: any, Authoritative: any } }? } }",
+            "{ ResimulationTime: number }"
+          ],
+          "summary": "Client only: fires after a received authoritative state differed from the predicted one and the simulation was rolled back and re-run — with the fixed clock's seconds at the tick that diverged, the instances that did (each with the mismatched properties and attributes as { Predicted, Authoritative }, captured at that tick) and the stats ({ ResimulationTime } in seconds). Meant for debugging; a server-side connection never fires."
         },
         {
           "decl": "string",
@@ -5460,6 +5515,25 @@
             "number"
           ],
           "summary": "Fires when the simulation rolls back to an earlier tick, before that tick and the ones since are re-simulated, with the fixed clock's seconds at the tick's start. Discard custom state kept past that time here; attributes of simulated instances are restored by the engine."
+        },
+        {
+          "decl": "(instance: Instance, mode: Enum.PredictionMode) -> ()",
+          "kind": "Method",
+          "name": "SetPredictionMode",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "mode",
+              "optional": false,
+              "type": "Enum.PredictionMode"
+            }
+          ],
+          "returns": [],
+          "summary": "Client only: forces prediction of instance On or Off, or hands it back to the engine (Automatic — v1 predicts the local character alone). Under server authority a predicted instance's pose, velocities and attributes are checked against every authoritative tick and a mismatch rolls back and re-simulates; under the classic model the mode is kept and nothing predicts. Errors on the server (\"SetPredictionMode can only be called on the client\") and inside a BindToSimulation callback."
         },
         {
           "decl": "BVScriptSignal<number, number>",

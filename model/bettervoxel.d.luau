@@ -163,6 +163,7 @@ declare extern type Instance with
     function IsDescendantOf(self, ancestor: Instance?): boolean
     Name: string
     Parent: Instance?
+    PredictionMode: EnumItem
     function SetAttribute(self, name: string, value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil): ()
     function WaitForChild(self, name: string, timeout: number?): Instance?
 end
@@ -619,6 +620,7 @@ declare extern type UIGridStyleLayout extends UILayout with
 end
 
 declare extern type Workspace extends WorldRoot with
+    AuthorityMode: EnumItem
     CurrentCamera: Camera?
     Gravity: number
     function Raycast(self, origin: Vector3, direction: Vector3, raycastParams: {[string]: any}?): {[string]: any}?
@@ -681,12 +683,14 @@ declare extern type RunService with
     function BindToRenderStep(self, name: string, priority: number, callback: (deltaTime: number) -> ()): ()
     function BindToSimulation(self, callback: (deltaTime: number) -> (), frequency: EnumItem?, priority: number?): BVScriptConnection
     ClassName: string
+    function GetPredictionStatus(self, instance: Instance): EnumItem
     Heartbeat: BVScriptSignal -- fires (number)
     function IsA(self, className: string): boolean
     function IsClient(self): boolean
     function IsResimulating(self): boolean
     function IsServer(self): boolean
     function IsStudio(self): boolean
+    Misprediction: BVScriptSignal -- fires (number, { { Instance: Instance, Properties: { [string]: { Predicted: any, Authoritative: any } }?, Attributes: { [string]: { Predicted: any, Authoritative: any } }? } }, { ResimulationTime: number })
     Name: string
     PostSimulation: BVScriptSignal -- fires (number)
     PreAnimation: BVScriptSignal -- fires (number)
@@ -694,6 +698,7 @@ declare extern type RunService with
     PreSimulation: BVScriptSignal -- fires (number)
     RenderStepped: BVScriptSignal -- fires (number)
     Rollback: BVScriptSignal -- fires (number)
+    function SetPredictionMode(self, instance: Instance, mode: EnumItem): ()
     Stepped: BVScriptSignal -- fires (number, number)
     function UnbindFromRenderStep(self, name: string): ()
 end
@@ -859,6 +864,7 @@ declare Vector3: {
 
 declare Enum: {
     ApplyStrokeMode: { Border: EnumItem, Contextual: EnumItem },
+    AuthorityMode: { Automatic: EnumItem, Server: EnumItem },
     CameraType: { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
     CollisionFidelity: { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
     EasingDirection: { In: EnumItem, InOut: EnumItem, Out: EnumItem },
@@ -880,6 +886,8 @@ declare Enum: {
     ParticleFlipbookMode: { Loop: EnumItem, OneShot: EnumItem, PingPong: EnumItem, Random: EnumItem },
     ParticleOrientation: { FacingCamera: EnumItem, FacingCameraWorldUp: EnumItem, VelocityParallel: EnumItem, VelocityPerpendicular: EnumItem },
     PlaybackState: { Begin: EnumItem, Cancelled: EnumItem, Completed: EnumItem, Delayed: EnumItem, Paused: EnumItem, Playing: EnumItem },
+    PredictionMode: { Automatic: EnumItem, Off: EnumItem, On: EnumItem },
+    PredictionStatus: { Authoritative: EnumItem, None: EnumItem, Predicted: EnumItem },
     RaycastFilterType: { Exclude: EnumItem, Include: EnumItem },
     RenderPriority: { Camera: EnumItem, Character: EnumItem, First: EnumItem, Input: EnumItem, Last: EnumItem },
     RollOffMode: { Inverse: EnumItem, InverseTapered: EnumItem, Linear: EnumItem, LinearSquare: EnumItem },
