@@ -1472,7 +1472,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#cframe"
   },
   "@bettervoxel/globaltype/Camera.CameraSubject": {
-    "documentation": "What the following modes track: any instance, though only one with a world pose (a part, a model, a character) moves the eye. nil restores the default subject — the local player's character, which is also what reads back then (measured).",
+    "documentation": "What the following modes track: any instance, though only one with a world pose (a part, a model, a character) or a Humanoid (followed through its body) moves the eye. The default is the local player's character's Humanoid (measured), and a nil write changes nothing — whatever subject was in place stays (measured).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Camera.html#camerasubject"
   },
   "@bettervoxel/globaltype/Camera.CameraType": {
@@ -1690,7 +1690,7 @@
     "documentation": "`boundingBoxSize: Vector3`"
   },
   "@bettervoxel/globaltype/Character": {
-    "documentation": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. Carries the humanoid surface: Health, WalkSpeed, MoveTo and their signals.",
+    "documentation": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. One collidable part that stands in for the reference's whole rig: its pose surface and Touched are here, its brain is the Humanoid child (character:FindFirstChildOfClass(\"Humanoid\") — the body IS the part, so hit:FindFirstChildOfClass, not hit.Parent).",
     "keys": {
       "AssemblyAngularVelocity": "@bettervoxel/globaltype/Character.AssemblyAngularVelocity",
       "AssemblyCenterOfMass": "@bettervoxel/globaltype/Character.AssemblyCenterOfMass",
@@ -1698,19 +1698,10 @@
       "AssemblyMass": "@bettervoxel/globaltype/Character.AssemblyMass",
       "CFrame": "@bettervoxel/globaltype/Character.CFrame",
       "CenterOfMass": "@bettervoxel/globaltype/Character.CenterOfMass",
-      "Died": "@bettervoxel/globaltype/Character.Died",
-      "Health": "@bettervoxel/globaltype/Character.Health",
-      "JumpPower": "@bettervoxel/globaltype/Character.JumpPower",
       "Mass": "@bettervoxel/globaltype/Character.Mass",
-      "MaxHealth": "@bettervoxel/globaltype/Character.MaxHealth",
-      "Move": "@bettervoxel/globaltype/Character.Move",
-      "MoveTo": "@bettervoxel/globaltype/Character.MoveTo",
-      "MoveToFinished": "@bettervoxel/globaltype/Character.MoveToFinished",
       "Position": "@bettervoxel/globaltype/Character.Position",
       "Rotation": "@bettervoxel/globaltype/Character.Rotation",
-      "TakeDamage": "@bettervoxel/globaltype/Character.TakeDamage",
-      "Touched": "@bettervoxel/globaltype/Character.Touched",
-      "WalkSpeed": "@bettervoxel/globaltype/Character.WalkSpeed"
+      "Touched": "@bettervoxel/globaltype/Character.Touched"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html"
   },
@@ -1738,64 +1729,9 @@
     "documentation": "The character body's local center of mass.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#centerofmass"
   },
-  "@bettervoxel/globaltype/Character.Died": {
-    "documentation": "Fires once per life, when Health reaches zero, with the body still in the world.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#died"
-  },
-  "@bettervoxel/globaltype/Character.Health": {
-    "documentation": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died once; the body stays in the world, dead, until the respawn replaces it. A write on a dead body reads back for the frame and is forced back to 0 on the next pass (measured) — nothing revives it.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#health"
-  },
-  "@bettervoxel/globaltype/Character.JumpPower": {
-    "documentation": "The upward velocity a jump imparts, floored at 0.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#jumppower"
-  },
   "@bettervoxel/globaltype/Character.Mass": {
     "documentation": "The character body's mass.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#mass"
-  },
-  "@bettervoxel/globaltype/Character.MaxHealth": {
-    "documentation": "The health ceiling. Lowering it pulls current Health down with it.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#maxhealth"
-  },
-  "@bettervoxel/globaltype/Character.Move": {
-    "documentation": "Sets a persistent world-space walk direction: the character keeps walking until the next call, and a zero vector stops it. The relativeToCamera flag is client presentation and is ignored here.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#move",
-    "params": [
-      {
-        "documentation": "@bettervoxel/globaltype/Character.Move/param/0",
-        "name": "direction"
-      },
-      {
-        "documentation": "@bettervoxel/globaltype/Character.Move/param/1",
-        "name": "relativeToCamera"
-      }
-    ],
-    "returns": []
-  },
-  "@bettervoxel/globaltype/Character.Move/param/0": {
-    "documentation": "`direction: Vector3`"
-  },
-  "@bettervoxel/globaltype/Character.Move/param/1": {
-    "documentation": "`relativeToCamera: boolean?`"
-  },
-  "@bettervoxel/globaltype/Character.MoveTo": {
-    "documentation": "Walks the character to a point: reached within 1 stud in the horizontal plane, or given up after 8 seconds (every call restarts the timer). MoveToFinished fires with the outcome; a pending MoveTo owns locomotion over Move.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#moveto",
-    "params": [
-      {
-        "documentation": "@bettervoxel/globaltype/Character.MoveTo/param/0",
-        "name": "target"
-      }
-    ],
-    "returns": []
-  },
-  "@bettervoxel/globaltype/Character.MoveTo/param/0": {
-    "documentation": "`target: Vector3`"
-  },
-  "@bettervoxel/globaltype/Character.MoveToFinished": {
-    "documentation": "Fires when a MoveTo ends: true when the target was reached, false on the timeout. A replaced target fires nothing.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#movetofinished"
   },
   "@bettervoxel/globaltype/Character.Position": {
     "documentation": "The character's world position. Writing teleports the character.",
@@ -1805,27 +1741,9 @@
     "documentation": "The character's orientation as XYZ Euler angles in degrees; writing turns the character.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#rotation"
   },
-  "@bettervoxel/globaltype/Character.TakeDamage": {
-    "documentation": "Subtracts amount from Health, floored at zero. Reaching zero fires Died; the body stays, dead, until the respawn replaces it. Negative amounts are ignored.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#takedamage",
-    "params": [
-      {
-        "documentation": "@bettervoxel/globaltype/Character.TakeDamage/param/0",
-        "name": "amount"
-      }
-    ],
-    "returns": []
-  },
-  "@bettervoxel/globaltype/Character.TakeDamage/param/0": {
-    "documentation": "`amount: number`"
-  },
   "@bettervoxel/globaltype/Character.Touched": {
     "documentation": "Fires when a collider starts touching the character body, with the other object.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#touched"
-  },
-  "@bettervoxel/globaltype/Character.WalkSpeed": {
-    "documentation": "The character's walk speed in studs per second, floored at 0.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#walkspeed"
   },
   "@bettervoxel/globaltype/ClickDetector": {
     "documentation": "Makes its parent part clickable: MouseClick fires with the clicking player, within MaxActivationDistance.",
@@ -2366,6 +2284,247 @@
   "@bettervoxel/globaltype/HingeConstraint": {
     "documentation": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html"
+  },
+  "@bettervoxel/globaltype/Humanoid": {
+    "documentation": "A character's brain, a child of the body it drives: Health and MaxHealth with Died and HealthChanged, WalkSpeed and JumpPower, the one-shot Jump, Sit and PlatformStand, MoveTo/Move with MoveDirection, WalkToPoint and MoveToFinished, and the state machine — GetState, StateChanged, Running, Jumping, FreeFalling, Seated, the SetStateEnabled gates. Spawned with every body; Instance.new makes a bodiless one (RootPart nil, state None) that parenting under a body brings alive. Destroying it leaves the body standing, and it never respawns (measured).",
+    "keys": {
+      "Died": "@bettervoxel/globaltype/Humanoid.Died",
+      "DisplayName": "@bettervoxel/globaltype/Humanoid.DisplayName",
+      "FreeFalling": "@bettervoxel/globaltype/Humanoid.FreeFalling",
+      "GetMoveVelocity": "@bettervoxel/globaltype/Humanoid.GetMoveVelocity",
+      "GetState": "@bettervoxel/globaltype/Humanoid.GetState",
+      "GetStateEnabled": "@bettervoxel/globaltype/Humanoid.GetStateEnabled",
+      "Health": "@bettervoxel/globaltype/Humanoid.Health",
+      "HealthChanged": "@bettervoxel/globaltype/Humanoid.HealthChanged",
+      "Jump": "@bettervoxel/globaltype/Humanoid.Jump",
+      "JumpPower": "@bettervoxel/globaltype/Humanoid.JumpPower",
+      "Jumping": "@bettervoxel/globaltype/Humanoid.Jumping",
+      "MaxHealth": "@bettervoxel/globaltype/Humanoid.MaxHealth",
+      "Move": "@bettervoxel/globaltype/Humanoid.Move",
+      "MoveDirection": "@bettervoxel/globaltype/Humanoid.MoveDirection",
+      "MoveTo": "@bettervoxel/globaltype/Humanoid.MoveTo",
+      "MoveToFinished": "@bettervoxel/globaltype/Humanoid.MoveToFinished",
+      "PlatformStand": "@bettervoxel/globaltype/Humanoid.PlatformStand",
+      "RootPart": "@bettervoxel/globaltype/Humanoid.RootPart",
+      "Running": "@bettervoxel/globaltype/Humanoid.Running",
+      "SeatPart": "@bettervoxel/globaltype/Humanoid.SeatPart",
+      "Seated": "@bettervoxel/globaltype/Humanoid.Seated",
+      "SetStateEnabled": "@bettervoxel/globaltype/Humanoid.SetStateEnabled",
+      "Sit": "@bettervoxel/globaltype/Humanoid.Sit",
+      "StateChanged": "@bettervoxel/globaltype/Humanoid.StateChanged",
+      "TakeDamage": "@bettervoxel/globaltype/Humanoid.TakeDamage",
+      "Touched": "@bettervoxel/globaltype/Humanoid.Touched",
+      "WalkSpeed": "@bettervoxel/globaltype/Humanoid.WalkSpeed",
+      "WalkToPart": "@bettervoxel/globaltype/Humanoid.WalkToPart",
+      "WalkToPoint": "@bettervoxel/globaltype/Humanoid.WalkToPoint"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html"
+  },
+  "@bettervoxel/globaltype/Humanoid.Died": {
+    "documentation": "Fires once per life, when Health reaches zero, with the body still in the world.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#died"
+  },
+  "@bettervoxel/globaltype/Humanoid.DisplayName": {
+    "documentation": "The name shown for the character: the body's name at spawn, empty for an Instance.new humanoid (measured). Up to 4096 bytes — the wire's limit; the reference caps nothing (recorded).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#displayname"
+  },
+  "@bettervoxel/globaltype/Humanoid.FreeFalling": {
+    "documentation": "true on entering Freefall and again on Landed (the reference's own quirk, measured); false on Landed and on the return to Running.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#freefalling"
+  },
+  "@bettervoxel/globaltype/Humanoid.GetMoveVelocity": {
+    "documentation": "MoveDirection times WalkSpeed times the intent's length: (WalkSpeed, 0, 0) for Move(1, 0, 0), half for a half-length direction, the unit's y scaled too (measured); zero at rest.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#getmovevelocity",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Humanoid.GetMoveVelocity/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Humanoid.GetMoveVelocity/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Humanoid.GetState": {
+    "documentation": "The current state: Running, Jumping, Freefall, Landed, Seated, PlatformStanding or Dead on a body this end simulates; None for an unparented humanoid. A replica keeps the state it was born with (only the dead latch travels).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#getstate",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Humanoid.GetState/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Humanoid.GetState/return/0": {
+    "documentation": "`Enum.HumanoidStateType`"
+  },
+  "@bettervoxel/globaltype/Humanoid.GetStateEnabled": {
+    "documentation": "Whether SetStateEnabled left the state enabled (measured: every state starts enabled).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#getstateenabled",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.GetStateEnabled/param/0",
+        "name": "state"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Humanoid.GetStateEnabled/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Humanoid.GetStateEnabled/param/0": {
+    "documentation": "`state: Enum.HumanoidStateType`"
+  },
+  "@bettervoxel/globaltype/Humanoid.GetStateEnabled/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Humanoid.Health": {
+    "documentation": "Current health; a write clamps to 0..MaxHealth at once (measured). Reaching zero fires Died once and latches the humanoid dead — the body stays in the world until the respawn replaces it; a write on a dead humanoid reads back for the frame and is forced back to 0 on the next pass (measured) — nothing revives it. Every change fires HealthChanged, after the property's own Changed (measured order). A non-finite write is refused (the reference stores it — recorded).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#health"
+  },
+  "@bettervoxel/globaltype/Humanoid.HealthChanged": {
+    "documentation": "Fires with the new Health on every change — and with the unchanged Health on a MaxHealth write (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#healthchanged"
+  },
+  "@bettervoxel/globaltype/Humanoid.Jump": {
+    "documentation": "A one-shot jump request: true makes the body take off on its next simulated tick (if grounded and Jumping is enabled) and reads back true until then; a seated humanoid stands up on it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#jump"
+  },
+  "@bettervoxel/globaltype/Humanoid.JumpPower": {
+    "documentation": "The upward velocity a jump imparts, floored at 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#jumppower"
+  },
+  "@bettervoxel/globaltype/Humanoid.Jumping": {
+    "documentation": "true on takeoff, false the frame after (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#jumping"
+  },
+  "@bettervoxel/globaltype/Humanoid.MaxHealth": {
+    "documentation": "The ceiling the Health SETTER clamps to, floored at 0 (math.huge accepted). Lowering it leaves the current Health alone (measured: 100 over a MaxHealth of 50 stays 100) and fires HealthChanged with it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#maxhealth"
+  },
+  "@bettervoxel/globaltype/Humanoid.Move": {
+    "documentation": "Sets a persistent world-space walk direction: the body keeps walking until the next call, a zero vector stops it, and the length scales the speed (half a unit walks at half WalkSpeed — measured). The relativeToCamera flag is client presentation and is ignored here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#move",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.Move/param/0",
+        "name": "direction"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.Move/param/1",
+        "name": "relativeToCamera"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Humanoid.Move/param/0": {
+    "documentation": "`direction: Vector3`"
+  },
+  "@bettervoxel/globaltype/Humanoid.Move/param/1": {
+    "documentation": "`relativeToCamera: boolean?`"
+  },
+  "@bettervoxel/globaltype/Humanoid.MoveDirection": {
+    "documentation": "The unit direction of the last accepted Move (the controls, on a possessed body), y included; zero at rest and zero during a MoveTo; kept through sitting and death, where a Move while seated is ignored (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#movedirection"
+  },
+  "@bettervoxel/globaltype/Humanoid.MoveTo": {
+    "documentation": "Walks the body to a point: reached within 1 stud in the horizontal plane, or given up after 8 seconds (every call restarts the timer). MoveToFinished fires with the outcome; a pending MoveTo owns locomotion over Move. With a part, the point is relative to it (WalkToPart) as it moves.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#moveto",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.MoveTo/param/0",
+        "name": "target"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.MoveTo/param/1",
+        "name": "part"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Humanoid.MoveTo/param/0": {
+    "documentation": "`target: Vector3`"
+  },
+  "@bettervoxel/globaltype/Humanoid.MoveTo/param/1": {
+    "documentation": "`part: Instance?`"
+  },
+  "@bettervoxel/globaltype/Humanoid.MoveToFinished": {
+    "documentation": "Fires when a MoveTo ends: true when the target was reached, false on the timeout. A replaced target fires nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#movetofinished"
+  },
+  "@bettervoxel/globaltype/Humanoid.PlatformStand": {
+    "documentation": "Limp: no walking, no jumping, the PlatformStanding state (measured; skipped when SetStateEnabled turned it off); a false write returns the body to Running.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#platformstand"
+  },
+  "@bettervoxel/globaltype/Humanoid.RootPart": {
+    "documentation": "The body this humanoid drives — the one-part Character — or nil for a humanoid parented nowhere a body is (measured: nil fresh from Instance.new and in a Folder).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#rootpart"
+  },
+  "@bettervoxel/globaltype/Humanoid.Running": {
+    "documentation": "Fires with the ground speed as it changes while Running — silent in the air — and with 0 on entering any other state (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#running"
+  },
+  "@bettervoxel/globaltype/Humanoid.SeatPart": {
+    "documentation": "The seat occupied — always nil: no seat class exists yet; Sit seats in place.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#seatpart"
+  },
+  "@bettervoxel/globaltype/Humanoid.Seated": {
+    "documentation": "Fires (true, nil) on sitting and (false, nil) on standing up — the seat nil until a seat class exists.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#seated"
+  },
+  "@bettervoxel/globaltype/Humanoid.SetStateEnabled": {
+    "documentation": "Keeps the state machine OUT of a state, never the motion (measured): Seated or PlatformStanding off skip the state while the body still cannot walk, Jumping off refuses the player's own jump but an NPC still takes off straight into Freefall, Dead off keeps a zero-health humanoid alive and unable to walk. Takes the item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#setstateenabled",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.SetStateEnabled/param/0",
+        "name": "state"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.SetStateEnabled/param/1",
+        "name": "enabled"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Humanoid.SetStateEnabled/param/0": {
+    "documentation": "`state: Enum.HumanoidStateType`"
+  },
+  "@bettervoxel/globaltype/Humanoid.SetStateEnabled/param/1": {
+    "documentation": "`enabled: boolean`"
+  },
+  "@bettervoxel/globaltype/Humanoid.Sit": {
+    "documentation": "Seated in place (no seat class exists yet, so SeatPart stays nil): the body walks nowhere and enters the Seated state with Seated(true, nil) — unless SetStateEnabled turned Seated off, when the state is skipped but the body still cannot walk (measured). A false write stands up; so does a jump on the player's own character (the reference's controls do that), while an NPC stays seated (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#sit"
+  },
+  "@bettervoxel/globaltype/Humanoid.StateChanged": {
+    "documentation": "Fires (old, new) on every state transition, after the state's own signal. The capsule body walks Running, Jumping, Freefall, Landed, Seated, PlatformStanding and Dead.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#statechanged"
+  },
+  "@bettervoxel/globaltype/Humanoid.TakeDamage": {
+    "documentation": "Subtracts amount from Health, floored at zero — reaching zero fires Died; the body stays, dead, until the respawn replaces it. A negative amount heals, past MaxHealth too (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#takedamage",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Humanoid.TakeDamage/param/0",
+        "name": "amount"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Humanoid.TakeDamage/param/0": {
+    "documentation": "`amount: number`"
+  },
+  "@bettervoxel/globaltype/Humanoid.Touched": {
+    "documentation": "Fires (touchingPart, humanoidPart) when a collider starts touching the body this humanoid drives — the toucher, then the one-part body (measured shape, once per contact start, silent at rest — relayed from the body's contacts).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#touched"
+  },
+  "@bettervoxel/globaltype/Humanoid.WalkSpeed": {
+    "documentation": "The body's walk speed in studs per second, floored at 0 (measured: a negative write reads 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#walkspeed"
+  },
+  "@bettervoxel/globaltype/Humanoid.WalkToPart": {
+    "documentation": "The part the last MoveTo target is relative to, or nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#walktopart"
+  },
+  "@bettervoxel/globaltype/Humanoid.WalkToPoint": {
+    "documentation": "The last MoveTo target, kept after arrival (measured). Read-only here where the reference accepts a write — a recorded divergence.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Humanoid.html#walktopoint"
   },
   "@bettervoxel/globaltype/ImageLabel": {
     "documentation": "A UI element that displays an image asset.",
@@ -3571,7 +3730,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#rotation"
   },
   "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter": {
-    "documentation": "Spawns an unowned (NPC) character from this template and returns it, placed at position or standing on the prefab's own pose. The character answers the humanoid surface (Health, MoveTo, ...).",
+    "documentation": "Spawns an unowned (NPC) character from this template and returns it, placed at position or standing on the prefab's own pose. Its Humanoid child answers the humanoid surface (Health, MoveTo, ...).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#spawncharacter",
     "params": [
       {

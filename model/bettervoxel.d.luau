@@ -200,19 +200,10 @@ declare extern type Character extends Instance with
     AssemblyMass: number
     CFrame: CFrame
     CenterOfMass: Vector3
-    Died: BVScriptSignal -- fires ()
-    Health: number
-    JumpPower: number
     Mass: number
-    MaxHealth: number
-    function Move(self, direction: Vector3, relativeToCamera: boolean?): ()
-    function MoveTo(self, target: Vector3): ()
-    MoveToFinished: BVScriptSignal -- fires (boolean)
     Position: Vector3
     Rotation: Vector3
-    function TakeDamage(self, amount: number): ()
     Touched: BVScriptSignal -- fires (Instance)
-    WalkSpeed: number
 end
 
 declare extern type ClickDetector extends Instance with
@@ -230,6 +221,38 @@ declare extern type Folder extends Instance with
 end
 
 declare extern type GuiBase extends Instance with
+end
+
+declare extern type Humanoid extends Instance with
+    Died: BVScriptSignal -- fires ()
+    DisplayName: string
+    FreeFalling: BVScriptSignal -- fires (boolean)
+    function GetMoveVelocity(self): Vector3
+    function GetState(self): EnumItem
+    function GetStateEnabled(self, state: EnumItem): boolean
+    Health: number
+    HealthChanged: BVScriptSignal -- fires (number)
+    Jump: boolean
+    JumpPower: number
+    Jumping: BVScriptSignal -- fires (boolean)
+    MaxHealth: number
+    function Move(self, direction: Vector3, relativeToCamera: boolean?): ()
+    MoveDirection: Vector3
+    function MoveTo(self, target: Vector3, part: Instance?): ()
+    MoveToFinished: BVScriptSignal -- fires (boolean)
+    PlatformStand: boolean
+    RootPart: Instance?
+    Running: BVScriptSignal -- fires (number)
+    SeatPart: Instance?
+    Seated: BVScriptSignal -- fires (boolean, Instance?)
+    function SetStateEnabled(self, state: EnumItem, enabled: boolean): ()
+    Sit: boolean
+    StateChanged: BVScriptSignal -- fires (Enum.HumanoidStateType, Enum.HumanoidStateType)
+    function TakeDamage(self, amount: number): ()
+    Touched: BVScriptSignal -- fires (Instance, Instance)
+    WalkSpeed: number
+    WalkToPart: Instance?
+    WalkToPoint: Vector3
 end
 
 declare extern type InputAction extends Instance with
@@ -813,7 +836,7 @@ declare Font: {
 }
 
 declare Instance: {
-    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "Humanoid") -> Humanoid) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
 }
 
 declare NumberRange: {
@@ -875,6 +898,7 @@ declare Enum: {
     FontStyle: { Italic: EnumItem, Normal: EnumItem },
     FontWeight: { Bold: EnumItem, ExtraBold: EnumItem, ExtraLight: EnumItem, Heavy: EnumItem, Light: EnumItem, Medium: EnumItem, Regular: EnumItem, SemiBold: EnumItem, Thin: EnumItem },
     HorizontalAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
+    HumanoidStateType: { Climbing: EnumItem, Dead: EnumItem, FallingDown: EnumItem, Flying: EnumItem, Freefall: EnumItem, GettingUp: EnumItem, Jumping: EnumItem, Landed: EnumItem, None: EnumItem, Physics: EnumItem, PlatformStanding: EnumItem, Ragdoll: EnumItem, Running: EnumItem, RunningNoPhysics: EnumItem, Seated: EnumItem, StrafingNoPhysics: EnumItem, Swimming: EnumItem },
     InputActionType: { Bool: EnumItem, Direction1D: EnumItem, Direction2D: EnumItem, Direction3D: EnumItem },
     KeyCode: { A: EnumItem, B: EnumItem, BackSlash: EnumItem, Backquote: EnumItem, Backspace: EnumItem, C: EnumItem, CapsLock: EnumItem, Comma: EnumItem, D: EnumItem, Delete: EnumItem, Down: EnumItem, E: EnumItem, Eight: EnumItem, End: EnumItem, Equals: EnumItem, Escape: EnumItem, F: EnumItem, F1: EnumItem, F10: EnumItem, F11: EnumItem, F12: EnumItem, F2: EnumItem, F3: EnumItem, F4: EnumItem, F5: EnumItem, F6: EnumItem, F7: EnumItem, F8: EnumItem, F9: EnumItem, Five: EnumItem, Four: EnumItem, G: EnumItem, H: EnumItem, Home: EnumItem, I: EnumItem, Insert: EnumItem, J: EnumItem, K: EnumItem, L: EnumItem, Left: EnumItem, LeftAlt: EnumItem, LeftBracket: EnumItem, LeftControl: EnumItem, LeftShift: EnumItem, M: EnumItem, Minus: EnumItem, N: EnumItem, Nine: EnumItem, O: EnumItem, One: EnumItem, P: EnumItem, PageDown: EnumItem, PageUp: EnumItem, Period: EnumItem, Q: EnumItem, Quote: EnumItem, R: EnumItem, Return: EnumItem, Right: EnumItem, RightAlt: EnumItem, RightBracket: EnumItem, RightControl: EnumItem, RightShift: EnumItem, S: EnumItem, Semicolon: EnumItem, Seven: EnumItem, Six: EnumItem, Slash: EnumItem, Space: EnumItem, T: EnumItem, Tab: EnumItem, Three: EnumItem, Two: EnumItem, U: EnumItem, Unknown: EnumItem, Up: EnumItem, V: EnumItem, W: EnumItem, X: EnumItem, Y: EnumItem, Z: EnumItem, Zero: EnumItem },
     Material: { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },

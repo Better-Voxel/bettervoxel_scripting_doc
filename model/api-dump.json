@@ -412,7 +412,7 @@
           "decl": "Instance?",
           "kind": "ReadWrite",
           "name": "CameraSubject",
-          "summary": "What the following modes track: any instance, though only one with a world pose (a part, a model, a character) moves the eye. nil restores the default subject — the local player's character, which is also what reads back then (measured)."
+          "summary": "What the following modes track: any instance, though only one with a world pose (a part, a model, a character) or a Humanoid (followed through its body) moves the eye. The default is the local player's character's Humanoid (measured), and a nil write changes nothing — whatever subject was in place stays (measured)."
         },
         {
           "decl": "Enum.CameraType",
@@ -677,77 +677,10 @@
           "summary": "The character body's local center of mass."
         },
         {
-          "decl": "BVScriptSignal",
-          "kind": "Signal",
-          "name": "Died",
-          "payloads": [],
-          "summary": "Fires once per life, when Health reaches zero, with the body still in the world."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "Health",
-          "summary": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died once; the body stays in the world, dead, until the respawn replaces it. A write on a dead body reads back for the frame and is forced back to 0 on the next pass (measured) — nothing revives it."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "JumpPower",
-          "summary": "The upward velocity a jump imparts, floored at 0."
-        },
-        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Mass",
           "summary": "The character body's mass."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "MaxHealth",
-          "summary": "The health ceiling. Lowering it pulls current Health down with it."
-        },
-        {
-          "decl": "(direction: Vector3, relativeToCamera: boolean?) -> ()",
-          "kind": "Method",
-          "name": "Move",
-          "params": [
-            {
-              "name": "direction",
-              "optional": false,
-              "type": "Vector3"
-            },
-            {
-              "name": "relativeToCamera",
-              "optional": true,
-              "type": "boolean?"
-            }
-          ],
-          "returns": [],
-          "summary": "Sets a persistent world-space walk direction: the character keeps walking until the next call, and a zero vector stops it. The relativeToCamera flag is client presentation and is ignored here."
-        },
-        {
-          "decl": "(target: Vector3) -> ()",
-          "kind": "Method",
-          "name": "MoveTo",
-          "params": [
-            {
-              "name": "target",
-              "optional": false,
-              "type": "Vector3"
-            }
-          ],
-          "returns": [],
-          "summary": "Walks the character to a point: reached within 1 stud in the horizontal plane, or given up after 8 seconds (every call restarts the timer). MoveToFinished fires with the outcome; a pending MoveTo owns locomotion over Move."
-        },
-        {
-          "decl": "BVScriptSignal<boolean>",
-          "kind": "Signal",
-          "name": "MoveToFinished",
-          "payloads": [
-            "boolean"
-          ],
-          "summary": "Fires when a MoveTo ends: true when the target was reached, false on the timeout. A replaced target fires nothing."
         },
         {
           "decl": "Vector3",
@@ -762,20 +695,6 @@
           "summary": "The character's orientation as XYZ Euler angles in degrees; writing turns the character."
         },
         {
-          "decl": "(amount: number) -> ()",
-          "kind": "Method",
-          "name": "TakeDamage",
-          "params": [
-            {
-              "name": "amount",
-              "optional": false,
-              "type": "number"
-            }
-          ],
-          "returns": [],
-          "summary": "Subtracts amount from Health, floored at zero. Reaching zero fires Died; the body stays, dead, until the respawn replaces it. Negative amounts are ignored."
-        },
-        {
           "decl": "BVScriptSignal<Instance>",
           "kind": "Signal",
           "name": "Touched",
@@ -783,17 +702,11 @@
             "Instance"
           ],
           "summary": "Fires when a collider starts touching the character body, with the other object."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "WalkSpeed",
-          "summary": "The character's walk speed in studs per second, floored at 0."
         }
       ],
       "name": "Character",
       "parent": "Instance",
-      "summary": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. Carries the humanoid surface: Health, WalkSpeed, MoveTo and their signals."
+      "summary": "A live character body — the physical, scriptable entity a player controls, or an NPC from SpawnCharacter. One collidable part that stands in for the reference's whole rig: its pose surface and Touched are here, its brain is the Humanoid child (character:FindFirstChildOfClass(\"Humanoid\") — the body IS the part, so hit:FindFirstChildOfClass, not hit.Parent)."
     },
     {
       "creatable": true,
@@ -957,6 +870,287 @@
       "name": "HingeConstraint",
       "parent": "Constraint",
       "summary": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Died",
+          "payloads": [],
+          "summary": "Fires once per life, when Health reaches zero, with the body still in the world."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "DisplayName",
+          "summary": "The name shown for the character: the body's name at spawn, empty for an Instance.new humanoid (measured). Up to 4096 bytes — the wire's limit; the reference caps nothing (recorded)."
+        },
+        {
+          "decl": "BVScriptSignal<boolean>",
+          "kind": "Signal",
+          "name": "FreeFalling",
+          "payloads": [
+            "boolean"
+          ],
+          "summary": "true on entering Freefall and again on Landed (the reference's own quirk, measured); false on Landed and on the return to Running."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "GetMoveVelocity",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "MoveDirection times WalkSpeed times the intent's length: (WalkSpeed, 0, 0) for Move(1, 0, 0), half for a half-length direction, the unit's y scaled too (measured); zero at rest."
+        },
+        {
+          "decl": "() -> Enum.HumanoidStateType",
+          "kind": "Method",
+          "name": "GetState",
+          "params": [],
+          "returns": [
+            {
+              "type": "Enum.HumanoidStateType"
+            }
+          ],
+          "summary": "The current state: Running, Jumping, Freefall, Landed, Seated, PlatformStanding or Dead on a body this end simulates; None for an unparented humanoid. A replica keeps the state it was born with (only the dead latch travels)."
+        },
+        {
+          "decl": "(state: Enum.HumanoidStateType) -> boolean",
+          "kind": "Method",
+          "name": "GetStateEnabled",
+          "params": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "Enum.HumanoidStateType"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether SetStateEnabled left the state enabled (measured: every state starts enabled)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Health",
+          "summary": "Current health; a write clamps to 0..MaxHealth at once (measured). Reaching zero fires Died once and latches the humanoid dead — the body stays in the world until the respawn replaces it; a write on a dead humanoid reads back for the frame and is forced back to 0 on the next pass (measured) — nothing revives it. Every change fires HealthChanged, after the property's own Changed (measured order). A non-finite write is refused (the reference stores it — recorded)."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "HealthChanged",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Fires with the new Health on every change — and with the unchanged Health on a MaxHealth write (measured)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Jump",
+          "summary": "A one-shot jump request: true makes the body take off on its next simulated tick (if grounded and Jumping is enabled) and reads back true until then; a seated humanoid stands up on it."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "JumpPower",
+          "summary": "The upward velocity a jump imparts, floored at 0."
+        },
+        {
+          "decl": "BVScriptSignal<boolean>",
+          "kind": "Signal",
+          "name": "Jumping",
+          "payloads": [
+            "boolean"
+          ],
+          "summary": "true on takeoff, false the frame after (measured)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxHealth",
+          "summary": "The ceiling the Health SETTER clamps to, floored at 0 (math.huge accepted). Lowering it leaves the current Health alone (measured: 100 over a MaxHealth of 50 stays 100) and fires HealthChanged with it."
+        },
+        {
+          "decl": "(direction: Vector3, relativeToCamera: boolean?) -> ()",
+          "kind": "Method",
+          "name": "Move",
+          "params": [
+            {
+              "name": "direction",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "relativeToCamera",
+              "optional": true,
+              "type": "boolean?"
+            }
+          ],
+          "returns": [],
+          "summary": "Sets a persistent world-space walk direction: the body keeps walking until the next call, a zero vector stops it, and the length scales the speed (half a unit walks at half WalkSpeed — measured). The relativeToCamera flag is client presentation and is ignored here."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "MoveDirection",
+          "summary": "The unit direction of the last accepted Move (the controls, on a possessed body), y included; zero at rest and zero during a MoveTo; kept through sitting and death, where a Move while seated is ignored (measured)."
+        },
+        {
+          "decl": "(target: Vector3, part: Instance?) -> ()",
+          "kind": "Method",
+          "name": "MoveTo",
+          "params": [
+            {
+              "name": "target",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "part",
+              "optional": true,
+              "type": "Instance?"
+            }
+          ],
+          "returns": [],
+          "summary": "Walks the body to a point: reached within 1 stud in the horizontal plane, or given up after 8 seconds (every call restarts the timer). MoveToFinished fires with the outcome; a pending MoveTo owns locomotion over Move. With a part, the point is relative to it (WalkToPart) as it moves."
+        },
+        {
+          "decl": "BVScriptSignal<boolean>",
+          "kind": "Signal",
+          "name": "MoveToFinished",
+          "payloads": [
+            "boolean"
+          ],
+          "summary": "Fires when a MoveTo ends: true when the target was reached, false on the timeout. A replaced target fires nothing."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "PlatformStand",
+          "summary": "Limp: no walking, no jumping, the PlatformStanding state (measured; skipped when SetStateEnabled turned it off); a false write returns the body to Running."
+        },
+        {
+          "decl": "Instance?",
+          "kind": "ReadOnly",
+          "name": "RootPart",
+          "summary": "The body this humanoid drives — the one-part Character — or nil for a humanoid parented nowhere a body is (measured: nil fresh from Instance.new and in a Folder)."
+        },
+        {
+          "decl": "BVScriptSignal<number>",
+          "kind": "Signal",
+          "name": "Running",
+          "payloads": [
+            "number"
+          ],
+          "summary": "Fires with the ground speed as it changes while Running — silent in the air — and with 0 on entering any other state (measured)."
+        },
+        {
+          "decl": "Instance?",
+          "kind": "ReadOnly",
+          "name": "SeatPart",
+          "summary": "The seat occupied — always nil: no seat class exists yet; Sit seats in place."
+        },
+        {
+          "decl": "BVScriptSignal<boolean, Instance?>",
+          "kind": "Signal",
+          "name": "Seated",
+          "payloads": [
+            "boolean",
+            "Instance?"
+          ],
+          "summary": "Fires (true, nil) on sitting and (false, nil) on standing up — the seat nil until a seat class exists."
+        },
+        {
+          "decl": "(state: Enum.HumanoidStateType, enabled: boolean) -> ()",
+          "kind": "Method",
+          "name": "SetStateEnabled",
+          "params": [
+            {
+              "name": "state",
+              "optional": false,
+              "type": "Enum.HumanoidStateType"
+            },
+            {
+              "name": "enabled",
+              "optional": false,
+              "type": "boolean"
+            }
+          ],
+          "returns": [],
+          "summary": "Keeps the state machine OUT of a state, never the motion (measured): Seated or PlatformStanding off skip the state while the body still cannot walk, Jumping off refuses the player's own jump but an NPC still takes off straight into Freefall, Dead off keeps a zero-health humanoid alive and unable to walk. Takes the item or its name."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Sit",
+          "summary": "Seated in place (no seat class exists yet, so SeatPart stays nil): the body walks nowhere and enters the Seated state with Seated(true, nil) — unless SetStateEnabled turned Seated off, when the state is skipped but the body still cannot walk (measured). A false write stands up; so does a jump on the player's own character (the reference's controls do that), while an NPC stays seated (measured)."
+        },
+        {
+          "decl": "BVScriptSignal<Enum.HumanoidStateType, Enum.HumanoidStateType>",
+          "kind": "Signal",
+          "name": "StateChanged",
+          "payloads": [
+            "Enum.HumanoidStateType",
+            "Enum.HumanoidStateType"
+          ],
+          "summary": "Fires (old, new) on every state transition, after the state's own signal. The capsule body walks Running, Jumping, Freefall, Landed, Seated, PlatformStanding and Dead."
+        },
+        {
+          "decl": "(amount: number) -> ()",
+          "kind": "Method",
+          "name": "TakeDamage",
+          "params": [
+            {
+              "name": "amount",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [],
+          "summary": "Subtracts amount from Health, floored at zero — reaching zero fires Died; the body stays, dead, until the respawn replaces it. A negative amount heals, past MaxHealth too (measured)."
+        },
+        {
+          "decl": "BVScriptSignal<Instance, Instance>",
+          "kind": "Signal",
+          "name": "Touched",
+          "payloads": [
+            "Instance",
+            "Instance"
+          ],
+          "summary": "Fires (touchingPart, humanoidPart) when a collider starts touching the body this humanoid drives — the toucher, then the one-part body (measured shape, once per contact start, silent at rest — relayed from the body's contacts)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "WalkSpeed",
+          "summary": "The body's walk speed in studs per second, floored at 0 (measured: a negative write reads 0)."
+        },
+        {
+          "decl": "Instance?",
+          "kind": "ReadOnly",
+          "name": "WalkToPart",
+          "summary": "The part the last MoveTo target is relative to, or nil."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "WalkToPoint",
+          "summary": "The last MoveTo target, kept after arrival (measured). Read-only here where the reference accepts a write — a recorded divergence."
+        }
+      ],
+      "name": "Humanoid",
+      "parent": "Instance",
+      "summary": "A character's brain, a child of the body it drives: Health and MaxHealth with Died and HealthChanged, WalkSpeed and JumpPower, the one-shot Jump, Sit and PlatformStand, MoveTo/Move with MoveDirection, WalkToPoint and MoveToFinished, and the state machine — GetState, StateChanged, Running, Jumping, FreeFalling, Seated, the SetStateEnabled gates. Spawned with every body; Instance.new makes a bodiless one (RootPart nil, state None) that parenting under a body brings alive. Destroying it leaves the body standing, and it never respawns (measured)."
     },
     {
       "creatable": true,
@@ -2190,7 +2384,7 @@
               "type": "Instance"
             }
           ],
-          "summary": "Spawns an unowned (NPC) character from this template and returns it, placed at position or standing on the prefab's own pose. The character answers the humanoid surface (Health, MoveTo, ...)."
+          "summary": "Spawns an unowned (NPC) character from this template and returns it, placed at position or standing on the prefab's own pose. Its Humanoid child answers the humanoid surface (Health, MoveTo, ...)."
         },
         {
           "decl": "BVScriptSignal<Instance>",
@@ -4958,6 +5152,25 @@
       "Center",
       "Left",
       "Right"
+    ],
+    "HumanoidStateType": [
+      "Climbing",
+      "Dead",
+      "FallingDown",
+      "Flying",
+      "Freefall",
+      "GettingUp",
+      "Jumping",
+      "Landed",
+      "None",
+      "Physics",
+      "PlatformStanding",
+      "Ragdoll",
+      "Running",
+      "RunningNoPhysics",
+      "Seated",
+      "StrafingNoPhysics",
+      "Swimming"
     ],
     "InputActionType": [
       "Bool",
