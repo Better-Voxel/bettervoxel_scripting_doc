@@ -1739,11 +1739,11 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#centerofmass"
   },
   "@bettervoxel/globaltype/Character.Died": {
-    "documentation": "Fires once per life, when Health reaches zero.",
+    "documentation": "Fires once per life, when Health reaches zero, with the body still in the world.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#died"
   },
   "@bettervoxel/globaltype/Character.Health": {
-    "documentation": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died and the respawn pass takes over.",
+    "documentation": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died once; the body stays in the world, dead, until the respawn replaces it. A write on a dead body reads back for the frame and is forced back to 0 on the next pass (measured) — nothing revives it.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#health"
   },
   "@bettervoxel/globaltype/Character.JumpPower": {
@@ -1806,7 +1806,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#rotation"
   },
   "@bettervoxel/globaltype/Character.TakeDamage": {
-    "documentation": "Subtracts amount from Health, floored at zero. Reaching zero fires Died and the respawn pass takes over. Negative amounts are ignored.",
+    "documentation": "Subtracts amount from Health, floored at zero. Reaching zero fires Died; the body stays, dead, until the respawn replaces it. Negative amounts are ignored.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#takedamage",
     "params": [
       {
@@ -3459,10 +3459,11 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#zoffset"
   },
   "@bettervoxel/globaltype/Player": {
-    "documentation": "A joined player's roster identity: UserId, the current Character and its CharacterAdded signal, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service.",
+    "documentation": "A joined player's roster identity: UserId, the current Character (a dead one included until its respawn) with the CharacterAdded and CharacterRemoving signals, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service.",
     "keys": {
       "Character": "@bettervoxel/globaltype/Player.Character",
       "CharacterAdded": "@bettervoxel/globaltype/Player.CharacterAdded",
+      "CharacterRemoving": "@bettervoxel/globaltype/Player.CharacterRemoving",
       "GetNetworkPing": "@bettervoxel/globaltype/Player.GetNetworkPing",
       "LoadCharacter": "@bettervoxel/globaltype/Player.LoadCharacter",
       "PlayerGui": "@bettervoxel/globaltype/Player.PlayerGui",
@@ -3472,12 +3473,16 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html"
   },
   "@bettervoxel/globaltype/Player.Character": {
-    "documentation": "The player's current character body, or nil between spawns. CharacterAdded fires with each new one.",
+    "documentation": "The player's current character body — a dead one included, until the respawn replaces it — or nil while none is loaded (before the first spawn, with CharacterAutoLoads off, or once the player is leaving). CharacterAdded fires with each new one, CharacterRemoving with each one leaving.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#character"
   },
   "@bettervoxel/globaltype/Player.CharacterAdded": {
     "documentation": "Fires with the new character on every spawn, the first included.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#characteradded"
+  },
+  "@bettervoxel/globaltype/Player.CharacterRemoving": {
+    "documentation": "Fires with the character just taken out of the world — the dead body a respawn replaces, the one LoadCharacter replaces, or a leaving player's. Delivered after the swap (measured): the old body's Parent is already nil and Character already the next body (nil on a leave), the old instance still readable; CharacterAdded follows in the same frame. The engine destroys the old body a frame later.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#characterremoving"
   },
   "@bettervoxel/globaltype/Player.GetNetworkPing": {
     "documentation": "One-way network latency to this player's machine in seconds (half the measured round trip). The server answers it for any connected player; a client only for its LocalPlayer — a remote player reads -1 (measured: the reference's no-measurement sentinel), and any player in solo play reads 0 (no transport). Sampled, not instantaneous: it averages the transport's last five probes (one every ~5 s) off frame-boundary clock reads, so it floors near a frame's latency on a local link and trails a link that has just degraded.",
@@ -3491,7 +3496,7 @@
     "documentation": "`number`"
   },
   "@bettervoxel/globaltype/Player.LoadCharacter": {
-    "documentation": "Despawns the player's current character (if any) and spawns a fresh one on the next respawn pass.",
+    "documentation": "Replaces the player's current character (dead or alive) with a fresh one, suspending the calling thread until the swap has landed: CharacterRemoving fires with the old one, CharacterAdded with the new one, and Character is the new one on return. The manual route when CharacterAutoLoads is off. Never returns in a place without a PlayerPrefab to load from.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#loadcharacter",
     "params": [],
     "returns": []
@@ -3604,7 +3609,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html"
   },
   "@bettervoxel/globaltype/Players.CharacterAutoLoads": {
-    "documentation": "Whether characters spawn automatically on join and after death (default true). When false only Player:LoadCharacter spawns one. Consulted as joins and deaths happen — set it at boot.",
+    "documentation": "Whether characters spawn automatically on join and after death (default true). When false only Player:LoadCharacter spawns one, and a dead body stays in the world until then. Consulted as joins and deaths happen — set it at boot.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#characterautoloads"
   },
   "@bettervoxel/globaltype/Players.ClassName": {
@@ -3612,7 +3617,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#classname"
   },
   "@bettervoxel/globaltype/Players.GetPlayers": {
-    "documentation": "Every player currently in the session, in unspecified order.",
+    "documentation": "Every player currently in the session, in unspecified order. A leaving player is already gone from it when its PlayerRemoving is delivered (measured).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#getplayers",
     "params": [],
     "returns": [

@@ -681,13 +681,13 @@
           "kind": "Signal",
           "name": "Died",
           "payloads": [],
-          "summary": "Fires once per life, when Health reaches zero."
+          "summary": "Fires once per life, when Health reaches zero, with the body still in the world."
         },
         {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "Health",
-          "summary": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died and the respawn pass takes over."
+          "summary": "The character's current health, clamped 0..MaxHealth. Reaching zero fires Died once; the body stays in the world, dead, until the respawn replaces it. A write on a dead body reads back for the frame and is forced back to 0 on the next pass (measured) — nothing revives it."
         },
         {
           "decl": "number",
@@ -773,7 +773,7 @@
             }
           ],
           "returns": [],
-          "summary": "Subtracts amount from Health, floored at zero. Reaching zero fires Died and the respawn pass takes over. Negative amounts are ignored."
+          "summary": "Subtracts amount from Health, floored at zero. Reaching zero fires Died; the body stays, dead, until the respawn replaces it. Negative amounts are ignored."
         },
         {
           "decl": "BVScriptSignal<Instance>",
@@ -2047,7 +2047,7 @@
           "decl": "Instance?",
           "kind": "ReadOnly",
           "name": "Character",
-          "summary": "The player's current character body, or nil between spawns. CharacterAdded fires with each new one."
+          "summary": "The player's current character body — a dead one included, until the respawn replaces it — or nil while none is loaded (before the first spawn, with CharacterAutoLoads off, or once the player is leaving). CharacterAdded fires with each new one, CharacterRemoving with each one leaving."
         },
         {
           "decl": "BVScriptSignal<Instance>",
@@ -2057,6 +2057,15 @@
             "Instance"
           ],
           "summary": "Fires with the new character on every spawn, the first included."
+        },
+        {
+          "decl": "BVScriptSignal<Instance>",
+          "kind": "Signal",
+          "name": "CharacterRemoving",
+          "payloads": [
+            "Instance"
+          ],
+          "summary": "Fires with the character just taken out of the world — the dead body a respawn replaces, the one LoadCharacter replaces, or a leaving player's. Delivered after the swap (measured): the old body's Parent is already nil and Character already the next body (nil on a leave), the old instance still readable; CharacterAdded follows in the same frame. The engine destroys the old body a frame later."
         },
         {
           "decl": "() -> number",
@@ -2076,7 +2085,7 @@
           "name": "LoadCharacter",
           "params": [],
           "returns": [],
-          "summary": "Despawns the player's current character (if any) and spawns a fresh one on the next respawn pass."
+          "summary": "Replaces the player's current character (dead or alive) with a fresh one, suspending the calling thread until the swap has landed: CharacterRemoving fires with the old one, CharacterAdded with the new one, and Character is the new one on return. The manual route when CharacterAutoLoads is off. Never returns in a place without a PlayerPrefab to load from."
         },
         {
           "decl": "PlayerGui?",
@@ -2099,7 +2108,7 @@
       ],
       "name": "Player",
       "parent": "Instance",
-      "summary": "A joined player's roster identity: UserId, the current Character and its CharacterAdded signal, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service."
+      "summary": "A joined player's roster identity: UserId, the current Character (a dead one included until its respawn) with the CharacterAdded and CharacterRemoving signals, LoadCharacter, and the per-player RespawnTime (an engine extension — the reference engine keeps it on the Players service). Engine-spawned only; scripts reach players through the Players service."
     },
     {
       "creatable": false,
@@ -5569,7 +5578,7 @@
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "CharacterAutoLoads",
-          "summary": "Whether characters spawn automatically on join and after death (default true). When false only Player:LoadCharacter spawns one. Consulted as joins and deaths happen — set it at boot."
+          "summary": "Whether characters spawn automatically on join and after death (default true). When false only Player:LoadCharacter spawns one, and a dead body stays in the world until then. Consulted as joins and deaths happen — set it at boot."
         },
         {
           "decl": "string",
@@ -5587,7 +5596,7 @@
               "type": "{Player}"
             }
           ],
-          "summary": "Every player currently in the session, in unspecified order."
+          "summary": "Every player currently in the session, in unspecified order. A leaving player is already gone from it when its PlayerRemoving is delivered (measured)."
         },
         {
           "decl": "(className: string) -> boolean",

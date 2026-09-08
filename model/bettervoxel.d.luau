@@ -320,6 +320,7 @@ end
 declare extern type Player extends Instance with
     Character: Instance?
     CharacterAdded: BVScriptSignal -- fires (Instance)
+    CharacterRemoving: BVScriptSignal -- fires (Instance)
     function GetNetworkPing(self): number
     function LoadCharacter(self): ()
     PlayerGui: PlayerGui?
