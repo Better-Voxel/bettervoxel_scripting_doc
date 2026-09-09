@@ -433,6 +433,7 @@ declare extern type BasePart extends PVInstance with
     function GetMass(self): number
     function GetNetworkOwner(self): Instance?
     function GetNetworkOwnershipAuto(self): boolean
+    function GetRenderCFrame(self): CFrame
     Mass: number
     Material: EnumItem
     Position: Vector3
@@ -722,6 +723,7 @@ declare extern type RunService with
     PreSimulation: BVScriptSignal -- fires (number)
     RenderStepped: BVScriptSignal -- fires (number)
     Rollback: BVScriptSignal -- fires (number)
+    function SetCorrectionSmoothing(self, instance: Instance, enabled: boolean): ()
     function SetPredictionMode(self, instance: Instance, mode: EnumItem): ()
     Stepped: BVScriptSignal -- fires (number, number)
     function UnbindFromRenderStep(self, name: string): ()

@@ -185,6 +185,18 @@
           "summary": "Server-only: whether automatic (distance-based) ownership is in effect for this assembly."
         },
         {
+          "decl": "() -> CFrame",
+          "kind": "Method",
+          "name": "GetRenderCFrame",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "The world pose the part is DRAWN at this frame, which differs from CFrame while the render departs from the simulation under server authority: a correction's offset decaying, or a tick mover shown one tick behind (net-sync-v2 §2.9). A camera or an effect that must sit on what is on screen reads this in the render step; game logic reads CFrame."
+        },
+        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Mass",
@@ -5737,6 +5749,25 @@
             "number"
           ],
           "summary": "Fires when the simulation rolls back to an earlier tick, before that tick and the ones since are re-simulated, with the fixed clock's seconds at the tick's start. Discard custom state kept past that time here; attributes of simulated instances are restored by the engine."
+        },
+        {
+          "decl": "(instance: Instance, enabled: boolean) -> ()",
+          "kind": "Method",
+          "name": "SetCorrectionSmoothing",
+          "params": [
+            {
+              "name": "instance",
+              "optional": false,
+              "type": "Instance"
+            },
+            {
+              "name": "enabled",
+              "optional": false,
+              "type": "boolean"
+            }
+          ],
+          "returns": [],
+          "summary": "Client only, an engine extension: whether a correction of this predicted instance is shown spread over the engine's smoothing (the reference's SmoothDamp over 0.07 s, on by default) or as the raw one-frame snap. The smoothing is render-only — the instance's CFrame is corrected whole either way. Errors on the server (\"SetCorrectionSmoothing can only be called on the client\")."
         },
         {
           "decl": "(instance: Instance, mode: Enum.PredictionMode) -> ()",

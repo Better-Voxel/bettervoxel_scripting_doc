@@ -920,6 +920,7 @@
       "GetMass": "@bettervoxel/globaltype/BasePart.GetMass",
       "GetNetworkOwner": "@bettervoxel/globaltype/BasePart.GetNetworkOwner",
       "GetNetworkOwnershipAuto": "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto",
+      "GetRenderCFrame": "@bettervoxel/globaltype/BasePart.GetRenderCFrame",
       "Mass": "@bettervoxel/globaltype/BasePart.Mass",
       "Material": "@bettervoxel/globaltype/BasePart.Material",
       "Position": "@bettervoxel/globaltype/BasePart.Position",
@@ -1049,6 +1050,17 @@
   },
   "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto/return/0": {
     "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/BasePart.GetRenderCFrame": {
+    "documentation": "The world pose the part is DRAWN at this frame, which differs from CFrame while the render departs from the simulation under server authority: a correction's offset decaying, or a tick mover shown one tick behind (net-sync-v2 §2.9). A camera or an effect that must sit on what is on screen reads this in the render step; game logic reads CFrame.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#getrendercframe",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/BasePart.GetRenderCFrame/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BasePart.GetRenderCFrame/return/0": {
+    "documentation": "`CFrame`"
   },
   "@bettervoxel/globaltype/BasePart.Mass": {
     "documentation": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume. Read only.",
@@ -4053,6 +4065,7 @@
       "PreSimulation": "@bettervoxel/globaltype/RunService.PreSimulation",
       "RenderStepped": "@bettervoxel/globaltype/RunService.RenderStepped",
       "Rollback": "@bettervoxel/globaltype/RunService.Rollback",
+      "SetCorrectionSmoothing": "@bettervoxel/globaltype/RunService.SetCorrectionSmoothing",
       "SetPredictionMode": "@bettervoxel/globaltype/RunService.SetPredictionMode",
       "Stepped": "@bettervoxel/globaltype/RunService.Stepped",
       "UnbindFromRenderStep": "@bettervoxel/globaltype/RunService.UnbindFromRenderStep"
@@ -4241,6 +4254,27 @@
   "@bettervoxel/globaltype/RunService.Rollback": {
     "documentation": "Fires when the simulation rolls back to an earlier tick, before that tick and the ones since are re-simulated, with the fixed clock's seconds at the tick's start. Discard custom state kept past that time here; attributes of simulated instances are restored by the engine.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#rollback"
+  },
+  "@bettervoxel/globaltype/RunService.SetCorrectionSmoothing": {
+    "documentation": "Client only, an engine extension: whether a correction of this predicted instance is shown spread over the engine's smoothing (the reference's SmoothDamp over 0.07 s, on by default) or as the raw one-frame snap. The smoothing is render-only — the instance's CFrame is corrected whole either way. Errors on the server (\"SetCorrectionSmoothing can only be called on the client\").",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#setcorrectionsmoothing",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.SetCorrectionSmoothing/param/0",
+        "name": "instance"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.SetCorrectionSmoothing/param/1",
+        "name": "enabled"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RunService.SetCorrectionSmoothing/param/0": {
+    "documentation": "`instance: Instance`"
+  },
+  "@bettervoxel/globaltype/RunService.SetCorrectionSmoothing/param/1": {
+    "documentation": "`enabled: boolean`"
   },
   "@bettervoxel/globaltype/RunService.SetPredictionMode": {
     "documentation": "Client only: forces prediction of instance On or Off, or hands it back to the engine (Automatic — v1 predicts the local character alone). Under server authority a predicted instance's pose, velocities and attributes are checked against every authoritative tick and a mismatch rolls back and re-simulates; under the classic model the mode is kept and nothing predicts. Errors on the server (\"SetPredictionMode can only be called on the client\") and inside a BindToSimulation callback.",
