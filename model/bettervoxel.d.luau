@@ -344,6 +344,7 @@ declare extern type Player extends Instance with
     Character: Instance?
     CharacterAdded: BVScriptSignal -- fires (Instance)
     CharacterRemoving: BVScriptSignal -- fires (Instance)
+    function GetCameraState(self): {CFrame: CFrame, FieldOfView: number, ViewportSize: Vector2}
     function GetNetworkPing(self): number
     function LoadCharacter(self): ()
     PlayerGui: PlayerGui?
@@ -647,6 +648,8 @@ end
 declare extern type Workspace extends WorldRoot with
     AuthorityMode: EnumItem
     CurrentCamera: Camera?
+    function GetRenderedServerTime(self, instance: Instance?): number
+    function GetServerTimeNow(self): number
     Gravity: number
     function Raycast(self, origin: Vector3, direction: Vector3, raycastParams: {[string]: any}?): {[string]: any}?
 end
@@ -709,6 +712,7 @@ declare extern type RunService with
     function BindToSimulation(self, callback: (deltaTime: number) -> (), frequency: EnumItem?, priority: number?): BVScriptConnection
     ClassName: string
     function GetPredictionStatus(self, instance: Instance): EnumItem
+    function GetSessionTick(self): number
     Heartbeat: BVScriptSignal -- fires (number)
     function IsA(self, className: string): boolean
     function IsClient(self): boolean

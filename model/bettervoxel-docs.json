@@ -3635,6 +3635,7 @@
       "Character": "@bettervoxel/globaltype/Player.Character",
       "CharacterAdded": "@bettervoxel/globaltype/Player.CharacterAdded",
       "CharacterRemoving": "@bettervoxel/globaltype/Player.CharacterRemoving",
+      "GetCameraState": "@bettervoxel/globaltype/Player.GetCameraState",
       "GetNetworkPing": "@bettervoxel/globaltype/Player.GetNetworkPing",
       "LoadCharacter": "@bettervoxel/globaltype/Player.LoadCharacter",
       "PlayerGui": "@bettervoxel/globaltype/Player.PlayerGui",
@@ -3654,6 +3655,17 @@
   "@bettervoxel/globaltype/Player.CharacterRemoving": {
     "documentation": "Fires with the character just taken out of the world — the dead body a respawn replaces, the one LoadCharacter replaces, or a leaving player's. Delivered after the swap (measured): the old body's Parent is already nil and Character already the next body (nil on a leave), the old instance still readable; CharacterAdded follows in the same frame. The engine destroys the old body a frame later.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#characterremoving"
+  },
+  "@bettervoxel/globaltype/Player.GetCameraState": {
+    "documentation": "The player's camera state under server authority: CFrame, FieldOfView and ViewportSize. The CFrame rides the player's input stream, synchronized with the inputs of the same simulation tick (the server reads the camera the player's tick was played under — aim and look-direction logic); the other two replicate as properties do, at their own cadence. The server answers it for any player, a client only for its LocalPlayer; raises under the classic networking model.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#getcamerastate",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Player.GetCameraState/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Player.GetCameraState/return/0": {
+    "documentation": "`{CFrame: CFrame, FieldOfView: number, ViewportSize: Vector2}`"
   },
   "@bettervoxel/globaltype/Player.GetNetworkPing": {
     "documentation": "One-way network latency to this player's machine in seconds (half the measured round trip). The server answers it for any connected player; a client only for its LocalPlayer — a remote player reads -1 (measured: the reference's no-measurement sentinel), and any player in solo play reads 0 (no transport). Sampled, not instantaneous: it averages the transport's last five probes (one every ~5 s) off frame-boundary clock reads, so it floors near a frame's latency on a local link and trails a link that has just degraded.",
@@ -4051,6 +4063,7 @@
       "BindToSimulation": "@bettervoxel/globaltype/RunService.BindToSimulation",
       "ClassName": "@bettervoxel/globaltype/RunService.ClassName",
       "GetPredictionStatus": "@bettervoxel/globaltype/RunService.GetPredictionStatus",
+      "GetSessionTick": "@bettervoxel/globaltype/RunService.GetSessionTick",
       "Heartbeat": "@bettervoxel/globaltype/RunService.Heartbeat",
       "IsA": "@bettervoxel/globaltype/RunService.IsA",
       "IsClient": "@bettervoxel/globaltype/RunService.IsClient",
@@ -4155,6 +4168,17 @@
   },
   "@bettervoxel/globaltype/RunService.GetPredictionStatus/return/0": {
     "documentation": "`Enum.PredictionStatus`"
+  },
+  "@bettervoxel/globaltype/RunService.GetSessionTick": {
+    "documentation": "The simulation tick this end stands at, numbered as the session numbers it (an engine extension; the reference has no tick API): the server's own count on the server and in solo play, on a client the server tick its fixed loop is at — its lead ahead of the server included, so an input consumed at tick N is applied by the server at its tick N. Inside a BindToSimulation callback the tick being simulated. -1 on a client before its numbering aligned. A game stamps its own remotes with it, so the other end knows the tick an action happened on.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#getsessiontick",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.GetSessionTick/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.GetSessionTick/return/0": {
+    "documentation": "`number`"
   },
   "@bettervoxel/globaltype/RunService.Heartbeat": {
     "documentation": "Fires once per frame after the physics step with the frame's delta time in script-clock seconds. The workhorse per-frame hook; a write here renders this frame.",
@@ -5571,6 +5595,8 @@
     "keys": {
       "AuthorityMode": "@bettervoxel/globaltype/Workspace.AuthorityMode",
       "CurrentCamera": "@bettervoxel/globaltype/Workspace.CurrentCamera",
+      "GetRenderedServerTime": "@bettervoxel/globaltype/Workspace.GetRenderedServerTime",
+      "GetServerTimeNow": "@bettervoxel/globaltype/Workspace.GetServerTimeNow",
       "Gravity": "@bettervoxel/globaltype/Workspace.Gravity",
       "Raycast": "@bettervoxel/globaltype/Workspace.Raycast"
     },
@@ -5584,12 +5610,42 @@
     "documentation": "The camera the eye renders through — nil where there is none (a dedicated server). Assigning a Camera parented under the workspace makes it current and DETACHES the previous one (Parent nil, alive); an assignee parented elsewhere is replaced the next frame by a fresh Fixed camera, as is a destroyed current camera (measured). Fires its property signal on every change, the engine's included.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#currentcamera"
   },
+  "@bettervoxel/globaltype/Workspace.GetRenderedServerTime": {
+    "documentation": "The server time, in GetServerTimeNow's seconds, the other players' parts are drawn at this frame on a client — the playback's position behind the server (an engine extension). With an instance, that part's own drawn instant, which differs from the world's by a few milliseconds: pass the part a shot hit on the client, so the server's cast (workspace:Raycast with params.ServerTime) finds it where it was drawn — half a stud matters on a fast ship. On the server, and for anything this client does not play back, the server time now.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#getrenderedservertime",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Workspace.GetRenderedServerTime/param/0",
+        "name": "instance"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Workspace.GetRenderedServerTime/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Workspace.GetRenderedServerTime/param/0": {
+    "documentation": "`instance: Instance?`"
+  },
+  "@bettervoxel/globaltype/Workspace.GetRenderedServerTime/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Workspace.GetServerTimeNow": {
+    "documentation": "The server's Unix time in seconds, as this end's session clock estimates it: the server's and solo play's own wall clock, a client's estimate of it — every end reads roughly the same value, whatever its own clock says. Monotonic, and moving at the local clock's rate; for a precise interval use os.clock. Raises on a client before it has joined a server.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#getservertimenow",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Workspace.GetServerTimeNow/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Workspace.GetServerTimeNow/return/0": {
+    "documentation": "`number`"
+  },
   "@bettervoxel/globaltype/Workspace.Gravity": {
     "documentation": "The global gravity magnitude in studs per second squared, applied downward. Parts and the character controller both read it.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#gravity"
   },
   "@bettervoxel/globaltype/Workspace.Raycast": {
-    "documentation": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil; the optional params table filters by instance list and Enum.RaycastFilterType.",
+    "documentation": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil; the optional params table filters by instance list and Enum.RaycastFilterType. On the server under server authority, params.ServerTime (an engine extension: a server time in GetServerTimeNow's seconds — the one a client read from GetRenderedServerTime when it fired) tests every streamed part at the pose the server held at that time and the rest of the world live, so a shot aimed at what a client drew hits what it drew; a time older than the second the history keeps clamps to it. A client cannot pass it: it casts at the poses it draws. Validate the shot's origin against the shooter yourself, as the reference advises: the engine rewinds the targets, not the gun.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#raycast",
     "params": [
       {
