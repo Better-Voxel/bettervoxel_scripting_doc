@@ -303,9 +303,29 @@
   "@bettervoxel/global/Font": {
     "documentation": "The Font constructors — see the Font page.",
     "keys": {
+      "fromEnum": "@bettervoxel/global/Font.fromEnum",
       "new": "@bettervoxel/global/Font.new"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html"
+  },
+  "@bettervoxel/global/Font.fromEnum": {
+    "documentation": "The face a legacy Enum.Font item names: the reference's catalog family (rbxasset://fonts/families/<Family>.json, rendered as the engine default face at the item's weight and style) — the same face the Font property stores, so fromEnum(label.Font) == label.FontFace after a Font write. Enum.Font.Unknown refuses.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#fromenum",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Font.fromEnum/param/0",
+        "name": "font"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Font.fromEnum/return/0"
+    ]
+  },
+  "@bettervoxel/global/Font.fromEnum/param/0": {
+    "documentation": "`font: Enum.Font`"
+  },
+  "@bettervoxel/global/Font.fromEnum/return/0": {
+    "documentation": "`Font`"
   },
   "@bettervoxel/global/Font.new": {
     "documentation": "A Font from a local font asset path — Regular and Normal unless given. Weight and style must be enum items (a name string is refused, as measured).",
@@ -774,6 +794,18 @@
     "documentation": "The zero vector (0, 0, 0).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#zero"
   },
+  "@bettervoxel/global/debug": {
+    "documentation": "Luau's debug library (`traceback`, `info`) plus the reference's profiler and memory-category extras, which validate their arguments and do nothing else here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/delay": {
+    "documentation": "The legacy delay: runs the callback after the given seconds (floored at 1/30 s), passing the seconds elapsed and elapsedTime(). Prefer task.delay.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/elapsedTime": {
+    "documentation": "Seconds since this process booted its first script context.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
   "@bettervoxel/global/game": {
     "documentation": "The DataModel: `game:GetService(name)` hands out the engine services.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html"
@@ -781,6 +813,22 @@
   "@bettervoxel/global/script": {
     "documentation": "The running script's own Instance — `script.Parent` navigates from it.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
+  },
+  "@bettervoxel/global/spawn": {
+    "documentation": "The legacy spawn: runs the callback one legacy cycle (1/30 s) later, never in place, passing the seconds elapsed and elapsedTime(). Prefer task.spawn or task.defer.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/tick": {
+    "documentation": "Seconds since the Unix epoch on this machine's clock, with sub-second precision.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/time": {
+    "documentation": "Seconds the game has been running with scripts live — the pause-aware script clock.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/wait": {
+    "documentation": "The legacy sleep: yields at least the given seconds (floored at 1/30 s, the floor alone with no argument) and returns the seconds slept, then elapsedTime(). Prefer task.wait.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
   },
   "@bettervoxel/global/warn": {
     "documentation": "Prints its arguments to the output as a warning (an engine global — plain Luau has no `warn`).",
@@ -2060,15 +2108,37 @@
     "documentation": "The `game` global: the service registry at the top of everything (measured ancestry DataModel < ServiceProvider < Instance). GetService hands out the engine services; its Name is the place name (\"Game\" until the engine carries one — a recorded stub).",
     "keys": {
       "ClassName": "@bettervoxel/globaltype/DataModel.ClassName",
+      "CollectionService": "@bettervoxel/globaltype/DataModel.CollectionService",
+      "Debris": "@bettervoxel/globaltype/DataModel.Debris",
       "GetService": "@bettervoxel/globaltype/DataModel.GetService",
+      "HttpService": "@bettervoxel/globaltype/DataModel.HttpService",
       "IsA": "@bettervoxel/globaltype/DataModel.IsA",
-      "Name": "@bettervoxel/globaltype/DataModel.Name"
+      "Lighting": "@bettervoxel/globaltype/DataModel.Lighting",
+      "Name": "@bettervoxel/globaltype/DataModel.Name",
+      "Players": "@bettervoxel/globaltype/DataModel.Players",
+      "ReplicatedStorage": "@bettervoxel/globaltype/DataModel.ReplicatedStorage",
+      "RunService": "@bettervoxel/globaltype/DataModel.RunService",
+      "ServerScriptService": "@bettervoxel/globaltype/DataModel.ServerScriptService",
+      "ServerStorage": "@bettervoxel/globaltype/DataModel.ServerStorage",
+      "SoundService": "@bettervoxel/globaltype/DataModel.SoundService",
+      "StarterPlayerScripts": "@bettervoxel/globaltype/DataModel.StarterPlayerScripts",
+      "TweenService": "@bettervoxel/globaltype/DataModel.TweenService",
+      "UserInputService": "@bettervoxel/globaltype/DataModel.UserInputService",
+      "Workspace": "@bettervoxel/globaltype/DataModel.Workspace"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html"
   },
   "@bettervoxel/globaltype/DataModel.ClassName": {
     "documentation": "The class name — the first name IsA answers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#classname"
+  },
+  "@bettervoxel/globaltype/DataModel.CollectionService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#collectionservice"
+  },
+  "@bettervoxel/globaltype/DataModel.Debris": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#debris"
   },
   "@bettervoxel/globaltype/DataModel.GetService": {
     "documentation": "Hands out an engine service by name (\"Players\", \"RunService\", \"TweenService\", …; \"Workspace\" answers the workspace root). Unknown names error.",
@@ -2089,6 +2159,10 @@
   "@bettervoxel/globaltype/DataModel.GetService/return/0": {
     "documentation": "`Instance`"
   },
+  "@bettervoxel/globaltype/DataModel.HttpService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#httpservice"
+  },
   "@bettervoxel/globaltype/DataModel.IsA": {
     "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#isa",
@@ -2108,9 +2182,53 @@
   "@bettervoxel/globaltype/DataModel.IsA/return/0": {
     "documentation": "`boolean`"
   },
+  "@bettervoxel/globaltype/DataModel.Lighting": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#lighting"
+  },
   "@bettervoxel/globaltype/DataModel.Name": {
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#name"
+  },
+  "@bettervoxel/globaltype/DataModel.Players": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#players"
+  },
+  "@bettervoxel/globaltype/DataModel.ReplicatedStorage": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#replicatedstorage"
+  },
+  "@bettervoxel/globaltype/DataModel.RunService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#runservice"
+  },
+  "@bettervoxel/globaltype/DataModel.ServerScriptService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#serverscriptservice"
+  },
+  "@bettervoxel/globaltype/DataModel.ServerStorage": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#serverstorage"
+  },
+  "@bettervoxel/globaltype/DataModel.SoundService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#soundservice"
+  },
+  "@bettervoxel/globaltype/DataModel.StarterPlayerScripts": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#starterplayerscripts"
+  },
+  "@bettervoxel/globaltype/DataModel.TweenService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#tweenservice"
+  },
+  "@bettervoxel/globaltype/DataModel.UserInputService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#userinputservice"
+  },
+  "@bettervoxel/globaltype/DataModel.Workspace": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#workspace"
   },
   "@bettervoxel/globaltype/Debris": {
     "documentation": "Scheduled destruction: AddItem destroys an instance after a lifetime on the pause-aware script clock — fire-and-forget cleanup for projectiles and effects.",
@@ -2188,7 +2306,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#name"
   },
   "@bettervoxel/globaltype/EnumItem.Value": {
-    "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight (the reference's 100..900) and RenderPriority (its 0..2000, the numbers BindToRenderStep takes).",
+    "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight (the reference's 100..900), RenderPriority (its 0..2000, the numbers BindToRenderStep takes) and Font (its 0..51 with Unknown 100, the api dump's).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#value"
   },
   "@bettervoxel/globaltype/Folder": {
@@ -2210,7 +2328,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#bold"
   },
   "@bettervoxel/globaltype/Font.Family": {
-    "documentation": "The typeface as a local font asset path (a .ttf/.otf under the assets root); the empty string is the engine default face. Recorded divergence: the reference engine's Family is a cloud font-family URL.",
+    "documentation": "The typeface as a local font asset path (a .ttf/.otf under the assets root); the empty string is the engine default face, and so renders a reference catalog family (rbxasset://fonts/families/ …, what Font.fromEnum and the legacy Font property store), kept verbatim. Recorded divergence: the reference engine's Family is a cloud font-family URL.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#family"
   },
   "@bettervoxel/globaltype/Font.Style": {
@@ -2296,6 +2414,209 @@
   "@bettervoxel/globaltype/HingeConstraint": {
     "documentation": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html"
+  },
+  "@bettervoxel/globaltype/HttpService": {
+    "documentation": "The JSON codec (JSONEncode/JSONDecode) and random GUIDs, usable everywhere; the request verbs are closed — HttpEnabled is false and GetAsync/PostAsync/RequestAsync error, the engine sends no HTTP.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/HttpService.ClassName",
+      "GenerateGUID": "@bettervoxel/globaltype/HttpService.GenerateGUID",
+      "GetAsync": "@bettervoxel/globaltype/HttpService.GetAsync",
+      "HttpEnabled": "@bettervoxel/globaltype/HttpService.HttpEnabled",
+      "IsA": "@bettervoxel/globaltype/HttpService.IsA",
+      "JSONDecode": "@bettervoxel/globaltype/HttpService.JSONDecode",
+      "JSONEncode": "@bettervoxel/globaltype/HttpService.JSONEncode",
+      "Name": "@bettervoxel/globaltype/HttpService.Name",
+      "PostAsync": "@bettervoxel/globaltype/HttpService.PostAsync",
+      "RequestAsync": "@bettervoxel/globaltype/HttpService.RequestAsync"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html"
+  },
+  "@bettervoxel/globaltype/HttpService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#classname"
+  },
+  "@bettervoxel/globaltype/HttpService.GenerateGUID": {
+    "documentation": "A random version-4 UUID in lowercase hexadecimal, 8-4-4-4-12, wrapped in curly braces unless wrapInCurlyBraces is false (a number counts by zero/nonzero, the strings \"true\"/\"false\" cast; anything else errors `Unable to cast <type> to bool`).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#generateguid",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.GenerateGUID/param/0",
+        "name": "wrapInCurlyBraces"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/HttpService.GenerateGUID/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/HttpService.GenerateGUID/param/0": {
+    "documentation": "`wrapInCurlyBraces: boolean?`"
+  },
+  "@bettervoxel/globaltype/HttpService.GenerateGUID/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/HttpService.GetAsync": {
+    "documentation": "Closed: errors `HTTP requests are not enabled. Enable via Experience Settings` — the engine sends no HTTP.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#getasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.GetAsync/param/0",
+        "name": "url"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.GetAsync/param/1",
+        "name": "nocache"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.GetAsync/param/2",
+        "name": "headers"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/HttpService.GetAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/HttpService.GetAsync/param/0": {
+    "documentation": "`url: string`"
+  },
+  "@bettervoxel/globaltype/HttpService.GetAsync/param/1": {
+    "documentation": "`nocache: boolean?`"
+  },
+  "@bettervoxel/globaltype/HttpService.GetAsync/param/2": {
+    "documentation": "`headers: { [string]: string }?`"
+  },
+  "@bettervoxel/globaltype/HttpService.GetAsync/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/HttpService.HttpEnabled": {
+    "documentation": "Whether scripts may send HTTP requests: false — the engine has no outbound HTTP, and the reference lets only the place's settings write it. The JSON and GUID members work regardless.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#httpenabled"
+  },
+  "@bettervoxel/globaltype/HttpService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/HttpService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/HttpService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/HttpService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/HttpService.JSONDecode": {
+    "documentation": "The JSON text as a value: null is nil, objects string-keyed tables (a null field absent, the tagged non-finite object its number), arrays 1-based tables, numbers doubles; a number argument is its text. Invalid text errors `Can't parse JSON`, nil `Argument 1 missing or nil`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#jsondecode",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.JSONDecode/param/0",
+        "name": "input"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/HttpService.JSONDecode/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/HttpService.JSONDecode/param/0": {
+    "documentation": "`input: string`"
+  },
+  "@bettervoxel/globaltype/HttpService.JSONDecode/return/0": {
+    "documentation": "`any`"
+  },
+  "@bettervoxel/globaltype/HttpService.JSONEncode": {
+    "documentation": "The value as compact JSON (measured): a table with a length is an array of 1..#t (holes null, other keys dropped), an empty table [], any other table an object — its keys a string, a number's integer text or `<Type> (tostring)` for the rest, written sorted; an integral number prints without a decimal point, a non-finite one as {\"m\":null,\"t\":\"numeric\",\"v\":\"inf\"}; nil values are absent; a function, userdata, thread or vector encodes null. A cyclic table errors `tables cannot be cyclic`, a boolean key `Invalid table key type used`, a nest past 512 tables `Can't convert to JSON`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#jsonencode",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.JSONEncode/param/0",
+        "name": "input"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/HttpService.JSONEncode/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/HttpService.JSONEncode/param/0": {
+    "documentation": "`input: any`"
+  },
+  "@bettervoxel/globaltype/HttpService.JSONEncode/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/HttpService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#name"
+  },
+  "@bettervoxel/globaltype/HttpService.PostAsync": {
+    "documentation": "Closed: errors `HTTP requests are not enabled. Enable via Experience Settings` — the engine sends no HTTP.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#postasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.PostAsync/param/0",
+        "name": "url"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.PostAsync/param/1",
+        "name": "data"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.PostAsync/param/2",
+        "name": "contentType"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.PostAsync/param/3",
+        "name": "compress"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.PostAsync/param/4",
+        "name": "headers"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/HttpService.PostAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/HttpService.PostAsync/param/0": {
+    "documentation": "`url: string`"
+  },
+  "@bettervoxel/globaltype/HttpService.PostAsync/param/1": {
+    "documentation": "`data: string`"
+  },
+  "@bettervoxel/globaltype/HttpService.PostAsync/param/2": {
+    "documentation": "`contentType: string?`"
+  },
+  "@bettervoxel/globaltype/HttpService.PostAsync/param/3": {
+    "documentation": "`compress: boolean?`"
+  },
+  "@bettervoxel/globaltype/HttpService.PostAsync/param/4": {
+    "documentation": "`headers: { [string]: string }?`"
+  },
+  "@bettervoxel/globaltype/HttpService.PostAsync/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/HttpService.RequestAsync": {
+    "documentation": "Closed: errors `HTTP requests are not enabled. Enable via Experience Settings` — the engine sends no HTTP.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/HttpService.html#requestasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/HttpService.RequestAsync/param/0",
+        "name": "options"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/HttpService.RequestAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/HttpService.RequestAsync/param/0": {
+    "documentation": "`options: { Url: string, Method: string?, Headers: { [string]: string }?, Body: string? }`"
+  },
+  "@bettervoxel/globaltype/HttpService.RequestAsync/return/0": {
+    "documentation": "`{ Success: boolean, StatusCode: number, StatusMessage: string, Headers: { [string]: string }, Body: string }`"
   },
   "@bettervoxel/globaltype/Humanoid": {
     "documentation": "A character's brain, a child of the body it drives: Health and MaxHealth with Died and HealthChanged, WalkSpeed and JumpPower, the one-shot Jump, Sit and PlatformStand, MoveTo/Move with MoveDirection, WalkToPoint and MoveToFinished, and the state machine — GetState, StateChanged, Running, Jumping, FreeFalling, Seated, the SetStateEnabled gates. Spawned with every body; Instance.new makes a bodiless one (RootPart nil, state None) that parenting under a body brings alive. Destroying it leaves the body standing, and it never respawns (measured).",
@@ -3636,6 +3957,7 @@
       "CharacterAdded": "@bettervoxel/globaltype/Player.CharacterAdded",
       "CharacterRemoving": "@bettervoxel/globaltype/Player.CharacterRemoving",
       "GetCameraState": "@bettervoxel/globaltype/Player.GetCameraState",
+      "GetMouse": "@bettervoxel/globaltype/Player.GetMouse",
       "GetNetworkPing": "@bettervoxel/globaltype/Player.GetNetworkPing",
       "LoadCharacter": "@bettervoxel/globaltype/Player.LoadCharacter",
       "PlayerGui": "@bettervoxel/globaltype/Player.PlayerGui",
@@ -3666,6 +3988,17 @@
   },
   "@bettervoxel/globaltype/Player.GetCameraState/return/0": {
     "documentation": "`{CFrame: CFrame, FieldOfView: number, ViewportSize: Vector2}`"
+  },
+  "@bettervoxel/globaltype/Player.GetMouse": {
+    "documentation": "The player's mouse — the legacy cursor object (X/Y, UnitRay, Hit, Target, TargetFilter, Icon, the button and Move signals) built from the current camera and the local cursor. One object per player, the same on every call; a player that is not this process's reads the defaults and hears no signal.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#getmouse",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Player.GetMouse/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Player.GetMouse/return/0": {
+    "documentation": "`PlayerMouse`"
   },
   "@bettervoxel/globaltype/Player.GetNetworkPing": {
     "documentation": "One-way network latency to this player's machine in seconds (half the measured round trip). The server answers it for any connected player; a client only for its LocalPlayer — a remote player reads -1 (measured: the reference's no-measurement sentinel), and any player in solo play reads 0 (no transport). Sampled, not instantaneous: it averages the transport's last five probes (one every ~5 s) off frame-boundary clock reads, so it floors near a frame's latency on a local link and trails a link that has just degraded.",
@@ -3699,6 +4032,154 @@
   "@bettervoxel/globaltype/PlayerGui": {
     "documentation": "A player's UI container, engine-spawned under each Player at join. ScreenGuis parented here render for the LOCAL player only; contents are client-local (never saved, never replicated in v1).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerGui.html"
+  },
+  "@bettervoxel/globaltype/PlayerMouse": {
+    "documentation": "The legacy cursor object Player:GetMouse returns (identity PlayerMouse < Mouse): the cursor in viewport pixels, the camera ray through it, the part and point it hits, a filter the cast ignores, an icon string, and the button, Move and Idle signals. Built from the current camera, the local cursor and the workspace cast; UserInputService is the modern surface.",
+    "keys": {
+      "Button1Down": "@bettervoxel/globaltype/PlayerMouse.Button1Down",
+      "Button1Up": "@bettervoxel/globaltype/PlayerMouse.Button1Up",
+      "Button2Down": "@bettervoxel/globaltype/PlayerMouse.Button2Down",
+      "Button2Up": "@bettervoxel/globaltype/PlayerMouse.Button2Up",
+      "ClassName": "@bettervoxel/globaltype/PlayerMouse.ClassName",
+      "Destroy": "@bettervoxel/globaltype/PlayerMouse.Destroy",
+      "Hit": "@bettervoxel/globaltype/PlayerMouse.Hit",
+      "Icon": "@bettervoxel/globaltype/PlayerMouse.Icon",
+      "Idle": "@bettervoxel/globaltype/PlayerMouse.Idle",
+      "IsA": "@bettervoxel/globaltype/PlayerMouse.IsA",
+      "KeyDown": "@bettervoxel/globaltype/PlayerMouse.KeyDown",
+      "KeyUp": "@bettervoxel/globaltype/PlayerMouse.KeyUp",
+      "Move": "@bettervoxel/globaltype/PlayerMouse.Move",
+      "Name": "@bettervoxel/globaltype/PlayerMouse.Name",
+      "Origin": "@bettervoxel/globaltype/PlayerMouse.Origin",
+      "Target": "@bettervoxel/globaltype/PlayerMouse.Target",
+      "TargetFilter": "@bettervoxel/globaltype/PlayerMouse.TargetFilter",
+      "TargetSurface": "@bettervoxel/globaltype/PlayerMouse.TargetSurface",
+      "UnitRay": "@bettervoxel/globaltype/PlayerMouse.UnitRay",
+      "ViewSizeX": "@bettervoxel/globaltype/PlayerMouse.ViewSizeX",
+      "ViewSizeY": "@bettervoxel/globaltype/PlayerMouse.ViewSizeY",
+      "WheelBackward": "@bettervoxel/globaltype/PlayerMouse.WheelBackward",
+      "WheelForward": "@bettervoxel/globaltype/PlayerMouse.WheelForward",
+      "X": "@bettervoxel/globaltype/PlayerMouse.X",
+      "Y": "@bettervoxel/globaltype/PlayerMouse.Y"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Button1Down": {
+    "documentation": "Fires when the left mouse button goes down (this process's player only).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#button1down"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Button1Up": {
+    "documentation": "Fires when the left mouse button comes up.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#button1up"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Button2Down": {
+    "documentation": "Fires when the right mouse button goes down.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#button2down"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Button2Up": {
+    "documentation": "Fires when the right mouse button comes up.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#button2up"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#classname"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Destroy": {
+    "documentation": "A no-op (measured): the mouse outlives the call and the next GetMouse answers the same object.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#destroy",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Hit": {
+    "documentation": "A CFrame at the point the cursor's ray hits, with Origin's rotation; 10000 studs from Origin when nothing is hit (measured). TargetFilter's subtree and the player's own character are ignored.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#hit"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Icon": {
+    "documentation": "The cursor image's content id, stored as written; the empty string (the default) is the platform arrow. Nothing here draws it yet.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#icon"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Idle": {
+    "documentation": "Fires on every frame no other mouse signal fired — not a stillness test, it fires between Move deliveries too.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#idle"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/PlayerMouse.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/PlayerMouse.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/PlayerMouse.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.KeyDown": {
+    "documentation": "The reference's deprecated key-down signal (measured to exist); never fires here — keys ride UserInputService.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#keydown"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.KeyUp": {
+    "documentation": "The reference's deprecated key-up signal (measured to exist); never fires here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#keyup"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Move": {
+    "documentation": "Fires on every frame the cursor's position changed.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#move"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#name"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Origin": {
+    "documentation": "A CFrame at UnitRay's origin — the current camera's near plane, measured — looking along it (the camera's roll ignored); the identity without a camera.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#origin"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Target": {
+    "documentation": "The part the cursor's ray hits, or nil (the sky, or nothing within 10000 studs).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#target"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.TargetFilter": {
+    "documentation": "An instance the cursor's cast ignores along with its descendants (nil, the default, ignores nothing beyond the player's own character). Only an Instance or nil can be assigned: `Unable to assign property TargetFilter. Instance expected, got number` (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#targetfilter"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.TargetSurface": {
+    "documentation": "The face of Target the ray hits, as its NormalId; Right when nothing is hit (documented) — check Target first.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#targetsurface"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.UnitRay": {
+    "documentation": "The unit ray through the cursor, its origin on the current camera's near plane — what Camera:ViewportPointToRay(X, Y) answers (measured); a zero ray without a camera.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#unitray"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.ViewSizeX": {
+    "documentation": "The current camera's viewport width in pixels (0 without a camera).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#viewsizex"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.ViewSizeY": {
+    "documentation": "The current camera's viewport height in pixels (0 without a camera).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#viewsizey"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.WheelBackward": {
+    "documentation": "The reference's wheel-backward signal (measured to exist); never fires here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#wheelbackward"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.WheelForward": {
+    "documentation": "The reference's wheel-forward signal (measured to exist); the engine's cursor carries no wheel, so it never fires.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#wheelforward"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.X": {
+    "documentation": "The cursor's horizontal position in viewport pixels from the left (0 without a cursor, and always for a player that is not this process's). Fires no property signal — connect Move.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#x"
+  },
+  "@bettervoxel/globaltype/PlayerMouse.Y": {
+    "documentation": "The cursor's vertical position in viewport pixels from the top (0 without a cursor).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#y"
   },
   "@bettervoxel/globaltype/PlayerPrefab": {
     "documentation": "The character template: joining players spawn their characters from it, SpawnCharacter builds NPCs from it, and its pose is where they stand.",
@@ -3781,6 +4262,8 @@
     "keys": {
       "CharacterAutoLoads": "@bettervoxel/globaltype/Players.CharacterAutoLoads",
       "ClassName": "@bettervoxel/globaltype/Players.ClassName",
+      "GetPlayerByUserId": "@bettervoxel/globaltype/Players.GetPlayerByUserId",
+      "GetPlayerFromCharacter": "@bettervoxel/globaltype/Players.GetPlayerFromCharacter",
       "GetPlayers": "@bettervoxel/globaltype/Players.GetPlayers",
       "IsA": "@bettervoxel/globaltype/Players.IsA",
       "LocalPlayer": "@bettervoxel/globaltype/Players.LocalPlayer",
@@ -3798,6 +4281,44 @@
   "@bettervoxel/globaltype/Players.ClassName": {
     "documentation": "The class name — the first name IsA answers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#classname"
+  },
+  "@bettervoxel/globaltype/Players.GetPlayerByUserId": {
+    "documentation": "The player with that UserId, or nil when nobody in the session has it — a fractional number is nobody's (measured); a numeric string converts. nil errors `Argument 1 missing or nil`; a non-number `Unable to cast <type> to User`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#getplayerbyuserid",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Players.GetPlayerByUserId/param/0",
+        "name": "userId"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Players.GetPlayerByUserId/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Players.GetPlayerByUserId/param/0": {
+    "documentation": "`userId: number`"
+  },
+  "@bettervoxel/globaltype/Players.GetPlayerByUserId/return/0": {
+    "documentation": "`Player?`"
+  },
+  "@bettervoxel/globaltype/Players.GetPlayerFromCharacter": {
+    "documentation": "The player whose Character is the given instance, or nil when it is nobody's (a dead body still counts until its respawn replaces it); nil answers nil (measured). A non-Instance errors `Unable to cast value to Object`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#getplayerfromcharacter",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Players.GetPlayerFromCharacter/param/0",
+        "name": "character"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Players.GetPlayerFromCharacter/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Players.GetPlayerFromCharacter/param/0": {
+    "documentation": "`character: Instance`"
+  },
+  "@bettervoxel/globaltype/Players.GetPlayerFromCharacter/return/0": {
+    "documentation": "`Player?`"
   },
   "@bettervoxel/globaltype/Players.GetPlayers": {
     "documentation": "Every player currently in the session, in unspecified order. A leaving player is already gone from it when its PlayerRemoving is delivered (measured).",
@@ -4067,7 +4588,9 @@
       "Heartbeat": "@bettervoxel/globaltype/RunService.Heartbeat",
       "IsA": "@bettervoxel/globaltype/RunService.IsA",
       "IsClient": "@bettervoxel/globaltype/RunService.IsClient",
+      "IsEdit": "@bettervoxel/globaltype/RunService.IsEdit",
       "IsResimulating": "@bettervoxel/globaltype/RunService.IsResimulating",
+      "IsRunning": "@bettervoxel/globaltype/RunService.IsRunning",
       "IsServer": "@bettervoxel/globaltype/RunService.IsServer",
       "IsStudio": "@bettervoxel/globaltype/RunService.IsStudio",
       "Misprediction": "@bettervoxel/globaltype/RunService.Misprediction",
@@ -4214,6 +4737,17 @@
   "@bettervoxel/globaltype/RunService.IsClient/return/0": {
     "documentation": "`boolean`"
   },
+  "@bettervoxel/globaltype/RunService.IsEdit": {
+    "documentation": "True in the editor with no game loaded; false while one runs, paused or not. The inverse of IsRunning except while paused, when both answer false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isedit",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.IsEdit/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.IsEdit/return/0": {
+    "documentation": "`boolean`"
+  },
   "@bettervoxel/globaltype/RunService.IsResimulating": {
     "documentation": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isresimulating",
@@ -4223,6 +4757,17 @@
     ]
   },
   "@bettervoxel/globaltype/RunService.IsResimulating/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/RunService.IsRunning": {
+    "documentation": "True while a game is live and unpaused; false in the editor's Idle and while the simulation is paused. The inverse of IsEdit except while paused, when both answer false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isrunning",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.IsRunning/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.IsRunning/return/0": {
     "documentation": "`boolean`"
   },
   "@bettervoxel/globaltype/RunService.IsServer": {
@@ -4603,6 +5148,7 @@
       "ClearTextOnFocus": "@bettervoxel/globaltype/TextBox.ClearTextOnFocus",
       "FocusLost": "@bettervoxel/globaltype/TextBox.FocusLost",
       "Focused": "@bettervoxel/globaltype/TextBox.Focused",
+      "Font": "@bettervoxel/globaltype/TextBox.Font",
       "FontFace": "@bettervoxel/globaltype/TextBox.FontFace",
       "IsFocused": "@bettervoxel/globaltype/TextBox.IsFocused",
       "MultiLine": "@bettervoxel/globaltype/TextBox.MultiLine",
@@ -4637,6 +5183,10 @@
   "@bettervoxel/globaltype/TextBox.Focused": {
     "documentation": "Fires (with no arguments) when the box gains keyboard focus — a click or CaptureFocus.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#focused"
+  },
+  "@bettervoxel/globaltype/TextBox.Font": {
+    "documentation": "The typed text's legacy typeface enum over FontFace (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#font"
   },
   "@bettervoxel/globaltype/TextBox.FontFace": {
     "documentation": "The typed text's typeface as a Font value (see TextLabel).",
@@ -4714,6 +5264,7 @@
   "@bettervoxel/globaltype/TextButton": {
     "documentation": "A clickable UI element with a text label; Activated fires on click release.",
     "keys": {
+      "Font": "@bettervoxel/globaltype/TextButton.Font",
       "FontFace": "@bettervoxel/globaltype/TextButton.FontFace",
       "RichText": "@bettervoxel/globaltype/TextButton.RichText",
       "Text": "@bettervoxel/globaltype/TextButton.Text",
@@ -4726,6 +5277,10 @@
       "TextYAlignment": "@bettervoxel/globaltype/TextButton.TextYAlignment"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html"
+  },
+  "@bettervoxel/globaltype/TextButton.Font": {
+    "documentation": "The label's legacy typeface enum over FontFace (see TextLabel).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextButton.html#font"
   },
   "@bettervoxel/globaltype/TextButton.FontFace": {
     "documentation": "The label's typeface as a Font value (see TextLabel).",
@@ -4770,6 +5325,7 @@
   "@bettervoxel/globaltype/TextLabel": {
     "documentation": "A UI element that displays text.",
     "keys": {
+      "Font": "@bettervoxel/globaltype/TextLabel.Font",
       "FontFace": "@bettervoxel/globaltype/TextLabel.FontFace",
       "RichText": "@bettervoxel/globaltype/TextLabel.RichText",
       "Text": "@bettervoxel/globaltype/TextLabel.Text",
@@ -4782,6 +5338,10 @@
       "TextYAlignment": "@bettervoxel/globaltype/TextLabel.TextYAlignment"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html"
+  },
+  "@bettervoxel/globaltype/TextLabel.Font": {
+    "documentation": "The legacy typeface enum beside FontFace: reads the item the last Font write stored — a fresh label reads Legacy, a face written through FontFace reads Unknown (measured), an authored face the item whose face it equals; a write of an item, its name or its value rewrites FontFace with the item's face and fires both signals. Unknown is silently ignored (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#font"
   },
   "@bettervoxel/globaltype/TextLabel.FontFace": {
     "documentation": "The typeface as a Font value: Family is a local font asset path (.ttf/.otf; the empty string is the engine default face), Weight and Style the reference enums. Reads are copies; only a Font can be assigned.",
@@ -5055,28 +5615,82 @@
   "@bettervoxel/globaltype/UDim2": {
     "documentation": "The UI coordinate: a parent-relative scale plus a pixel offset per axis. GuiObject Position and Size speak it.",
     "keys": {
-      "XOffset": "@bettervoxel/globaltype/UDim2.XOffset",
-      "XScale": "@bettervoxel/globaltype/UDim2.XScale",
-      "YOffset": "@bettervoxel/globaltype/UDim2.YOffset",
-      "YScale": "@bettervoxel/globaltype/UDim2.YScale"
+      "Height": "@bettervoxel/globaltype/UDim2.Height",
+      "Lerp": "@bettervoxel/globaltype/UDim2.Lerp",
+      "Width": "@bettervoxel/globaltype/UDim2.Width",
+      "X": "@bettervoxel/globaltype/UDim2.X",
+      "Y": "@bettervoxel/globaltype/UDim2.Y",
+      "lerp": "@bettervoxel/globaltype/UDim2.lerp"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html"
   },
-  "@bettervoxel/globaltype/UDim2.XOffset": {
-    "documentation": "The X offset component, in pixels.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#xoffset"
+  "@bettervoxel/globaltype/UDim2.Height": {
+    "documentation": "The Y axis under its other name: the same UDim as Y.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#height"
   },
-  "@bettervoxel/globaltype/UDim2.XScale": {
-    "documentation": "The X scale component: a fraction of the parent's width.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#xscale"
+  "@bettervoxel/globaltype/UDim2.Lerp": {
+    "documentation": "Interpolates toward goal by alpha, unclamped (-0.5 and 1.5 extrapolate): the scales as floats, the offsets rounded to the nearest integer, a half away from zero (measured). A missing goal or alpha errors `Argument N missing or nil`, a wrong one `Unable to cast <type> to UDim2` / `to float`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/UDim2.Lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/UDim2.Lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/UDim2.Lerp/return/0"
+    ]
   },
-  "@bettervoxel/globaltype/UDim2.YOffset": {
-    "documentation": "The Y offset component, in pixels.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#yoffset"
+  "@bettervoxel/globaltype/UDim2.Lerp/param/0": {
+    "documentation": "`goal: UDim2`"
   },
-  "@bettervoxel/globaltype/UDim2.YScale": {
-    "documentation": "The Y scale component: a fraction of the parent's height.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#yscale"
+  "@bettervoxel/globaltype/UDim2.Lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/UDim2.Lerp/return/0": {
+    "documentation": "`UDim2`"
+  },
+  "@bettervoxel/globaltype/UDim2.Width": {
+    "documentation": "The X axis under its other name: the same UDim as X.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#width"
+  },
+  "@bettervoxel/globaltype/UDim2.X": {
+    "documentation": "The X axis as a UDim: the fraction of the parent's width plus the pixel offset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#x"
+  },
+  "@bettervoxel/globaltype/UDim2.Y": {
+    "documentation": "The Y axis as a UDim: the fraction of the parent's height plus the pixel offset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#y"
+  },
+  "@bettervoxel/globaltype/UDim2.lerp": {
+    "documentation": "Lerp under its deprecated lowercase spelling (the reference answers both, measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/UDim2.lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/UDim2.lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/UDim2.lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/UDim2.lerp/param/0": {
+    "documentation": "`goal: UDim2`"
+  },
+  "@bettervoxel/globaltype/UDim2.lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/UDim2.lerp/return/0": {
+    "documentation": "`UDim2`"
   },
   "@bettervoxel/globaltype/UIBase": {
     "documentation": "The root of the UI modifier family; it adds no members of its own.",
@@ -5334,6 +5948,7 @@
       "X": "@bettervoxel/globaltype/Vector2.X",
       "Y": "@bettervoxel/globaltype/Vector2.Y",
       "magnitude": "@bettervoxel/globaltype/Vector2.magnitude",
+      "unit": "@bettervoxel/globaltype/Vector2.unit",
       "x": "@bettervoxel/globaltype/Vector2.x",
       "y": "@bettervoxel/globaltype/Vector2.y"
     },
@@ -5556,6 +6171,10 @@
   "@bettervoxel/globaltype/Vector2.magnitude": {
     "documentation": "The length of the vector, lowercase dialect.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#magnitude"
+  },
+  "@bettervoxel/globaltype/Vector2.unit": {
+    "documentation": "The same direction at unit length, lowercase dialect (the reference answers both, measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#unit"
   },
   "@bettervoxel/globaltype/Vector2.x": {
     "documentation": "The X component, lowercase dialect (the reference answers both).",

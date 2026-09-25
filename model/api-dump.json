@@ -2286,6 +2286,18 @@
           "summary": "The player's camera state under server authority: CFrame, FieldOfView and ViewportSize. The CFrame rides the player's input stream, synchronized with the inputs of the same simulation tick (the server reads the camera the player's tick was played under — aim and look-direction logic); the other two replicate as properties do, at their own cadence. The server answers it for any player, a client only for its LocalPlayer; raises under the classic networking model."
         },
         {
+          "decl": "() -> PlayerMouse",
+          "kind": "Method",
+          "name": "GetMouse",
+          "params": [],
+          "returns": [
+            {
+              "type": "PlayerMouse"
+            }
+          ],
+          "summary": "The player's mouse — the legacy cursor object (X/Y, UnitRay, Hit, Target, TargetFilter, Icon, the button and Move signals) built from the current camera and the local cursor. One object per player, the same on every call; a player that is not this process's reads the defaults and hears no signal."
+        },
+        {
           "decl": "() -> number",
           "kind": "Method",
           "name": "GetNetworkPing",
@@ -2875,6 +2887,12 @@
           "summary": "Fires (with no arguments) when the box gains keyboard focus — a click or CaptureFocus."
         },
         {
+          "decl": "Enum.Font",
+          "kind": "ReadWrite",
+          "name": "Font",
+          "summary": "The typed text's legacy typeface enum over FontFace (see TextLabel)."
+        },
+        {
           "decl": "Font",
           "kind": "ReadWrite",
           "name": "FontFace",
@@ -2981,6 +2999,12 @@
       "creatable": true,
       "members": [
         {
+          "decl": "Enum.Font",
+          "kind": "ReadWrite",
+          "name": "Font",
+          "summary": "The label's legacy typeface enum over FontFace (see TextLabel)."
+        },
+        {
           "decl": "Font",
           "kind": "ReadWrite",
           "name": "FontFace",
@@ -3048,6 +3072,12 @@
     {
       "creatable": true,
       "members": [
+        {
+          "decl": "Enum.Font",
+          "kind": "ReadWrite",
+          "name": "Font",
+          "summary": "The legacy typeface enum beside FontFace: reads the item the last Font write stored — a fresh label reads Legacy, a face written through FontFace reads Unknown (measured), an authored face the item whose face it equals; a write of an item, its name or its value rewrites FontFace with the item's face and fires both signals. Unknown is silently ignored (measured)."
+        },
         {
           "decl": "Font",
           "kind": "ReadWrite",
@@ -3739,6 +3769,12 @@
           "summary": "The vector (1, 1)."
         },
         {
+          "decl": "Vector2",
+          "kind": "ReadOnly",
+          "name": "unit",
+          "summary": "The same direction at unit length, lowercase dialect (the reference answers both, measured)."
+        },
+        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "x",
@@ -4307,28 +4343,51 @@
     {
       "members": [
         {
-          "decl": "number",
+          "decl": "UDim",
           "kind": "ReadOnly",
-          "name": "XOffset",
-          "summary": "The X offset component, in pixels."
+          "name": "Height",
+          "summary": "The Y axis under its other name: the same UDim as Y."
         },
         {
-          "decl": "number",
-          "kind": "ReadOnly",
-          "name": "XScale",
-          "summary": "The X scale component: a fraction of the parent's width."
+          "decl": "(goal: UDim2, alpha: number) -> UDim2",
+          "kind": "Method",
+          "name": "Lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "UDim2"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "UDim2"
+            }
+          ],
+          "summary": "Interpolates toward goal by alpha, unclamped (-0.5 and 1.5 extrapolate): the scales as floats, the offsets rounded to the nearest integer, a half away from zero (measured). A missing goal or alpha errors `Argument N missing or nil`, a wrong one `Unable to cast <type> to UDim2` / `to float`."
         },
         {
-          "decl": "number",
+          "decl": "UDim",
           "kind": "ReadOnly",
-          "name": "YOffset",
-          "summary": "The Y offset component, in pixels."
+          "name": "Width",
+          "summary": "The X axis under its other name: the same UDim as X."
         },
         {
-          "decl": "number",
+          "decl": "UDim",
           "kind": "ReadOnly",
-          "name": "YScale",
-          "summary": "The Y scale component: a fraction of the parent's height."
+          "name": "X",
+          "summary": "The X axis as a UDim: the fraction of the parent's width plus the pixel offset."
+        },
+        {
+          "decl": "UDim",
+          "kind": "ReadOnly",
+          "name": "Y",
+          "summary": "The Y axis as a UDim: the fraction of the parent's height plus the pixel offset."
         },
         {
           "decl": "(x: number, y: number) -> UDim2",
@@ -4375,6 +4434,29 @@
             }
           ],
           "summary": "A UDim2 with only the scale components set (offsets zero)."
+        },
+        {
+          "decl": "(goal: UDim2, alpha: number) -> UDim2",
+          "kind": "Method",
+          "name": "lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "UDim2"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "UDim2"
+            }
+          ],
+          "summary": "Lerp under its deprecated lowercase spelling (the reference answers both, measured)."
         },
         {
           "decl": "(xScale: number, xOffset: number, yScale: number, yOffset: number) -> UDim2",
@@ -4466,7 +4548,7 @@
           "decl": "string",
           "kind": "ReadWrite",
           "name": "Family",
-          "summary": "The typeface as a local font asset path (a .ttf/.otf under the assets root); the empty string is the engine default face. Recorded divergence: the reference engine's Family is a cloud font-family URL."
+          "summary": "The typeface as a local font asset path (a .ttf/.otf under the assets root); the empty string is the engine default face, and so renders a reference catalog family (rbxasset://fonts/families/ …, what Font.fromEnum and the legacy Font property store), kept verbatim. Recorded divergence: the reference engine's Family is a cloud font-family URL."
         },
         {
           "decl": "Enum.FontStyle",
@@ -4479,6 +4561,24 @@
           "kind": "ReadWrite",
           "name": "Weight",
           "summary": "The weight, Thin (100) to Heavy (900); Regular by default. An enum item only."
+        },
+        {
+          "decl": "(font: Enum.Font) -> Font",
+          "kind": "Static",
+          "name": "fromEnum",
+          "params": [
+            {
+              "name": "font",
+              "optional": false,
+              "type": "Enum.Font"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Font"
+            }
+          ],
+          "summary": "The face a legacy Enum.Font item names: the reference's catalog family (rbxasset://fonts/families/<Family>.json, rendered as the engine default face at the item's weight and style) — the same face the Font property stores, so fromEnum(label.Font) == label.FontFace after a Font write. Enum.Font.Unknown refuses."
         },
         {
           "decl": "(family: string, weight: Enum.FontWeight?, style: Enum.FontStyle?) -> Font",
@@ -4899,7 +4999,7 @@
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Value",
-          "summary": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight (the reference's 100..900) and RenderPriority (its 0..2000, the numbers BindToRenderStep takes)."
+          "summary": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight (the reference's 100..900), RenderPriority (its 0..2000, the numbers BindToRenderStep takes) and Font (its 0..51 with Unknown 100, the api dump's)."
         }
       ],
       "name": "EnumItem",
@@ -5062,6 +5162,186 @@
     {
       "members": [
         {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Button1Down",
+          "payloads": [],
+          "summary": "Fires when the left mouse button goes down (this process's player only)."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Button1Up",
+          "payloads": [],
+          "summary": "Fires when the left mouse button comes up."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Button2Down",
+          "payloads": [],
+          "summary": "Fires when the right mouse button goes down."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Button2Up",
+          "payloads": [],
+          "summary": "Fires when the right mouse button comes up."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Destroy",
+          "params": [],
+          "returns": [],
+          "summary": "A no-op (measured): the mouse outlives the call and the next GetMouse answers the same object."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadOnly",
+          "name": "Hit",
+          "summary": "A CFrame at the point the cursor's ray hits, with Origin's rotation; 10000 studs from Origin when nothing is hit (measured). TargetFilter's subtree and the player's own character are ignored."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "Icon",
+          "summary": "The cursor image's content id, stored as written; the empty string (the default) is the platform arrow. Nothing here draws it yet."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Idle",
+          "payloads": [],
+          "summary": "Fires on every frame no other mouse signal fired — not a stillness test, it fires between Move deliveries too."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "KeyDown",
+          "payloads": [],
+          "summary": "The reference's deprecated key-down signal (measured to exist); never fires here — keys ride UserInputService."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "KeyUp",
+          "payloads": [],
+          "summary": "The reference's deprecated key-up signal (measured to exist); never fires here."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "Move",
+          "payloads": [],
+          "summary": "Fires on every frame the cursor's position changed."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadOnly",
+          "name": "Origin",
+          "summary": "A CFrame at UnitRay's origin — the current camera's near plane, measured — looking along it (the camera's roll ignored); the identity without a camera."
+        },
+        {
+          "decl": "BasePart?",
+          "kind": "ReadOnly",
+          "name": "Target",
+          "summary": "The part the cursor's ray hits, or nil (the sky, or nothing within 10000 studs)."
+        },
+        {
+          "decl": "Instance?",
+          "kind": "ReadWrite",
+          "name": "TargetFilter",
+          "summary": "An instance the cursor's cast ignores along with its descendants (nil, the default, ignores nothing beyond the player's own character). Only an Instance or nil can be assigned: `Unable to assign property TargetFilter. Instance expected, got number` (measured)."
+        },
+        {
+          "decl": "Enum.NormalId",
+          "kind": "ReadOnly",
+          "name": "TargetSurface",
+          "summary": "The face of Target the ray hits, as its NormalId; Right when nothing is hit (documented) — check Target first."
+        },
+        {
+          "decl": "Ray",
+          "kind": "ReadOnly",
+          "name": "UnitRay",
+          "summary": "The unit ray through the cursor, its origin on the current camera's near plane — what Camera:ViewportPointToRay(X, Y) answers (measured); a zero ray without a camera."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "ViewSizeX",
+          "summary": "The current camera's viewport width in pixels (0 without a camera)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "ViewSizeY",
+          "summary": "The current camera's viewport height in pixels (0 without a camera)."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "WheelBackward",
+          "payloads": [],
+          "summary": "The reference's wheel-backward signal (measured to exist); never fires here."
+        },
+        {
+          "decl": "BVScriptSignal",
+          "kind": "Signal",
+          "name": "WheelForward",
+          "payloads": [],
+          "summary": "The reference's wheel-forward signal (measured to exist); the engine's cursor carries no wheel, so it never fires."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "X",
+          "summary": "The cursor's horizontal position in viewport pixels from the left (0 without a cursor, and always for a player that is not this process's). Fires no property signal — connect Move."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Y",
+          "summary": "The cursor's vertical position in viewport pixels from the top (0 without a cursor)."
+        }
+      ],
+      "name": "PlayerMouse",
+      "summary": "The legacy cursor object Player:GetMouse returns (identity PlayerMouse < Mouse): the cursor in viewport pixels, the camera ray through it, the part and point it hits, a filter the cast ignores, an icon string, and the button, Move and Idle signals. Built from the current camera, the local cursor and the workspace cast; UserInputService is the modern surface."
+    },
+    {
+      "members": [
+        {
           "decl": "boolean",
           "kind": "ReadOnly",
           "name": "Connected",
@@ -5186,6 +5466,61 @@
     "FillDirection": [
       "Horizontal",
       "Vertical"
+    ],
+    "Font": [
+      "AmaticSC",
+      "Antique",
+      "Arcade",
+      "Arial",
+      "ArialBold",
+      "Arimo",
+      "ArimoBold",
+      "Bangers",
+      "Bodoni",
+      "BuilderSans",
+      "BuilderSansBold",
+      "BuilderSansExtraBold",
+      "BuilderSansMedium",
+      "Cartoon",
+      "Code",
+      "Creepster",
+      "DenkOne",
+      "Fantasy",
+      "Fondamento",
+      "FredokaOne",
+      "Garamond",
+      "Gotham",
+      "GothamBlack",
+      "GothamBold",
+      "GothamMedium",
+      "GrenzeGotisch",
+      "Highway",
+      "IndieFlower",
+      "JosefinSans",
+      "Jura",
+      "Kalam",
+      "Legacy",
+      "LuckiestGuy",
+      "Merriweather",
+      "Michroma",
+      "Nunito",
+      "Oswald",
+      "PatrickHand",
+      "PermanentMarker",
+      "Roboto",
+      "RobotoCondensed",
+      "RobotoMono",
+      "Sarpanch",
+      "SciFi",
+      "SourceSans",
+      "SourceSansBold",
+      "SourceSansItalic",
+      "SourceSansLight",
+      "SourceSansSemibold",
+      "SpecialElite",
+      "TitilliumWeb",
+      "Ubuntu",
+      "Unknown"
     ],
     "FontStyle": [
       "Italic",
@@ -5477,6 +5812,9 @@
     "bit32",
     "collectgarbage",
     "coroutine",
+    "debug",
+    "delay",
+    "elapsedTime",
     "error",
     "game",
     "gcinfo",
@@ -5499,9 +5837,12 @@
     "select",
     "setfenv",
     "setmetatable",
+    "spawn",
     "string",
     "table",
     "task",
+    "tick",
+    "time",
     "tonumber",
     "tostring",
     "type",
@@ -5509,6 +5850,7 @@
     "unpack",
     "utf8",
     "vector",
+    "wait",
     "warn",
     "workspace",
     "xpcall"
@@ -5521,6 +5863,18 @@
           "kind": "ReadOnly",
           "name": "ClassName",
           "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "CollectionService",
+          "kind": "ReadOnly",
+          "name": "CollectionService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "Debris",
+          "kind": "ReadOnly",
+          "name": "Debris",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
           "decl": "(service: string) -> Instance",
@@ -5541,6 +5895,12 @@
           "summary": "Hands out an engine service by name (\"Players\", \"RunService\", \"TweenService\", …; \"Workspace\" answers the workspace root). Unknown names error."
         },
         {
+          "decl": "HttpService",
+          "kind": "ReadOnly",
+          "name": "HttpService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
           "decl": "(className: string) -> boolean",
           "kind": "Method",
           "name": "IsA",
@@ -5559,10 +5919,76 @@
           "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
         },
         {
+          "decl": "Lighting",
+          "kind": "ReadOnly",
+          "name": "Lighting",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
           "decl": "string",
           "kind": "ReadOnly",
           "name": "Name",
           "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "Players",
+          "kind": "ReadOnly",
+          "name": "Players",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "Instance",
+          "kind": "ReadOnly",
+          "name": "ReplicatedStorage",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "RunService",
+          "kind": "ReadOnly",
+          "name": "RunService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "Instance",
+          "kind": "ReadOnly",
+          "name": "ServerScriptService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "Instance",
+          "kind": "ReadOnly",
+          "name": "ServerStorage",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "SoundService",
+          "kind": "ReadOnly",
+          "name": "SoundService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "Instance",
+          "kind": "ReadOnly",
+          "name": "StarterPlayerScripts",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "TweenService",
+          "kind": "ReadOnly",
+          "name": "TweenService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "UserInputService",
+          "kind": "ReadOnly",
+          "name": "UserInputService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "Workspace",
+          "kind": "ReadOnly",
+          "name": "Workspace",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         }
       ],
       "name": "DataModel",
@@ -5700,6 +6126,18 @@
         {
           "decl": "() -> boolean",
           "kind": "Method",
+          "name": "IsEdit",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True in the editor with no game loaded; false while one runs, paused or not. The inverse of IsRunning except while paused, when both answer false."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
           "name": "IsResimulating",
           "params": [],
           "returns": [
@@ -5708,6 +6146,18 @@
             }
           ],
           "summary": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "IsRunning",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True while a game is live and unpaused; false in the editor's Idle and while the simulation is paused. The inverse of IsEdit except while paused, when both answer false."
         },
         {
           "decl": "() -> boolean",
@@ -5883,6 +6333,42 @@
           "kind": "ReadOnly",
           "name": "ClassName",
           "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(userId: number) -> Player?",
+          "kind": "Method",
+          "name": "GetPlayerByUserId",
+          "params": [
+            {
+              "name": "userId",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Player?"
+            }
+          ],
+          "summary": "The player with that UserId, or nil when nobody in the session has it — a fractional number is nobody's (measured); a numeric string converts. nil errors `Argument 1 missing or nil`; a non-number `Unable to cast <type> to User`."
+        },
+        {
+          "decl": "(character: Instance) -> Player?",
+          "kind": "Method",
+          "name": "GetPlayerFromCharacter",
+          "params": [
+            {
+              "name": "character",
+              "optional": false,
+              "type": "Instance"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Player?"
+            }
+          ],
+          "summary": "The player whose Character is the given instance, or nil when it is nobody's (a dead body still counts until its respawn replaces it); nil answers nil (measured). A non-Instance errors `Unable to cast value to Object`."
         },
         {
           "decl": "() -> {Player}",
@@ -6525,6 +7011,186 @@
       ],
       "name": "CollectionService",
       "summary": "Instance tags: storage is per-instance and survives leaving the tree, while GetTagged and the per-tag Added/Removed signals track tree membership. Tags serialize with the place."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(wrapInCurlyBraces: boolean?) -> string",
+          "kind": "Method",
+          "name": "GenerateGUID",
+          "params": [
+            {
+              "name": "wrapInCurlyBraces",
+              "optional": true,
+              "type": "boolean?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "A random version-4 UUID in lowercase hexadecimal, 8-4-4-4-12, wrapped in curly braces unless wrapInCurlyBraces is false (a number counts by zero/nonzero, the strings \"true\"/\"false\" cast; anything else errors `Unable to cast <type> to bool`)."
+        },
+        {
+          "decl": "(url: string, nocache: boolean?, headers: { [string]: string }?) -> string",
+          "kind": "Method",
+          "name": "GetAsync",
+          "params": [
+            {
+              "name": "url",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "nocache",
+              "optional": true,
+              "type": "boolean?"
+            },
+            {
+              "name": "headers",
+              "optional": true,
+              "type": "{ [string]: string }?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "Closed: errors `HTTP requests are not enabled. Enable via Experience Settings` — the engine sends no HTTP."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "HttpEnabled",
+          "summary": "Whether scripts may send HTTP requests: false — the engine has no outbound HTTP, and the reference lets only the place's settings write it. The JSON and GUID members work regardless."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "(input: string) -> any",
+          "kind": "Method",
+          "name": "JSONDecode",
+          "params": [
+            {
+              "name": "input",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "any"
+            }
+          ],
+          "summary": "The JSON text as a value: null is nil, objects string-keyed tables (a null field absent, the tagged non-finite object its number), arrays 1-based tables, numbers doubles; a number argument is its text. Invalid text errors `Can't parse JSON`, nil `Argument 1 missing or nil`."
+        },
+        {
+          "decl": "(input: any) -> string",
+          "kind": "Method",
+          "name": "JSONEncode",
+          "params": [
+            {
+              "name": "input",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "The value as compact JSON (measured): a table with a length is an array of 1..#t (holes null, other keys dropped), an empty table [], any other table an object — its keys a string, a number's integer text or `<Type> (tostring)` for the rest, written sorted; an integral number prints without a decimal point, a non-finite one as {\"m\":null,\"t\":\"numeric\",\"v\":\"inf\"}; nil values are absent; a function, userdata, thread or vector encodes null. A cyclic table errors `tables cannot be cyclic`, a boolean key `Invalid table key type used`, a nest past 512 tables `Can't convert to JSON`."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "(url: string, data: string, contentType: string?, compress: boolean?, headers: { [string]: string }?) -> string",
+          "kind": "Method",
+          "name": "PostAsync",
+          "params": [
+            {
+              "name": "url",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "data",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "contentType",
+              "optional": true,
+              "type": "string?"
+            },
+            {
+              "name": "compress",
+              "optional": true,
+              "type": "boolean?"
+            },
+            {
+              "name": "headers",
+              "optional": true,
+              "type": "{ [string]: string }?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "Closed: errors `HTTP requests are not enabled. Enable via Experience Settings` — the engine sends no HTTP."
+        },
+        {
+          "decl": "(options: { Url: string, Method: string?, Headers: { [string]: string }?, Body: string? }) -> { Success: boolean, StatusCode: number, StatusMessage: string, Headers: { [string]: string }, Body: string }",
+          "kind": "Method",
+          "name": "RequestAsync",
+          "params": [
+            {
+              "name": "options",
+              "optional": false,
+              "type": "{ Url: string, Method: string?, Headers: { [string]: string }?, Body: string? }"
+            }
+          ],
+          "returns": [
+            {
+              "type": "{ Success: boolean, StatusCode: number, StatusMessage: string, Headers: { [string]: string }, Body: string }"
+            }
+          ],
+          "summary": "Closed: errors `HTTP requests are not enabled. Enable via Experience Settings` — the engine sends no HTTP."
+        }
+      ],
+      "name": "HttpService",
+      "summary": "The JSON codec (JSONEncode/JSONDecode) and random GUIDs, usable everywhere; the request verbs are closed — HttpEnabled is false and GetAsync/PostAsync/RequestAsync error, the engine sends no HTTP."
     }
   ]
 }

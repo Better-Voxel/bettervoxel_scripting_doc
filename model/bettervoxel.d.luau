@@ -64,10 +64,12 @@ declare extern type Color3 with
 end
 
 declare extern type UDim2 with
-    XOffset: number
-    XScale: number
-    YOffset: number
-    YScale: number
+    Height: UDim
+    function Lerp(self, goal: UDim2, alpha: number): UDim2
+    Width: UDim
+    X: UDim
+    Y: UDim
+    function lerp(self, goal: UDim2, alpha: number): UDim2
 end
 
 declare extern type UDim with
@@ -107,6 +109,7 @@ declare extern type Vector2 with
     X: number
     Y: number
     magnitude: number
+    unit: Vector2
     x: number
     y: number
 end
@@ -345,6 +348,7 @@ declare extern type Player extends Instance with
     CharacterAdded: BVScriptSignal -- fires (Instance)
     CharacterRemoving: BVScriptSignal -- fires (Instance)
     function GetCameraState(self): {CFrame: CFrame, FieldOfView: number, ViewportSize: Vector2}
+    function GetMouse(self): PlayerMouse
     function GetNetworkPing(self): number
     function LoadCharacter(self): ()
     PlayerGui: PlayerGui?
@@ -626,6 +630,7 @@ declare extern type TextBox extends GuiObject with
     ClearTextOnFocus: boolean
     FocusLost: BVScriptSignal -- fires (boolean)
     Focused: BVScriptSignal -- fires ()
+    Font: EnumItem
     FontFace: Font
     function IsFocused(self): boolean
     MultiLine: boolean
@@ -664,6 +669,7 @@ declare extern type SpawnLocation extends Part with
 end
 
 declare extern type TextButton extends GuiButton with
+    Font: EnumItem
     FontFace: Font
     RichText: boolean
     Text: string
@@ -677,6 +683,7 @@ declare extern type TextButton extends GuiButton with
 end
 
 declare extern type TextLabel extends GuiLabel with
+    Font: EnumItem
     FontFace: Font
     RichText: boolean
     Text: string
@@ -707,6 +714,34 @@ declare extern type Tween with
     function Play(self): ()
 end
 
+declare extern type PlayerMouse with
+    Button1Down: BVScriptSignal -- fires ()
+    Button1Up: BVScriptSignal -- fires ()
+    Button2Down: BVScriptSignal -- fires ()
+    Button2Up: BVScriptSignal -- fires ()
+    ClassName: string
+    function Destroy(self): ()
+    Hit: CFrame
+    Icon: string
+    Idle: BVScriptSignal -- fires ()
+    function IsA(self, className: string): boolean
+    KeyDown: BVScriptSignal -- fires ()
+    KeyUp: BVScriptSignal -- fires ()
+    Move: BVScriptSignal -- fires ()
+    Name: string
+    Origin: CFrame
+    Target: BasePart?
+    TargetFilter: Instance?
+    TargetSurface: EnumItem
+    UnitRay: Ray
+    ViewSizeX: number
+    ViewSizeY: number
+    WheelBackward: BVScriptSignal -- fires ()
+    WheelForward: BVScriptSignal -- fires ()
+    X: number
+    Y: number
+end
+
 declare extern type RunService with
     function BindToRenderStep(self, name: string, priority: number, callback: (deltaTime: number) -> ()): ()
     function BindToSimulation(self, callback: (deltaTime: number) -> (), frequency: EnumItem?, priority: number?): BVScriptConnection
@@ -716,7 +751,9 @@ declare extern type RunService with
     Heartbeat: BVScriptSignal -- fires (number)
     function IsA(self, className: string): boolean
     function IsClient(self): boolean
+    function IsEdit(self): boolean
     function IsResimulating(self): boolean
+    function IsRunning(self): boolean
     function IsServer(self): boolean
     function IsStudio(self): boolean
     Misprediction: BVScriptSignal -- fires (number, { { Instance: Instance, Properties: { [string]: { Predicted: any, Authoritative: any } }?, Attributes: { [string]: { Predicted: any, Authoritative: any } }? } }, { ResimulationTime: number })
@@ -736,6 +773,8 @@ end
 declare extern type Players with
     CharacterAutoLoads: boolean
     ClassName: string
+    function GetPlayerByUserId(self, userId: number): Player?
+    function GetPlayerFromCharacter(self, character: Instance): Player?
     function GetPlayers(self): {Player}
     function IsA(self, className: string): boolean
     LocalPlayer: Player?
@@ -807,11 +846,38 @@ declare extern type CollectionService with
     function RemoveTag(self, instance: Instance, tag: string): ()
 end
 
-declare extern type DataModel with
-    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: string) -> Instance)
+declare extern type HttpService with
     ClassName: string
+    function GenerateGUID(self, wrapInCurlyBraces: boolean?): string
+    function GetAsync(self, url: string, nocache: boolean?, headers: { [string]: string }?): string
+    HttpEnabled: boolean
     function IsA(self, className: string): boolean
+    function JSONDecode(self, input: string): any
+    function JSONEncode(self, input: any): string
     Name: string
+    function PostAsync(self, url: string, data: string, contentType: string?, compress: boolean?, headers: { [string]: string }?): string
+    function RequestAsync(self, options: { Url: string, Method: string?, Headers: { [string]: string }?, Body: string? }): { Success: boolean, StatusCode: number, StatusMessage: string, Headers: { [string]: string }, Body: string }
+end
+
+declare extern type DataModel with
+    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: string) -> Instance)
+    ClassName: string
+    CollectionService: CollectionService
+    Debris: Debris
+    HttpService: HttpService
+    function IsA(self, className: string): boolean
+    Lighting: Lighting
+    Name: string
+    Players: Players
+    ReplicatedStorage: Instance
+    RunService: RunService
+    ServerScriptService: Instance
+    ServerStorage: Instance
+    SoundService: SoundService
+    StarterPlayerScripts: Instance
+    TweenService: TweenService
+    UserInputService: UserInputService
+    Workspace: Workspace
 end
 
 declare CFrame: {
@@ -838,6 +904,7 @@ declare ColorSequenceKeypoint: {
 }
 
 declare Font: {
+    fromEnum: (font: EnumItem) -> Font,
     new: (family: string, weight: EnumItem?, style: EnumItem?) -> Font,
 }
 
@@ -901,6 +968,7 @@ declare Enum: {
     EasingStyle: { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
     FieldOfViewMode: { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },
     FillDirection: { Horizontal: EnumItem, Vertical: EnumItem },
+    Font: { AmaticSC: EnumItem, Antique: EnumItem, Arcade: EnumItem, Arial: EnumItem, ArialBold: EnumItem, Arimo: EnumItem, ArimoBold: EnumItem, Bangers: EnumItem, Bodoni: EnumItem, BuilderSans: EnumItem, BuilderSansBold: EnumItem, BuilderSansExtraBold: EnumItem, BuilderSansMedium: EnumItem, Cartoon: EnumItem, Code: EnumItem, Creepster: EnumItem, DenkOne: EnumItem, Fantasy: EnumItem, Fondamento: EnumItem, FredokaOne: EnumItem, Garamond: EnumItem, Gotham: EnumItem, GothamBlack: EnumItem, GothamBold: EnumItem, GothamMedium: EnumItem, GrenzeGotisch: EnumItem, Highway: EnumItem, IndieFlower: EnumItem, JosefinSans: EnumItem, Jura: EnumItem, Kalam: EnumItem, Legacy: EnumItem, LuckiestGuy: EnumItem, Merriweather: EnumItem, Michroma: EnumItem, Nunito: EnumItem, Oswald: EnumItem, PatrickHand: EnumItem, PermanentMarker: EnumItem, Roboto: EnumItem, RobotoCondensed: EnumItem, RobotoMono: EnumItem, Sarpanch: EnumItem, SciFi: EnumItem, SourceSans: EnumItem, SourceSansBold: EnumItem, SourceSansItalic: EnumItem, SourceSansLight: EnumItem, SourceSansSemibold: EnumItem, SpecialElite: EnumItem, TitilliumWeb: EnumItem, Ubuntu: EnumItem, Unknown: EnumItem },
     FontStyle: { Italic: EnumItem, Normal: EnumItem },
     FontWeight: { Bold: EnumItem, ExtraBold: EnumItem, ExtraLight: EnumItem, Heavy: EnumItem, Light: EnumItem, Medium: EnumItem, Regular: EnumItem, SemiBold: EnumItem, Thin: EnumItem },
     HorizontalAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
@@ -932,6 +1000,24 @@ declare Enum: {
 }
 
 declare function warn(...: any): ()
+
+declare debug: {
+    info: ((thread: thread, level: number, options: string) -> ...any) & ((level: number, options: string) -> ...any) & ((fun: (...any) -> ...any, options: string) -> ...any),
+    traceback: ((message: string?, level: number?) -> string) & ((thread: thread, message: string?, level: number?) -> string),
+    profilebegin: (label: string) -> (),
+    profileend: () -> (),
+    dumpcodesize: () -> (),
+    setmemorycategory: (tag: string) -> string,
+    resetmemorycategory: () -> (),
+    getmemorycategory: () -> string,
+}
+
+declare function wait(seconds: number?): (number, number)
+declare function spawn(callback: (number, number) -> ()): ()
+declare function delay(delayTime: number?, callback: (number, number) -> ()): ()
+declare function tick(): number
+declare function time(): number
+declare function elapsedTime(): number
 
 declare workspace: Workspace
 declare script: Instance
