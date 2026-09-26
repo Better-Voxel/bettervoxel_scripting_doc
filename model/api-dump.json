@@ -1789,6 +1789,42 @@
           "summary": "The first direct child named name, suspending the calling thread until one exists. A child already present returns without yielding. With a timeout (in seconds) the wait gives up and returns nil once it elapses; without one it waits forever."
         },
         {
+          "decl": "() -> Instance",
+          "kind": "Method",
+          "name": "clone",
+          "params": [],
+          "returns": [
+            {
+              "type": "Instance"
+            }
+          ],
+          "summary": "Deprecated: the retired spelling of Clone, answered the same way — use Clone.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(name: string) -> Instance?",
+          "kind": "Method",
+          "name": "findFirstChild",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance?"
+            }
+          ],
+          "summary": "Deprecated: the retired spelling of FindFirstChild, answered the same way — use FindFirstChild.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
           "decl": "(className: string) -> Instance",
           "kind": "Static",
           "name": "new",
@@ -5989,6 +6025,27 @@
           "kind": "ReadOnly",
           "name": "Workspace",
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "(service: string) -> Instance",
+          "kind": "Method",
+          "name": "service",
+          "params": [
+            {
+              "name": "service",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Instance"
+            }
+          ],
+          "summary": "Deprecated: the retired spelling of GetService, answered the same way — use GetService.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "DataModel",
@@ -6435,6 +6492,27 @@
           "kind": "ReadWrite",
           "name": "RespawnTime",
           "summary": "Seconds between death and respawn (measured default 3). Stored as given — negatives read back and respawn promptly — and consulted at death: a write reaches players already in the game. Each Player's RespawnTime seeds from it and may override it per player."
+        },
+        {
+          "decl": "(character: Instance) -> Player?",
+          "kind": "Method",
+          "name": "playerFromCharacter",
+          "params": [
+            {
+              "name": "character",
+              "optional": false,
+              "type": "Instance"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Player?"
+            }
+          ],
+          "summary": "Deprecated: the retired spelling of GetPlayerFromCharacter, answered the same way — use GetPlayerFromCharacter.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "Players",

@@ -169,6 +169,10 @@ declare extern type Instance with
     PredictionMode: EnumItem
     function SetAttribute(self, name: string, value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil): ()
     function WaitForChild(self, name: string, timeout: number?): Instance?
+    @deprecated
+    function clone(self): Instance
+    @deprecated
+    function findFirstChild(self, name: string): Instance?
 end
 
 declare extern type Attachment extends Instance with
@@ -782,6 +786,8 @@ declare extern type Players with
     PlayerAdded: BVScriptSignal -- fires (Player)
     PlayerRemoving: BVScriptSignal -- fires (Player)
     RespawnTime: number
+    @deprecated
+    function playerFromCharacter(self, character: Instance): Player?
 end
 
 declare extern type UserInputService with
@@ -878,6 +884,8 @@ declare extern type DataModel with
     TweenService: TweenService
     UserInputService: UserInputService
     Workspace: Workspace
+    @deprecated
+    function service(self, service: string): Instance
 end
 
 declare CFrame: {

@@ -2124,7 +2124,8 @@
       "StarterPlayerScripts": "@bettervoxel/globaltype/DataModel.StarterPlayerScripts",
       "TweenService": "@bettervoxel/globaltype/DataModel.TweenService",
       "UserInputService": "@bettervoxel/globaltype/DataModel.UserInputService",
-      "Workspace": "@bettervoxel/globaltype/DataModel.Workspace"
+      "Workspace": "@bettervoxel/globaltype/DataModel.Workspace",
+      "service": "@bettervoxel/globaltype/DataModel.service"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html"
   },
@@ -2229,6 +2230,25 @@
   "@bettervoxel/globaltype/DataModel.Workspace": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#workspace"
+  },
+  "@bettervoxel/globaltype/DataModel.service": {
+    "documentation": "Deprecated: the retired spelling of GetService, answered the same way — use GetService.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#service",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataModel.service/param/0",
+        "name": "service"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataModel.service/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataModel.service/param/0": {
+    "documentation": "`service: string`"
+  },
+  "@bettervoxel/globaltype/DataModel.service/return/0": {
+    "documentation": "`Instance`"
   },
   "@bettervoxel/globaltype/Debris": {
     "documentation": "Scheduled destruction: AddItem destroys an instance after a lifetime on the pause-aware script clock — fire-and-forget cleanup for projectiles and effects.",
@@ -3062,7 +3082,9 @@
       "Parent": "@bettervoxel/globaltype/Instance.Parent",
       "PredictionMode": "@bettervoxel/globaltype/Instance.PredictionMode",
       "SetAttribute": "@bettervoxel/globaltype/Instance.SetAttribute",
-      "WaitForChild": "@bettervoxel/globaltype/Instance.WaitForChild"
+      "WaitForChild": "@bettervoxel/globaltype/Instance.WaitForChild",
+      "clone": "@bettervoxel/globaltype/Instance.clone",
+      "findFirstChild": "@bettervoxel/globaltype/Instance.findFirstChild"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
   },
@@ -3447,6 +3469,36 @@
     "documentation": "`timeout: number?`"
   },
   "@bettervoxel/globaltype/Instance.WaitForChild/return/0": {
+    "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.clone": {
+    "documentation": "Deprecated: the retired spelling of Clone, answered the same way — use Clone.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#clone",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.clone/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.clone/return/0": {
+    "documentation": "`Instance`"
+  },
+  "@bettervoxel/globaltype/Instance.findFirstChild": {
+    "documentation": "Deprecated: the retired spelling of FindFirstChild, answered the same way — use FindFirstChild.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#findfirstchild",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Instance.findFirstChild/param/0",
+        "name": "name"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.findFirstChild/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.findFirstChild/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/Instance.findFirstChild/return/0": {
     "documentation": "`Instance?`"
   },
   "@bettervoxel/globaltype/IntValue": {
@@ -4270,7 +4322,8 @@
       "Name": "@bettervoxel/globaltype/Players.Name",
       "PlayerAdded": "@bettervoxel/globaltype/Players.PlayerAdded",
       "PlayerRemoving": "@bettervoxel/globaltype/Players.PlayerRemoving",
-      "RespawnTime": "@bettervoxel/globaltype/Players.RespawnTime"
+      "RespawnTime": "@bettervoxel/globaltype/Players.RespawnTime",
+      "playerFromCharacter": "@bettervoxel/globaltype/Players.playerFromCharacter"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html"
   },
@@ -4369,6 +4422,25 @@
   "@bettervoxel/globaltype/Players.RespawnTime": {
     "documentation": "Seconds between death and respawn (measured default 3). Stored as given — negatives read back and respawn promptly — and consulted at death: a write reaches players already in the game. Each Player's RespawnTime seeds from it and may override it per player.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#respawntime"
+  },
+  "@bettervoxel/globaltype/Players.playerFromCharacter": {
+    "documentation": "Deprecated: the retired spelling of GetPlayerFromCharacter, answered the same way — use GetPlayerFromCharacter.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Players.html#playerfromcharacter",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Players.playerFromCharacter/param/0",
+        "name": "character"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Players.playerFromCharacter/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Players.playerFromCharacter/param/0": {
+    "documentation": "`character: Instance`"
+  },
+  "@bettervoxel/globaltype/Players.playerFromCharacter/return/0": {
+    "documentation": "`Player?`"
   },
   "@bettervoxel/globaltype/PointLight": {
     "documentation": "A light radiating in every direction from its parent's position.",
