@@ -981,7 +981,7 @@ declare Enum: {
     AuthorityMode: { Automatic: EnumItem, Server: EnumItem },
     CameraType: { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
     CollisionFidelity: { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
-    CoreGuiType: { All: EnumItem, Backpack: EnumItem, Captures: EnumItem, Chat: EnumItem, EmotesMenu: EnumItem, Health: EnumItem, PlayerList: EnumItem, SelfView: EnumItem },
+    CoreGuiType: { All: EnumItem, AvatarSwitcher: EnumItem, Backpack: EnumItem, Captures: EnumItem, Chat: EnumItem, EmotesMenu: EnumItem, ExperienceShop: EnumItem, Health: EnumItem, PlayerList: EnumItem, SelfView: EnumItem },
     EasingDirection: { In: EnumItem, InOut: EnumItem, Out: EnumItem },
     EasingStyle: { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
     FieldOfViewMode: { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },

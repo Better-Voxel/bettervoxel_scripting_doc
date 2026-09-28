@@ -5478,10 +5478,12 @@
     ],
     "CoreGuiType": [
       "All",
+      "AvatarSwitcher",
       "Backpack",
       "Captures",
       "Chat",
       "EmotesMenu",
+      "ExperienceShop",
       "Health",
       "PlayerList",
       "SelfView"
@@ -7310,7 +7312,7 @@
               "type": "boolean"
             }
           ],
-          "summary": "Whether a built-in interface is shown — true until SetCoreGuiEnabled says otherwise; `All` reads true only when every kind is."
+          "summary": "Whether a built-in interface is shown — true until SetCoreGuiEnabled says otherwise; `All` reads true only when every kind is (measured)."
         },
         {
           "decl": "(className: string) -> boolean",
@@ -7353,7 +7355,7 @@
             }
           ],
           "returns": [],
-          "summary": "Shows or hides one of the engine's built-in interfaces on this client: `Enum.CoreGuiType.PlayerList` is the player list (the one drawn today), `All` every kind at once; the other kinds are remembered for GetCoreGuiEnabled. The item or its name; a server accepts and stores the call without drawing anything."
+          "summary": "Shows or hides one of the engine's built-in interfaces on this client: `Enum.CoreGuiType.PlayerList` is the player list (the one drawn today), `All` every kind at once; the other kinds are remembered for GetCoreGuiEnabled. The item, its name or its value; the flag cast the reflection's way (a number by zero/nonzero, \"true\"/\"false\"). A server accepts and stores the call without drawing anything (measured)."
         }
       ],
       "name": "StarterGui",
