@@ -865,8 +865,16 @@ declare extern type HttpService with
     function RequestAsync(self, options: { Url: string, Method: string?, Headers: { [string]: string }?, Body: string? }): { Success: boolean, StatusCode: number, StatusMessage: string, Headers: { [string]: string }, Body: string }
 end
 
+declare extern type StarterGui with
+    ClassName: string
+    function GetCoreGuiEnabled(self, coreGuiType: EnumItem): boolean
+    function IsA(self, className: string): boolean
+    Name: string
+    function SetCoreGuiEnabled(self, coreGuiType: EnumItem, enabled: boolean): ()
+end
+
 declare extern type DataModel with
-    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: string) -> Instance)
+    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: "StarterGui") -> StarterGui) & ((self: DataModel, service: string) -> Instance)
     ClassName: string
     CollectionService: CollectionService
     Debris: Debris
@@ -880,6 +888,7 @@ declare extern type DataModel with
     ServerScriptService: Instance
     ServerStorage: Instance
     SoundService: SoundService
+    StarterGui: StarterGui
     StarterPlayerScripts: Instance
     TweenService: TweenService
     UserInputService: UserInputService
@@ -972,6 +981,7 @@ declare Enum: {
     AuthorityMode: { Automatic: EnumItem, Server: EnumItem },
     CameraType: { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
     CollisionFidelity: { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
+    CoreGuiType: { All: EnumItem, Backpack: EnumItem, Captures: EnumItem, Chat: EnumItem, EmotesMenu: EnumItem, Health: EnumItem, PlayerList: EnumItem, SelfView: EnumItem },
     EasingDirection: { In: EnumItem, InOut: EnumItem, Out: EnumItem },
     EasingStyle: { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
     FieldOfViewMode: { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },

@@ -5476,6 +5476,16 @@
       "Hull",
       "PreciseConvexDecomposition"
     ],
+    "CoreGuiType": [
+      "All",
+      "Backpack",
+      "Captures",
+      "Chat",
+      "EmotesMenu",
+      "Health",
+      "PlayerList",
+      "SelfView"
+    ],
     "EasingDirection": [
       "In",
       "InOut",
@@ -6000,6 +6010,12 @@
           "decl": "SoundService",
           "kind": "ReadOnly",
           "name": "SoundService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "StarterGui",
+          "kind": "ReadOnly",
+          "name": "StarterGui",
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
@@ -7269,6 +7285,79 @@
       ],
       "name": "HttpService",
       "summary": "The JSON codec (JSONEncode/JSONDecode) and random GUIDs, usable everywhere; the request verbs are closed — HttpEnabled is false and GetAsync/PostAsync/RequestAsync error, the engine sends no HTTP."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(coreGuiType: Enum.CoreGuiType) -> boolean",
+          "kind": "Method",
+          "name": "GetCoreGuiEnabled",
+          "params": [
+            {
+              "name": "coreGuiType",
+              "optional": false,
+              "type": "Enum.CoreGuiType"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether a built-in interface is shown — true until SetCoreGuiEnabled says otherwise; `All` reads true only when every kind is."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "(coreGuiType: Enum.CoreGuiType, enabled: boolean) -> ()",
+          "kind": "Method",
+          "name": "SetCoreGuiEnabled",
+          "params": [
+            {
+              "name": "coreGuiType",
+              "optional": false,
+              "type": "Enum.CoreGuiType"
+            },
+            {
+              "name": "enabled",
+              "optional": false,
+              "type": "boolean"
+            }
+          ],
+          "returns": [],
+          "summary": "Shows or hides one of the engine's built-in interfaces on this client: `Enum.CoreGuiType.PlayerList` is the player list (the one drawn today), `All` every kind at once; the other kinds are remembered for GetCoreGuiEnabled. The item or its name; a server accepts and stores the call without drawing anything."
+        }
+      ],
+      "name": "StarterGui",
+      "summary": "The switch on the engine's built-in interfaces: SetCoreGuiEnabled shows or hides the player list (Enum.CoreGuiType.PlayerList, the one drawn today) or every kind at once, GetCoreGuiEnabled reads the store. The container of authored ScreenGuis the reference's service also is waits on UI serialization."
     }
   ]
 }

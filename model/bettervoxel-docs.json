@@ -2121,6 +2121,7 @@
       "ServerScriptService": "@bettervoxel/globaltype/DataModel.ServerScriptService",
       "ServerStorage": "@bettervoxel/globaltype/DataModel.ServerStorage",
       "SoundService": "@bettervoxel/globaltype/DataModel.SoundService",
+      "StarterGui": "@bettervoxel/globaltype/DataModel.StarterGui",
       "StarterPlayerScripts": "@bettervoxel/globaltype/DataModel.StarterPlayerScripts",
       "TweenService": "@bettervoxel/globaltype/DataModel.TweenService",
       "UserInputService": "@bettervoxel/globaltype/DataModel.UserInputService",
@@ -2214,6 +2215,10 @@
   "@bettervoxel/globaltype/DataModel.SoundService": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#soundservice"
+  },
+  "@bettervoxel/globaltype/DataModel.StarterGui": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#startergui"
   },
   "@bettervoxel/globaltype/DataModel.StarterPlayerScripts": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
@@ -5201,6 +5206,84 @@
   "@bettervoxel/globaltype/SpotLight.Angle": {
     "documentation": "The full cone angle in degrees, clamped 0..180 (writing 200 reads back 180). A default spot light reads 90.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpotLight.html#angle"
+  },
+  "@bettervoxel/globaltype/StarterGui": {
+    "documentation": "The switch on the engine's built-in interfaces: SetCoreGuiEnabled shows or hides the player list (Enum.CoreGuiType.PlayerList, the one drawn today) or every kind at once, GetCoreGuiEnabled reads the store. The container of authored ScreenGuis the reference's service also is waits on UI serialization.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/StarterGui.ClassName",
+      "GetCoreGuiEnabled": "@bettervoxel/globaltype/StarterGui.GetCoreGuiEnabled",
+      "IsA": "@bettervoxel/globaltype/StarterGui.IsA",
+      "Name": "@bettervoxel/globaltype/StarterGui.Name",
+      "SetCoreGuiEnabled": "@bettervoxel/globaltype/StarterGui.SetCoreGuiEnabled"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/StarterGui.html"
+  },
+  "@bettervoxel/globaltype/StarterGui.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/StarterGui.html#classname"
+  },
+  "@bettervoxel/globaltype/StarterGui.GetCoreGuiEnabled": {
+    "documentation": "Whether a built-in interface is shown — true until SetCoreGuiEnabled says otherwise; `All` reads true only when every kind is.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/StarterGui.html#getcoreguienabled",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/StarterGui.GetCoreGuiEnabled/param/0",
+        "name": "coreGuiType"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/StarterGui.GetCoreGuiEnabled/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/StarterGui.GetCoreGuiEnabled/param/0": {
+    "documentation": "`coreGuiType: Enum.CoreGuiType`"
+  },
+  "@bettervoxel/globaltype/StarterGui.GetCoreGuiEnabled/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/StarterGui.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/StarterGui.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/StarterGui.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/StarterGui.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/StarterGui.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/StarterGui.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/StarterGui.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/StarterGui.html#name"
+  },
+  "@bettervoxel/globaltype/StarterGui.SetCoreGuiEnabled": {
+    "documentation": "Shows or hides one of the engine's built-in interfaces on this client: `Enum.CoreGuiType.PlayerList` is the player list (the one drawn today), `All` every kind at once; the other kinds are remembered for GetCoreGuiEnabled. The item or its name; a server accepts and stores the call without drawing anything.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/StarterGui.html#setcoreguienabled",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/StarterGui.SetCoreGuiEnabled/param/0",
+        "name": "coreGuiType"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/StarterGui.SetCoreGuiEnabled/param/1",
+        "name": "enabled"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/StarterGui.SetCoreGuiEnabled/param/0": {
+    "documentation": "`coreGuiType: Enum.CoreGuiType`"
+  },
+  "@bettervoxel/globaltype/StarterGui.SetCoreGuiEnabled/param/1": {
+    "documentation": "`enabled: boolean`"
   },
   "@bettervoxel/globaltype/StringValue": {
     "documentation": "A named container for one string.",
