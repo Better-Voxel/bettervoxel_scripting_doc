@@ -5711,6 +5711,11 @@
       "SmoothPlastic",
       "Wood"
     ],
+    "MouseBehavior": [
+      "Default",
+      "LockCenter",
+      "LockCurrentPosition"
+    ],
     "NormalId": [
       "Back",
       "Bottom",
@@ -6635,6 +6640,18 @@
             }
           ],
           "summary": "Whether the key is held right now. Accepts the enum item or its name; unknown or unmapped keys are simply not down."
+        },
+        {
+          "decl": "Enum.MouseBehavior",
+          "kind": "ReadWrite",
+          "name": "MouseBehavior",
+          "summary": "How the cursor behaves while the game owns it (a Scriptable or any other non-orbit camera) and the player window has focus: Default leaves it free, LockCenter pins it to the window's center every frame, LockCurrentPosition where it is — a lock keeps GetMouseDelta flowing. Focus loss frees the cursor and focus restores the lock. Accepts the item or its name; an orbit camera's own rule (first person hides, the drag pins) stands regardless."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "MouseIconEnabled",
+          "summary": "Whether the cursor is drawn while the game owns it and the window has focus (default true). Read as a raw boolean."
         },
         {
           "decl": "string",

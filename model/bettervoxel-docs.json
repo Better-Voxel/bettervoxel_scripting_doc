@@ -5989,6 +5989,8 @@
       "InputEnded": "@bettervoxel/globaltype/UserInputService.InputEnded",
       "IsA": "@bettervoxel/globaltype/UserInputService.IsA",
       "IsKeyDown": "@bettervoxel/globaltype/UserInputService.IsKeyDown",
+      "MouseBehavior": "@bettervoxel/globaltype/UserInputService.MouseBehavior",
+      "MouseIconEnabled": "@bettervoxel/globaltype/UserInputService.MouseIconEnabled",
       "Name": "@bettervoxel/globaltype/UserInputService.Name"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html"
@@ -6075,6 +6077,14 @@
   },
   "@bettervoxel/globaltype/UserInputService.IsKeyDown/return/0": {
     "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/UserInputService.MouseBehavior": {
+    "documentation": "How the cursor behaves while the game owns it (a Scriptable or any other non-orbit camera) and the player window has focus: Default leaves it free, LockCenter pins it to the window's center every frame, LockCurrentPosition where it is — a lock keeps GetMouseDelta flowing. Focus loss frees the cursor and focus restores the lock. Accepts the item or its name; an orbit camera's own rule (first person hides, the drag pins) stands regardless.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#mousebehavior"
+  },
+  "@bettervoxel/globaltype/UserInputService.MouseIconEnabled": {
+    "documentation": "Whether the cursor is drawn while the game owns it and the window has focus (default true). Read as a raw boolean.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#mouseiconenabled"
   },
   "@bettervoxel/globaltype/UserInputService.Name": {
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
