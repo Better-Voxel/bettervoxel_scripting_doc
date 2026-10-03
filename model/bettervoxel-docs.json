@@ -969,6 +969,7 @@
       "GetNetworkOwner": "@bettervoxel/globaltype/BasePart.GetNetworkOwner",
       "GetNetworkOwnershipAuto": "@bettervoxel/globaltype/BasePart.GetNetworkOwnershipAuto",
       "GetRenderCFrame": "@bettervoxel/globaltype/BasePart.GetRenderCFrame",
+      "Locked": "@bettervoxel/globaltype/BasePart.Locked",
       "Mass": "@bettervoxel/globaltype/BasePart.Mass",
       "Material": "@bettervoxel/globaltype/BasePart.Material",
       "Position": "@bettervoxel/globaltype/BasePart.Position",
@@ -1109,6 +1110,10 @@
   },
   "@bettervoxel/globaltype/BasePart.GetRenderCFrame/return/0": {
     "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/BasePart.Locked": {
+    "documentation": "Whether the editor's viewport leaves the part alone: a click does not select a locked part and a box does not take it (the Explorer still selects it). Nothing at run time reads it; a server's write replicates like any other property's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#locked"
   },
   "@bettervoxel/globaltype/BasePart.Mass": {
     "documentation": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume. Read only.",

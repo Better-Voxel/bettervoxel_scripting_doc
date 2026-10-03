@@ -197,6 +197,12 @@
           "summary": "The world pose the part is DRAWN at this frame, which differs from CFrame while the render departs from the simulation under server authority: a correction's offset decaying, or a tick mover shown one tick behind (net-sync-v2 §2.9). A camera or an effect that must sit on what is on screen reads this in the render step; game logic reads CFrame."
         },
         {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Locked",
+          "summary": "Whether the editor's viewport leaves the part alone: a click does not select a locked part and a box does not take it (the Explorer still selects it). Nothing at run time reads it; a server's write replicates like any other property's."
+        },
+        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Mass",

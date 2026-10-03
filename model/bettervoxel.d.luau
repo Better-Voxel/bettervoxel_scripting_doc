@@ -443,6 +443,7 @@ declare extern type BasePart extends PVInstance with
     function GetNetworkOwner(self): Instance?
     function GetNetworkOwnershipAuto(self): boolean
     function GetRenderCFrame(self): CFrame
+    Locked: boolean
     Mass: number
     Material: EnumItem
     Position: Vector3
