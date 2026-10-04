@@ -752,6 +752,7 @@ declare extern type RunService with
     function BindToSimulation(self, callback: (deltaTime: number) -> (), frequency: EnumItem?, priority: number?): BVScriptConnection
     ClassName: string
     function GetPredictionStatus(self, instance: Instance): EnumItem
+    function GetRenderedSessionTick(self, instance: Instance?): number
     function GetSessionTick(self): number
     Heartbeat: BVScriptSignal -- fires (number)
     function IsA(self, className: string): boolean

@@ -4666,6 +4666,7 @@
       "BindToSimulation": "@bettervoxel/globaltype/RunService.BindToSimulation",
       "ClassName": "@bettervoxel/globaltype/RunService.ClassName",
       "GetPredictionStatus": "@bettervoxel/globaltype/RunService.GetPredictionStatus",
+      "GetRenderedSessionTick": "@bettervoxel/globaltype/RunService.GetRenderedSessionTick",
       "GetSessionTick": "@bettervoxel/globaltype/RunService.GetSessionTick",
       "Heartbeat": "@bettervoxel/globaltype/RunService.Heartbeat",
       "IsA": "@bettervoxel/globaltype/RunService.IsA",
@@ -4773,6 +4774,25 @@
   },
   "@bettervoxel/globaltype/RunService.GetPredictionStatus/return/0": {
     "documentation": "`Enum.PredictionStatus`"
+  },
+  "@bettervoxel/globaltype/RunService.GetRenderedSessionTick": {
+    "documentation": "The session tick, fractional, this frame draws at (an engine extension, GetSessionTick's counterpart for what is on screen): what a script reads to draw something that is a function of the tick — a scrolling track, a conveyor's marks — where the things beside it are drawn. With no instance, this end's own simulation: the server's and solo play's world, a client's predicted instances and what its own scripts made. Under server authority a mover written at the tick is shown one tick behind and eased across it, so the answer is GetSessionTick() - 1 plus the frame's phase through the tick; it runs on whether or not such an instance exists, so what is drawn from it never jumps when one stops or is gone, and a tick the session's numbering catches up or holds on a poor link is spread over the frames after it, as the bodies are shown. With an instance, where that instance is drawn (a welded part through its assembly's root): one this end simulates answers as above; a followed one is drawn at its playback's position — the tick the server's own snapshots give it, behind the server's present by the link and the playback's depth, running on while it rests; one the server moves that this end plays nothing back of answers with the followed world's median. Under the classic model nothing is eased across ticks (this end's own simulation answers GetSessionTick()) and poses carry no tick (a followed instance answers from the numbering, within a tick). -1 on a client before its numbering aligned.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#getrenderedsessiontick",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RunService.GetRenderedSessionTick/param/0",
+        "name": "instance"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.GetRenderedSessionTick/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.GetRenderedSessionTick/param/0": {
+    "documentation": "`instance: Instance?`"
+  },
+  "@bettervoxel/globaltype/RunService.GetRenderedSessionTick/return/0": {
+    "documentation": "`number`"
   },
   "@bettervoxel/globaltype/RunService.GetSessionTick": {
     "documentation": "The simulation tick this end stands at, numbered as the session numbers it (an engine extension; the reference has no tick API): the server's own count on the server and in solo play, on a client the server tick its fixed loop is at — its lead ahead of the server included, so an input consumed at tick N is applied by the server at its tick N. Inside a BindToSimulation callback the tick being simulated. -1 on a client before its numbering aligned. A game stamps its own remotes with it, so the other end knows the tick an action happened on.",

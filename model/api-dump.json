@@ -6159,6 +6159,24 @@
           "summary": "What instance is to this end: Authoritative on the server, Predicted on a client that predicts it under server authority, None otherwise (the classic rules apply). Readable inside a BindToSimulation callback, so one bound module can run on both ends and skip what neither end simulates."
         },
         {
+          "decl": "(instance: Instance?) -> number",
+          "kind": "Method",
+          "name": "GetRenderedSessionTick",
+          "params": [
+            {
+              "name": "instance",
+              "optional": true,
+              "type": "Instance?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The session tick, fractional, this frame draws at (an engine extension, GetSessionTick's counterpart for what is on screen): what a script reads to draw something that is a function of the tick — a scrolling track, a conveyor's marks — where the things beside it are drawn. With no instance, this end's own simulation: the server's and solo play's world, a client's predicted instances and what its own scripts made. Under server authority a mover written at the tick is shown one tick behind and eased across it, so the answer is GetSessionTick() - 1 plus the frame's phase through the tick; it runs on whether or not such an instance exists, so what is drawn from it never jumps when one stops or is gone, and a tick the session's numbering catches up or holds on a poor link is spread over the frames after it, as the bodies are shown. With an instance, where that instance is drawn (a welded part through its assembly's root): one this end simulates answers as above; a followed one is drawn at its playback's position — the tick the server's own snapshots give it, behind the server's present by the link and the playback's depth, running on while it rests; one the server moves that this end plays nothing back of answers with the followed world's median. Under the classic model nothing is eased across ticks (this end's own simulation answers GetSessionTick()) and poses carry no tick (a followed instance answers from the numbering, within a tick). -1 on a client before its numbering aligned."
+        },
+        {
           "decl": "() -> number",
           "kind": "Method",
           "name": "GetSessionTick",
