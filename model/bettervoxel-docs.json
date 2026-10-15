@@ -1,11 +1,168 @@
 {
+  "@bettervoxel/global/BrickColor": {
+    "documentation": "The BrickColor constructors — see the BrickColor page.",
+    "keys": {
+      "Black": "@bettervoxel/global/BrickColor.Black",
+      "Blue": "@bettervoxel/global/BrickColor.Blue",
+      "DarkGray": "@bettervoxel/global/BrickColor.DarkGray",
+      "Gray": "@bettervoxel/global/BrickColor.Gray",
+      "Green": "@bettervoxel/global/BrickColor.Green",
+      "Random": "@bettervoxel/global/BrickColor.Random",
+      "Red": "@bettervoxel/global/BrickColor.Red",
+      "White": "@bettervoxel/global/BrickColor.White",
+      "Yellow": "@bettervoxel/global/BrickColor.Yellow",
+      "new": "@bettervoxel/global/BrickColor.new",
+      "palette": "@bettervoxel/global/BrickColor.palette",
+      "random": "@bettervoxel/global/BrickColor.random"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html"
+  },
+  "@bettervoxel/global/BrickColor.Black": {
+    "documentation": "Black, number 26.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#black",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.Black/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.Black/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.Blue": {
+    "documentation": "Bright blue, number 23.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#blue",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.Blue/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.Blue/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.DarkGray": {
+    "documentation": "Dark stone grey, number 199.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#darkgray",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.DarkGray/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.DarkGray/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.Gray": {
+    "documentation": "Medium stone grey, number 194.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#gray",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.Gray/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.Gray/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.Green": {
+    "documentation": "Dark green, number 28.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#green",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.Green/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.Green/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.Random": {
+    "documentation": "random under its other spelling: the same draw.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#random",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.Random/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.Random/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.Red": {
+    "documentation": "Bright red, number 21.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#red",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.Red/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.Red/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.White": {
+    "documentation": "White, number 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#white",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.White/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.White/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.Yellow": {
+    "documentation": "Bright yellow, number 24.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#yellow",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.Yellow/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.Yellow/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.new": {
+    "documentation": "Really black (1003) with no argument; a number, truncated toward zero — 194 when the table has none; a name, case-sensitive — 194 for an unknown one, a numeric string read as a number; three channels 0..1 (a missing one 0) or a Color3, the nearest colour by the least sum of absolute channel differences (the first in number order on a tie; nothing clamped).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#new"
+  },
+  "@bettervoxel/global/BrickColor.palette": {
+    "documentation": "The 128-entry palette's colour at a zero-based index, rounded to the nearest (a half away from zero); out of bounds raises `palette index out of bounds (<index>)`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#palette",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/BrickColor.palette/param/0",
+        "name": "index"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/BrickColor.palette/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.palette/param/0": {
+    "documentation": "`index: number`"
+  },
+  "@bettervoxel/global/BrickColor.palette/return/0": {
+    "documentation": "`BrickColor`"
+  },
+  "@bettervoxel/global/BrickColor.random": {
+    "documentation": "A colour of the 128-entry palette, drawn from the VM's own generator — the stream math.random draws, so a session replayed under a seed replays it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#random",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/BrickColor.random/return/0"
+    ]
+  },
+  "@bettervoxel/global/BrickColor.random/return/0": {
+    "documentation": "`BrickColor`"
+  },
   "@bettervoxel/global/CFrame": {
     "documentation": "The CFrame constructors — see the CFrame page.",
     "keys": {
       "Angles": "@bettervoxel/global/CFrame.Angles",
       "fromAxisAngle": "@bettervoxel/global/CFrame.fromAxisAngle",
+      "fromEulerAngles": "@bettervoxel/global/CFrame.fromEulerAngles",
       "fromEulerAnglesXYZ": "@bettervoxel/global/CFrame.fromEulerAnglesXYZ",
+      "fromEulerAnglesYXZ": "@bettervoxel/global/CFrame.fromEulerAnglesYXZ",
+      "fromMatrix": "@bettervoxel/global/CFrame.fromMatrix",
+      "fromOrientation": "@bettervoxel/global/CFrame.fromOrientation",
+      "fromRotationBetweenVectors": "@bettervoxel/global/CFrame.fromRotationBetweenVectors",
       "identity": "@bettervoxel/global/CFrame.identity",
+      "lookAlong": "@bettervoxel/global/CFrame.lookAlong",
       "lookAt": "@bettervoxel/global/CFrame.lookAt",
       "new": "@bettervoxel/global/CFrame.new"
     },
@@ -70,6 +227,46 @@
   "@bettervoxel/global/CFrame.fromAxisAngle/return/0": {
     "documentation": "`CFrame`"
   },
+  "@bettervoxel/global/CFrame.fromEulerAngles": {
+    "documentation": "A rotation-only CFrame from Euler angles in radians: the product of the three axis rotations in the order's letters, left to right (an Enum.RotationOrder item, XYZ by default), the angles always rx, ry, rz.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fromeulerangles",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAngles/param/0",
+        "name": "rx"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAngles/param/1",
+        "name": "ry"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAngles/param/2",
+        "name": "rz"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAngles/param/3",
+        "name": "order"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.fromEulerAngles/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.fromEulerAngles/param/0": {
+    "documentation": "`rx: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAngles/param/1": {
+    "documentation": "`ry: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAngles/param/2": {
+    "documentation": "`rz: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAngles/param/3": {
+    "documentation": "`order: Enum.RotationOrder?`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAngles/return/0": {
+    "documentation": "`CFrame`"
+  },
   "@bettervoxel/global/CFrame.fromEulerAnglesXYZ": {
     "documentation": "A rotation-only CFrame from XYZ Euler angles in radians — the same axis order the instance Rotation property uses (in degrees there).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fromeuleranglesxyz",
@@ -103,12 +300,177 @@
   "@bettervoxel/global/CFrame.fromEulerAnglesXYZ/return/0": {
     "documentation": "`CFrame`"
   },
+  "@bettervoxel/global/CFrame.fromEulerAnglesYXZ": {
+    "documentation": "A rotation-only CFrame from YXZ Euler angles in radians: the product Ry·Rx·Rz, the angles still passed as rx, ry, rz (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fromeuleranglesyxz",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/param/0",
+        "name": "rx"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/param/1",
+        "name": "ry"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/param/2",
+        "name": "rz"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/param/0": {
+    "documentation": "`rx: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/param/1": {
+    "documentation": "`ry: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/param/2": {
+    "documentation": "`rz: number`"
+  },
+  "@bettervoxel/global/CFrame.fromEulerAnglesYXZ/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/global/CFrame.fromMatrix": {
+    "documentation": "A CFrame at pos from a rotation matrix's columns, orthonormalized: Gram–Schmidt over vX then vY, the third column their cross — a CFrame here is a rotation, so vZ is taken and not kept (the reference keeps all three columns as given).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#frommatrix",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromMatrix/param/0",
+        "name": "pos"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromMatrix/param/1",
+        "name": "vX"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromMatrix/param/2",
+        "name": "vY"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromMatrix/param/3",
+        "name": "vZ"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.fromMatrix/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.fromMatrix/param/0": {
+    "documentation": "`pos: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.fromMatrix/param/1": {
+    "documentation": "`vX: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.fromMatrix/param/2": {
+    "documentation": "`vY: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.fromMatrix/param/3": {
+    "documentation": "`vZ: Vector3?`"
+  },
+  "@bettervoxel/global/CFrame.fromMatrix/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/global/CFrame.fromOrientation": {
+    "documentation": "fromEulerAnglesYXZ under its other name: the Ry·Rx·Rz product of rx, ry, rz in radians.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fromorientation",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromOrientation/param/0",
+        "name": "rx"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromOrientation/param/1",
+        "name": "ry"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromOrientation/param/2",
+        "name": "rz"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.fromOrientation/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.fromOrientation/param/0": {
+    "documentation": "`rx: number`"
+  },
+  "@bettervoxel/global/CFrame.fromOrientation/param/1": {
+    "documentation": "`ry: number`"
+  },
+  "@bettervoxel/global/CFrame.fromOrientation/param/2": {
+    "documentation": "`rz: number`"
+  },
+  "@bettervoxel/global/CFrame.fromOrientation/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/global/CFrame.fromRotationBetweenVectors": {
+    "documentation": "The shortest rotation taking the direction of from onto that of to; opposite directions take a half turn about from × Y when |from.X| > |from.Y|, else about from × X; a zero vector is an all-NaN rotation.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fromrotationbetweenvectors",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromRotationBetweenVectors/param/0",
+        "name": "from"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.fromRotationBetweenVectors/param/1",
+        "name": "to"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.fromRotationBetweenVectors/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.fromRotationBetweenVectors/param/0": {
+    "documentation": "`from: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.fromRotationBetweenVectors/param/1": {
+    "documentation": "`to: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.fromRotationBetweenVectors/return/0": {
+    "documentation": "`CFrame`"
+  },
   "@bettervoxel/global/CFrame.identity": {
     "documentation": "The identity transform: zero position, no rotation.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#identity"
   },
+  "@bettervoxel/global/CFrame.lookAlong": {
+    "documentation": "A CFrame at position with its LookVector along direction — lookAt aimed at position + direction, by the same rule for the up.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lookalong",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/CFrame.lookAlong/param/0",
+        "name": "position"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.lookAlong/param/1",
+        "name": "direction"
+      },
+      {
+        "documentation": "@bettervoxel/global/CFrame.lookAlong/param/2",
+        "name": "up"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/CFrame.lookAlong/return/0"
+    ]
+  },
+  "@bettervoxel/global/CFrame.lookAlong/param/0": {
+    "documentation": "`position: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.lookAlong/param/1": {
+    "documentation": "`direction: Vector3`"
+  },
+  "@bettervoxel/global/CFrame.lookAlong/param/2": {
+    "documentation": "`up: Vector3?`"
+  },
+  "@bettervoxel/global/CFrame.lookAlong/return/0": {
+    "documentation": "`CFrame`"
+  },
   "@bettervoxel/global/CFrame.lookAt": {
-    "documentation": "A CFrame at position with its LookVector aimed at target; up defaults to the world Y axis.",
+    "documentation": "A CFrame at position with its LookVector aimed at target; up defaults to the world Y axis, and the X axis stands in for an up parallel to the look.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lookat",
     "params": [
       {
@@ -141,15 +503,17 @@
     "documentation": "`CFrame`"
   },
   "@bettervoxel/global/CFrame.new": {
-    "documentation": "The identity (no arguments), a translation from a position vector or from x, y, z, or the legacy two-vector form: a position looking at a point (Y up).",
+    "documentation": "The identity (no arguments), a translation from a position vector or from x, y, z, the legacy two-vector form (a position looking at a point: Y up, the X axis the up once the look is within about eight degrees of the vertical), a position and a quaternion (normalized; a zero one is an all-NaN rotation), or a position and a rotation matrix row by row (orthonormalized: Gram–Schmidt over the X then the Y column, the third their cross).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#new"
   },
   "@bettervoxel/global/Color3": {
     "documentation": "The Color3 constructors — see the Color3 page.",
     "keys": {
       "fromHSV": "@bettervoxel/global/Color3.fromHSV",
+      "fromHex": "@bettervoxel/global/Color3.fromHex",
       "fromRGB": "@bettervoxel/global/Color3.fromRGB",
-      "new": "@bettervoxel/global/Color3.new"
+      "new": "@bettervoxel/global/Color3.new",
+      "toHSV": "@bettervoxel/global/Color3.toHSV"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html"
   },
@@ -184,6 +548,25 @@
     "documentation": "`v: number`"
   },
   "@bettervoxel/global/Color3.fromHSV/return/0": {
+    "documentation": "`Color3`"
+  },
+  "@bettervoxel/global/Color3.fromHex": {
+    "documentation": "A color from three or six hex digits in either case after an optional #, the short form's digits doubled; a number is read as its digits.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#fromhex",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Color3.fromHex/param/0",
+        "name": "hex"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Color3.fromHex/return/0"
+    ]
+  },
+  "@bettervoxel/global/Color3.fromHex/param/0": {
+    "documentation": "`hex: string`"
+  },
+  "@bettervoxel/global/Color3.fromHex/return/0": {
     "documentation": "`Color3`"
   },
   "@bettervoxel/global/Color3.fromRGB": {
@@ -251,6 +634,33 @@
   },
   "@bettervoxel/global/Color3.new/return/0": {
     "documentation": "`Color3`"
+  },
+  "@bettervoxel/global/Color3.toHSV": {
+    "documentation": "Deprecated: the function form of ToHSV — the hue, saturation and value of color, answered as color:ToHSV() (measured) — use ToHSV.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#tohsv",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Color3.toHSV/param/0",
+        "name": "color"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Color3.toHSV/return/0",
+      "@bettervoxel/global/Color3.toHSV/return/1",
+      "@bettervoxel/global/Color3.toHSV/return/2"
+    ]
+  },
+  "@bettervoxel/global/Color3.toHSV/param/0": {
+    "documentation": "`color: Color3`"
+  },
+  "@bettervoxel/global/Color3.toHSV/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/global/Color3.toHSV/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/global/Color3.toHSV/return/2": {
+    "documentation": "`number`"
   },
   "@bettervoxel/global/ColorSequence": {
     "documentation": "The ColorSequence constructors — see the ColorSequence page.",
@@ -448,6 +858,32 @@
   "@bettervoxel/global/NumberSequenceKeypoint.new/return/0": {
     "documentation": "`NumberSequenceKeypoint`"
   },
+  "@bettervoxel/global/Random": {
+    "documentation": "The Random constructors — see the Random page.",
+    "keys": {
+      "new": "@bettervoxel/global/Random.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html"
+  },
+  "@bettervoxel/global/Random.new": {
+    "documentation": "A generator from a seed — truncated toward zero, a negative one its two's complement, a magnitude of 2^53 or more seed 0, NaN the bits of -2^63 (measured) — or, with no seed, from the VM's own generator: the stream math.random draws, so a session replayed under a seed replays it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html#new",
+    "params": [
+      {
+        "documentation": "@bettervoxel/global/Random.new/param/0",
+        "name": "seed"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/global/Random.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/Random.new/param/0": {
+    "documentation": "`seed: number?`"
+  },
+  "@bettervoxel/global/Random.new/return/0": {
+    "documentation": "`Random`"
+  },
   "@bettervoxel/global/Ray": {
     "documentation": "The Ray constructors — see the Ray page.",
     "keys": {
@@ -480,6 +916,24 @@
   },
   "@bettervoxel/global/Ray.new/return/0": {
     "documentation": "`Ray`"
+  },
+  "@bettervoxel/global/RaycastParams": {
+    "documentation": "The RaycastParams constructors — see the RaycastParams page.",
+    "keys": {
+      "new": "@bettervoxel/global/RaycastParams.new"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html"
+  },
+  "@bettervoxel/global/RaycastParams.new": {
+    "documentation": "The defaults: FilterType Exclude over an empty list, the new pair nil, the flags false, CollisionGroup \"Default\", ServerTime nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#new",
+    "params": [],
+    "returns": [
+      "@bettervoxel/global/RaycastParams.new/return/0"
+    ]
+  },
+  "@bettervoxel/global/RaycastParams.new/return/0": {
+    "documentation": "`RaycastParams`"
   },
   "@bettervoxel/global/TweenInfo": {
     "documentation": "The TweenInfo constructors — see the TweenInfo page.",
@@ -855,7 +1309,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#cframe"
   },
   "@bettervoxel/globaltype/Attachment.Orientation": {
-    "documentation": "The attachment's LOCAL rotation as XYZ Euler angles in degrees (§15).",
+    "documentation": "The attachment's LOCAL rotation as YXZ Euler angles in degrees: (rx, ry, rz) names the product Ry·Rx·Rz, where CFrame.Angles composes Rx·Ry·Rz (§30).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Attachment.html#orientation"
   },
   "@bettervoxel/globaltype/Attachment.Position": {
@@ -878,7 +1332,9 @@
     "documentation": "One registered callback on a signal: Disconnect unregisters it, Connected reads back. Connections die with their creating script.",
     "keys": {
       "Connected": "@bettervoxel/globaltype/BVScriptConnection.Connected",
-      "Disconnect": "@bettervoxel/globaltype/BVScriptConnection.Disconnect"
+      "Disconnect": "@bettervoxel/globaltype/BVScriptConnection.Disconnect",
+      "connected": "@bettervoxel/globaltype/BVScriptConnection.connected",
+      "disconnect": "@bettervoxel/globaltype/BVScriptConnection.disconnect"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptConnection.html"
   },
@@ -892,12 +1348,24 @@
     "params": [],
     "returns": []
   },
+  "@bettervoxel/globaltype/BVScriptConnection.connected": {
+    "documentation": "Deprecated: the retired spelling of Connected, answered the same way — use Connected.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptConnection.html#connected"
+  },
+  "@bettervoxel/globaltype/BVScriptConnection.disconnect": {
+    "documentation": "Deprecated: the retired spelling of Disconnect, answered the same way — use Disconnect.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptConnection.html#disconnect",
+    "params": [],
+    "returns": []
+  },
   "@bettervoxel/globaltype/BVScriptSignal": {
     "documentation": "The event surface (the BV spelling of the reference engine's RBXScriptSignal): Connect and Once register callbacks, Wait suspends until the next fire. Delivery is deferred to the script pass after the event.",
     "keys": {
       "Connect": "@bettervoxel/globaltype/BVScriptSignal.Connect",
       "Once": "@bettervoxel/globaltype/BVScriptSignal.Once",
-      "Wait": "@bettervoxel/globaltype/BVScriptSignal.Wait"
+      "Wait": "@bettervoxel/globaltype/BVScriptSignal.Wait",
+      "connect": "@bettervoxel/globaltype/BVScriptSignal.connect",
+      "wait": "@bettervoxel/globaltype/BVScriptSignal.wait"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptSignal.html"
   },
@@ -950,6 +1418,36 @@
   "@bettervoxel/globaltype/BVScriptSignal.Wait/return/0": {
     "documentation": "`...any`"
   },
+  "@bettervoxel/globaltype/BVScriptSignal.connect": {
+    "documentation": "Deprecated: the retired spelling of Connect, answered the same way — use Connect.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptSignal.html#connect",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/BVScriptSignal.connect/param/0",
+        "name": "callback"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/BVScriptSignal.connect/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.connect/param/0": {
+    "documentation": "`callback: (...any) -> ()`"
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.connect/return/0": {
+    "documentation": "`BVScriptConnection`"
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.wait": {
+    "documentation": "Deprecated: the retired spelling of Wait, answered the same way — use Wait.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BVScriptSignal.html#wait",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/BVScriptSignal.wait/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/BVScriptSignal.wait/return/0": {
+    "documentation": "`...any`"
+  },
   "@bettervoxel/globaltype/BasePart": {
     "documentation": "Everything physical: world pose (Position, Rotation, CFrame), Size, appearance (Color, Material, Transparency), collision flags, and the Touched signal.",
     "keys": {
@@ -961,8 +1459,10 @@
       "AssemblyCenterOfMass": "@bettervoxel/globaltype/BasePart.AssemblyCenterOfMass",
       "AssemblyLinearVelocity": "@bettervoxel/globaltype/BasePart.AssemblyLinearVelocity",
       "AssemblyMass": "@bettervoxel/globaltype/BasePart.AssemblyMass",
+      "BrickColor": "@bettervoxel/globaltype/BasePart.BrickColor",
       "CFrame": "@bettervoxel/globaltype/BasePart.CFrame",
       "CanCollide": "@bettervoxel/globaltype/BasePart.CanCollide",
+      "CastShadow": "@bettervoxel/globaltype/BasePart.CastShadow",
       "CenterOfMass": "@bettervoxel/globaltype/BasePart.CenterOfMass",
       "Color": "@bettervoxel/globaltype/BasePart.Color",
       "GetMass": "@bettervoxel/globaltype/BasePart.GetMass",
@@ -973,12 +1473,14 @@
       "Mass": "@bettervoxel/globaltype/BasePart.Mass",
       "Material": "@bettervoxel/globaltype/BasePart.Material",
       "Position": "@bettervoxel/globaltype/BasePart.Position",
+      "RotVelocity": "@bettervoxel/globaltype/BasePart.RotVelocity",
       "Rotation": "@bettervoxel/globaltype/BasePart.Rotation",
       "SetNetworkOwner": "@bettervoxel/globaltype/BasePart.SetNetworkOwner",
       "SetNetworkOwnershipAuto": "@bettervoxel/globaltype/BasePart.SetNetworkOwnershipAuto",
       "Size": "@bettervoxel/globaltype/BasePart.Size",
       "Touched": "@bettervoxel/globaltype/BasePart.Touched",
-      "Transparency": "@bettervoxel/globaltype/BasePart.Transparency"
+      "Transparency": "@bettervoxel/globaltype/BasePart.Transparency",
+      "Velocity": "@bettervoxel/globaltype/BasePart.Velocity"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html"
   },
@@ -1051,6 +1553,10 @@
     "documentation": "The whole assembly's mass, every welded member's own summed; infinity for an anchored assembly. Read only.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#assemblymass"
   },
+  "@bettervoxel/globaltype/BasePart.BrickColor": {
+    "documentation": "The nearest BrickColor of the part's Color (the rule of BrickColor.new(color)); a write stores the table colour's bytes as Color3.fromRGB would, so Color reads back equal to fromRGB of them — an ulp off the BrickColor's own Color, as measured. Every real change of the colour fires Changed(\"BrickColor\") and the BrickColor property signal before Color's pair; the same value again fires nothing. A BrickColor only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#brickcolor"
+  },
   "@bettervoxel/globaltype/BasePart.CFrame": {
     "documentation": "The full rigid transform as one CFrame. Reads and writes agree with Position and Rotation — three views of the same pose. Welded members refuse the write; move the assembly root instead.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#cframe"
@@ -1058,6 +1564,10 @@
   "@bettervoxel/globaltype/BasePart.CanCollide": {
     "documentation": "Whether the part responds to contacts. false keeps it physical — it falls and fires Touched — but removes the contact response.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#cancollide"
+  },
+  "@bettervoxel/globaltype/BasePart.CastShadow": {
+    "documentation": "Whether the part casts a shadow (true by default), under the sun and under a PointLight or SpotLight whose Shadows is on. A part that casts none still receives the shadows of others. A server's write replicates like any other property's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#castshadow"
   },
   "@bettervoxel/globaltype/BasePart.CenterOfMass": {
     "documentation": "The part's own center of mass in its LOCAL frame — the origin for every symmetric shape. Read only.",
@@ -1127,6 +1637,10 @@
     "documentation": "The part's world position. Welded members read their world pose, and a write moves the whole assembly with offsets preserved. Explicit writes fire the pose property signals; physics motion does not.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#position"
   },
+  "@bettervoxel/globaltype/BasePart.RotVelocity": {
+    "documentation": "Deprecated: the assembly's angular velocity in radians per second about the world axes — use AssemblyAngularVelocity. A write sets it and keeps the velocity of the assembly root part's position (measured), where an AssemblyAngularVelocity write keeps the centre of mass's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#rotvelocity"
+  },
   "@bettervoxel/globaltype/BasePart.Rotation": {
     "documentation": "The orientation as XYZ Euler angles in degrees. Welded members read their assembly pose; writing a welded member is refused — rotate the assembly root instead.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#rotation"
@@ -1162,6 +1676,10 @@
   "@bettervoxel/globaltype/BasePart.Transparency": {
     "documentation": "How see-through the part renders, clamped 0 (opaque) to 1 (invisible).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#transparency"
+  },
+  "@bettervoxel/globaltype/BasePart.Velocity": {
+    "documentation": "Deprecated: the velocity of the part's own position — the assembly's linear velocity plus its spin's arm from the centre of mass (measured) — use AssemblyLinearVelocity. A write on any part of an assembly sets the velocity of the assembly root part's position, the spin kept; on a part alone the pair is the assembly's. Not signal-backed (the reference fires Changed; recorded).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#velocity"
   },
   "@bettervoxel/globaltype/BasePlayerGui": {
     "documentation": "The per-player UI container layer; no members of its own here.",
@@ -1281,28 +1799,195 @@
     "documentation": "The stored boolean. Writes require a real boolean.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BoolValue.html#value"
   },
+  "@bettervoxel/globaltype/BrickColor": {
+    "documentation": "A named colour of the reference engine's 208-entry table — its Number, its Name (what tostring prints), its Color and the three channels r, g, b; immutable, equal by value. BrickColor.new takes a number, a name, three channels or a Color3 (the nearest colour), palette(i) reads the 128-entry palette, random() draws from it, and eight named constructors (White, Gray, DarkGray, Black, Red, Yellow, Green, Blue) stand for their numbers.",
+    "keys": {
+      "Color": "@bettervoxel/globaltype/BrickColor.Color",
+      "Name": "@bettervoxel/globaltype/BrickColor.Name",
+      "Number": "@bettervoxel/globaltype/BrickColor.Number",
+      "b": "@bettervoxel/globaltype/BrickColor.b",
+      "g": "@bettervoxel/globaltype/BrickColor.g",
+      "r": "@bettervoxel/globaltype/BrickColor.r"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html"
+  },
+  "@bettervoxel/globaltype/BrickColor.Color": {
+    "documentation": "The colour as a Color3: each byte times 1/255 in single precision — an ulp off Color3.fromRGB's byte / 255 on some bytes (measured: BrickColor.new(21).Color ~= Color3.fromRGB(196, 40, 28)).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#color"
+  },
+  "@bettervoxel/globaltype/BrickColor.Name": {
+    "documentation": "The colour's name — what tostring prints; case-sensitive in BrickColor.new.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#name"
+  },
+  "@bettervoxel/globaltype/BrickColor.Number": {
+    "documentation": "The colour's number in the table, 1 to 1032 (194 is Medium stone grey, the answer for an unknown number or name).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#number"
+  },
+  "@bettervoxel/globaltype/BrickColor.b": {
+    "documentation": "The blue channel, 0..1: the byte times 1/255.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#b"
+  },
+  "@bettervoxel/globaltype/BrickColor.g": {
+    "documentation": "The green channel, 0..1: the byte times 1/255.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#g"
+  },
+  "@bettervoxel/globaltype/BrickColor.r": {
+    "documentation": "The red channel, 0..1: the byte times 1/255.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/BrickColor.html#r"
+  },
   "@bettervoxel/globaltype/CFrame": {
     "documentation": "An immutable rigid transform: position plus rotation, right-handed and Y-up, with LookVector along -Z. Every operation returns a new value; cf1 * cf2 composes and cf * vector transforms the point.",
     "keys": {
+      "AngleBetween": "@bettervoxel/globaltype/CFrame.AngleBetween",
+      "FuzzyEq": "@bettervoxel/globaltype/CFrame.FuzzyEq",
+      "GetComponents": "@bettervoxel/globaltype/CFrame.GetComponents",
       "Inverse": "@bettervoxel/globaltype/CFrame.Inverse",
       "Lerp": "@bettervoxel/globaltype/CFrame.Lerp",
       "LookVector": "@bettervoxel/globaltype/CFrame.LookVector",
+      "Orthonormalize": "@bettervoxel/globaltype/CFrame.Orthonormalize",
       "PointToObjectSpace": "@bettervoxel/globaltype/CFrame.PointToObjectSpace",
       "PointToWorldSpace": "@bettervoxel/globaltype/CFrame.PointToWorldSpace",
       "Position": "@bettervoxel/globaltype/CFrame.Position",
       "RightVector": "@bettervoxel/globaltype/CFrame.RightVector",
       "Rotation": "@bettervoxel/globaltype/CFrame.Rotation",
+      "ToAxisAngle": "@bettervoxel/globaltype/CFrame.ToAxisAngle",
+      "ToEulerAngles": "@bettervoxel/globaltype/CFrame.ToEulerAngles",
       "ToEulerAnglesXYZ": "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ",
+      "ToEulerAnglesYXZ": "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ",
       "ToObjectSpace": "@bettervoxel/globaltype/CFrame.ToObjectSpace",
+      "ToOrientation": "@bettervoxel/globaltype/CFrame.ToOrientation",
       "ToWorldSpace": "@bettervoxel/globaltype/CFrame.ToWorldSpace",
       "UpVector": "@bettervoxel/globaltype/CFrame.UpVector",
       "VectorToObjectSpace": "@bettervoxel/globaltype/CFrame.VectorToObjectSpace",
       "VectorToWorldSpace": "@bettervoxel/globaltype/CFrame.VectorToWorldSpace",
       "X": "@bettervoxel/globaltype/CFrame.X",
+      "XVector": "@bettervoxel/globaltype/CFrame.XVector",
       "Y": "@bettervoxel/globaltype/CFrame.Y",
-      "Z": "@bettervoxel/globaltype/CFrame.Z"
+      "YVector": "@bettervoxel/globaltype/CFrame.YVector",
+      "Z": "@bettervoxel/globaltype/CFrame.Z",
+      "ZVector": "@bettervoxel/globaltype/CFrame.ZVector",
+      "components": "@bettervoxel/globaltype/CFrame.components",
+      "inverse": "@bettervoxel/globaltype/CFrame.inverse",
+      "lerp": "@bettervoxel/globaltype/CFrame.lerp",
+      "lookVector": "@bettervoxel/globaltype/CFrame.lookVector",
+      "p": "@bettervoxel/globaltype/CFrame.p",
+      "pointToObjectSpace": "@bettervoxel/globaltype/CFrame.pointToObjectSpace",
+      "pointToWorldSpace": "@bettervoxel/globaltype/CFrame.pointToWorldSpace",
+      "rightVector": "@bettervoxel/globaltype/CFrame.rightVector",
+      "toAxisAngle": "@bettervoxel/globaltype/CFrame.toAxisAngle",
+      "toEulerAnglesXYZ": "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ",
+      "toEulerAnglesYXZ": "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ",
+      "toObjectSpace": "@bettervoxel/globaltype/CFrame.toObjectSpace",
+      "toOrientation": "@bettervoxel/globaltype/CFrame.toOrientation",
+      "toWorldSpace": "@bettervoxel/globaltype/CFrame.toWorldSpace",
+      "upVector": "@bettervoxel/globaltype/CFrame.upVector",
+      "vectorToObjectSpace": "@bettervoxel/globaltype/CFrame.vectorToObjectSpace",
+      "vectorToWorldSpace": "@bettervoxel/globaltype/CFrame.vectorToWorldSpace",
+      "x": "@bettervoxel/globaltype/CFrame.x",
+      "y": "@bettervoxel/globaltype/CFrame.y",
+      "z": "@bettervoxel/globaltype/CFrame.z"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html"
+  },
+  "@bettervoxel/globaltype/CFrame.AngleBetween": {
+    "documentation": "The angle in radians of the rotation from this CFrame's to other's, 0..π, positions ignored (single precision: a difference of 1e-4 reads 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#anglebetween",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.AngleBetween/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.AngleBetween/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.AngleBetween/param/0": {
+    "documentation": "`other: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.AngleBetween/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.FuzzyEq": {
+    "documentation": "Whether other is this CFrame within eps (default 1e-5, at most 0.1): each position component within eps·(1 + |x|) of this frame's, the rotation between them within eps radians.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#fuzzyeq",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.FuzzyEq/param/0",
+        "name": "other"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.FuzzyEq/param/1",
+        "name": "eps"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.FuzzyEq/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.FuzzyEq/param/0": {
+    "documentation": "`other: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.FuzzyEq/param/1": {
+    "documentation": "`eps: number?`"
+  },
+  "@bettervoxel/globaltype/CFrame.FuzzyEq/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents": {
+    "documentation": "The twelve numbers of the CFrame: the position, then the rotation matrix row by row (x, y, z, R00, R01, R02, R10, R11, R12, R20, R21, R22) — what the twelve-number CFrame.new takes back.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#getcomponents",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/0",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/1",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/2",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/3",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/4",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/5",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/6",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/7",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/8",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/9",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/10",
+      "@bettervoxel/globaltype/CFrame.GetComponents/return/11"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/10": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/11": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/2": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/3": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/4": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/5": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/6": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/7": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/8": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.GetComponents/return/9": {
+    "documentation": "`number`"
   },
   "@bettervoxel/globaltype/CFrame.Inverse": {
     "documentation": "The inverse transform: composing with it yields the identity.",
@@ -1345,13 +2030,24 @@
     "documentation": "The facing direction: the -Z basis vector.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lookvector"
   },
+  "@bettervoxel/globaltype/CFrame.Orthonormalize": {
+    "documentation": "The CFrame with its rotation brought back to unit length. A CFrame here is always a position and a rotation — a matrix is orthonormalized as it is built (the reference keeps it as given) — so this undoes only the drift of long chains of products.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#orthonormalize",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.Orthonormalize/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.Orthonormalize/return/0": {
+    "documentation": "`CFrame`"
+  },
   "@bettervoxel/globaltype/CFrame.PointToObjectSpace": {
-    "documentation": "A world-space point as an object-space point.",
+    "documentation": "Each world-space point as an object-space point — one value per argument, the inverse's position for none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#pointtoobjectspace",
     "params": [
       {
         "documentation": "@bettervoxel/globaltype/CFrame.PointToObjectSpace/param/0",
-        "name": "point"
+        "name": "..."
       }
     ],
     "returns": [
@@ -1359,18 +2055,18 @@
     ]
   },
   "@bettervoxel/globaltype/CFrame.PointToObjectSpace/param/0": {
-    "documentation": "`point: Vector3`"
+    "documentation": "`...: Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.PointToObjectSpace/return/0": {
-    "documentation": "`Vector3`"
+    "documentation": "`...Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.PointToWorldSpace": {
-    "documentation": "An object-space point as a world-space point.",
+    "documentation": "Each object-space point as a world-space point — one value per argument, the position for none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#pointtoworldspace",
     "params": [
       {
         "documentation": "@bettervoxel/globaltype/CFrame.PointToWorldSpace/param/0",
-        "name": "point"
+        "name": "..."
       }
     ],
     "returns": [
@@ -1378,10 +2074,10 @@
     ]
   },
   "@bettervoxel/globaltype/CFrame.PointToWorldSpace/param/0": {
-    "documentation": "`point: Vector3`"
+    "documentation": "`...: Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.PointToWorldSpace/return/0": {
-    "documentation": "`Vector3`"
+    "documentation": "`...Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.Position": {
     "documentation": "The translation component.",
@@ -1394,6 +2090,48 @@
   "@bettervoxel/globaltype/CFrame.Rotation": {
     "documentation": "A rotation-only copy of this CFrame, with the translation stripped.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#rotation"
+  },
+  "@bettervoxel/globaltype/CFrame.ToAxisAngle": {
+    "documentation": "The rotation as an axis and an angle in radians: the angle 2·acos(w) in single precision, never negative; the identity's axis is (1, 0, 0) and its angle 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toaxisangle",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.ToAxisAngle/return/0",
+      "@bettervoxel/globaltype/CFrame.ToAxisAngle/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.ToAxisAngle/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToAxisAngle/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAngles": {
+    "documentation": "The rotation as Euler angles in radians for an order (an Enum.RotationOrder item, XYZ by default), handed back as rx, ry, rz whatever the order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toeulerangles",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.ToEulerAngles/param/0",
+        "name": "order"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.ToEulerAngles/return/0",
+      "@bettervoxel/globaltype/CFrame.ToEulerAngles/return/1",
+      "@bettervoxel/globaltype/CFrame.ToEulerAngles/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAngles/param/0": {
+    "documentation": "`order: Enum.RotationOrder?`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAngles/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAngles/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAngles/return/2": {
+    "documentation": "`number`"
   },
   "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ": {
     "documentation": "The rotation as XYZ Euler angles in radians (the same order the instance Rotation property uses, in degrees there).",
@@ -1414,13 +2152,32 @@
   "@bettervoxel/globaltype/CFrame.ToEulerAnglesXYZ/return/2": {
     "documentation": "`number`"
   },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ": {
+    "documentation": "The rotation as YXZ Euler angles in radians — the angles of the Ry·Rx·Rz product, handed back as rx, ry, rz; at the lock rz is 0 and ry takes the sum or the difference.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toeuleranglesyxz",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ/return/0",
+      "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ/return/1",
+      "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToEulerAnglesYXZ/return/2": {
+    "documentation": "`number`"
+  },
   "@bettervoxel/globaltype/CFrame.ToObjectSpace": {
-    "documentation": "The world transform other, re-expressed relative to this CFrame (self:Inverse() * other).",
+    "documentation": "Each world transform other, re-expressed relative to this CFrame (self:Inverse() * other) — one value per argument, the inverse for none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toobjectspace",
     "params": [
       {
         "documentation": "@bettervoxel/globaltype/CFrame.ToObjectSpace/param/0",
-        "name": "other"
+        "name": "..."
       }
     ],
     "returns": [
@@ -1428,18 +2185,37 @@
     ]
   },
   "@bettervoxel/globaltype/CFrame.ToObjectSpace/param/0": {
-    "documentation": "`other: CFrame`"
+    "documentation": "`...: CFrame`"
   },
   "@bettervoxel/globaltype/CFrame.ToObjectSpace/return/0": {
-    "documentation": "`CFrame`"
+    "documentation": "`...CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToOrientation": {
+    "documentation": "ToEulerAnglesYXZ under its other name: rx, ry, rz of the Ry·Rx·Rz product, in radians.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toorientation",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.ToOrientation/return/0",
+      "@bettervoxel/globaltype/CFrame.ToOrientation/return/1",
+      "@bettervoxel/globaltype/CFrame.ToOrientation/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.ToOrientation/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToOrientation/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.ToOrientation/return/2": {
+    "documentation": "`number`"
   },
   "@bettervoxel/globaltype/CFrame.ToWorldSpace": {
-    "documentation": "Composes: other, expressed relative to this CFrame, as a world transform (self * other).",
+    "documentation": "Composes: each other, expressed relative to this CFrame, as a world transform (self * other) — one value per argument, this CFrame itself for none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toworldspace",
     "params": [
       {
         "documentation": "@bettervoxel/globaltype/CFrame.ToWorldSpace/param/0",
-        "name": "other"
+        "name": "..."
       }
     ],
     "returns": [
@@ -1447,22 +2223,22 @@
     ]
   },
   "@bettervoxel/globaltype/CFrame.ToWorldSpace/param/0": {
-    "documentation": "`other: CFrame`"
+    "documentation": "`...: CFrame`"
   },
   "@bettervoxel/globaltype/CFrame.ToWorldSpace/return/0": {
-    "documentation": "`CFrame`"
+    "documentation": "`...CFrame`"
   },
   "@bettervoxel/globaltype/CFrame.UpVector": {
     "documentation": "The +Y basis vector.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#upvector"
   },
   "@bettervoxel/globaltype/CFrame.VectorToObjectSpace": {
-    "documentation": "Rotates a world direction into object space (no translation).",
+    "documentation": "Rotates each world direction into object space (no translation) — one value per argument, the zero vector for none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#vectortoobjectspace",
     "params": [
       {
         "documentation": "@bettervoxel/globaltype/CFrame.VectorToObjectSpace/param/0",
-        "name": "direction"
+        "name": "..."
       }
     ],
     "returns": [
@@ -1470,18 +2246,18 @@
     ]
   },
   "@bettervoxel/globaltype/CFrame.VectorToObjectSpace/param/0": {
-    "documentation": "`direction: Vector3`"
+    "documentation": "`...: Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.VectorToObjectSpace/return/0": {
-    "documentation": "`Vector3`"
+    "documentation": "`...Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.VectorToWorldSpace": {
-    "documentation": "Rotates a direction into world space (no translation).",
+    "documentation": "Rotates each direction into world space (no translation) — one value per argument, the zero vector for none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#vectortoworldspace",
     "params": [
       {
         "documentation": "@bettervoxel/globaltype/CFrame.VectorToWorldSpace/param/0",
-        "name": "direction"
+        "name": "..."
       }
     ],
     "returns": [
@@ -1489,21 +2265,339 @@
     ]
   },
   "@bettervoxel/globaltype/CFrame.VectorToWorldSpace/param/0": {
-    "documentation": "`direction: Vector3`"
+    "documentation": "`...: Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.VectorToWorldSpace/return/0": {
-    "documentation": "`Vector3`"
+    "documentation": "`...Vector3`"
   },
   "@bettervoxel/globaltype/CFrame.X": {
     "documentation": "The position's X component.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#x"
   },
+  "@bettervoxel/globaltype/CFrame.XVector": {
+    "documentation": "The rotation matrix's first column: RightVector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#xvector"
+  },
   "@bettervoxel/globaltype/CFrame.Y": {
     "documentation": "The position's Y component.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#y"
   },
+  "@bettervoxel/globaltype/CFrame.YVector": {
+    "documentation": "The rotation matrix's second column: UpVector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#yvector"
+  },
   "@bettervoxel/globaltype/CFrame.Z": {
     "documentation": "The position's Z component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#z"
+  },
+  "@bettervoxel/globaltype/CFrame.ZVector": {
+    "documentation": "The rotation matrix's third column: the negated LookVector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#zvector"
+  },
+  "@bettervoxel/globaltype/CFrame.components": {
+    "documentation": "Deprecated: the retired lowercase spelling of GetComponents, answered the same way (measured) — use GetComponents.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#components",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.components/return/0",
+      "@bettervoxel/globaltype/CFrame.components/return/1",
+      "@bettervoxel/globaltype/CFrame.components/return/2",
+      "@bettervoxel/globaltype/CFrame.components/return/3",
+      "@bettervoxel/globaltype/CFrame.components/return/4",
+      "@bettervoxel/globaltype/CFrame.components/return/5",
+      "@bettervoxel/globaltype/CFrame.components/return/6",
+      "@bettervoxel/globaltype/CFrame.components/return/7",
+      "@bettervoxel/globaltype/CFrame.components/return/8",
+      "@bettervoxel/globaltype/CFrame.components/return/9",
+      "@bettervoxel/globaltype/CFrame.components/return/10",
+      "@bettervoxel/globaltype/CFrame.components/return/11"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/10": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/11": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/2": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/3": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/4": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/5": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/6": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/7": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/8": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.components/return/9": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.inverse": {
+    "documentation": "Deprecated: the retired lowercase spelling of Inverse (measured) — use Inverse.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#inverse",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.inverse/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.inverse/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.lerp": {
+    "documentation": "Deprecated: the retired lowercase spelling of Lerp (measured) — use Lerp.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.lerp/param/0": {
+    "documentation": "`goal: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/CFrame.lerp/return/0": {
+    "documentation": "`CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.lookVector": {
+    "documentation": "Deprecated: the retired lowercase spelling of LookVector (measured) — use LookVector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#lookvector"
+  },
+  "@bettervoxel/globaltype/CFrame.p": {
+    "documentation": "Deprecated: the retired spelling of Position, answered the same way (measured) — use Position.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#p"
+  },
+  "@bettervoxel/globaltype/CFrame.pointToObjectSpace": {
+    "documentation": "Deprecated: the retired lowercase spelling of PointToObjectSpace (measured) — use PointToObjectSpace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#pointtoobjectspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.pointToObjectSpace/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.pointToObjectSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.pointToObjectSpace/param/0": {
+    "documentation": "`...: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.pointToObjectSpace/return/0": {
+    "documentation": "`...Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.pointToWorldSpace": {
+    "documentation": "Deprecated: the retired lowercase spelling of PointToWorldSpace (measured) — use PointToWorldSpace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#pointtoworldspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.pointToWorldSpace/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.pointToWorldSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.pointToWorldSpace/param/0": {
+    "documentation": "`...: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.pointToWorldSpace/return/0": {
+    "documentation": "`...Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.rightVector": {
+    "documentation": "Deprecated: the retired lowercase spelling of RightVector (measured) — use RightVector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#rightvector"
+  },
+  "@bettervoxel/globaltype/CFrame.toAxisAngle": {
+    "documentation": "Deprecated: the retired lowercase spelling of ToAxisAngle (measured) — use ToAxisAngle.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toaxisangle",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.toAxisAngle/return/0",
+      "@bettervoxel/globaltype/CFrame.toAxisAngle/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.toAxisAngle/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.toAxisAngle/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ": {
+    "documentation": "Deprecated: the retired lowercase spelling of ToEulerAnglesXYZ (measured) — use ToEulerAnglesXYZ.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toeuleranglesxyz",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ/return/0",
+      "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ/return/1",
+      "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesXYZ/return/2": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ": {
+    "documentation": "Deprecated: the retired lowercase spelling of ToEulerAnglesYXZ (measured) — use ToEulerAnglesYXZ.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toeuleranglesyxz",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ/return/0",
+      "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ/return/1",
+      "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toEulerAnglesYXZ/return/2": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toObjectSpace": {
+    "documentation": "Deprecated: the retired lowercase spelling of ToObjectSpace, its tuples too (measured) — use ToObjectSpace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toobjectspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.toObjectSpace/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.toObjectSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.toObjectSpace/param/0": {
+    "documentation": "`...: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.toObjectSpace/return/0": {
+    "documentation": "`...CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.toOrientation": {
+    "documentation": "Deprecated: the retired lowercase spelling of ToOrientation (measured) — use ToOrientation.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toorientation",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.toOrientation/return/0",
+      "@bettervoxel/globaltype/CFrame.toOrientation/return/1",
+      "@bettervoxel/globaltype/CFrame.toOrientation/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.toOrientation/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toOrientation/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toOrientation/return/2": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/CFrame.toWorldSpace": {
+    "documentation": "Deprecated: the retired lowercase spelling of ToWorldSpace, its tuples too (measured) — use ToWorldSpace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#toworldspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.toWorldSpace/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.toWorldSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.toWorldSpace/param/0": {
+    "documentation": "`...: CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.toWorldSpace/return/0": {
+    "documentation": "`...CFrame`"
+  },
+  "@bettervoxel/globaltype/CFrame.upVector": {
+    "documentation": "Deprecated: the retired lowercase spelling of UpVector (measured) — use UpVector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#upvector"
+  },
+  "@bettervoxel/globaltype/CFrame.vectorToObjectSpace": {
+    "documentation": "Deprecated: the retired lowercase spelling of VectorToObjectSpace (measured) — use VectorToObjectSpace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#vectortoobjectspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.vectorToObjectSpace/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.vectorToObjectSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.vectorToObjectSpace/param/0": {
+    "documentation": "`...: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.vectorToObjectSpace/return/0": {
+    "documentation": "`...Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.vectorToWorldSpace": {
+    "documentation": "Deprecated: the retired lowercase spelling of VectorToWorldSpace (measured) — use VectorToWorldSpace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#vectortoworldspace",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/CFrame.vectorToWorldSpace/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/CFrame.vectorToWorldSpace/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/CFrame.vectorToWorldSpace/param/0": {
+    "documentation": "`...: Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.vectorToWorldSpace/return/0": {
+    "documentation": "`...Vector3`"
+  },
+  "@bettervoxel/globaltype/CFrame.x": {
+    "documentation": "Deprecated: the retired lowercase spelling of X (measured) — use X.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#x"
+  },
+  "@bettervoxel/globaltype/CFrame.y": {
+    "documentation": "Deprecated: the retired lowercase spelling of Y (measured) — use Y.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#y"
+  },
+  "@bettervoxel/globaltype/CFrame.z": {
+    "documentation": "Deprecated: the retired lowercase spelling of Z (measured) — use Z.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/CFrame.html#z"
   },
   "@bettervoxel/globaltype/Camera": {
@@ -1765,8 +2859,10 @@
       "CenterOfMass": "@bettervoxel/globaltype/Character.CenterOfMass",
       "Mass": "@bettervoxel/globaltype/Character.Mass",
       "Position": "@bettervoxel/globaltype/Character.Position",
+      "RotVelocity": "@bettervoxel/globaltype/Character.RotVelocity",
       "Rotation": "@bettervoxel/globaltype/Character.Rotation",
-      "Touched": "@bettervoxel/globaltype/Character.Touched"
+      "Touched": "@bettervoxel/globaltype/Character.Touched",
+      "Velocity": "@bettervoxel/globaltype/Character.Velocity"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html"
   },
@@ -1802,6 +2898,10 @@
     "documentation": "The character's world position. Writing teleports the character.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#position"
   },
+  "@bettervoxel/globaltype/Character.RotVelocity": {
+    "documentation": "Deprecated: the character body's angular velocity — use AssemblyAngularVelocity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#rotvelocity"
+  },
   "@bettervoxel/globaltype/Character.Rotation": {
     "documentation": "The character's orientation as XYZ Euler angles in degrees; writing turns the character.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#rotation"
@@ -1809,6 +2909,10 @@
   "@bettervoxel/globaltype/Character.Touched": {
     "documentation": "Fires when a collider starts touching the character body, with the other object.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#touched"
+  },
+  "@bettervoxel/globaltype/Character.Velocity": {
+    "documentation": "Deprecated: the character body's linear velocity — use AssemblyLinearVelocity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Character.html#velocity"
   },
   "@bettervoxel/globaltype/ClickDetector": {
     "documentation": "Makes its parent part clickable: MouseClick fires with the clicking player, within MaxActivationDistance.",
@@ -2019,7 +3123,10 @@
       "B": "@bettervoxel/globaltype/Color3.B",
       "G": "@bettervoxel/globaltype/Color3.G",
       "Lerp": "@bettervoxel/globaltype/Color3.Lerp",
-      "R": "@bettervoxel/globaltype/Color3.R"
+      "R": "@bettervoxel/globaltype/Color3.R",
+      "ToHSV": "@bettervoxel/globaltype/Color3.ToHSV",
+      "ToHex": "@bettervoxel/globaltype/Color3.ToHex",
+      "lerp": "@bettervoxel/globaltype/Color3.lerp"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html"
   },
@@ -2060,6 +3167,62 @@
   "@bettervoxel/globaltype/Color3.R": {
     "documentation": "The red component (sRGB, 0..1).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#r"
+  },
+  "@bettervoxel/globaltype/Color3.ToHSV": {
+    "documentation": "Hue, saturation and value, each 0..1, of the channels clamped to 0..1. A grey's hue is 0; a saturated color whose hue is 0 reads 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#tohsv",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Color3.ToHSV/return/0",
+      "@bettervoxel/globaltype/Color3.ToHSV/return/1",
+      "@bettervoxel/globaltype/Color3.ToHSV/return/2"
+    ]
+  },
+  "@bettervoxel/globaltype/Color3.ToHSV/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Color3.ToHSV/return/1": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Color3.ToHSV/return/2": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Color3.ToHex": {
+    "documentation": "The color as six lowercase hex digits: each channel clamped to 0..1 and rounded half up to a byte. A NaN channel is an error.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#tohex",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Color3.ToHex/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Color3.ToHex/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/Color3.lerp": {
+    "documentation": "Deprecated: the retired lowercase spelling of Lerp, answered the same way (measured) — use Lerp.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Color3.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Color3.lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Color3.lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Color3.lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Color3.lerp/param/0": {
+    "documentation": "`goal: Color3`"
+  },
+  "@bettervoxel/globaltype/Color3.lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/Color3.lerp/return/0": {
+    "documentation": "`Color3`"
   },
   "@bettervoxel/globaltype/ColorSequence": {
     "documentation": "A piecewise-linear color ramp over a unit time span, built from 2 to 20 keypoints under the same rules as NumberSequence — the particle Color.",
@@ -2110,16 +3273,20 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Constraint.html#enabled"
   },
   "@bettervoxel/globaltype/DataModel": {
-    "documentation": "The `game` global: the service registry at the top of everything (measured ancestry DataModel < ServiceProvider < Instance). GetService hands out the engine services; its Name is the place name (\"Game\" until the engine carries one — a recorded stub).",
+    "documentation": "The `game` global: the service registry at the top of everything (measured ancestry DataModel < ServiceProvider < Instance). GetService hands out the engine services; PlaceId, GameId and JobId name the session; its Name is the place name (\"Game\" until the engine carries one — a recorded stub).",
     "keys": {
+      "BindToClose": "@bettervoxel/globaltype/DataModel.BindToClose",
       "ClassName": "@bettervoxel/globaltype/DataModel.ClassName",
       "CollectionService": "@bettervoxel/globaltype/DataModel.CollectionService",
       "Debris": "@bettervoxel/globaltype/DataModel.Debris",
+      "GameId": "@bettervoxel/globaltype/DataModel.GameId",
       "GetService": "@bettervoxel/globaltype/DataModel.GetService",
       "HttpService": "@bettervoxel/globaltype/DataModel.HttpService",
       "IsA": "@bettervoxel/globaltype/DataModel.IsA",
+      "JobId": "@bettervoxel/globaltype/DataModel.JobId",
       "Lighting": "@bettervoxel/globaltype/DataModel.Lighting",
       "Name": "@bettervoxel/globaltype/DataModel.Name",
+      "PlaceId": "@bettervoxel/globaltype/DataModel.PlaceId",
       "Players": "@bettervoxel/globaltype/DataModel.Players",
       "ReplicatedStorage": "@bettervoxel/globaltype/DataModel.ReplicatedStorage",
       "RunService": "@bettervoxel/globaltype/DataModel.RunService",
@@ -2135,6 +3302,20 @@
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html"
   },
+  "@bettervoxel/globaltype/DataModel.BindToClose": {
+    "documentation": "Binds a function the session's close calls with its Enum.CloseReason (DeveloperShutdown for the editor's Stop and a dedicated server's shutdown). The close lets every player go first — their PlayerRemoving fires — then starts every bound function at once, in bind order, each on a thread of its own; it waits for them to return, 30 seconds at most. One that raises stops none of the others; a script that died takes its binding with it. The server's alone.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#bindtoclose",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataModel.BindToClose/param/0",
+        "name": "callback"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataModel.BindToClose/param/0": {
+    "documentation": "`callback: (reason: Enum.CloseReason) -> ()`"
+  },
   "@bettervoxel/globaltype/DataModel.ClassName": {
     "documentation": "The class name — the first name IsA answers.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#classname"
@@ -2146,6 +3327,10 @@
   "@bettervoxel/globaltype/DataModel.Debris": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#debris"
+  },
+  "@bettervoxel/globaltype/DataModel.GameId": {
+    "documentation": "The game's id: what a dedicated server was started with (--game-id), the same on its clients; 0 where nothing names one. A client reads 0 until its join's world globals land.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#gameid"
   },
   "@bettervoxel/globaltype/DataModel.GetService": {
     "documentation": "Hands out an engine service by name (\"Players\", \"RunService\", \"TweenService\", …; \"Workspace\" answers the workspace root). Unknown names error.",
@@ -2189,6 +3374,10 @@
   "@bettervoxel/globaltype/DataModel.IsA/return/0": {
     "documentation": "`boolean`"
   },
+  "@bettervoxel/globaltype/DataModel.JobId": {
+    "documentation": "The running server's id: a fresh random UUID at every start of a dedicated server, read by the server and its clients alike; the empty string on the server side of the editor's Play and its session, where a client-side read answers the zero GUID (00000000-0000-0000-0000-000000000000) — Studio's pair, measured. A client reads the zero GUID until its join's world globals land.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#jobid"
+  },
   "@bettervoxel/globaltype/DataModel.Lighting": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#lighting"
@@ -2196,6 +3385,10 @@
   "@bettervoxel/globaltype/DataModel.Name": {
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#name"
+  },
+  "@bettervoxel/globaltype/DataModel.PlaceId": {
+    "documentation": "The place's id: what a dedicated server was started with (--place-id), the same on its clients; 0 where nothing names one — the editor's Play and its session (a place here has no published identity). A client reads 0 until its join's world globals land.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#placeid"
   },
   "@bettervoxel/globaltype/DataModel.Players": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
@@ -2318,6 +3511,64 @@
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Debris.html#name"
   },
+  "@bettervoxel/globaltype/Enum": {
+    "documentation": "One enum of the tree, `Enum.<Type>`: its items by name, and GetEnumItems, FromName and FromValue; a name it has no item or method for is an error. A read-only table here (typeof \"table\").",
+    "keys": {
+      "FromName": "@bettervoxel/globaltype/Enum.FromName",
+      "FromValue": "@bettervoxel/globaltype/Enum.FromValue",
+      "GetEnumItems": "@bettervoxel/globaltype/Enum.GetEnumItems"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Enum.html"
+  },
+  "@bettervoxel/globaltype/Enum.FromName": {
+    "documentation": "The item with that name, or nil. The name must be a string: nothing else converts.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Enum.html#fromname",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Enum.FromName/param/0",
+        "name": "name"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Enum.FromName/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Enum.FromName/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/Enum.FromName/return/0": {
+    "documentation": "`EnumItem?`"
+  },
+  "@bettervoxel/globaltype/Enum.FromValue": {
+    "documentation": "The item with that Value (the engine's numbering — see EnumItem.Value), the number truncated toward zero, or nil. The value must be a number: a numeric string does not convert.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Enum.html#fromvalue",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Enum.FromValue/param/0",
+        "name": "value"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Enum.FromValue/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Enum.FromValue/param/0": {
+    "documentation": "`value: number`"
+  },
+  "@bettervoxel/globaltype/Enum.FromValue/return/0": {
+    "documentation": "`EnumItem?`"
+  },
+  "@bettervoxel/globaltype/Enum.GetEnumItems": {
+    "documentation": "A fresh array of the enum's items, ascending by Value.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Enum.html#getenumitems",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Enum.GetEnumItems/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Enum.GetEnumItems/return/0": {
+    "documentation": "`{EnumItem}`"
+  },
   "@bettervoxel/globaltype/EnumItem": {
     "documentation": "One `Enum.<Type>.<Item>` value: equality is by item, tostring prints the full path, and enum-valued properties accept the item or its plain name string.",
     "keys": {
@@ -2338,6 +3589,24 @@
   "@bettervoxel/globaltype/EnumItem.Value": {
     "documentation": "The item's numeric value: an engine-internal index, stable within a release but not a reference-engine value — except FontWeight (the reference's 100..900), RenderPriority (its 0..2000, the numbers BindToRenderStep takes) and Font (its 0..51 with Unknown 100, the api dump's).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/EnumItem.html#value"
+  },
+  "@bettervoxel/globaltype/Enums": {
+    "documentation": "The `Enum` global: every enum by name, and GetEnums; a name it has no enum for is an error. A read-only table here (typeof \"table\").",
+    "keys": {
+      "GetEnums": "@bettervoxel/globaltype/Enums.GetEnums"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Enums.html"
+  },
+  "@bettervoxel/globaltype/Enums.GetEnums": {
+    "documentation": "A fresh array of every enum of the tree, in name order.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Enums.html#getenums",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Enums.GetEnums/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Enums.GetEnums/return/0": {
+    "documentation": "`{Enum}`"
   },
   "@bettervoxel/globaltype/Folder": {
     "documentation": "A pure organizational container with no behavior of its own.",
@@ -2988,7 +4257,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html"
   },
   "@bettervoxel/globaltype/InputBinding.Backward": {
-    "documentation": "The composite key for +Z; Unknown when unset.",
+    "documentation": "The composite key for +Z; None when unset.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#backward"
   },
   "@bettervoxel/globaltype/InputBinding.ClampMagnitudeToOne": {
@@ -2996,27 +4265,27 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#clampmagnitudetoone"
   },
   "@bettervoxel/globaltype/InputBinding.Down": {
-    "documentation": "The composite key for -Y; Unknown when unset.",
+    "documentation": "The composite key for -Y; None when unset.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#down"
   },
   "@bettervoxel/globaltype/InputBinding.Forward": {
-    "documentation": "The composite key for -Z (a Direction3D's (0, 0, -1)); Unknown when unset.",
+    "documentation": "The composite key for -Z (a Direction3D's (0, 0, -1)); None when unset.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#forward"
   },
   "@bettervoxel/globaltype/InputBinding.KeyCode": {
-    "documentation": "The key driving a Bool action (pressed) or a Direction1D one (+1); Unknown when unset. Writes accept the item, its name, or Unknown to clear.",
+    "documentation": "The key driving a Bool action (pressed) or a Direction1D one (+1); None when unset. Writes accept the item, its name, or None (Unknown, its legacy name, too) to clear.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#keycode"
   },
   "@bettervoxel/globaltype/InputBinding.Left": {
-    "documentation": "The composite key for -X (a Direction2D's (-1, 0)); Unknown when unset.",
+    "documentation": "The composite key for -X (a Direction2D's (-1, 0)); None when unset.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#left"
   },
   "@bettervoxel/globaltype/InputBinding.PrimaryModifier": {
-    "documentation": "A key that must be held for the binding to count; Unknown (the default) requires none.",
+    "documentation": "A key that must be held for the binding to count; None (the default) requires none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#primarymodifier"
   },
   "@bettervoxel/globaltype/InputBinding.Right": {
-    "documentation": "The composite key for +X; Unknown when unset.",
+    "documentation": "The composite key for +X; None when unset.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#right"
   },
   "@bettervoxel/globaltype/InputBinding.Scale": {
@@ -3024,11 +4293,11 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#scale"
   },
   "@bettervoxel/globaltype/InputBinding.SecondaryModifier": {
-    "documentation": "A second key that must be held for the binding to count; Unknown (the default) requires none.",
+    "documentation": "A second key that must be held for the binding to count; None (the default) requires none.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#secondarymodifier"
   },
   "@bettervoxel/globaltype/InputBinding.Up": {
-    "documentation": "The composite key for +Y (a Direction1D's +1, a Direction2D's (0, 1), a Direction3D's (0, 1, 0)); Unknown when unset.",
+    "documentation": "The composite key for +Y (a Direction1D's +1, a Direction2D's (0, 1), a Direction3D's (0, 1, 0)); None when unset.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputBinding.html#up"
   },
   "@bettervoxel/globaltype/InputBinding.Vector2Scale": {
@@ -3064,11 +4333,13 @@
     "documentation": "The root of the class tree: identity (Name, ClassName), the Parent tree with its hierarchy signals, attributes, and lifetime (Clone, Destroy). Every scriptable object is an Instance.",
     "keys": {
       "AncestryChanged": "@bettervoxel/globaltype/Instance.AncestryChanged",
+      "Archivable": "@bettervoxel/globaltype/Instance.Archivable",
       "AttributeChanged": "@bettervoxel/globaltype/Instance.AttributeChanged",
       "Changed": "@bettervoxel/globaltype/Instance.Changed",
       "ChildAdded": "@bettervoxel/globaltype/Instance.ChildAdded",
       "ChildRemoved": "@bettervoxel/globaltype/Instance.ChildRemoved",
       "ClassName": "@bettervoxel/globaltype/Instance.ClassName",
+      "ClearAllChildren": "@bettervoxel/globaltype/Instance.ClearAllChildren",
       "Clone": "@bettervoxel/globaltype/Instance.Clone",
       "DescendantAdded": "@bettervoxel/globaltype/Instance.DescendantAdded",
       "Destroy": "@bettervoxel/globaltype/Instance.Destroy",
@@ -3081,6 +4352,7 @@
       "FindFirstChildWhichIsA": "@bettervoxel/globaltype/Instance.FindFirstChildWhichIsA",
       "GetAttribute": "@bettervoxel/globaltype/Instance.GetAttribute",
       "GetAttributeChangedSignal": "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal",
+      "GetAttributes": "@bettervoxel/globaltype/Instance.GetAttributes",
       "GetChildren": "@bettervoxel/globaltype/Instance.GetChildren",
       "GetDescendants": "@bettervoxel/globaltype/Instance.GetDescendants",
       "GetFullName": "@bettervoxel/globaltype/Instance.GetFullName",
@@ -3091,16 +4363,24 @@
       "Name": "@bettervoxel/globaltype/Instance.Name",
       "Parent": "@bettervoxel/globaltype/Instance.Parent",
       "PredictionMode": "@bettervoxel/globaltype/Instance.PredictionMode",
+      "Remove": "@bettervoxel/globaltype/Instance.Remove",
       "SetAttribute": "@bettervoxel/globaltype/Instance.SetAttribute",
       "WaitForChild": "@bettervoxel/globaltype/Instance.WaitForChild",
+      "changed": "@bettervoxel/globaltype/Instance.changed",
       "clone": "@bettervoxel/globaltype/Instance.clone",
-      "findFirstChild": "@bettervoxel/globaltype/Instance.findFirstChild"
+      "destroy": "@bettervoxel/globaltype/Instance.destroy",
+      "findFirstChild": "@bettervoxel/globaltype/Instance.findFirstChild",
+      "remove": "@bettervoxel/globaltype/Instance.remove"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
   },
   "@bettervoxel/globaltype/Instance.AncestryChanged": {
     "documentation": "Fires when this instance or any ancestor is reparented, on every node of the moved subtree (deepest first), with the MOVED instance and its new parent — nil on detach. Destroy fires each destroyed node's own (self, nil).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#ancestrychanged"
+  },
+  "@bettervoxel/globaltype/Instance.Archivable": {
+    "documentation": "Whether Clone copies the instance: true by default. A non-archivable instance's Clone returns nil, and a clone of its parent leaves it and its subtree out; a character is born non-archivable. A runtime flag: neither saved nor replicated, never copied by Clone, and a boolean only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#archivable"
   },
   "@bettervoxel/globaltype/Instance.AttributeChanged": {
     "documentation": "Fires with the attribute NAME on every landed attribute write — first set, value changes and removal included; same-value writes stay silent. Delivers once per landed write in write order, before the matching GetAttributeChangedSignal.",
@@ -3121,6 +4401,12 @@
   "@bettervoxel/globaltype/Instance.ClassName": {
     "documentation": "The instance's class, as a string. An instance never changes class. Prefer IsA over comparing ClassName — IsA also matches base classes like BasePart.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#classname"
+  },
+  "@bettervoxel/globaltype/Instance.ClearAllChildren": {
+    "documentation": "Destroys every direct child and its subtree — the last child first, each node's Destroying before its children's — and leaves the instance itself in place. The cleared nodes are husks: parentless and locked. On a destroyed instance it does nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#clearallchildren",
+    "params": [],
+    "returns": []
   },
   "@bettervoxel/globaltype/Instance.Clone": {
     "documentation": "A deep copy of the instance and its subtree: authored state, attributes and tags copy; the copy is detached (Parent is nil) with fresh identity. A destroyed instance clones its husk as a live single-node copy.",
@@ -3313,6 +4599,17 @@
   "@bettervoxel/globaltype/Instance.GetAttributeChangedSignal/return/0": {
     "documentation": "`BVScriptSignal`"
   },
+  "@bettervoxel/globaltype/Instance.GetAttributes": {
+    "documentation": "Every attribute of the instance as a fresh table of name to value — a bare value for primitives, a table of fields for records — empty when none is set. The table is a copy: writing it changes no attribute (SetAttribute does).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getattributes",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Instance.GetAttributes/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Instance.GetAttributes/return/0": {
+    "documentation": "`{[string]: any}`"
+  },
   "@bettervoxel/globaltype/Instance.GetChildren": {
     "documentation": "The direct children, in child order, as an array. A destroyed instance answers an empty array.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#getchildren",
@@ -3427,12 +4724,18 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#name"
   },
   "@bettervoxel/globaltype/Instance.Parent": {
-    "documentation": "The instance's parent in the object tree, or nil for a detached root. Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy.",
+    "documentation": "The instance's parent in the object tree, or nil for a detached root; a Player's is the Players service while it is in the game (measured). Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#parent"
   },
   "@bettervoxel/globaltype/Instance.PredictionMode": {
     "documentation": "Whether a client predicts this instance under server authority (net-sync-v2 §2.9): Automatic unless RunService:SetPredictionMode forced it On or Off on this client. Read-only; the reference shows it in Studio only under server authority.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#predictionmode"
+  },
+  "@bettervoxel/globaltype/Instance.Remove": {
+    "documentation": "Deprecated: sets the Parent of this instance and of every descendant to nil, top-down, each node leaving with the ordinary signals of a reparent. Nothing is destroyed or locked: every node can take a parent again. On a destroyed instance it does nothing. Use Destroy to destroy, or set Parent to nil to detach.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#remove",
+    "params": [],
+    "returns": []
   },
   "@bettervoxel/globaltype/Instance.SetAttribute": {
     "documentation": "Writes the named attribute: a primitive or datatype (Vector3, Color3, CFrame) stores directly, a table stores a structured record, and nil REMOVES the attribute (also the way to change its type: remove, then set). Writes coerce onto the attribute's declared shape — out-of-range values error, a record write merges field by field with missing fields keeping their values. Every landed write fires AttributeChanged then the per-name signal; same-value writes are silent. Names are capped at 100 characters and cannot be empty; non-finite components refuse.",
@@ -3481,6 +4784,10 @@
   "@bettervoxel/globaltype/Instance.WaitForChild/return/0": {
     "documentation": "`Instance?`"
   },
+  "@bettervoxel/globaltype/Instance.changed": {
+    "documentation": "Deprecated: the retired spelling of Changed, answered the same way — a value container's is its value signal — use Changed.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#changed"
+  },
   "@bettervoxel/globaltype/Instance.clone": {
     "documentation": "Deprecated: the retired spelling of Clone, answered the same way — use Clone.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#clone",
@@ -3491,6 +4798,12 @@
   },
   "@bettervoxel/globaltype/Instance.clone/return/0": {
     "documentation": "`Instance`"
+  },
+  "@bettervoxel/globaltype/Instance.destroy": {
+    "documentation": "Deprecated: the retired spelling of Destroy, answered the same way — use Destroy.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#destroy",
+    "params": [],
+    "returns": []
   },
   "@bettervoxel/globaltype/Instance.findFirstChild": {
     "documentation": "Deprecated: the retired spelling of FindFirstChild, answered the same way — use FindFirstChild.",
@@ -3510,6 +4823,12 @@
   },
   "@bettervoxel/globaltype/Instance.findFirstChild/return/0": {
     "documentation": "`Instance?`"
+  },
+  "@bettervoxel/globaltype/Instance.remove": {
+    "documentation": "Deprecated: the retired spelling of Remove, answered the same way.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#remove",
+    "params": [],
+    "returns": []
   },
   "@bettervoxel/globaltype/IntValue": {
     "documentation": "A named container for one integer; number writes round half away from zero.",
@@ -3564,6 +4883,7 @@
       "Brightness": "@bettervoxel/globaltype/Lighting.Brightness",
       "ClassName": "@bettervoxel/globaltype/Lighting.ClassName",
       "ClockTime": "@bettervoxel/globaltype/Lighting.ClockTime",
+      "ExposureCompensation": "@bettervoxel/globaltype/Lighting.ExposureCompensation",
       "FogColor": "@bettervoxel/globaltype/Lighting.FogColor",
       "FogEnd": "@bettervoxel/globaltype/Lighting.FogEnd",
       "FogStart": "@bettervoxel/globaltype/Lighting.FogStart",
@@ -3590,6 +4910,10 @@
   "@bettervoxel/globaltype/Lighting.ClockTime": {
     "documentation": "The time of day in hours: writes clamp onto 0..24 and 24 reads back as 0 (the measured reference contract); the sun and sky follow.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#clocktime"
+  },
+  "@bettervoxel/globaltype/Lighting.ExposureCompensation": {
+    "documentation": "A bias to the scene's exposure before the tone curve, in stops: 1 is twice the light, -1 half. Writes clamp onto -5..5, the range the reference states; a non-finite number is refused.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#exposurecompensation"
   },
   "@bettervoxel/globaltype/Lighting.FogColor": {
     "documentation": "The distance-fog color.",
@@ -3673,7 +4997,9 @@
     "documentation": "A grouping node for parts: pivots through PrimaryPart (or its bounding-box center without one) and moves as a group via PivotTo.",
     "keys": {
       "GetBoundingBox": "@bettervoxel/globaltype/Model.GetBoundingBox",
-      "PrimaryPart": "@bettervoxel/globaltype/Model.PrimaryPart"
+      "GetPrimaryPartCFrame": "@bettervoxel/globaltype/Model.GetPrimaryPartCFrame",
+      "PrimaryPart": "@bettervoxel/globaltype/Model.PrimaryPart",
+      "SetPrimaryPartCFrame": "@bettervoxel/globaltype/Model.SetPrimaryPartCFrame"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Model.html"
   },
@@ -3692,9 +5018,34 @@
   "@bettervoxel/globaltype/Model.GetBoundingBox/return/1": {
     "documentation": "`Vector3`"
   },
+  "@bettervoxel/globaltype/Model.GetPrimaryPartCFrame": {
+    "documentation": "Deprecated: the PrimaryPart's CFrame. Errors when the model has no PrimaryPart or it no longer exists. Use GetPivot.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Model.html#getprimarypartcframe",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Model.GetPrimaryPartCFrame/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Model.GetPrimaryPartCFrame/return/0": {
+    "documentation": "`CFrame`"
+  },
   "@bettervoxel/globaltype/Model.PrimaryPart": {
     "documentation": "The part the model pivots through, or nil. GetPivot and PivotTo use it; without one they fall back to the bounding-box center. A reference to a despawned part reads as nil.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Model.html#primarypart"
+  },
+  "@bettervoxel/globaltype/Model.SetPrimaryPartCFrame": {
+    "documentation": "Deprecated: moves the model by one rigid transform so its PrimaryPart lands at cframe — PivotTo through the PrimaryPart. Errors when the model has no PrimaryPart or it no longer exists. Use PivotTo.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Model.html#setprimarypartcframe",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Model.SetPrimaryPartCFrame/param/0",
+        "name": "cframe"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Model.SetPrimaryPartCFrame/param/0": {
+    "documentation": "`cframe: CFrame`"
   },
   "@bettervoxel/globaltype/ModuleScript": {
     "documentation": "Reusable code loaded with require: runs once per context, and its return value is cached and shared between requirers.",
@@ -4021,7 +5372,9 @@
       "GetCameraState": "@bettervoxel/globaltype/Player.GetCameraState",
       "GetMouse": "@bettervoxel/globaltype/Player.GetMouse",
       "GetNetworkPing": "@bettervoxel/globaltype/Player.GetNetworkPing",
+      "Kick": "@bettervoxel/globaltype/Player.Kick",
       "LoadCharacter": "@bettervoxel/globaltype/Player.LoadCharacter",
+      "LoadCharacterAsync": "@bettervoxel/globaltype/Player.LoadCharacterAsync",
       "PlayerGui": "@bettervoxel/globaltype/Player.PlayerGui",
       "RespawnTime": "@bettervoxel/globaltype/Player.RespawnTime",
       "UserId": "@bettervoxel/globaltype/Player.UserId"
@@ -4073,9 +5426,29 @@
   "@bettervoxel/globaltype/Player.GetNetworkPing/return/0": {
     "documentation": "`number`"
   },
+  "@bettervoxel/globaltype/Player.Kick": {
+    "documentation": "Removes the player from the game with an optional message (a number is taken as its text). The server may kick any player: its client's console prints 'Server Kick Message: <message>; Metadata: ', its session ends and its world stays as it stood, and PlayerRemoving fires wherever the player is still held. A client may kick its LocalPlayer alone — another raises 'Cannot kick a non-local Player from a LocalScript' — which ends its session. In solo play the player leaves and no other joins for the rest of the run.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#kick",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Player.Kick/param/0",
+        "name": "message"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Player.Kick/param/0": {
+    "documentation": "`message: string?`"
+  },
   "@bettervoxel/globaltype/Player.LoadCharacter": {
-    "documentation": "Replaces the player's current character (dead or alive) with a fresh one, suspending the calling thread until the swap has landed: CharacterRemoving fires with the old one, CharacterAdded with the new one, and Character is the new one on return. The manual route when CharacterAutoLoads is off. Never returns in a place without a PlayerPrefab to load from.",
+    "documentation": "Deprecated: the former name of LoadCharacterAsync, answered the same way — use LoadCharacterAsync.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#loadcharacter",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Player.LoadCharacterAsync": {
+    "documentation": "Replaces the player's current character (dead or alive) with a fresh one, suspending the calling thread until the swap has landed: CharacterRemoving fires with the old one, CharacterAdded with the new one, and Character is the new one on return. The manual route when CharacterAutoLoads is off; the server's alone. Never returns in a place without a PlayerPrefab to load from.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#loadcharacterasync",
     "params": [],
     "returns": []
   },
@@ -4088,7 +5461,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#respawntime"
   },
   "@bettervoxel/globaltype/Player.UserId": {
-    "documentation": "The session identity — how a script tells two players apart. Hosts keep it under 2^53 so it survives Luau's number type.",
+    "documentation": "Who the player is beyond its connection — what a save is keyed by, as far as the server can tell. A joined player reads what the server's identity policy settles on: its join number (1, 2, 3 … per server process), a guest's negative id of that session alone, the id its client claims, or a fold of its name — one player holds an id at a time. Solo play's player is -1, Studio's own id for its first test player (measured). Below 2^53 in magnitude, so it survives Luau's number type.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#userid"
   },
   "@bettervoxel/globaltype/PlayerGui": {
@@ -4184,11 +5557,11 @@
     "documentation": "`boolean`"
   },
   "@bettervoxel/globaltype/PlayerMouse.KeyDown": {
-    "documentation": "The reference's deprecated key-down signal (measured to exist); never fires here — keys ride UserInputService.",
+    "documentation": "Deprecated: the reference's retired key-down signal (measured to exist); never fires here — keys ride UserInputService.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#keydown"
   },
   "@bettervoxel/globaltype/PlayerMouse.KeyUp": {
-    "documentation": "The reference's deprecated key-up signal (measured to exist); never fires here.",
+    "documentation": "Deprecated: the reference's retired key-up signal (measured to exist); never fires here — keys ride UserInputService.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/PlayerMouse.html#keyup"
   },
   "@bettervoxel/globaltype/PlayerMouse.Move": {
@@ -4254,9 +5627,11 @@
       "CenterOfMass": "@bettervoxel/globaltype/PlayerPrefab.CenterOfMass",
       "Mass": "@bettervoxel/globaltype/PlayerPrefab.Mass",
       "Position": "@bettervoxel/globaltype/PlayerPrefab.Position",
+      "RotVelocity": "@bettervoxel/globaltype/PlayerPrefab.RotVelocity",
       "Rotation": "@bettervoxel/globaltype/PlayerPrefab.Rotation",
       "SpawnCharacter": "@bettervoxel/globaltype/PlayerPrefab.SpawnCharacter",
-      "Touched": "@bettervoxel/globaltype/PlayerPrefab.Touched"
+      "Touched": "@bettervoxel/globaltype/PlayerPrefab.Touched",
+      "Velocity": "@bettervoxel/globaltype/PlayerPrefab.Velocity"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html"
   },
@@ -4292,6 +5667,10 @@
     "documentation": "The prefab's world position — where characters spawned from it stand.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#position"
   },
+  "@bettervoxel/globaltype/PlayerPrefab.RotVelocity": {
+    "documentation": "Deprecated: the prefab body's angular velocity — use AssemblyAngularVelocity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#rotvelocity"
+  },
   "@bettervoxel/globaltype/PlayerPrefab.Rotation": {
     "documentation": "The prefab's orientation as XYZ Euler angles in degrees.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#rotation"
@@ -4318,6 +5697,10 @@
   "@bettervoxel/globaltype/PlayerPrefab.Touched": {
     "documentation": "Fires when a collider starts touching the prefab body, with the other object.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#touched"
+  },
+  "@bettervoxel/globaltype/PlayerPrefab.Velocity": {
+    "documentation": "Deprecated: the prefab body's linear velocity — use AssemblyLinearVelocity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PlayerPrefab.html#velocity"
   },
   "@bettervoxel/globaltype/Players": {
     "documentation": "The session roster: LocalPlayer, the player list, join/leave signals, and the measured RespawnTime service property (consulted at death; each Player's per-player value seeds from it).",
@@ -4456,6 +5839,105 @@
     "documentation": "A light radiating in every direction from its parent's position.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PointLight.html"
   },
+  "@bettervoxel/globaltype/Random": {
+    "documentation": "A seeded pseudo-random generator — the reference engine's own stream (PCG32), so a seed draws the same numbers here as there: NextNumber, NextInteger, NextUnitVector, an in-place Shuffle and Clone; two generators are equal when their states are. Random.new() with no seed draws from the VM's generator, the one math.random uses.",
+    "keys": {
+      "Clone": "@bettervoxel/globaltype/Random.Clone",
+      "NextInteger": "@bettervoxel/globaltype/Random.NextInteger",
+      "NextNumber": "@bettervoxel/globaltype/Random.NextNumber",
+      "NextUnitVector": "@bettervoxel/globaltype/Random.NextUnitVector",
+      "Shuffle": "@bettervoxel/globaltype/Random.Shuffle"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html"
+  },
+  "@bettervoxel/globaltype/Random.Clone": {
+    "documentation": "A second generator at the same state: neither moves the other.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html#clone",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Random.Clone/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Random.Clone/return/0": {
+    "documentation": "`Random`"
+  },
+  "@bettervoxel/globaltype/Random.NextInteger": {
+    "documentation": "An integer between the bounds, each truncated toward zero and the two sorted: one draw for a span of up to 2^32 - 2 values, two for a wider one (the measured forms); a bound outside the 64-bit range, an infinity or a NaN is -2^63.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html#nextinteger",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Random.NextInteger/param/0",
+        "name": "min"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Random.NextInteger/param/1",
+        "name": "max"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Random.NextInteger/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Random.NextInteger/param/0": {
+    "documentation": "`min: number`"
+  },
+  "@bettervoxel/globaltype/Random.NextInteger/param/1": {
+    "documentation": "`max: number`"
+  },
+  "@bettervoxel/globaltype/Random.NextInteger/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Random.NextNumber": {
+    "documentation": "A number in [0, 1) from two draws of the measured generator, or with both bounds lo*(1 - u) + hi*u over the bounds SORTED; one argument refuses.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html#nextnumber",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Random.NextNumber/param/0",
+        "name": "min"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Random.NextNumber/param/1",
+        "name": "max"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Random.NextNumber/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Random.NextNumber/param/0": {
+    "documentation": "`min: number?`"
+  },
+  "@bettervoxel/globaltype/Random.NextNumber/param/1": {
+    "documentation": "`max: number?`"
+  },
+  "@bettervoxel/globaltype/Random.NextNumber/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Random.NextUnitVector": {
+    "documentation": "A unit vector from two draws in single precision: a longitude over the full turn and a height uniform on [-1, 1].",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html#nextunitvector",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Random.NextUnitVector/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Random.NextUnitVector/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Random.Shuffle": {
+    "documentation": "Permutes the array part of t in place — from the end, one draw per position, raw reads and writes — and returns nothing. A nil within #t refuses before any draw; a dictionary alone is an empty array; a frozen table refuses after the first draw.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Random.html#shuffle",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Random.Shuffle/param/0",
+        "name": "t"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/Random.Shuffle/param/0": {
+    "documentation": "`t: {any}`"
+  },
   "@bettervoxel/globaltype/Ray": {
     "documentation": "An immutable origin + direction pair, as the camera's ScreenPointToRay/ViewportPointToRay hand out. Its own methods treat it as a half-line: ClosestPoint clamps at the origin and runs unbounded ahead.",
     "keys": {
@@ -4516,6 +5998,72 @@
   "@bettervoxel/globaltype/Ray.Unit": {
     "documentation": "The same ray with its direction normalized to unit length.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Ray.html#unit"
+  },
+  "@bettervoxel/globaltype/RaycastParams": {
+    "documentation": "The filter bundle Workspace:Raycast takes: both filter generations — FilterType over FilterDescendantsInstances (AddToFilter appends to it), and the newer ExcludeInstances / IncludeInstances pair, nil until written — all applied to a cast, each entry with its descendants; RespectCanCollide; the IgnoreWater, BruteForceAllSlow and CollisionGroup the reference keeps, stored and read back; and the engine's own ServerTime, the server time a cast rewinds the streamed parts to. Mutable; equal by value over the old members; RaycastParams.new() is the defaults.",
+    "keys": {
+      "AddToFilter": "@bettervoxel/globaltype/RaycastParams.AddToFilter",
+      "BruteForceAllSlow": "@bettervoxel/globaltype/RaycastParams.BruteForceAllSlow",
+      "CollisionGroup": "@bettervoxel/globaltype/RaycastParams.CollisionGroup",
+      "ExcludeInstances": "@bettervoxel/globaltype/RaycastParams.ExcludeInstances",
+      "FilterDescendantsInstances": "@bettervoxel/globaltype/RaycastParams.FilterDescendantsInstances",
+      "FilterType": "@bettervoxel/globaltype/RaycastParams.FilterType",
+      "IgnoreWater": "@bettervoxel/globaltype/RaycastParams.IgnoreWater",
+      "IncludeInstances": "@bettervoxel/globaltype/RaycastParams.IncludeInstances",
+      "RespectCanCollide": "@bettervoxel/globaltype/RaycastParams.RespectCanCollide",
+      "ServerTime": "@bettervoxel/globaltype/RaycastParams.ServerTime"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html"
+  },
+  "@bettervoxel/globaltype/RaycastParams.AddToFilter": {
+    "documentation": "Appends an instance, or every instance of a table (nested tables too), to FilterDescendantsInstances — the old list, duplicates kept — and returns nothing; anything else is `Expected a table or Instance` (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#addtofilter",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/RaycastParams.AddToFilter/param/0",
+        "name": "instances"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/RaycastParams.AddToFilter/param/0": {
+    "documentation": "`instances: Instance | {Instance}`"
+  },
+  "@bettervoxel/globaltype/RaycastParams.BruteForceAllSlow": {
+    "documentation": "Stored and read back, false by default; the engine's cast has no slow path to force.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#bruteforceallslow"
+  },
+  "@bettervoxel/globaltype/RaycastParams.CollisionGroup": {
+    "documentation": "Stored and read back, \"Default\" by default (a number written is its text, measured); parts carry no collision group here, so a cast ignores it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#collisiongroup"
+  },
+  "@bettervoxel/globaltype/RaycastParams.ExcludeInstances": {
+    "documentation": "The newer exclusion list, nil until written and independent of FilterType's pair: a cast applies both — the listed instances and their descendants never hit, whatever IncludeInstances says. A table of instances or nil (the old list's texts for the rest); never shown by tostring and outside == (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#excludeinstances"
+  },
+  "@bettervoxel/globaltype/RaycastParams.FilterDescendantsInstances": {
+    "documentation": "The instances FilterType applies to, each with its logical descendants; AddToFilter appends here. A read is a fresh copy (writing into it changes nothing); a write takes a table of instances, nested tables flattened — `Invalid value type; expected a table` otherwise, `Invalid value type; table must only contain Instances and other tables` for a wrong entry. A destroyed instance stays listed while a script value names it, and filters nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#filterdescendantsinstances"
+  },
+  "@bettervoxel/globaltype/RaycastParams.FilterType": {
+    "documentation": "How FilterDescendantsInstances reads: Exclude (the default) hides the listed instances and their descendants, Include admits them alone. An enum item only — a name string, a number or another enum's item is `Invalid value for enum 'RaycastFilterType'` (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#filtertype"
+  },
+  "@bettervoxel/globaltype/RaycastParams.IgnoreWater": {
+    "documentation": "Stored and read back, false by default; the engine has no terrain water for a cast to ignore.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#ignorewater"
+  },
+  "@bettervoxel/globaltype/RaycastParams.IncludeInstances": {
+    "documentation": "The newer inclusion list, nil until written and independent of FilterType's pair: nil admits everything, an empty list nothing, a list its instances and their descendants alone — less what ExcludeInstances and the old pair take away. A table of instances or nil; never shown by tostring and outside == (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#includeinstances"
+  },
+  "@bettervoxel/globaltype/RaycastParams.RespectCanCollide": {
+    "documentation": "Whether a cast skips parts with CanCollide false; false by default (a ray hits them). Any value writes by truthiness.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#respectcancollide"
+  },
+  "@bettervoxel/globaltype/RaycastParams.ServerTime": {
+    "documentation": "An engine extension, the server alone: a server time in Workspace:GetServerTimeNow's seconds — the one a client read from GetRenderedServerTime when it fired — at which the cast tests every streamed root at the pose the server held then, the rest of the world live. Nil (the default) casts live; a number or nil only, a non-finite one refuses at the cast, and a client's cast refuses it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/RaycastParams.html#servertime"
   },
   "@bettervoxel/globaltype/RemoteEvent": {
     "documentation": "The cross-network signal: FireServer and FireClient/FireAllClients queue OnServerEvent and OnClientEvent on the far side, payloads deep-copied through the remote codec.",
@@ -5847,7 +7395,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#y"
   },
   "@bettervoxel/globaltype/UDim2.lerp": {
-    "documentation": "Lerp under its deprecated lowercase spelling (the reference answers both, measured).",
+    "documentation": "Deprecated: the retired lowercase spelling of Lerp, answered the same way (measured) — use Lerp.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/UDim2.html#lerp",
     "params": [
       {
@@ -6058,7 +7606,7 @@
     "documentation": "`Vector2`"
   },
   "@bettervoxel/globaltype/UserInputService.InputBegan": {
-    "documentation": "Fires on every key or mouse-button press with a read-only input table and a gameProcessed flag (always false until UI focus exists). Mouse buttons carry KeyCode Unknown.",
+    "documentation": "Fires on every key or mouse-button press with a read-only input table and a gameProcessed flag (always false until UI focus exists). Mouse buttons carry KeyCode None.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/UserInputService.html#inputbegan"
   },
   "@bettervoxel/globaltype/UserInputService.InputEnded": {
@@ -6137,6 +7685,7 @@
       "Unit": "@bettervoxel/globaltype/Vector2.Unit",
       "X": "@bettervoxel/globaltype/Vector2.X",
       "Y": "@bettervoxel/globaltype/Vector2.Y",
+      "lerp": "@bettervoxel/globaltype/Vector2.lerp",
       "magnitude": "@bettervoxel/globaltype/Vector2.magnitude",
       "unit": "@bettervoxel/globaltype/Vector2.unit",
       "x": "@bettervoxel/globaltype/Vector2.x",
@@ -6358,20 +7907,46 @@
     "documentation": "The Y component.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#y"
   },
+  "@bettervoxel/globaltype/Vector2.lerp": {
+    "documentation": "Deprecated: the retired lowercase spelling of Lerp, answered the same way (measured) — use Lerp.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector2.lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector2.lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector2.lerp/param/0": {
+    "documentation": "`goal: Vector2`"
+  },
+  "@bettervoxel/globaltype/Vector2.lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/Vector2.lerp/return/0": {
+    "documentation": "`Vector2`"
+  },
   "@bettervoxel/globaltype/Vector2.magnitude": {
-    "documentation": "The length of the vector, lowercase dialect.",
+    "documentation": "Deprecated: the retired lowercase spelling of Magnitude (the reference answers both) — use Magnitude.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#magnitude"
   },
   "@bettervoxel/globaltype/Vector2.unit": {
-    "documentation": "The same direction at unit length, lowercase dialect (the reference answers both, measured).",
+    "documentation": "Deprecated: the retired lowercase spelling of Unit (the reference answers both, measured) — use Unit.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#unit"
   },
   "@bettervoxel/globaltype/Vector2.x": {
-    "documentation": "The X component, lowercase dialect (the reference answers both).",
+    "documentation": "Deprecated: the retired lowercase spelling of X (the reference answers both) — use X.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#x"
   },
   "@bettervoxel/globaltype/Vector2.y": {
-    "documentation": "The Y component, lowercase dialect (the reference answers both).",
+    "documentation": "Deprecated: the retired lowercase spelling of Y (the reference answers both) — use Y.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector2.html#y"
   },
   "@bettervoxel/globaltype/Vector3": {
@@ -6454,7 +8029,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#gravity"
   },
   "@bettervoxel/globaltype/Workspace.Raycast": {
-    "documentation": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil; the optional params table filters by instance list and Enum.RaycastFilterType. On the server under server authority, params.ServerTime (an engine extension: a server time in GetServerTimeNow's seconds — the one a client read from GetRenderedServerTime when it fired) tests every streamed part at the pose the server held at that time and the rest of the world live, so a shot aimed at what a client drew hits what it drew; a time older than the second the history keeps clamps to it. A client cannot pass it: it casts at the poses it draws. Validate the shot's origin against the shooter yourself, as the reference advises: the engine rewinds the targets, not the gun.",
+    "documentation": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil. The optional RaycastParams filters by both generations — FilterType over FilterDescendantsInstances, and ExcludeInstances / IncludeInstances — all applied, each entry with its descendants, RespectCanCollide skipping CanCollide-false parts; the engine also takes a plain table of the same keys (FilterType, FilterDescendantsInstances, RespectCanCollide, ServerTime). On the server under server authority, ServerTime (an engine extension: a server time in GetServerTimeNow's seconds — the one a client read from GetRenderedServerTime when it fired) tests every streamed part at the pose the server held at that time and the rest of the world live, so a shot aimed at what a client drew hits what it drew; a time older than the second the history keeps clamps to it. A client cannot pass it: it casts at the poses it draws. Validate the shot's origin against the shooter yourself, as the reference advises: the engine rewinds the targets, not the gun.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html#raycast",
     "params": [
       {
@@ -6481,7 +8056,7 @@
     "documentation": "`direction: Vector3`"
   },
   "@bettervoxel/globaltype/Workspace.Raycast/param/2": {
-    "documentation": "`raycastParams: {[string]: any}?`"
+    "documentation": "`raycastParams: (RaycastParams | {[string]: any})?`"
   },
   "@bettervoxel/globaltype/Workspace.Raycast/return/0": {
     "documentation": "`{[string]: any}?`"

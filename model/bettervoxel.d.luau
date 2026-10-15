@@ -13,12 +13,19 @@ export type Vector3 = vector
 declare extern type BVScriptConnection with
     Connected: boolean
     function Disconnect(self): ()
+    connected: boolean -- deprecated
+    @deprecated
+    function disconnect(self): ()
 end
 
 declare extern type BVScriptSignal with
     function Connect(self, callback: (...any) -> ()): BVScriptConnection
     function Once(self, callback: (...any) -> ()): BVScriptConnection
     function Wait(self): ...any
+    @deprecated
+    function connect(self, callback: (...any) -> ()): BVScriptConnection
+    @deprecated
+    function wait(self): ...any
 end
 
 declare extern type EnumItem with
@@ -36,24 +43,89 @@ declare extern type TweenInfo with
     Time: number
 end
 
+declare extern type Random with
+    function Clone(self): Random
+    function NextInteger(self, min: number, max: number): number
+    function NextNumber(self, min: number?, max: number?): number
+    function NextUnitVector(self): Vector3
+    function Shuffle(self, t: {any}): ()
+end
+
+declare extern type RaycastParams with
+    function AddToFilter(self, instances: Instance | {Instance}): ()
+    BruteForceAllSlow: boolean
+    CollisionGroup: string
+    ExcludeInstances: {Instance}?
+    FilterDescendantsInstances: {Instance}
+    FilterType: EnumItem
+    IgnoreWater: boolean
+    IncludeInstances: {Instance}?
+    RespectCanCollide: boolean
+    ServerTime: number?
+end
+
 declare extern type CFrame with
+    function AngleBetween(self, other: CFrame): number
+    function FuzzyEq(self, other: CFrame, eps: number?): boolean
+    function GetComponents(self): (number, number, number, number, number, number, number, number, number, number, number, number)
     function Inverse(self): CFrame
     function Lerp(self, goal: CFrame, alpha: number): CFrame
     LookVector: Vector3
-    function PointToObjectSpace(self, point: Vector3): Vector3
-    function PointToWorldSpace(self, point: Vector3): Vector3
+    function Orthonormalize(self): CFrame
+    function PointToObjectSpace(self, ...: Vector3): ...Vector3
+    function PointToWorldSpace(self, ...: Vector3): ...Vector3
     Position: Vector3
     RightVector: Vector3
     Rotation: CFrame
+    function ToAxisAngle(self): (Vector3, number)
+    function ToEulerAngles(self, order: EnumItem?): (number, number, number)
     function ToEulerAnglesXYZ(self): (number, number, number)
-    function ToObjectSpace(self, other: CFrame): CFrame
-    function ToWorldSpace(self, other: CFrame): CFrame
+    function ToEulerAnglesYXZ(self): (number, number, number)
+    function ToObjectSpace(self, ...: CFrame): ...CFrame
+    function ToOrientation(self): (number, number, number)
+    function ToWorldSpace(self, ...: CFrame): ...CFrame
     UpVector: Vector3
-    function VectorToObjectSpace(self, direction: Vector3): Vector3
-    function VectorToWorldSpace(self, direction: Vector3): Vector3
+    function VectorToObjectSpace(self, ...: Vector3): ...Vector3
+    function VectorToWorldSpace(self, ...: Vector3): ...Vector3
     X: number
+    XVector: Vector3
     Y: number
+    YVector: Vector3
     Z: number
+    ZVector: Vector3
+    @deprecated
+    function components(self): (number, number, number, number, number, number, number, number, number, number, number, number)
+    @deprecated
+    function inverse(self): CFrame
+    @deprecated
+    function lerp(self, goal: CFrame, alpha: number): CFrame
+    lookVector: Vector3 -- deprecated
+    p: Vector3 -- deprecated
+    @deprecated
+    function pointToObjectSpace(self, ...: Vector3): ...Vector3
+    @deprecated
+    function pointToWorldSpace(self, ...: Vector3): ...Vector3
+    rightVector: Vector3 -- deprecated
+    @deprecated
+    function toAxisAngle(self): (Vector3, number)
+    @deprecated
+    function toEulerAnglesXYZ(self): (number, number, number)
+    @deprecated
+    function toEulerAnglesYXZ(self): (number, number, number)
+    @deprecated
+    function toObjectSpace(self, ...: CFrame): ...CFrame
+    @deprecated
+    function toOrientation(self): (number, number, number)
+    @deprecated
+    function toWorldSpace(self, ...: CFrame): ...CFrame
+    upVector: Vector3 -- deprecated
+    @deprecated
+    function vectorToObjectSpace(self, ...: Vector3): ...Vector3
+    @deprecated
+    function vectorToWorldSpace(self, ...: Vector3): ...Vector3
+    x: number -- deprecated
+    y: number -- deprecated
+    z: number -- deprecated
 end
 
 declare extern type Color3 with
@@ -61,6 +133,19 @@ declare extern type Color3 with
     G: number
     function Lerp(self, goal: Color3, alpha: number): Color3
     R: number
+    function ToHSV(self): (number, number, number)
+    function ToHex(self): string
+    @deprecated
+    function lerp(self, goal: Color3, alpha: number): Color3
+end
+
+declare extern type BrickColor with
+    Color: Color3
+    Name: string
+    Number: number
+    b: number
+    g: number
+    r: number
 end
 
 declare extern type UDim2 with
@@ -69,6 +154,7 @@ declare extern type UDim2 with
     Width: UDim
     X: UDim
     Y: UDim
+    @deprecated
     function lerp(self, goal: UDim2, alpha: number): UDim2
 end
 
@@ -108,10 +194,12 @@ declare extern type Vector2 with
     Unit: Vector2
     X: number
     Y: number
-    magnitude: number
-    unit: Vector2
-    x: number
-    y: number
+    @deprecated
+    function lerp(self, goal: Vector2, alpha: number): Vector2
+    magnitude: number -- deprecated
+    unit: Vector2 -- deprecated
+    x: number -- deprecated
+    y: number -- deprecated
 end
 
 declare extern type NumberRange with
@@ -140,11 +228,13 @@ end
 
 declare extern type Instance with
     AncestryChanged: BVScriptSignal -- fires (Instance, Instance?)
+    Archivable: boolean
     AttributeChanged: BVScriptSignal -- fires (string)
     Changed: BVScriptSignal -- fires (string)
     ChildAdded: BVScriptSignal -- fires (Instance)
     ChildRemoved: BVScriptSignal -- fires (Instance)
     ClassName: string
+    function ClearAllChildren(self): ()
     function Clone(self): Instance
     DescendantAdded: BVScriptSignal -- fires (Instance)
     function Destroy(self): ()
@@ -157,6 +247,7 @@ declare extern type Instance with
     function FindFirstChildWhichIsA(self, className: string, recursive: boolean?): Instance?
     function GetAttribute(self, name: string, field: string?): any
     function GetAttributeChangedSignal(self, attribute: string): BVScriptSignal
+    function GetAttributes(self): {[string]: any}
     function GetChildren(self): {Instance}
     function GetDescendants(self): {Instance}
     function GetFullName(self): string
@@ -167,12 +258,19 @@ declare extern type Instance with
     Name: string
     Parent: Instance?
     PredictionMode: EnumItem
+    @deprecated
+    function Remove(self): ()
     function SetAttribute(self, name: string, value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil): ()
     function WaitForChild(self, name: string, timeout: number?): Instance?
+    changed: BVScriptSignal -- deprecated; fires (string)
     @deprecated
     function clone(self): Instance
     @deprecated
+    function destroy(self): ()
+    @deprecated
     function findFirstChild(self, name: string): Instance?
+    @deprecated
+    function remove(self): ()
 end
 
 declare extern type Attachment extends Instance with
@@ -209,8 +307,10 @@ declare extern type Character extends Instance with
     CenterOfMass: Vector3
     Mass: number
     Position: Vector3
+    RotVelocity: Vector3 -- deprecated
     Rotation: Vector3
     Touched: BVScriptSignal -- fires (Instance)
+    Velocity: Vector3 -- deprecated
 end
 
 declare extern type ClickDetector extends Instance with
@@ -354,7 +454,10 @@ declare extern type Player extends Instance with
     function GetCameraState(self): {CFrame: CFrame, FieldOfView: number, ViewportSize: Vector2}
     function GetMouse(self): PlayerMouse
     function GetNetworkPing(self): number
+    function Kick(self, message: string?): ()
+    @deprecated
     function LoadCharacter(self): ()
+    function LoadCharacterAsync(self): ()
     PlayerGui: PlayerGui?
     RespawnTime: number
     UserId: number
@@ -369,9 +472,11 @@ declare extern type PlayerPrefab extends Instance with
     CenterOfMass: Vector3
     Mass: number
     Position: Vector3
+    RotVelocity: Vector3 -- deprecated
     Rotation: Vector3
     function SpawnCharacter(self, position: Vector3?): Instance
     Touched: BVScriptSignal -- fires (Instance)
+    Velocity: Vector3 -- deprecated
 end
 
 declare extern type RemoteFunction extends Instance with
@@ -435,8 +540,10 @@ declare extern type BasePart extends PVInstance with
     AssemblyCenterOfMass: Vector3
     AssemblyLinearVelocity: Vector3
     AssemblyMass: number
+    BrickColor: BrickColor
     CFrame: CFrame
     CanCollide: boolean
+    CastShadow: boolean
     CenterOfMass: Vector3
     Color: Color3
     function GetMass(self): number
@@ -447,12 +554,14 @@ declare extern type BasePart extends PVInstance with
     Mass: number
     Material: EnumItem
     Position: Vector3
+    RotVelocity: Vector3 -- deprecated
     Rotation: Vector3
     function SetNetworkOwner(self, player: Instance?): ()
     function SetNetworkOwnershipAuto(self): ()
     Size: Vector3
     Touched: BVScriptSignal -- fires (Instance)
     Transparency: number
+    Velocity: Vector3 -- deprecated
 end
 
 declare extern type BaseScript extends LuaSourceContainer with
@@ -500,7 +609,11 @@ end
 
 declare extern type Model extends PVInstance with
     function GetBoundingBox(self): (CFrame, Vector3)
+    @deprecated
+    function GetPrimaryPartCFrame(self): CFrame
     PrimaryPart: BasePart?
+    @deprecated
+    function SetPrimaryPartCFrame(self, cframe: CFrame): ()
 end
 
 declare extern type ModuleScript extends LuaSourceContainer with
@@ -661,7 +774,7 @@ declare extern type Workspace extends WorldRoot with
     function GetRenderedServerTime(self, instance: Instance?): number
     function GetServerTimeNow(self): number
     Gravity: number
-    function Raycast(self, origin: Vector3, direction: Vector3, raycastParams: {[string]: any}?): {[string]: any}?
+    function Raycast(self, origin: Vector3, direction: Vector3, raycastParams: (RaycastParams | {[string]: any})?): {[string]: any}?
 end
 
 declare extern type ImageLabel extends GuiLabel with
@@ -730,8 +843,8 @@ declare extern type PlayerMouse with
     Icon: string
     Idle: BVScriptSignal -- fires ()
     function IsA(self, className: string): boolean
-    KeyDown: BVScriptSignal -- fires ()
-    KeyUp: BVScriptSignal -- fires ()
+    KeyDown: BVScriptSignal -- deprecated; fires ()
+    KeyUp: BVScriptSignal -- deprecated; fires ()
     Move: BVScriptSignal -- fires ()
     Name: string
     Origin: CFrame
@@ -818,6 +931,7 @@ declare extern type Lighting with
     Brightness: number
     ClassName: string
     ClockTime: number
+    ExposureCompensation: number
     FogColor: Color3
     FogEnd: number
     FogStart: number
@@ -879,13 +993,17 @@ end
 
 declare extern type DataModel with
     GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: "StarterGui") -> StarterGui) & ((self: DataModel, service: string) -> Instance)
+    function BindToClose(self, callback: (reason: EnumItem) -> ()): ()
     ClassName: string
     CollectionService: CollectionService
     Debris: Debris
+    GameId: number
     HttpService: HttpService
     function IsA(self, className: string): boolean
+    JobId: string
     Lighting: Lighting
     Name: string
+    PlaceId: number
     Players: Players
     ReplicatedStorage: Instance
     RunService: RunService
@@ -901,19 +1019,42 @@ declare extern type DataModel with
     function service(self, service: string): Instance
 end
 
+declare BrickColor: {
+    Black: () -> BrickColor,
+    Blue: () -> BrickColor,
+    DarkGray: () -> BrickColor,
+    Gray: () -> BrickColor,
+    Green: () -> BrickColor,
+    Random: () -> BrickColor,
+    Red: () -> BrickColor,
+    White: () -> BrickColor,
+    Yellow: () -> BrickColor,
+    new: (() -> BrickColor) & ((number: number) -> BrickColor) & ((name: string) -> BrickColor) & ((r: number, g: number, b: number) -> BrickColor) & ((color: Color3) -> BrickColor),
+    palette: (index: number) -> BrickColor,
+    random: () -> BrickColor,
+}
+
 declare CFrame: {
     Angles: (rx: number, ry: number, rz: number) -> CFrame,
     fromAxisAngle: (axis: Vector3, angle: number) -> CFrame,
+    fromEulerAngles: (rx: number, ry: number, rz: number, order: EnumItem?) -> CFrame,
     fromEulerAnglesXYZ: (rx: number, ry: number, rz: number) -> CFrame,
+    fromEulerAnglesYXZ: (rx: number, ry: number, rz: number) -> CFrame,
+    fromMatrix: (pos: Vector3, vX: Vector3, vY: Vector3, vZ: Vector3?) -> CFrame,
+    fromOrientation: (rx: number, ry: number, rz: number) -> CFrame,
+    fromRotationBetweenVectors: (from: Vector3, to: Vector3) -> CFrame,
     identity: CFrame,
+    lookAlong: (position: Vector3, direction: Vector3, up: Vector3?) -> CFrame,
     lookAt: (position: Vector3, target: Vector3, up: Vector3?) -> CFrame,
-    new: (() -> CFrame) & ((position: Vector3) -> CFrame) & ((position: Vector3, lookAt: Vector3) -> CFrame) & ((x: number, y: number, z: number) -> CFrame),
+    new: (() -> CFrame) & ((position: Vector3) -> CFrame) & ((position: Vector3, lookAt: Vector3) -> CFrame) & ((x: number, y: number, z: number) -> CFrame) & ((x: number, y: number, z: number, qX: number, qY: number, qZ: number, qW: number) -> CFrame) & ((x: number, y: number, z: number, R00: number, R01: number, R02: number, R10: number, R11: number, R12: number, R20: number, R21: number, R22: number) -> CFrame),
 }
 
 declare Color3: {
     fromHSV: (h: number, s: number, v: number) -> Color3,
+    fromHex: (hex: string) -> Color3,
     fromRGB: (r: number, g: number, b: number) -> Color3,
     new: (r: number?, g: number?, b: number?) -> Color3,
+    toHSV: (color: Color3) -> (number, number, number), -- deprecated
 }
 
 declare ColorSequence: {
@@ -945,8 +1086,16 @@ declare NumberSequenceKeypoint: {
     new: (time: number, value: number, envelope: number?) -> NumberSequenceKeypoint,
 }
 
+declare Random: {
+    new: (seed: number?) -> Random,
+}
+
 declare Ray: {
     new: (origin: Vector3, direction: Vector3) -> Ray,
+}
+
+declare RaycastParams: {
+    new: () -> RaycastParams,
 }
 
 declare TweenInfo: {
@@ -980,46 +1129,55 @@ declare Vector3: {
     zero: Vector3,
 }
 
+export type Enum = {
+    FromName: (self: Enum, name: string) -> EnumItem?,
+    FromValue: (self: Enum, value: number) -> EnumItem?,
+    GetEnumItems: (self: Enum) -> {EnumItem},
+}
+
 declare Enum: {
-    ApplyStrokeMode: { Border: EnumItem, Contextual: EnumItem },
-    AuthorityMode: { Automatic: EnumItem, Server: EnumItem },
-    CameraType: { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
-    CollisionFidelity: { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
-    CoreGuiType: { All: EnumItem, AvatarSwitcher: EnumItem, Backpack: EnumItem, Captures: EnumItem, Chat: EnumItem, EmotesMenu: EnumItem, ExperienceShop: EnumItem, Health: EnumItem, PlayerList: EnumItem, SelfView: EnumItem },
-    EasingDirection: { In: EnumItem, InOut: EnumItem, Out: EnumItem },
-    EasingStyle: { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
-    FieldOfViewMode: { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },
-    FillDirection: { Horizontal: EnumItem, Vertical: EnumItem },
-    Font: { AmaticSC: EnumItem, Antique: EnumItem, Arcade: EnumItem, Arial: EnumItem, ArialBold: EnumItem, Arimo: EnumItem, ArimoBold: EnumItem, Bangers: EnumItem, Bodoni: EnumItem, BuilderSans: EnumItem, BuilderSansBold: EnumItem, BuilderSansExtraBold: EnumItem, BuilderSansMedium: EnumItem, Cartoon: EnumItem, Code: EnumItem, Creepster: EnumItem, DenkOne: EnumItem, Fantasy: EnumItem, Fondamento: EnumItem, FredokaOne: EnumItem, Garamond: EnumItem, Gotham: EnumItem, GothamBlack: EnumItem, GothamBold: EnumItem, GothamMedium: EnumItem, GrenzeGotisch: EnumItem, Highway: EnumItem, IndieFlower: EnumItem, JosefinSans: EnumItem, Jura: EnumItem, Kalam: EnumItem, Legacy: EnumItem, LuckiestGuy: EnumItem, Merriweather: EnumItem, Michroma: EnumItem, Nunito: EnumItem, Oswald: EnumItem, PatrickHand: EnumItem, PermanentMarker: EnumItem, Roboto: EnumItem, RobotoCondensed: EnumItem, RobotoMono: EnumItem, Sarpanch: EnumItem, SciFi: EnumItem, SourceSans: EnumItem, SourceSansBold: EnumItem, SourceSansItalic: EnumItem, SourceSansLight: EnumItem, SourceSansSemibold: EnumItem, SpecialElite: EnumItem, TitilliumWeb: EnumItem, Ubuntu: EnumItem, Unknown: EnumItem },
-    FontStyle: { Italic: EnumItem, Normal: EnumItem },
-    FontWeight: { Bold: EnumItem, ExtraBold: EnumItem, ExtraLight: EnumItem, Heavy: EnumItem, Light: EnumItem, Medium: EnumItem, Regular: EnumItem, SemiBold: EnumItem, Thin: EnumItem },
-    HorizontalAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
-    HumanoidStateType: { Climbing: EnumItem, Dead: EnumItem, FallingDown: EnumItem, Flying: EnumItem, Freefall: EnumItem, GettingUp: EnumItem, Jumping: EnumItem, Landed: EnumItem, None: EnumItem, Physics: EnumItem, PlatformStanding: EnumItem, Ragdoll: EnumItem, Running: EnumItem, RunningNoPhysics: EnumItem, Seated: EnumItem, StrafingNoPhysics: EnumItem, Swimming: EnumItem },
-    InputActionType: { Bool: EnumItem, Direction1D: EnumItem, Direction2D: EnumItem, Direction3D: EnumItem },
-    KeyCode: { A: EnumItem, B: EnumItem, BackSlash: EnumItem, Backquote: EnumItem, Backspace: EnumItem, C: EnumItem, CapsLock: EnumItem, Comma: EnumItem, D: EnumItem, Delete: EnumItem, Down: EnumItem, E: EnumItem, Eight: EnumItem, End: EnumItem, Equals: EnumItem, Escape: EnumItem, F: EnumItem, F1: EnumItem, F10: EnumItem, F11: EnumItem, F12: EnumItem, F2: EnumItem, F3: EnumItem, F4: EnumItem, F5: EnumItem, F6: EnumItem, F7: EnumItem, F8: EnumItem, F9: EnumItem, Five: EnumItem, Four: EnumItem, G: EnumItem, H: EnumItem, Home: EnumItem, I: EnumItem, Insert: EnumItem, J: EnumItem, K: EnumItem, L: EnumItem, Left: EnumItem, LeftAlt: EnumItem, LeftBracket: EnumItem, LeftControl: EnumItem, LeftShift: EnumItem, M: EnumItem, Minus: EnumItem, N: EnumItem, Nine: EnumItem, O: EnumItem, One: EnumItem, P: EnumItem, PageDown: EnumItem, PageUp: EnumItem, Period: EnumItem, Q: EnumItem, Quote: EnumItem, R: EnumItem, Return: EnumItem, Right: EnumItem, RightAlt: EnumItem, RightBracket: EnumItem, RightControl: EnumItem, RightShift: EnumItem, S: EnumItem, Semicolon: EnumItem, Seven: EnumItem, Six: EnumItem, Slash: EnumItem, Space: EnumItem, T: EnumItem, Tab: EnumItem, Three: EnumItem, Two: EnumItem, U: EnumItem, Unknown: EnumItem, Up: EnumItem, V: EnumItem, W: EnumItem, X: EnumItem, Y: EnumItem, Z: EnumItem, Zero: EnumItem },
-    Material: { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },
-    MouseBehavior: { Default: EnumItem, LockCenter: EnumItem, LockCurrentPosition: EnumItem },
-    NormalId: { Back: EnumItem, Bottom: EnumItem, Front: EnumItem, Left: EnumItem, Right: EnumItem, Top: EnumItem },
-    PartType: { Ball: EnumItem, Block: EnumItem, CornerWedge: EnumItem, Cylinder: EnumItem, Wedge: EnumItem },
-    ParticleEmitterShape: { Box: EnumItem, Cylinder: EnumItem, Disc: EnumItem, Sphere: EnumItem },
-    ParticleEmitterShapeInOut: { InAndOut: EnumItem, Inward: EnumItem, Outward: EnumItem },
-    ParticleEmitterShapeStyle: { Surface: EnumItem, Volume: EnumItem },
-    ParticleFlipbookLayout: { Custom: EnumItem, Grid2x2: EnumItem, Grid4x4: EnumItem, Grid8x8: EnumItem, None: EnumItem },
-    ParticleFlipbookMode: { Loop: EnumItem, OneShot: EnumItem, PingPong: EnumItem, Random: EnumItem },
-    ParticleOrientation: { FacingCamera: EnumItem, FacingCameraWorldUp: EnumItem, VelocityParallel: EnumItem, VelocityPerpendicular: EnumItem },
-    PlaybackState: { Begin: EnumItem, Cancelled: EnumItem, Completed: EnumItem, Delayed: EnumItem, Paused: EnumItem, Playing: EnumItem },
-    PredictionMode: { Automatic: EnumItem, Off: EnumItem, On: EnumItem },
-    PredictionStatus: { Authoritative: EnumItem, None: EnumItem, Predicted: EnumItem },
-    RaycastFilterType: { Exclude: EnumItem, Include: EnumItem },
-    RenderPriority: { Camera: EnumItem, Character: EnumItem, First: EnumItem, Input: EnumItem, Last: EnumItem },
-    RollOffMode: { Inverse: EnumItem, InverseTapered: EnumItem, Linear: EnumItem, LinearSquare: EnumItem },
-    RunContext: { Client: EnumItem, Legacy: EnumItem, Server: EnumItem },
-    SortOrder: { Custom: EnumItem, LayoutOrder: EnumItem, Name: EnumItem },
-    StepFrequency: { Hz1: EnumItem, Hz10: EnumItem, Hz15: EnumItem, Hz30: EnumItem, Hz5: EnumItem, Hz60: EnumItem },
-    TextXAlignment: { Center: EnumItem, Left: EnumItem, Right: EnumItem },
-    TextYAlignment: { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
-    UserInputType: { Keyboard: EnumItem, MouseButton1: EnumItem, MouseButton2: EnumItem, MouseButton3: EnumItem },
-    VerticalAlignment: { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
+    GetEnums: (self: any) -> {Enum},
+    ApplyStrokeMode: Enum & { Border: EnumItem, Contextual: EnumItem },
+    AuthorityMode: Enum & { Automatic: EnumItem, Server: EnumItem },
+    CameraType: Enum & { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
+    CloseReason: Enum & { DeveloperShutdown: EnumItem, DeveloperUpdate: EnumItem, Moderation: EnumItem, OutOfMemory: EnumItem, RobloxMaintenance: EnumItem, ServerEmpty: EnumItem, Unknown: EnumItem },
+    CollisionFidelity: Enum & { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
+    CoreGuiType: Enum & { All: EnumItem, AvatarSwitcher: EnumItem, Backpack: EnumItem, Captures: EnumItem, Chat: EnumItem, EmotesMenu: EnumItem, ExperienceShop: EnumItem, Health: EnumItem, PlayerList: EnumItem, SelfView: EnumItem },
+    EasingDirection: Enum & { In: EnumItem, InOut: EnumItem, Out: EnumItem },
+    EasingStyle: Enum & { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
+    FieldOfViewMode: Enum & { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },
+    FillDirection: Enum & { Horizontal: EnumItem, Vertical: EnumItem },
+    Font: Enum & { AmaticSC: EnumItem, Antique: EnumItem, Arcade: EnumItem, Arial: EnumItem, ArialBold: EnumItem, Arimo: EnumItem, ArimoBold: EnumItem, Bangers: EnumItem, Bodoni: EnumItem, BuilderSans: EnumItem, BuilderSansBold: EnumItem, BuilderSansExtraBold: EnumItem, BuilderSansMedium: EnumItem, Cartoon: EnumItem, Code: EnumItem, Creepster: EnumItem, DenkOne: EnumItem, Fantasy: EnumItem, Fondamento: EnumItem, FredokaOne: EnumItem, Garamond: EnumItem, Gotham: EnumItem, GothamBlack: EnumItem, GothamBold: EnumItem, GothamMedium: EnumItem, GrenzeGotisch: EnumItem, Highway: EnumItem, IndieFlower: EnumItem, JosefinSans: EnumItem, Jura: EnumItem, Kalam: EnumItem, Legacy: EnumItem, LuckiestGuy: EnumItem, Merriweather: EnumItem, Michroma: EnumItem, Nunito: EnumItem, Oswald: EnumItem, PatrickHand: EnumItem, PermanentMarker: EnumItem, Roboto: EnumItem, RobotoCondensed: EnumItem, RobotoMono: EnumItem, Sarpanch: EnumItem, SciFi: EnumItem, SourceSans: EnumItem, SourceSansBold: EnumItem, SourceSansItalic: EnumItem, SourceSansLight: EnumItem, SourceSansSemibold: EnumItem, SpecialElite: EnumItem, TitilliumWeb: EnumItem, Ubuntu: EnumItem, Unknown: EnumItem },
+    FontStyle: Enum & { Italic: EnumItem, Normal: EnumItem },
+    FontWeight: Enum & { Bold: EnumItem, ExtraBold: EnumItem, ExtraLight: EnumItem, Heavy: EnumItem, Light: EnumItem, Medium: EnumItem, Regular: EnumItem, SemiBold: EnumItem, Thin: EnumItem },
+    HorizontalAlignment: Enum & { Center: EnumItem, Left: EnumItem, Right: EnumItem },
+    HumanoidStateType: Enum & { Climbing: EnumItem, Dead: EnumItem, FallingDown: EnumItem, Flying: EnumItem, Freefall: EnumItem, GettingUp: EnumItem, Jumping: EnumItem, Landed: EnumItem, None: EnumItem, Physics: EnumItem, PlatformStanding: EnumItem, Ragdoll: EnumItem, Running: EnumItem, RunningNoPhysics: EnumItem, Seated: EnumItem, StrafingNoPhysics: EnumItem, Swimming: EnumItem },
+    InputActionType: Enum & { Bool: EnumItem, Direction1D: EnumItem, Direction2D: EnumItem, Direction3D: EnumItem },
+    KeyCode: Enum & { A: EnumItem, B: EnumItem, BackSlash: EnumItem, Backquote: EnumItem, Backspace: EnumItem, C: EnumItem, CapsLock: EnumItem, Comma: EnumItem, D: EnumItem, Delete: EnumItem, Down: EnumItem, E: EnumItem, Eight: EnumItem, End: EnumItem, Equals: EnumItem, Escape: EnumItem, F: EnumItem, F1: EnumItem, F10: EnumItem, F11: EnumItem, F12: EnumItem, F2: EnumItem, F3: EnumItem, F4: EnumItem, F5: EnumItem, F6: EnumItem, F7: EnumItem, F8: EnumItem, F9: EnumItem, Five: EnumItem, Four: EnumItem, G: EnumItem, H: EnumItem, Home: EnumItem, I: EnumItem, Insert: EnumItem, J: EnumItem, K: EnumItem, L: EnumItem, Left: EnumItem, LeftAlt: EnumItem, LeftBracket: EnumItem, LeftControl: EnumItem, LeftShift: EnumItem, M: EnumItem, Minus: EnumItem, N: EnumItem, Nine: EnumItem, None: EnumItem, O: EnumItem, One: EnumItem, P: EnumItem, PageDown: EnumItem, PageUp: EnumItem, Period: EnumItem, Q: EnumItem, Quote: EnumItem, R: EnumItem, Return: EnumItem, Right: EnumItem, RightAlt: EnumItem, RightBracket: EnumItem, RightControl: EnumItem, RightShift: EnumItem, S: EnumItem, Semicolon: EnumItem, Seven: EnumItem, Six: EnumItem, Slash: EnumItem, Space: EnumItem, T: EnumItem, Tab: EnumItem, Three: EnumItem, Two: EnumItem, U: EnumItem, Unknown: EnumItem, Up: EnumItem, V: EnumItem, W: EnumItem, X: EnumItem, Y: EnumItem, Z: EnumItem, Zero: EnumItem },
+    Material: Enum & { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },
+    MouseBehavior: Enum & { Default: EnumItem, LockCenter: EnumItem, LockCurrentPosition: EnumItem },
+    NormalId: Enum & { Back: EnumItem, Bottom: EnumItem, Front: EnumItem, Left: EnumItem, Right: EnumItem, Top: EnumItem },
+    PartType: Enum & { Ball: EnumItem, Block: EnumItem, CornerWedge: EnumItem, Cylinder: EnumItem, Wedge: EnumItem },
+    ParticleEmitterShape: Enum & { Box: EnumItem, Cylinder: EnumItem, Disc: EnumItem, Sphere: EnumItem },
+    ParticleEmitterShapeInOut: Enum & { InAndOut: EnumItem, Inward: EnumItem, Outward: EnumItem },
+    ParticleEmitterShapeStyle: Enum & { Surface: EnumItem, Volume: EnumItem },
+    ParticleFlipbookLayout: Enum & { Custom: EnumItem, Grid2x2: EnumItem, Grid4x4: EnumItem, Grid8x8: EnumItem, None: EnumItem },
+    ParticleFlipbookMode: Enum & { Loop: EnumItem, OneShot: EnumItem, PingPong: EnumItem, Random: EnumItem },
+    ParticleOrientation: Enum & { FacingCamera: EnumItem, FacingCameraWorldUp: EnumItem, VelocityParallel: EnumItem, VelocityPerpendicular: EnumItem },
+    PlaybackState: Enum & { Begin: EnumItem, Cancelled: EnumItem, Completed: EnumItem, Delayed: EnumItem, Paused: EnumItem, Playing: EnumItem },
+    PredictionMode: Enum & { Automatic: EnumItem, Off: EnumItem, On: EnumItem },
+    PredictionStatus: Enum & { Authoritative: EnumItem, None: EnumItem, Predicted: EnumItem },
+    RaycastFilterType: Enum & { Blacklist: EnumItem, Exclude: EnumItem, Include: EnumItem, Whitelist: EnumItem },
+    RenderPriority: Enum & { Camera: EnumItem, Character: EnumItem, First: EnumItem, Input: EnumItem, Last: EnumItem },
+    RollOffMode: Enum & { Inverse: EnumItem, InverseTapered: EnumItem, Linear: EnumItem, LinearSquare: EnumItem },
+    RotationOrder: Enum & { XYZ: EnumItem, XZY: EnumItem, YXZ: EnumItem, YZX: EnumItem, ZXY: EnumItem, ZYX: EnumItem },
+    RunContext: Enum & { Client: EnumItem, Legacy: EnumItem, Server: EnumItem },
+    SortOrder: Enum & { Custom: EnumItem, LayoutOrder: EnumItem, Name: EnumItem },
+    StepFrequency: Enum & { Hz1: EnumItem, Hz10: EnumItem, Hz15: EnumItem, Hz30: EnumItem, Hz5: EnumItem, Hz60: EnumItem },
+    TextXAlignment: Enum & { Center: EnumItem, Left: EnumItem, Right: EnumItem },
+    TextYAlignment: Enum & { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
+    UserInputType: Enum & { Keyboard: EnumItem, MouseButton1: EnumItem, MouseButton2: EnumItem, MouseButton3: EnumItem },
+    VerticalAlignment: Enum & { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
 }
 
 declare function warn(...: any): ()

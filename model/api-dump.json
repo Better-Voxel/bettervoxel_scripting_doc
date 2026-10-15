@@ -13,7 +13,7 @@
           "decl": "Vector3",
           "kind": "ReadWrite",
           "name": "Orientation",
-          "summary": "The attachment's LOCAL rotation as XYZ Euler angles in degrees (§15)."
+          "summary": "The attachment's LOCAL rotation as YXZ Euler angles in degrees: (rx, ry, rz) names the product Ry·Rx·Rz, where CFrame.Angles composes Rx·Ry·Rz (§30)."
         },
         {
           "decl": "Vector3",
@@ -125,6 +125,12 @@
           "summary": "The whole assembly's mass, every welded member's own summed; infinity for an anchored assembly. Read only."
         },
         {
+          "decl": "BrickColor",
+          "kind": "ReadWrite",
+          "name": "BrickColor",
+          "summary": "The nearest BrickColor of the part's Color (the rule of BrickColor.new(color)); a write stores the table colour's bytes as Color3.fromRGB would, so Color reads back equal to fromRGB of them — an ulp off the BrickColor's own Color, as measured. Every real change of the colour fires Changed(\"BrickColor\") and the BrickColor property signal before Color's pair; the same value again fires nothing. A BrickColor only."
+        },
+        {
           "decl": "CFrame",
           "kind": "ReadWrite",
           "name": "CFrame",
@@ -135,6 +141,12 @@
           "kind": "ReadWrite",
           "name": "CanCollide",
           "summary": "Whether the part responds to contacts. false keeps it physical — it falls and fires Touched — but removes the contact response."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "CastShadow",
+          "summary": "Whether the part casts a shadow (true by default), under the sun and under a PointLight or SpotLight whose Shadows is on. A part that casts none still receives the shadows of others. A server's write replicates like any other property's."
         },
         {
           "decl": "Vector3",
@@ -223,6 +235,15 @@
         {
           "decl": "Vector3",
           "kind": "ReadWrite",
+          "name": "RotVelocity",
+          "summary": "Deprecated: the assembly's angular velocity in radians per second about the world axes — use AssemblyAngularVelocity. A write sets it and keeps the velocity of the assembly root part's position (measured), where an AssemblyAngularVelocity write keeps the centre of mass's.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
           "name": "Rotation",
           "summary": "The orientation as XYZ Euler angles in degrees. Welded members read their assembly pose; writing a welded member is refused — rotate the assembly root instead."
         },
@@ -268,6 +289,15 @@
           "kind": "ReadWrite",
           "name": "Transparency",
           "summary": "How see-through the part renders, clamped 0 (opaque) to 1 (invisible)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Velocity",
+          "summary": "Deprecated: the velocity of the part's own position — the assembly's linear velocity plus its spin's arm from the centre of mass (measured) — use AssemblyLinearVelocity. A write on any part of an assembly sets the velocity of the assembly root part's position, the spin kept; on a part alone the pair is the assembly's. Not signal-backed (the reference fires Changed; recorded).",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "BasePart",
@@ -709,6 +739,15 @@
         {
           "decl": "Vector3",
           "kind": "ReadWrite",
+          "name": "RotVelocity",
+          "summary": "Deprecated: the character body's angular velocity — use AssemblyAngularVelocity.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
           "name": "Rotation",
           "summary": "The character's orientation as XYZ Euler angles in degrees; writing turns the character."
         },
@@ -720,6 +759,15 @@
             "Instance"
           ],
           "summary": "Fires when a collider starts touching the character body, with the other object."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Velocity",
+          "summary": "Deprecated: the character body's linear velocity — use AssemblyLinearVelocity.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "Character",
@@ -1276,7 +1324,7 @@
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "Backward",
-          "summary": "The composite key for +Z; Unknown when unset."
+          "summary": "The composite key for +Z; None when unset."
         },
         {
           "decl": "boolean",
@@ -1288,37 +1336,37 @@
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "Down",
-          "summary": "The composite key for -Y; Unknown when unset."
+          "summary": "The composite key for -Y; None when unset."
         },
         {
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "Forward",
-          "summary": "The composite key for -Z (a Direction3D's (0, 0, -1)); Unknown when unset."
+          "summary": "The composite key for -Z (a Direction3D's (0, 0, -1)); None when unset."
         },
         {
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "KeyCode",
-          "summary": "The key driving a Bool action (pressed) or a Direction1D one (+1); Unknown when unset. Writes accept the item, its name, or Unknown to clear."
+          "summary": "The key driving a Bool action (pressed) or a Direction1D one (+1); None when unset. Writes accept the item, its name, or None (Unknown, its legacy name, too) to clear."
         },
         {
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "Left",
-          "summary": "The composite key for -X (a Direction2D's (-1, 0)); Unknown when unset."
+          "summary": "The composite key for -X (a Direction2D's (-1, 0)); None when unset."
         },
         {
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "PrimaryModifier",
-          "summary": "A key that must be held for the binding to count; Unknown (the default) requires none."
+          "summary": "A key that must be held for the binding to count; None (the default) requires none."
         },
         {
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "Right",
-          "summary": "The composite key for +X; Unknown when unset."
+          "summary": "The composite key for +X; None when unset."
         },
         {
           "decl": "number",
@@ -1330,13 +1378,13 @@
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "SecondaryModifier",
-          "summary": "A second key that must be held for the binding to count; Unknown (the default) requires none."
+          "summary": "A second key that must be held for the binding to count; None (the default) requires none."
         },
         {
           "decl": "Enum.KeyCode",
           "kind": "ReadWrite",
           "name": "Up",
-          "summary": "The composite key for +Y (a Direction1D's +1, a Direction2D's (0, 1), a Direction3D's (0, 1, 0)); Unknown when unset."
+          "summary": "The composite key for +Y (a Direction1D's +1, a Direction2D's (0, 1), a Direction3D's (0, 1, 0)); None when unset."
         },
         {
           "decl": "Vector2",
@@ -1395,6 +1443,12 @@
           "summary": "Fires when this instance or any ancestor is reparented, on every node of the moved subtree (deepest first), with the MOVED instance and its new parent — nil on detach. Destroy fires each destroyed node's own (self, nil)."
         },
         {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Archivable",
+          "summary": "Whether Clone copies the instance: true by default. A non-archivable instance's Clone returns nil, and a clone of its parent leaves it and its subtree out; a character is born non-archivable. A runtime flag: neither saved nor replicated, never copied by Clone, and a boolean only."
+        },
+        {
           "decl": "BVScriptSignal<string>",
           "kind": "Signal",
           "name": "AttributeChanged",
@@ -1435,6 +1489,14 @@
           "kind": "ReadOnly",
           "name": "ClassName",
           "summary": "The instance's class, as a string. An instance never changes class. Prefer IsA over comparing ClassName — IsA also matches base classes like BasePart."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "ClearAllChildren",
+          "params": [],
+          "returns": [],
+          "summary": "Destroys every direct child and its subtree — the last child first, each node's Destroying before its children's — and leaves the instance itself in place. The cleared nodes are husks: parentless and locked. On a destroyed instance it does nothing."
         },
         {
           "decl": "() -> Instance",
@@ -1627,6 +1689,18 @@
           "summary": "A signal that fires (with no arguments) when the named attribute lands a change on this instance — first set, value changes and removal included; same-value writes stay silent. Any attribute name is legal, set or not. Delivers after the instance-wide AttributeChanged for the same write."
         },
         {
+          "decl": "() -> {[string]: any}",
+          "kind": "Method",
+          "name": "GetAttributes",
+          "params": [],
+          "returns": [
+            {
+              "type": "{[string]: any}"
+            }
+          ],
+          "summary": "Every attribute of the instance as a fresh table of name to value — a bare value for primitives, a table of fields for records — empty when none is set. The table is a copy: writing it changes no attribute (SetAttribute does)."
+        },
+        {
           "decl": "() -> {Instance}",
           "kind": "Method",
           "name": "GetChildren",
@@ -1744,13 +1818,24 @@
           "decl": "Instance?",
           "kind": "ReadWrite",
           "name": "Parent",
-          "summary": "The instance's parent in the object tree, or nil for a detached root. Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy."
+          "summary": "The instance's parent in the object tree, or nil for a detached root; a Player's is the Players service while it is in the game (measured). Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy."
         },
         {
           "decl": "Enum.PredictionMode",
           "kind": "ReadOnly",
           "name": "PredictionMode",
           "summary": "Whether a client predicts this instance under server authority (net-sync-v2 §2.9): Automatic unless RunService:SetPredictionMode forced it On or Off on this client. Read-only; the reference shows it in Studio only under server authority."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "Remove",
+          "params": [],
+          "returns": [],
+          "summary": "Deprecated: sets the Parent of this instance and of every descendant to nil, top-down, each node leaving with the ordinary signals of a reparent. Nothing is destroyed or locked: every node can take a parent again. On a destroyed instance it does nothing. Use Destroy to destroy, or set Parent to nil to detach.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "(name: string, value: boolean | number | string | Vector3 | Color3 | CFrame | {[string]: any} | nil) -> ()",
@@ -1795,6 +1880,18 @@
           "summary": "The first direct child named name, suspending the calling thread until one exists. A child already present returns without yielding. With a timeout (in seconds) the wait gives up and returns nil once it elapses; without one it waits forever."
         },
         {
+          "decl": "BVScriptSignal<string>",
+          "kind": "Signal",
+          "name": "changed",
+          "payloads": [
+            "string"
+          ],
+          "summary": "Deprecated: the retired spelling of Changed, answered the same way — a value container's is its value signal — use Changed.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
           "decl": "() -> Instance",
           "kind": "Method",
           "name": "clone",
@@ -1805,6 +1902,17 @@
             }
           ],
           "summary": "Deprecated: the retired spelling of Clone, answered the same way — use Clone.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "destroy",
+          "params": [],
+          "returns": [],
+          "summary": "Deprecated: the retired spelling of Destroy, answered the same way — use Destroy.",
           "tags": [
             "Deprecated"
           ]
@@ -1847,6 +1955,17 @@
             }
           ],
           "summary": "A default-constructed instance of the named class, with Parent nil — assign Parent to bring it into the world (derived state appears on attach). Only creatable classes are accepted; abstract and engine-spawned classes error exactly like an unknown name."
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "remove",
+          "params": [],
+          "returns": [],
+          "summary": "Deprecated: the retired spelling of Remove, answered the same way.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "Instance",
@@ -1965,10 +2084,42 @@
           "summary": "The axis-aligned box around the subtree's parts, as (center CFrame, size). Errors when the subtree holds no part."
         },
         {
+          "decl": "() -> CFrame",
+          "kind": "Method",
+          "name": "GetPrimaryPartCFrame",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "Deprecated: the PrimaryPart's CFrame. Errors when the model has no PrimaryPart or it no longer exists. Use GetPivot.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
           "decl": "BasePart?",
           "kind": "ReadWrite",
           "name": "PrimaryPart",
           "summary": "The part the model pivots through, or nil. GetPivot and PivotTo use it; without one they fall back to the bounding-box center. A reference to a despawned part reads as nil."
+        },
+        {
+          "decl": "(cframe: CFrame) -> ()",
+          "kind": "Method",
+          "name": "SetPrimaryPartCFrame",
+          "params": [
+            {
+              "name": "cframe",
+              "optional": false,
+              "type": "CFrame"
+            }
+          ],
+          "returns": [],
+          "summary": "Deprecated: moves the model by one rigid transform so its PrimaryPart lands at cframe — PivotTo through the PrimaryPart. Errors when the model has no PrimaryPart or it no longer exists. Use PivotTo.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "Model",
@@ -2352,12 +2503,37 @@
           "summary": "One-way network latency to this player's machine in seconds (half the measured round trip). The server answers it for any connected player; a client only for its LocalPlayer — a remote player reads -1 (measured: the reference's no-measurement sentinel), and any player in solo play reads 0 (no transport). Sampled, not instantaneous: it averages the transport's last five probes (one every ~5 s) off frame-boundary clock reads, so it floors near a frame's latency on a local link and trails a link that has just degraded."
         },
         {
+          "decl": "(message: string?) -> ()",
+          "kind": "Method",
+          "name": "Kick",
+          "params": [
+            {
+              "name": "message",
+              "optional": true,
+              "type": "string?"
+            }
+          ],
+          "returns": [],
+          "summary": "Removes the player from the game with an optional message (a number is taken as its text). The server may kick any player: its client's console prints 'Server Kick Message: <message>; Metadata: ', its session ends and its world stays as it stood, and PlayerRemoving fires wherever the player is still held. A client may kick its LocalPlayer alone — another raises 'Cannot kick a non-local Player from a LocalScript' — which ends its session. In solo play the player leaves and no other joins for the rest of the run."
+        },
+        {
           "decl": "() -> ()",
           "kind": "Method",
           "name": "LoadCharacter",
           "params": [],
           "returns": [],
-          "summary": "Replaces the player's current character (dead or alive) with a fresh one, suspending the calling thread until the swap has landed: CharacterRemoving fires with the old one, CharacterAdded with the new one, and Character is the new one on return. The manual route when CharacterAutoLoads is off. Never returns in a place without a PlayerPrefab to load from."
+          "summary": "Deprecated: the former name of LoadCharacterAsync, answered the same way — use LoadCharacterAsync.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "LoadCharacterAsync",
+          "params": [],
+          "returns": [],
+          "summary": "Replaces the player's current character (dead or alive) with a fresh one, suspending the calling thread until the swap has landed: CharacterRemoving fires with the old one, CharacterAdded with the new one, and Character is the new one on return. The manual route when CharacterAutoLoads is off; the server's alone. Never returns in a place without a PlayerPrefab to load from."
         },
         {
           "decl": "PlayerGui?",
@@ -2375,7 +2551,7 @@
           "decl": "number",
           "kind": "ReadOnly",
           "name": "UserId",
-          "summary": "The session identity — how a script tells two players apart. Hosts keep it under 2^53 so it survives Luau's number type."
+          "summary": "Who the player is beyond its connection — what a save is keyed by, as far as the server can tell. A joined player reads what the server's identity policy settles on: its join number (1, 2, 3 … per server process), a guest's negative id of that session alone, the id its client claims, or a fold of its name — one player holds an id at a time. Solo play's player is -1, Studio's own id for its first test player (measured). Below 2^53 in magnitude, so it survives Luau's number type."
         }
       ],
       "name": "Player",
@@ -2443,6 +2619,15 @@
         {
           "decl": "Vector3",
           "kind": "ReadWrite",
+          "name": "RotVelocity",
+          "summary": "Deprecated: the prefab body's angular velocity — use AssemblyAngularVelocity.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
           "name": "Rotation",
           "summary": "The prefab's orientation as XYZ Euler angles in degrees."
         },
@@ -2472,6 +2657,15 @@
             "Instance"
           ],
           "summary": "Fires when a collider starts touching the prefab body, with the other object."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Velocity",
+          "summary": "Deprecated: the prefab body's linear velocity — use AssemblyLinearVelocity.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "PlayerPrefab",
@@ -3454,7 +3648,7 @@
           "summary": "The global gravity magnitude in studs per second squared, applied downward. Parts and the character controller both read it."
         },
         {
-          "decl": "(origin: Vector3, direction: Vector3, raycastParams: {[string]: any}?) -> {[string]: any}?",
+          "decl": "(origin: Vector3, direction: Vector3, raycastParams: (RaycastParams | {[string]: any})?) -> {[string]: any}?",
           "kind": "Method",
           "name": "Raycast",
           "params": [
@@ -3471,7 +3665,7 @@
             {
               "name": "raycastParams",
               "optional": true,
-              "type": "{[string]: any}?"
+              "type": "(RaycastParams | {[string]: any})?"
             }
           ],
           "returns": [
@@ -3479,7 +3673,7 @@
               "type": "{[string]: any}?"
             }
           ],
-          "summary": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil; the optional params table filters by instance list and Enum.RaycastFilterType. On the server under server authority, params.ServerTime (an engine extension: a server time in GetServerTimeNow's seconds — the one a client read from GetRenderedServerTime when it fired) tests every streamed part at the pose the server held at that time and the rest of the world live, so a shot aimed at what a client drew hits what it drew; a time older than the second the history keeps clamps to it. A client cannot pass it: it casts at the poses it draws. Validate the shot's origin against the shooter yourself, as the reference advises: the engine rewinds the targets, not the gun."
+          "summary": "Casts a ray from origin along direction — the vector's length is the range. Returns a hit record (Instance, Position, Normal, Distance) or nil. The optional RaycastParams filters by both generations — FilterType over FilterDescendantsInstances, and ExcludeInstances / IncludeInstances — all applied, each entry with its descendants, RespectCanCollide skipping CanCollide-false parts; the engine also takes a plain table of the same keys (FilterType, FilterDescendantsInstances, RespectCanCollide, ServerTime). On the server under server authority, ServerTime (an engine extension: a server time in GetServerTimeNow's seconds — the one a client read from GetRenderedServerTime when it fired) tests every streamed part at the pose the server held at that time and the rest of the world live, so a shot aimed at what a client drew hits what it drew; a time older than the second the history keeps clamps to it. A client cannot pass it: it casts at the poses it draws. Validate the shot's origin against the shooter yourself, as the reference advises: the engine rewinds the targets, not the gun."
         }
       ],
       "name": "Workspace",
@@ -3776,10 +3970,39 @@
           "summary": "The Y component."
         },
         {
+          "decl": "(goal: Vector2, alpha: number) -> Vector2",
+          "kind": "Method",
+          "name": "lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "Vector2"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector2"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of Lerp, answered the same way (measured) — use Lerp.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "magnitude",
-          "summary": "The length of the vector, lowercase dialect."
+          "summary": "Deprecated: the retired lowercase spelling of Magnitude (the reference answers both) — use Magnitude.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "(x: number?, y: number?) -> Vector2",
@@ -3814,13 +4037,19 @@
           "decl": "Vector2",
           "kind": "ReadOnly",
           "name": "unit",
-          "summary": "The same direction at unit length, lowercase dialect (the reference answers both, measured)."
+          "summary": "Deprecated: the retired lowercase spelling of Unit (the reference answers both, measured) — use Unit.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "x",
-          "summary": "The X component, lowercase dialect (the reference answers both)."
+          "summary": "Deprecated: the retired lowercase spelling of X (the reference answers both) — use X.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "Vector2",
@@ -3832,7 +4061,10 @@
           "decl": "number",
           "kind": "ReadOnly",
           "name": "y",
-          "summary": "The Y component, lowercase dialect (the reference answers both)."
+          "summary": "Deprecated: the retired lowercase spelling of Y (the reference answers both) — use Y.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "Vector2",
@@ -3852,6 +4084,24 @@
     },
     {
       "members": [
+        {
+          "decl": "(other: CFrame) -> number",
+          "kind": "Method",
+          "name": "AngleBetween",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "CFrame"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The angle in radians of the rotation from this CFrame's to other's, 0..π, positions ignored (single precision: a difference of 1e-4 reads 0)."
+        },
         {
           "decl": "(rx: number, ry: number, rz: number) -> CFrame",
           "kind": "Static",
@@ -3879,6 +4129,74 @@
             }
           ],
           "summary": "A rotation-only CFrame from XYZ Euler angles in radians — the canonical spelling of fromEulerAnglesXYZ (measured: the X·Y·Z product, matching the reference)."
+        },
+        {
+          "decl": "(other: CFrame, eps: number?) -> boolean",
+          "kind": "Method",
+          "name": "FuzzyEq",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "CFrame"
+            },
+            {
+              "name": "eps",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether other is this CFrame within eps (default 1e-5, at most 0.1): each position component within eps·(1 + |x|) of this frame's, the rotation between them within eps radians."
+        },
+        {
+          "decl": "() -> (number, number, number, number, number, number, number, number, number, number, number, number)",
+          "kind": "Method",
+          "name": "GetComponents",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The twelve numbers of the CFrame: the position, then the rotation matrix row by row (x, y, z, R00, R01, R02, R10, R11, R12, R20, R21, R22) — what the twelve-number CFrame.new takes back."
         },
         {
           "decl": "() -> CFrame",
@@ -3922,40 +4240,52 @@
           "summary": "The facing direction: the -Z basis vector."
         },
         {
-          "decl": "(point: Vector3) -> Vector3",
+          "decl": "() -> CFrame",
+          "kind": "Method",
+          "name": "Orthonormalize",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "The CFrame with its rotation brought back to unit length. A CFrame here is always a position and a rotation — a matrix is orthonormalized as it is built (the reference keeps it as given) — so this undoes only the drift of long chains of products."
+        },
+        {
+          "decl": "(...: Vector3) -> ...Vector3",
           "kind": "Method",
           "name": "PointToObjectSpace",
           "params": [
             {
-              "name": "point",
+              "name": "...",
               "optional": false,
               "type": "Vector3"
             }
           ],
           "returns": [
             {
-              "type": "Vector3"
+              "type": "...Vector3"
             }
           ],
-          "summary": "A world-space point as an object-space point."
+          "summary": "Each world-space point as an object-space point — one value per argument, the inverse's position for none."
         },
         {
-          "decl": "(point: Vector3) -> Vector3",
+          "decl": "(...: Vector3) -> ...Vector3",
           "kind": "Method",
           "name": "PointToWorldSpace",
           "params": [
             {
-              "name": "point",
+              "name": "...",
               "optional": false,
               "type": "Vector3"
             }
           ],
           "returns": [
             {
-              "type": "Vector3"
+              "type": "...Vector3"
             }
           ],
-          "summary": "An object-space point as a world-space point."
+          "summary": "Each object-space point as a world-space point — one value per argument, the position for none."
         },
         {
           "decl": "Vector3",
@@ -3976,6 +4306,45 @@
           "summary": "A rotation-only copy of this CFrame, with the translation stripped."
         },
         {
+          "decl": "() -> (Vector3, number)",
+          "kind": "Method",
+          "name": "ToAxisAngle",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The rotation as an axis and an angle in radians: the angle 2·acos(w) in single precision, never negative; the identity's axis is (1, 0, 0) and its angle 0."
+        },
+        {
+          "decl": "(order: Enum.RotationOrder?) -> (number, number, number)",
+          "kind": "Method",
+          "name": "ToEulerAngles",
+          "params": [
+            {
+              "name": "order",
+              "optional": true,
+              "type": "Enum.RotationOrder?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The rotation as Euler angles in radians for an order (an Enum.RotationOrder item, XYZ by default), handed back as rx, ry, rz whatever the order."
+        },
+        {
           "decl": "() -> (number, number, number)",
           "kind": "Method",
           "name": "ToEulerAnglesXYZ",
@@ -3994,40 +4363,76 @@
           "summary": "The rotation as XYZ Euler angles in radians (the same order the instance Rotation property uses, in degrees there)."
         },
         {
-          "decl": "(other: CFrame) -> CFrame",
+          "decl": "() -> (number, number, number)",
+          "kind": "Method",
+          "name": "ToEulerAnglesYXZ",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The rotation as YXZ Euler angles in radians — the angles of the Ry·Rx·Rz product, handed back as rx, ry, rz; at the lock rz is 0 and ry takes the sum or the difference."
+        },
+        {
+          "decl": "(...: CFrame) -> ...CFrame",
           "kind": "Method",
           "name": "ToObjectSpace",
           "params": [
             {
-              "name": "other",
+              "name": "...",
               "optional": false,
               "type": "CFrame"
             }
           ],
           "returns": [
             {
-              "type": "CFrame"
+              "type": "...CFrame"
             }
           ],
-          "summary": "The world transform other, re-expressed relative to this CFrame (self:Inverse() * other)."
+          "summary": "Each world transform other, re-expressed relative to this CFrame (self:Inverse() * other) — one value per argument, the inverse for none."
         },
         {
-          "decl": "(other: CFrame) -> CFrame",
+          "decl": "() -> (number, number, number)",
+          "kind": "Method",
+          "name": "ToOrientation",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "ToEulerAnglesYXZ under its other name: rx, ry, rz of the Ry·Rx·Rz product, in radians."
+        },
+        {
+          "decl": "(...: CFrame) -> ...CFrame",
           "kind": "Method",
           "name": "ToWorldSpace",
           "params": [
             {
-              "name": "other",
+              "name": "...",
               "optional": false,
               "type": "CFrame"
             }
           ],
           "returns": [
             {
-              "type": "CFrame"
+              "type": "...CFrame"
             }
           ],
-          "summary": "Composes: other, expressed relative to this CFrame, as a world transform (self * other)."
+          "summary": "Composes: each other, expressed relative to this CFrame, as a world transform (self * other) — one value per argument, this CFrame itself for none."
         },
         {
           "decl": "Vector3",
@@ -4036,40 +4441,40 @@
           "summary": "The +Y basis vector."
         },
         {
-          "decl": "(direction: Vector3) -> Vector3",
+          "decl": "(...: Vector3) -> ...Vector3",
           "kind": "Method",
           "name": "VectorToObjectSpace",
           "params": [
             {
-              "name": "direction",
+              "name": "...",
               "optional": false,
               "type": "Vector3"
             }
           ],
           "returns": [
             {
-              "type": "Vector3"
+              "type": "...Vector3"
             }
           ],
-          "summary": "Rotates a world direction into object space (no translation)."
+          "summary": "Rotates each world direction into object space (no translation) — one value per argument, the zero vector for none."
         },
         {
-          "decl": "(direction: Vector3) -> Vector3",
+          "decl": "(...: Vector3) -> ...Vector3",
           "kind": "Method",
           "name": "VectorToWorldSpace",
           "params": [
             {
-              "name": "direction",
+              "name": "...",
               "optional": false,
               "type": "Vector3"
             }
           ],
           "returns": [
             {
-              "type": "Vector3"
+              "type": "...Vector3"
             }
           ],
-          "summary": "Rotates a direction into world space (no translation)."
+          "summary": "Rotates each direction into world space (no translation) — one value per argument, the zero vector for none."
         },
         {
           "decl": "number",
@@ -4078,16 +4483,82 @@
           "summary": "The position's X component."
         },
         {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "XVector",
+          "summary": "The rotation matrix's first column: RightVector."
+        },
+        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Y",
           "summary": "The position's Y component."
         },
         {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "YVector",
+          "summary": "The rotation matrix's second column: UpVector."
+        },
+        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Z",
           "summary": "The position's Z component."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "ZVector",
+          "summary": "The rotation matrix's third column: the negated LookVector."
+        },
+        {
+          "decl": "() -> (number, number, number, number, number, number, number, number, number, number, number, number)",
+          "kind": "Method",
+          "name": "components",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of GetComponents, answered the same way (measured) — use GetComponents.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "(axis: Vector3, angle: number) -> CFrame",
@@ -4111,6 +4582,39 @@
             }
           ],
           "summary": "A rotation-only CFrame around axis (a nonzero vector) by angle radians."
+        },
+        {
+          "decl": "(rx: number, ry: number, rz: number, order: Enum.RotationOrder?) -> CFrame",
+          "kind": "Static",
+          "name": "fromEulerAngles",
+          "params": [
+            {
+              "name": "rx",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "ry",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "rz",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "order",
+              "optional": true,
+              "type": "Enum.RotationOrder?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A rotation-only CFrame from Euler angles in radians: the product of the three axis rotations in the order's letters, left to right (an Enum.RotationOrder item, XYZ by default), the angles always rx, ry, rz."
         },
         {
           "decl": "(rx: number, ry: number, rz: number) -> CFrame",
@@ -4141,10 +4645,191 @@
           "summary": "A rotation-only CFrame from XYZ Euler angles in radians — the same axis order the instance Rotation property uses (in degrees there)."
         },
         {
+          "decl": "(rx: number, ry: number, rz: number) -> CFrame",
+          "kind": "Static",
+          "name": "fromEulerAnglesYXZ",
+          "params": [
+            {
+              "name": "rx",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "ry",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "rz",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A rotation-only CFrame from YXZ Euler angles in radians: the product Ry·Rx·Rz, the angles still passed as rx, ry, rz (measured)."
+        },
+        {
+          "decl": "(pos: Vector3, vX: Vector3, vY: Vector3, vZ: Vector3?) -> CFrame",
+          "kind": "Static",
+          "name": "fromMatrix",
+          "params": [
+            {
+              "name": "pos",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "vX",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "vY",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "vZ",
+              "optional": true,
+              "type": "Vector3?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A CFrame at pos from a rotation matrix's columns, orthonormalized: Gram–Schmidt over vX then vY, the third column their cross — a CFrame here is a rotation, so vZ is taken and not kept (the reference keeps all three columns as given)."
+        },
+        {
+          "decl": "(rx: number, ry: number, rz: number) -> CFrame",
+          "kind": "Static",
+          "name": "fromOrientation",
+          "params": [
+            {
+              "name": "rx",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "ry",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "rz",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "fromEulerAnglesYXZ under its other name: the Ry·Rx·Rz product of rx, ry, rz in radians."
+        },
+        {
+          "decl": "(from: Vector3, to: Vector3) -> CFrame",
+          "kind": "Static",
+          "name": "fromRotationBetweenVectors",
+          "params": [
+            {
+              "name": "from",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "to",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "The shortest rotation taking the direction of from onto that of to; opposite directions take a half turn about from × Y when |from.X| > |from.Y|, else about from × X; a zero vector is an all-NaN rotation."
+        },
+        {
           "decl": "CFrame",
           "kind": "Static",
           "name": "identity",
           "summary": "The identity transform: zero position, no rotation."
+        },
+        {
+          "decl": "() -> CFrame",
+          "kind": "Method",
+          "name": "inverse",
+          "params": [],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of Inverse (measured) — use Inverse.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(goal: CFrame, alpha: number) -> CFrame",
+          "kind": "Method",
+          "name": "lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "CFrame"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of Lerp (measured) — use Lerp.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(position: Vector3, direction: Vector3, up: Vector3?) -> CFrame",
+          "kind": "Static",
+          "name": "lookAlong",
+          "params": [
+            {
+              "name": "position",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "direction",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "up",
+              "optional": true,
+              "type": "Vector3?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "CFrame"
+            }
+          ],
+          "summary": "A CFrame at position with its LookVector along direction — lookAt aimed at position + direction, by the same rule for the up."
         },
         {
           "decl": "(position: Vector3, target: Vector3, up: Vector3?) -> CFrame",
@@ -4172,10 +4857,19 @@
               "type": "CFrame"
             }
           ],
-          "summary": "A CFrame at position with its LookVector aimed at target; up defaults to the world Y axis."
+          "summary": "A CFrame at position with its LookVector aimed at target; up defaults to the world Y axis, and the X axis stands in for an up parallel to the look."
         },
         {
-          "decl": "(() -> CFrame) & ((position: Vector3) -> CFrame) & ((position: Vector3, lookAt: Vector3) -> CFrame) & ((x: number, y: number, z: number) -> CFrame)",
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "lookVector",
+          "summary": "Deprecated: the retired lowercase spelling of LookVector (measured) — use LookVector.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(() -> CFrame) & ((position: Vector3) -> CFrame) & ((position: Vector3, lookAt: Vector3) -> CFrame) & ((x: number, y: number, z: number) -> CFrame) & ((x: number, y: number, z: number, qX: number, qY: number, qZ: number, qW: number) -> CFrame) & ((x: number, y: number, z: number, R00: number, R01: number, R02: number, R10: number, R11: number, R12: number, R20: number, R21: number, R22: number) -> CFrame)",
           "kind": "Static",
           "name": "new",
           "overloads": [
@@ -4243,9 +4937,383 @@
                   "type": "CFrame"
                 }
               ]
+            },
+            {
+              "params": [
+                {
+                  "name": "x",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "y",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "z",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "qX",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "qY",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "qZ",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "qW",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "CFrame"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "x",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "y",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "z",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R00",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R01",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R02",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R10",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R11",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R12",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R20",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R21",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "R22",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "CFrame"
+                }
+              ]
             }
           ],
-          "summary": "The identity (no arguments), a translation from a position vector or from x, y, z, or the legacy two-vector form: a position looking at a point (Y up)."
+          "summary": "The identity (no arguments), a translation from a position vector or from x, y, z, the legacy two-vector form (a position looking at a point: Y up, the X axis the up once the look is within about eight degrees of the vertical), a position and a quaternion (normalized; a zero one is an all-NaN rotation), or a position and a rotation matrix row by row (orthonormalized: Gram–Schmidt over the X then the Y column, the third their cross)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "p",
+          "summary": "Deprecated: the retired spelling of Position, answered the same way (measured) — use Position.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(...: Vector3) -> ...Vector3",
+          "kind": "Method",
+          "name": "pointToObjectSpace",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...Vector3"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of PointToObjectSpace (measured) — use PointToObjectSpace.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(...: Vector3) -> ...Vector3",
+          "kind": "Method",
+          "name": "pointToWorldSpace",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...Vector3"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of PointToWorldSpace (measured) — use PointToWorldSpace.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "rightVector",
+          "summary": "Deprecated: the retired lowercase spelling of RightVector (measured) — use RightVector.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> (Vector3, number)",
+          "kind": "Method",
+          "name": "toAxisAngle",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of ToAxisAngle (measured) — use ToAxisAngle.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> (number, number, number)",
+          "kind": "Method",
+          "name": "toEulerAnglesXYZ",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of ToEulerAnglesXYZ (measured) — use ToEulerAnglesXYZ.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> (number, number, number)",
+          "kind": "Method",
+          "name": "toEulerAnglesYXZ",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of ToEulerAnglesYXZ (measured) — use ToEulerAnglesYXZ.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(...: CFrame) -> ...CFrame",
+          "kind": "Method",
+          "name": "toObjectSpace",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "CFrame"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...CFrame"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of ToObjectSpace, its tuples too (measured) — use ToObjectSpace.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> (number, number, number)",
+          "kind": "Method",
+          "name": "toOrientation",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of ToOrientation (measured) — use ToOrientation.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(...: CFrame) -> ...CFrame",
+          "kind": "Method",
+          "name": "toWorldSpace",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "CFrame"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...CFrame"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of ToWorldSpace, its tuples too (measured) — use ToWorldSpace.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "upVector",
+          "summary": "Deprecated: the retired lowercase spelling of UpVector (measured) — use UpVector.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(...: Vector3) -> ...Vector3",
+          "kind": "Method",
+          "name": "vectorToObjectSpace",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...Vector3"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of VectorToObjectSpace (measured) — use VectorToObjectSpace.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(...: Vector3) -> ...Vector3",
+          "kind": "Method",
+          "name": "vectorToWorldSpace",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "...Vector3"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of VectorToWorldSpace (measured) — use VectorToWorldSpace.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "x",
+          "summary": "Deprecated: the retired lowercase spelling of X (measured) — use X.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "y",
+          "summary": "Deprecated: the retired lowercase spelling of Y (measured) — use Y.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "z",
+          "summary": "Deprecated: the retired lowercase spelling of Z (measured) — use Z.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "CFrame",
@@ -4295,6 +5363,36 @@
           "summary": "The red component (sRGB, 0..1)."
         },
         {
+          "decl": "() -> (number, number, number)",
+          "kind": "Method",
+          "name": "ToHSV",
+          "params": [],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Hue, saturation and value, each 0..1, of the channels clamped to 0..1. A grey's hue is 0; a saturated color whose hue is 0 reads 1."
+        },
+        {
+          "decl": "() -> string",
+          "kind": "Method",
+          "name": "ToHex",
+          "params": [],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "The color as six lowercase hex digits: each channel clamped to 0..1 and rounded half up to a byte. A NaN channel is an error."
+        },
+        {
           "decl": "(h: number, s: number, v: number) -> Color3",
           "kind": "Static",
           "name": "fromHSV",
@@ -4321,6 +5419,24 @@
             }
           ],
           "summary": "A color from hue, saturation and value, all 0..1; the hue wraps."
+        },
+        {
+          "decl": "(hex: string) -> Color3",
+          "kind": "Static",
+          "name": "fromHex",
+          "params": [
+            {
+              "name": "hex",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Color3"
+            }
+          ],
+          "summary": "A color from three or six hex digits in either case after an optional #, the short form's digits doubled; a number is read as its digits."
         },
         {
           "decl": "(r: number, g: number, b: number) -> Color3",
@@ -4351,6 +5467,32 @@
           "summary": "A color from byte components, clamped 0..255 — the editor color picker's scale."
         },
         {
+          "decl": "(goal: Color3, alpha: number) -> Color3",
+          "kind": "Method",
+          "name": "lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "Color3"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Color3"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of Lerp, answered the same way (measured) — use Lerp.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
           "decl": "(r: number?, g: number?, b: number?) -> Color3",
           "kind": "Static",
           "name": "new",
@@ -4377,6 +5519,33 @@
             }
           ],
           "summary": "A color from sRGB components 0..1 (unclamped); omitted components default to 0."
+        },
+        {
+          "decl": "(color: Color3) -> (number, number, number)",
+          "kind": "Static",
+          "name": "toHSV",
+          "params": [
+            {
+              "name": "color",
+              "optional": false,
+              "type": "Color3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Deprecated: the function form of ToHSV — the hue, saturation and value of color, answered as color:ToHSV() (measured) — use ToHSV.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "Color3",
@@ -4498,7 +5667,10 @@
               "type": "UDim2"
             }
           ],
-          "summary": "Lerp under its deprecated lowercase spelling (the reference answers both, measured)."
+          "summary": "Deprecated: the retired lowercase spelling of Lerp, answered the same way (measured) — use Lerp.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "(xScale: number, xOffset: number, yScale: number, yOffset: number) -> UDim2",
@@ -5050,6 +6222,78 @@
     {
       "members": [
         {
+          "decl": "(name: string) -> EnumItem?",
+          "kind": "Method",
+          "name": "FromName",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "EnumItem?"
+            }
+          ],
+          "summary": "The item with that name, or nil. The name must be a string: nothing else converts."
+        },
+        {
+          "decl": "(value: number) -> EnumItem?",
+          "kind": "Method",
+          "name": "FromValue",
+          "params": [
+            {
+              "name": "value",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "EnumItem?"
+            }
+          ],
+          "summary": "The item with that Value (the engine's numbering — see EnumItem.Value), the number truncated toward zero, or nil. The value must be a number: a numeric string does not convert."
+        },
+        {
+          "decl": "() -> {EnumItem}",
+          "kind": "Method",
+          "name": "GetEnumItems",
+          "params": [],
+          "returns": [
+            {
+              "type": "{EnumItem}"
+            }
+          ],
+          "summary": "A fresh array of the enum's items, ascending by Value."
+        }
+      ],
+      "name": "Enum",
+      "summary": "One enum of the tree, `Enum.<Type>`: its items by name, and GetEnumItems, FromName and FromValue; a name it has no item or method for is an error. A read-only table here (typeof \"table\")."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> {Enum}",
+          "kind": "Method",
+          "name": "GetEnums",
+          "params": [],
+          "returns": [
+            {
+              "type": "{Enum}"
+            }
+          ],
+          "summary": "A fresh array of every enum of the tree, in name order."
+        }
+      ],
+      "name": "Enums",
+      "summary": "The `Enum` global: every enum by name, and GetEnums; a name it has no enum for is an error. A read-only table here (typeof \"table\")."
+    },
+    {
+      "members": [
+        {
           "decl": "number",
           "kind": "ReadOnly",
           "name": "DelayTime",
@@ -5131,6 +6375,462 @@
       ],
       "name": "TweenInfo",
       "summary": "The parameter bundle TweenService:Create consumes: duration, easing style and direction, repeats, reversal and delay — immutable once built."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> Random",
+          "kind": "Method",
+          "name": "Clone",
+          "params": [],
+          "returns": [
+            {
+              "type": "Random"
+            }
+          ],
+          "summary": "A second generator at the same state: neither moves the other."
+        },
+        {
+          "decl": "(min: number, max: number) -> number",
+          "kind": "Method",
+          "name": "NextInteger",
+          "params": [
+            {
+              "name": "min",
+              "optional": false,
+              "type": "number"
+            },
+            {
+              "name": "max",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "An integer between the bounds, each truncated toward zero and the two sorted: one draw for a span of up to 2^32 - 2 values, two for a wider one (the measured forms); a bound outside the 64-bit range, an infinity or a NaN is -2^63."
+        },
+        {
+          "decl": "(min: number?, max: number?) -> number",
+          "kind": "Method",
+          "name": "NextNumber",
+          "params": [
+            {
+              "name": "min",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "max",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "A number in [0, 1) from two draws of the measured generator, or with both bounds lo*(1 - u) + hi*u over the bounds SORTED; one argument refuses."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "NextUnitVector",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "A unit vector from two draws in single precision: a longitude over the full turn and a height uniform on [-1, 1]."
+        },
+        {
+          "decl": "(t: {any}) -> ()",
+          "kind": "Method",
+          "name": "Shuffle",
+          "params": [
+            {
+              "name": "t",
+              "optional": false,
+              "type": "{any}"
+            }
+          ],
+          "returns": [],
+          "summary": "Permutes the array part of t in place — from the end, one draw per position, raw reads and writes — and returns nothing. A nil within #t refuses before any draw; a dictionary alone is an empty array; a frozen table refuses after the first draw."
+        },
+        {
+          "decl": "(seed: number?) -> Random",
+          "kind": "Static",
+          "name": "new",
+          "params": [
+            {
+              "name": "seed",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Random"
+            }
+          ],
+          "summary": "A generator from a seed — truncated toward zero, a negative one its two's complement, a magnitude of 2^53 or more seed 0, NaN the bits of -2^63 (measured) — or, with no seed, from the VM's own generator: the stream math.random draws, so a session replayed under a seed replays it."
+        }
+      ],
+      "name": "Random",
+      "summary": "A seeded pseudo-random generator — the reference engine's own stream (PCG32), so a seed draws the same numbers here as there: NextNumber, NextInteger, NextUnitVector, an in-place Shuffle and Clone; two generators are equal when their states are. Random.new() with no seed draws from the VM's generator, the one math.random uses."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "Black",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "Black, number 26."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "Blue",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "Bright blue, number 23."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadOnly",
+          "name": "Color",
+          "summary": "The colour as a Color3: each byte times 1/255 in single precision — an ulp off Color3.fromRGB's byte / 255 on some bytes (measured: BrickColor.new(21).Color ~= Color3.fromRGB(196, 40, 28))."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "DarkGray",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "Dark stone grey, number 199."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "Gray",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "Medium stone grey, number 194."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "Green",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "Dark green, number 28."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The colour's name — what tostring prints; case-sensitive in BrickColor.new."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Number",
+          "summary": "The colour's number in the table, 1 to 1032 (194 is Medium stone grey, the answer for an unknown number or name)."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "Random",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "random under its other spelling: the same draw."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "Red",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "Bright red, number 21."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "White",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "White, number 1."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "Yellow",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "Bright yellow, number 24."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "b",
+          "summary": "The blue channel, 0..1: the byte times 1/255."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "g",
+          "summary": "The green channel, 0..1: the byte times 1/255."
+        },
+        {
+          "decl": "(() -> BrickColor) & ((number: number) -> BrickColor) & ((name: string) -> BrickColor) & ((r: number, g: number, b: number) -> BrickColor) & ((color: Color3) -> BrickColor)",
+          "kind": "Static",
+          "name": "new",
+          "overloads": [
+            {
+              "params": [],
+              "returns": [
+                {
+                  "type": "BrickColor"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "number",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "BrickColor"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "name",
+                  "optional": false,
+                  "type": "string"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "BrickColor"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "r",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "g",
+                  "optional": false,
+                  "type": "number"
+                },
+                {
+                  "name": "b",
+                  "optional": false,
+                  "type": "number"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "BrickColor"
+                }
+              ]
+            },
+            {
+              "params": [
+                {
+                  "name": "color",
+                  "optional": false,
+                  "type": "Color3"
+                }
+              ],
+              "returns": [
+                {
+                  "type": "BrickColor"
+                }
+              ]
+            }
+          ],
+          "summary": "Really black (1003) with no argument; a number, truncated toward zero — 194 when the table has none; a name, case-sensitive — 194 for an unknown one, a numeric string read as a number; three channels 0..1 (a missing one 0) or a Color3, the nearest colour by the least sum of absolute channel differences (the first in number order on a tie; nothing clamped)."
+        },
+        {
+          "decl": "(index: number) -> BrickColor",
+          "kind": "Static",
+          "name": "palette",
+          "params": [
+            {
+              "name": "index",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "The 128-entry palette's colour at a zero-based index, rounded to the nearest (a half away from zero); out of bounds raises `palette index out of bounds (<index>)`."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "r",
+          "summary": "The red channel, 0..1: the byte times 1/255."
+        },
+        {
+          "decl": "() -> BrickColor",
+          "kind": "Static",
+          "name": "random",
+          "params": [],
+          "returns": [
+            {
+              "type": "BrickColor"
+            }
+          ],
+          "summary": "A colour of the 128-entry palette, drawn from the VM's own generator — the stream math.random draws, so a session replayed under a seed replays it."
+        }
+      ],
+      "name": "BrickColor",
+      "summary": "A named colour of the reference engine's 208-entry table — its Number, its Name (what tostring prints), its Color and the three channels r, g, b; immutable, equal by value. BrickColor.new takes a number, a name, three channels or a Color3 (the nearest colour), palette(i) reads the 128-entry palette, random() draws from it, and eight named constructors (White, Gray, DarkGray, Black, Red, Yellow, Green, Blue) stand for their numbers."
+    },
+    {
+      "members": [
+        {
+          "decl": "(instances: Instance | {Instance}) -> ()",
+          "kind": "Method",
+          "name": "AddToFilter",
+          "params": [
+            {
+              "name": "instances",
+              "optional": false,
+              "type": "Instance | {Instance}"
+            }
+          ],
+          "returns": [],
+          "summary": "Appends an instance, or every instance of a table (nested tables too), to FilterDescendantsInstances — the old list, duplicates kept — and returns nothing; anything else is `Expected a table or Instance` (measured)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "BruteForceAllSlow",
+          "summary": "Stored and read back, false by default; the engine's cast has no slow path to force."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "CollisionGroup",
+          "summary": "Stored and read back, \"Default\" by default (a number written is its text, measured); parts carry no collision group here, so a cast ignores it."
+        },
+        {
+          "decl": "{Instance}?",
+          "kind": "ReadWrite",
+          "name": "ExcludeInstances",
+          "summary": "The newer exclusion list, nil until written and independent of FilterType's pair: a cast applies both — the listed instances and their descendants never hit, whatever IncludeInstances says. A table of instances or nil (the old list's texts for the rest); never shown by tostring and outside == (measured)."
+        },
+        {
+          "decl": "{Instance}",
+          "kind": "ReadWrite",
+          "name": "FilterDescendantsInstances",
+          "summary": "The instances FilterType applies to, each with its logical descendants; AddToFilter appends here. A read is a fresh copy (writing into it changes nothing); a write takes a table of instances, nested tables flattened — `Invalid value type; expected a table` otherwise, `Invalid value type; table must only contain Instances and other tables` for a wrong entry. A destroyed instance stays listed while a script value names it, and filters nothing."
+        },
+        {
+          "decl": "Enum.RaycastFilterType",
+          "kind": "ReadWrite",
+          "name": "FilterType",
+          "summary": "How FilterDescendantsInstances reads: Exclude (the default) hides the listed instances and their descendants, Include admits them alone. An enum item only — a name string, a number or another enum's item is `Invalid value for enum 'RaycastFilterType'` (measured)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "IgnoreWater",
+          "summary": "Stored and read back, false by default; the engine has no terrain water for a cast to ignore."
+        },
+        {
+          "decl": "{Instance}?",
+          "kind": "ReadWrite",
+          "name": "IncludeInstances",
+          "summary": "The newer inclusion list, nil until written and independent of FilterType's pair: nil admits everything, an empty list nothing, a list its instances and their descendants alone — less what ExcludeInstances and the old pair take away. A table of instances or nil; never shown by tostring and outside == (measured)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "RespectCanCollide",
+          "summary": "Whether a cast skips parts with CanCollide false; false by default (a ray hits them). Any value writes by truthiness."
+        },
+        {
+          "decl": "number?",
+          "kind": "ReadWrite",
+          "name": "ServerTime",
+          "summary": "An engine extension, the server alone: a server time in Workspace:GetServerTimeNow's seconds — the one a client read from GetRenderedServerTime when it fired — at which the cast tests every streamed root at the pose the server held then, the rest of the world live. Nil (the default) casts live; a number or nil only, a non-finite one refuses at the cast, and a client's cast refuses it."
+        },
+        {
+          "decl": "() -> RaycastParams",
+          "kind": "Static",
+          "name": "new",
+          "params": [],
+          "returns": [
+            {
+              "type": "RaycastParams"
+            }
+          ],
+          "summary": "The defaults: FilterType Exclude over an empty list, the new pair nil, the flags false, CollisionGroup \"Default\", ServerTime nil."
+        }
+      ],
+      "name": "RaycastParams",
+      "summary": "The filter bundle Workspace:Raycast takes: both filter generations — FilterType over FilterDescendantsInstances (AddToFilter appends to it), and the newer ExcludeInstances / IncludeInstances pair, nil until written — all applied to a cast, each entry with its descendants; RespectCanCollide; the IgnoreWater, BruteForceAllSlow and CollisionGroup the reference keeps, stored and read back; and the engine's own ServerTime, the server time a cast rewinds the streamed parts to. Mutable; equal by value over the old members; RaycastParams.new() is the defaults."
     },
     {
       "members": [
@@ -5287,14 +6987,20 @@
           "kind": "Signal",
           "name": "KeyDown",
           "payloads": [],
-          "summary": "The reference's deprecated key-down signal (measured to exist); never fires here — keys ride UserInputService."
+          "summary": "Deprecated: the reference's retired key-down signal (measured to exist); never fires here — keys ride UserInputService.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "BVScriptSignal",
           "kind": "Signal",
           "name": "KeyUp",
           "payloads": [],
-          "summary": "The reference's deprecated key-up signal (measured to exist); never fires here."
+          "summary": "Deprecated: the reference's retired key-up signal (measured to exist); never fires here — keys ride UserInputService.",
+          "tags": [
+            "Deprecated"
+          ]
         },
         {
           "decl": "BVScriptSignal",
@@ -5396,6 +7102,26 @@
           "params": [],
           "returns": [],
           "summary": "Unregisters the callback; Connected reads false afterward. Safe to call more than once."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "connected",
+          "summary": "Deprecated: the retired spelling of Connected, answered the same way — use Connected.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "disconnect",
+          "params": [],
+          "returns": [],
+          "summary": "Deprecated: the retired spelling of Disconnect, answered the same way — use Disconnect.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "BVScriptConnection",
@@ -5450,6 +7176,42 @@
             }
           ],
           "summary": "Suspends the calling thread until the next fire, then returns the fired arguments."
+        },
+        {
+          "decl": "(callback: (...any) -> ()) -> BVScriptConnection",
+          "kind": "Method",
+          "name": "connect",
+          "params": [
+            {
+              "name": "callback",
+              "optional": false,
+              "type": "(...any) -> ()"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptConnection"
+            }
+          ],
+          "summary": "Deprecated: the retired spelling of Connect, answered the same way — use Connect.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "() -> ...any",
+          "kind": "Method",
+          "name": "wait",
+          "params": [],
+          "returns": [
+            {
+              "type": "...any"
+            }
+          ],
+          "summary": "Deprecated: the retired spelling of Wait, answered the same way — use Wait.",
+          "tags": [
+            "Deprecated"
+          ]
         }
       ],
       "name": "BVScriptSignal",
@@ -5475,6 +7237,15 @@
       "Scriptable",
       "Track",
       "Watch"
+    ],
+    "CloseReason": [
+      "DeveloperShutdown",
+      "DeveloperUpdate",
+      "Moderation",
+      "OutOfMemory",
+      "RobloxMaintenance",
+      "ServerEmpty",
+      "Unknown"
     ],
     "CollisionFidelity": [
       "Box",
@@ -5670,6 +7441,7 @@
       "Minus",
       "N",
       "Nine",
+      "None",
       "O",
       "One",
       "P",
@@ -5790,8 +7562,10 @@
       "Predicted"
     ],
     "RaycastFilterType": [
+      "Blacklist",
       "Exclude",
-      "Include"
+      "Include",
+      "Whitelist"
     ],
     "RenderPriority": [
       "Camera",
@@ -5805,6 +7579,14 @@
       "InverseTapered",
       "Linear",
       "LinearSquare"
+    ],
+    "RotationOrder": [
+      "XYZ",
+      "XZY",
+      "YXZ",
+      "YZX",
+      "ZXY",
+      "ZYX"
     ],
     "RunContext": [
       "Client",
@@ -5847,6 +7629,7 @@
     ]
   },
   "globals": [
+    "BrickColor",
     "CFrame",
     "Color3",
     "ColorSequence",
@@ -5858,7 +7641,9 @@
     "NumberRange",
     "NumberSequence",
     "NumberSequenceKeypoint",
+    "Random",
     "Ray",
+    "RaycastParams",
     "Signals",
     "TweenInfo",
     "UDim",
@@ -5869,6 +7654,7 @@
     "_VERSION",
     "assert",
     "bit32",
+    "buffer",
     "collectgarbage",
     "coroutine",
     "debug",
@@ -5880,7 +7666,6 @@
     "getfenv",
     "getmetatable",
     "ipairs",
-    "loadstring",
     "math",
     "newproxy",
     "next",
@@ -5918,6 +7703,20 @@
     {
       "members": [
         {
+          "decl": "(callback: (reason: Enum.CloseReason) -> ()) -> ()",
+          "kind": "Method",
+          "name": "BindToClose",
+          "params": [
+            {
+              "name": "callback",
+              "optional": false,
+              "type": "(reason: Enum.CloseReason) -> ()"
+            }
+          ],
+          "returns": [],
+          "summary": "Binds a function the session's close calls with its Enum.CloseReason (DeveloperShutdown for the editor's Stop and a dedicated server's shutdown). The close lets every player go first — their PlayerRemoving fires — then starts every bound function at once, in bind order, each on a thread of its own; it waits for them to return, 30 seconds at most. One that raises stops none of the others; a script that died takes its binding with it. The server's alone."
+        },
+        {
           "decl": "string",
           "kind": "ReadOnly",
           "name": "ClassName",
@@ -5934,6 +7733,12 @@
           "kind": "ReadOnly",
           "name": "Debris",
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "GameId",
+          "summary": "The game's id: what a dedicated server was started with (--game-id), the same on its clients; 0 where nothing names one. A client reads 0 until its join's world globals land."
         },
         {
           "decl": "(service: string) -> Instance",
@@ -5978,6 +7783,12 @@
           "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
         },
         {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "JobId",
+          "summary": "The running server's id: a fresh random UUID at every start of a dedicated server, read by the server and its clients alike; the empty string on the server side of the editor's Play and its session, where a client-side read answers the zero GUID (00000000-0000-0000-0000-000000000000) — Studio's pair, measured. A client reads the zero GUID until its join's world globals land."
+        },
+        {
           "decl": "Lighting",
           "kind": "ReadOnly",
           "name": "Lighting",
@@ -5988,6 +7799,12 @@
           "kind": "ReadOnly",
           "name": "Name",
           "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "PlaceId",
+          "summary": "The place's id: what a dedicated server was started with (--place-id), the same on its clients; 0 where nothing names one — the editor's Play and its session (a place here has no published identity). A client reads 0 until its join's world globals land."
         },
         {
           "decl": "Players",
@@ -6078,7 +7895,7 @@
         }
       ],
       "name": "DataModel",
-      "summary": "The `game` global: the service registry at the top of everything (measured ancestry DataModel < ServiceProvider < Instance). GetService hands out the engine services; its Name is the place name (\"Game\" until the engine carries one — a recorded stub)."
+      "summary": "The `game` global: the service registry at the top of everything (measured ancestry DataModel < ServiceProvider < Instance). GetService hands out the engine services; PlaceId, GameId and JobId name the session; its Name is the place name (\"Game\" until the engine carries one — a recorded stub)."
     },
     {
       "members": [
@@ -6617,7 +8434,7 @@
             "{ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }",
             "boolean"
           ],
-          "summary": "Fires on every key or mouse-button press with a read-only input table and a gameProcessed flag (always false until UI focus exists). Mouse buttons carry KeyCode Unknown."
+          "summary": "Fires on every key or mouse-button press with a read-only input table and a gameProcessed flag (always false until UI focus exists). Mouse buttons carry KeyCode None."
         },
         {
           "decl": "BVScriptSignal<{ KeyCode: Enum.KeyCode, UserInputType: Enum.UserInputType }, boolean>",
@@ -6762,6 +8579,12 @@
           "kind": "ReadWrite",
           "name": "ClockTime",
           "summary": "The time of day in hours: writes clamp onto 0..24 and 24 reads back as 0 (the measured reference contract); the sun and sky follow."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ExposureCompensation",
+          "summary": "A bias to the scene's exposure before the tone curve, in stops: 1 is twice the light, -1 half. Writes clamp onto -5..5, the range the reference states; a non-finite number is refused."
         },
         {
           "decl": "Color3",
