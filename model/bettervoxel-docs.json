@@ -719,7 +719,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html"
   },
   "@bettervoxel/global/Font.fromEnum": {
-    "documentation": "The face a legacy Enum.Font item names: the reference's catalog family (rbxasset://fonts/families/<Family>.json, rendered as the engine default face at the item's weight and style) — the same face the Font property stores, so fromEnum(label.Font) == label.FontFace after a Font write. Enum.Font.Unknown refuses.",
+    "documentation": "The face a legacy Enum.Font item names: the reference's catalog family (`rbxasset://fonts/families/<Family>.json`, rendered as the engine default face at the item's weight and style) — the same face the Font property stores, so fromEnum(label.Font) == label.FontFace after a Font write. Enum.Font.Unknown refuses.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Font.html#fromenum",
     "params": [
       {
@@ -795,6 +795,10 @@
   },
   "@bettervoxel/global/Instance.new/return/0": {
     "documentation": "`Instance`"
+  },
+  "@bettervoxel/global/Keybinds": {
+    "documentation": "The game's authored keybinds by name: each is a signal that fires with an action on its key's press and on its release — the action's `pressed` is true on the press, its `state` names it (\"Pressed\" or \"Released\"). Quiet while a TextBox has the focus.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
   },
   "@bettervoxel/global/NumberRange": {
     "documentation": "The NumberRange constructors — see the NumberRange page.",
@@ -934,6 +938,22 @@
   },
   "@bettervoxel/global/RaycastParams.new/return/0": {
     "documentation": "`RaycastParams`"
+  },
+  "@bettervoxel/global/Signals": {
+    "documentation": "Named cross-script channels (BindableEvent-style): every script of the context reaches the same signal by its name, and the payloads are real Lua values — tables, functions and instances pass as they are.",
+    "keys": {
+      "Fire": "@bettervoxel/global/Signals.Fire",
+      "Get": "@bettervoxel/global/Signals.Get"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/Signals.Fire": {
+    "documentation": "Fires the channel with the arguments. Delivery is deferred to the next flush, and a name nobody read fires into nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/Signals.Get": {
+    "documentation": "The channel's signal: made on the first read of the name, the same value after — connect to it as to any signal.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
   },
   "@bettervoxel/global/TweenInfo": {
     "documentation": "The TweenInfo constructors — see the TweenInfo page.",
@@ -1248,6 +1268,10 @@
     "documentation": "The zero vector (0, 0, 0).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#zero"
   },
+  "@bettervoxel/global/collectgarbage": {
+    "documentation": "Luau's memory reading under the sandbox: `collectgarbage(\"count\")` is the heap's size in kilobytes; every other option is refused.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
   "@bettervoxel/global/debug": {
     "documentation": "Luau's debug library (`traceback`, `info`) plus the reference's profiler and memory-category extras, which validate their arguments and do nothing else here.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
@@ -1265,11 +1289,52 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html"
   },
   "@bettervoxel/global/script": {
-    "documentation": "The running script's own Instance — `script.Parent` navigates from it.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
+    "documentation": "The running script's own instance, a LuaSourceContainer — `script.Parent` navigates from it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LuaSourceContainer.html"
   },
   "@bettervoxel/global/spawn": {
     "documentation": "The legacy spawn: runs the callback one legacy cycle (1/30 s) later, never in place, passing the seconds elapsed and elapsedTime(). Prefer task.spawn or task.defer.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task": {
+    "documentation": "The scheduler library the VM opens: wait, spawn, defer, delay and cancel over the scheduler each step resumes. A function handed to spawn, defer or delay runs on a new thread; a thread handed to them is resumed.",
+    "keys": {
+      "cancel": "@bettervoxel/global/task.cancel",
+      "defer": "@bettervoxel/global/task.defer",
+      "delay": "@bettervoxel/global/task.delay",
+      "desynchronize": "@bettervoxel/global/task.desynchronize",
+      "spawn": "@bettervoxel/global/task.spawn",
+      "synchronize": "@bettervoxel/global/task.synchronize",
+      "wait": "@bettervoxel/global/task.wait"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task.cancel": {
+    "documentation": "Closes the thread as coroutine.close does: a suspended or not yet started thread never runs again (its finalizers run as cancelled); the running thread is refused.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task.defer": {
+    "documentation": "Runs the function, or resumes the thread, at the end of the current step with the given arguments. Returns the thread.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task.delay": {
+    "documentation": "Runs the function, or resumes the thread, once the given seconds have passed, with the given arguments. Returns the thread.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task.desynchronize": {
+    "documentation": "Does nothing: scripts run on one thread of execution here, so there is no parallel phase to switch to.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task.spawn": {
+    "documentation": "Runs the function, or resumes the thread, at once and in place with the given arguments; an error it raises is reported, never propagated to the caller. Returns the thread.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task.synchronize": {
+    "documentation": "Does nothing: scripts run on one thread of execution here, so there is no serial phase to switch to.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
+  },
+  "@bettervoxel/global/task.wait": {
+    "documentation": "Yields the running thread until at least the given seconds have passed — the next step when omitted — and returns the seconds it slept.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/globals.html"
   },
   "@bettervoxel/global/tick": {
@@ -1291,6 +1356,189 @@
   "@bettervoxel/global/workspace": {
     "documentation": "The Workspace root — the container every world object lives under.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Workspace.html"
+  },
+  "@bettervoxel/globaltype/AlignOrientation": {
+    "documentation": "A mover: a torque that turns Attachment0 to Attachment1's orientation, or to CFrame's with one attachment — the whole orientation, its primary axis alone, or that axis toward a point (AlignType; LookAtPosition with one attachment) — as quickly as Responsiveness asks and within MaxTorque and MaxAngularVelocity.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/AlignOrientation.Active",
+      "AlignType": "@bettervoxel/globaltype/AlignOrientation.AlignType",
+      "CFrame": "@bettervoxel/globaltype/AlignOrientation.CFrame",
+      "LookAtPosition": "@bettervoxel/globaltype/AlignOrientation.LookAtPosition",
+      "MaxAngularVelocity": "@bettervoxel/globaltype/AlignOrientation.MaxAngularVelocity",
+      "MaxTorque": "@bettervoxel/globaltype/AlignOrientation.MaxTorque",
+      "Mode": "@bettervoxel/globaltype/AlignOrientation.Mode",
+      "PrimaryAxis": "@bettervoxel/globaltype/AlignOrientation.PrimaryAxis",
+      "PrimaryAxisOnly": "@bettervoxel/globaltype/AlignOrientation.PrimaryAxisOnly",
+      "ReactionTorqueEnabled": "@bettervoxel/globaltype/AlignOrientation.ReactionTorqueEnabled",
+      "Responsiveness": "@bettervoxel/globaltype/AlignOrientation.Responsiveness",
+      "RigidityEnabled": "@bettervoxel/globaltype/AlignOrientation.RigidityEnabled",
+      "SecondaryAxis": "@bettervoxel/globaltype/AlignOrientation.SecondaryAxis",
+      "Visible": "@bettervoxel/globaltype/AlignOrientation.Visible"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.Active": {
+    "documentation": "Whether the alignment acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body in TwoAttachment mode (measured: OneAttachment needs Attachment0 alone). Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#active"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.AlignType": {
+    "documentation": "What turns: AllAxes (the default) the whole orientation; PrimaryAxisParallel Attachment0's X parallel to the goal's X; PrimaryAxisLookAt Attachment0's X toward LookAtPosition (one attachment) or Attachment1's position (two). Parallel, Perpendicular and PrimaryAxisPerpendicular are refused (a recorded divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#aligntype"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.CFrame": {
+    "documentation": "The goal orientation in OneAttachment mode: Attachment0 turns to its rotation; its translation is saved and ignored, as the reference's (a look-at aims at LookAtPosition). Default identity.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#cframe"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.LookAtPosition": {
+    "documentation": "The world point Attachment0's X turns toward when AlignType is PrimaryAxisLookAt and Mode is OneAttachment. Neither saved nor replicated: a client's is its own. Default (0, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#lookatposition"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.MaxAngularVelocity": {
+    "documentation": "The speed Attachment0 turns toward its goal at, at most, in radians per second. Default inf.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#maxangularvelocity"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.MaxTorque": {
+    "documentation": "The most torque the alignment turns with; math.huge is no limit. Default 10000.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#maxtorque"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.Mode": {
+    "documentation": "TwoAttachment (the default) turns Attachment0 to Attachment1's orientation; OneAttachment turns it to CFrame's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#mode"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.PrimaryAxis": {
+    "documentation": "The goal's X axis in OneAttachment mode — a view of CFrame's rotation: a write turns the goal so its X is the axis, keeping its Y as near as perpendicularity allows. Default (1, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#primaryaxis"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.PrimaryAxisOnly": {
+    "documentation": "Deprecated on the reference: set AlignType instead. True makes AllAxes turn the primary axes alone, as PrimaryAxisParallel does. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#primaryaxisonly"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.ReactionTorqueEnabled": {
+    "documentation": "Whether Attachment1's assembly takes the opposite torque (TwoAttachment mode). Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#reactiontorqueenabled"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.Responsiveness": {
+    "documentation": "How quickly Attachment0 turns to its goal: an approach without overshoot that settles in about 13 / Responsiveness seconds (45 is within 1 degree of a quarter turn at 0.32 s, measured). Stored within 5 to 200: a write outside lands on the nearer end (measured), an infinite one included; a NaN write is refused. Default 10.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#responsiveness"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.RigidityEnabled": {
+    "documentation": "Always false: the rigid alignment is not built, and a write of true is refused (a recorded divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#rigidityenabled"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.SecondaryAxis": {
+    "documentation": "The goal's Y axis in OneAttachment mode — a view of CFrame's rotation: a write turns the goal about its X toward the axis. Default (0, 1, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#secondaryaxis"
+  },
+  "@bettervoxel/globaltype/AlignOrientation.Visible": {
+    "documentation": "Draws the editor's marker for the alignment whatever the selection. An authoring aid — nothing at runtime reads it. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignOrientation.html#visible"
+  },
+  "@bettervoxel/globaltype/AlignPosition": {
+    "documentation": "A mover: a force that carries Attachment0 to Attachment1, or to Position with one attachment, as quickly as Responsiveness asks and within MaxForce and MaxVelocity — holding the assembly's weight while it does.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/AlignPosition.Active",
+      "ApplyAtCenterOfMass": "@bettervoxel/globaltype/AlignPosition.ApplyAtCenterOfMass",
+      "ForceLimitMode": "@bettervoxel/globaltype/AlignPosition.ForceLimitMode",
+      "ForceRelativeTo": "@bettervoxel/globaltype/AlignPosition.ForceRelativeTo",
+      "MaxAxesForce": "@bettervoxel/globaltype/AlignPosition.MaxAxesForce",
+      "MaxForce": "@bettervoxel/globaltype/AlignPosition.MaxForce",
+      "MaxVelocity": "@bettervoxel/globaltype/AlignPosition.MaxVelocity",
+      "Mode": "@bettervoxel/globaltype/AlignPosition.Mode",
+      "Position": "@bettervoxel/globaltype/AlignPosition.Position",
+      "ReactionForceEnabled": "@bettervoxel/globaltype/AlignPosition.ReactionForceEnabled",
+      "Responsiveness": "@bettervoxel/globaltype/AlignPosition.Responsiveness",
+      "RigidityEnabled": "@bettervoxel/globaltype/AlignPosition.RigidityEnabled",
+      "Visible": "@bettervoxel/globaltype/AlignPosition.Visible"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html"
+  },
+  "@bettervoxel/globaltype/AlignPosition.Active": {
+    "documentation": "Whether the alignment acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body in TwoAttachment mode or when the per-axis limit is in its frame (measured: OneAttachment needs Attachment0 alone). Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#active"
+  },
+  "@bettervoxel/globaltype/AlignPosition.ApplyAtCenterOfMass": {
+    "documentation": "Whether the force acts at the assembly's centre of mass instead of at Attachment0. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#applyatcenterofmass"
+  },
+  "@bettervoxel/globaltype/AlignPosition.ForceLimitMode": {
+    "documentation": "Magnitude (the default) holds the force's length to MaxForce; PerAxis holds each axis of ForceRelativeTo's frame to its lane of MaxAxesForce.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#forcelimitmode"
+  },
+  "@bettervoxel/globaltype/AlignPosition.ForceRelativeTo": {
+    "documentation": "The frame whose axes the PerAxis limit applies along: the world's (the default), Attachment0's or Attachment1's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#forcerelativeto"
+  },
+  "@bettervoxel/globaltype/AlignPosition.MaxAxesForce": {
+    "documentation": "The most force along each axis of ForceRelativeTo's frame under the PerAxis limit; a lane of math.huge is no limit. Default (10000, 10000, 10000).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#maxaxesforce"
+  },
+  "@bettervoxel/globaltype/AlignPosition.MaxForce": {
+    "documentation": "The most force the alignment pushes with under the Magnitude limit — the assembly's weight included; math.huge is no limit. Default 10000.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#maxforce"
+  },
+  "@bettervoxel/globaltype/AlignPosition.MaxVelocity": {
+    "documentation": "The speed Attachment0 approaches its goal at, at most, in studs per second (measured as an exact cap). Default inf.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#maxvelocity"
+  },
+  "@bettervoxel/globaltype/AlignPosition.Mode": {
+    "documentation": "TwoAttachment (the default) carries Attachment0 to Attachment1; OneAttachment carries it to Position.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#mode"
+  },
+  "@bettervoxel/globaltype/AlignPosition.Position": {
+    "documentation": "The goal in world space in OneAttachment mode: Attachment0 is carried there. Default (0, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#position"
+  },
+  "@bettervoxel/globaltype/AlignPosition.ReactionForceEnabled": {
+    "documentation": "Whether Attachment1's assembly takes the opposite force (TwoAttachment mode). Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#reactionforceenabled"
+  },
+  "@bettervoxel/globaltype/AlignPosition.Responsiveness": {
+    "documentation": "How quickly Attachment0 reaches its goal: an approach without overshoot that settles in about 13 / Responsiveness seconds (45 is within 0.1 stud of a 10-stud goal at 0.32 s, measured). Stored within 5 to 200: a write outside lands on the nearer end (measured), an infinite one included; a NaN write is refused. Default 10.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#responsiveness"
+  },
+  "@bettervoxel/globaltype/AlignPosition.RigidityEnabled": {
+    "documentation": "Always false: the rigid alignment is not built, and a write of true is refused (a recorded divergence).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#rigidityenabled"
+  },
+  "@bettervoxel/globaltype/AlignPosition.Visible": {
+    "documentation": "Draws the editor's marker for the alignment whatever the selection. An authoring aid — nothing at runtime reads it. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AlignPosition.html#visible"
+  },
+  "@bettervoxel/globaltype/AngularVelocity": {
+    "documentation": "A mover: a torque that brings Attachment0's assembly to an angular velocity within each physics step, named in RelativeTo's frame, within MaxTorque — whose default 0 turns nothing.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/AngularVelocity.Active",
+      "AngularVelocity": "@bettervoxel/globaltype/AngularVelocity.AngularVelocity",
+      "MaxTorque": "@bettervoxel/globaltype/AngularVelocity.MaxTorque",
+      "ReactionTorqueEnabled": "@bettervoxel/globaltype/AngularVelocity.ReactionTorqueEnabled",
+      "RelativeTo": "@bettervoxel/globaltype/AngularVelocity.RelativeTo",
+      "Visible": "@bettervoxel/globaltype/AngularVelocity.Visible"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html"
+  },
+  "@bettervoxel/globaltype/AngularVelocity.Active": {
+    "documentation": "Whether the angular velocity target acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it; the fresh zero MaxTorque leaves it active (measured). Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html#active"
+  },
+  "@bettervoxel/globaltype/AngularVelocity.AngularVelocity": {
+    "documentation": "The angular velocity, radians per second, the torque brings Attachment0's assembly to within each physics step, in RelativeTo's frame — relative to Attachment1's assembly under Attachment1. Default (0, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html#angularvelocity"
+  },
+  "@bettervoxel/globaltype/AngularVelocity.MaxTorque": {
+    "documentation": "The most torque the target spins the assembly with; the default 0 turns nothing, as does any value of 0 or less (the hinge's rule); math.huge is no limit.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html#maxtorque"
+  },
+  "@bettervoxel/globaltype/AngularVelocity.ReactionTorqueEnabled": {
+    "documentation": "Whether Attachment1's assembly takes the opposite torque — with RelativeTo Attachment1, the frame it is meaningful in. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html#reactiontorqueenabled"
+  },
+  "@bettervoxel/globaltype/AngularVelocity.RelativeTo": {
+    "documentation": "The frame AngularVelocity is named in: the world's (the default), Attachment0's, or Attachment1's — the spin then relative to Attachment1's assembly.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html#relativeto"
+  },
+  "@bettervoxel/globaltype/AngularVelocity.Visible": {
+    "documentation": "Draws the editor's marker for the angular velocity target whatever the selection. An authoring aid — nothing at runtime reads it. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html#visible"
   },
   "@bettervoxel/globaltype/Attachment": {
     "documentation": "A named point on a part: its CFrame, Position and Orientation are LOCAL to the parent, and the WorldCFrame/WorldPosition pair is the composed world view (writing it recomputes the local). Constraints anchor to attachments; Visible draws the editor marker.",
@@ -1447,6 +1695,57 @@
   },
   "@bettervoxel/globaltype/BVScriptSignal.wait/return/0": {
     "documentation": "`...any`"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint": {
+    "documentation": "A ball and socket: the two attachments held at one point, free to turn about it — while LimitsEnabled, Attachment1's X axis within UpperAngle of Attachment0's (a hard stop, measured), and with TwistLimitsEnabled its twist within TwistLowerAngle and TwistUpperAngle.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/BallSocketConstraint.Active",
+      "LimitsEnabled": "@bettervoxel/globaltype/BallSocketConstraint.LimitsEnabled",
+      "MaxFrictionTorque": "@bettervoxel/globaltype/BallSocketConstraint.MaxFrictionTorque",
+      "Radius": "@bettervoxel/globaltype/BallSocketConstraint.Radius",
+      "Restitution": "@bettervoxel/globaltype/BallSocketConstraint.Restitution",
+      "TwistLimitsEnabled": "@bettervoxel/globaltype/BallSocketConstraint.TwistLimitsEnabled",
+      "TwistLowerAngle": "@bettervoxel/globaltype/BallSocketConstraint.TwistLowerAngle",
+      "TwistUpperAngle": "@bettervoxel/globaltype/BallSocketConstraint.TwistUpperAngle",
+      "UpperAngle": "@bettervoxel/globaltype/BallSocketConstraint.UpperAngle"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.Active": {
+    "documentation": "Whether the ball socket acts: Enabled, in the workspace, both attachments on parts in the workspace, two assemblies, one of them not anchored (an anchored end leaves it active). Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#active"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.LimitsEnabled": {
+    "documentation": "Whether Attachment1's X axis stops hard within UpperAngle of Attachment0's — the tilt cone (measured a hard limit) — and, with TwistLimitsEnabled, its twist within the twist range. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#limitsenabled"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.MaxFrictionTorque": {
+    "documentation": "The socket's friction torque. Reads 0, the default; a write of any other value is refused: the reference's friction holds the attachments' angle against a smaller load (measured) and the engine's solver has no such hold (not supported in v1).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#maxfrictiontorque"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.Radius": {
+    "documentation": "The size of the ball socket's marker in studs: cosmetic. Default 0.15.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#radius"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.Restitution": {
+    "documentation": "The cone's bounce, clamped to 0..1 at the write (measured), an infinity included; a NaN write is refused. Stored and saved, but inert: the socket stops dead at its limits whatever it holds (a recorded divergence, as the hinge's). Default 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#restitution"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.TwistLimitsEnabled": {
+    "documentation": "Whether the twist — the angle from Attachment0's Y axis to Attachment1's about their X — stops hard within TwistLowerAngle and TwistUpperAngle. One of the limits: it acts while LimitsEnabled is on too. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#twistlimitsenabled"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.TwistLowerAngle": {
+    "documentation": "The twist's lower limit in degrees, while TwistLimitsEnabled. Clamped to -180..180 at the write (measured), an infinity included; never reordered against TwistUpperAngle (measured); a NaN write is refused. Default -45.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#twistlowerangle"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.TwistUpperAngle": {
+    "documentation": "The twist's upper limit in degrees, while TwistLimitsEnabled (a 20 rad/s twist under ±10 stopped at 12.1 — measured). Clamped to -180..180 at the write, an infinity included, never reordered against TwistLowerAngle (measured); a NaN write is refused. Default 45.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#twistupperangle"
+  },
+  "@bettervoxel/globaltype/BallSocketConstraint.UpperAngle": {
+    "documentation": "The tilt cone's half angle in degrees, while LimitsEnabled: the most Attachment1's X axis turns from Attachment0's (a hung arm pushed hard stopped at 30.9 under 30 — measured). Clamped to 0..180 at the write, an infinity included (measured); a NaN write is refused. Default 45.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BallSocketConstraint.html#upperangle"
   },
   "@bettervoxel/globaltype/BasePart": {
     "documentation": "Everything physical: world pose (Position, Rotation, CFrame), Size, appearance (Color, Material, Transparency), collision flags, and the Touched signal.",
@@ -3252,7 +3551,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/ColorSequenceKeypoint.html#value"
   },
   "@bettervoxel/globaltype/Constraint": {
-    "documentation": "The base of the attachment-anchored constraints: Attachment0, Attachment1 and Enabled. A constraint acts while Enabled and both ends sit under live in-world parts; anything else is inert.",
+    "documentation": "The base of the attachment-anchored constraints: Attachment0, Attachment1 and Enabled. A constraint acts while Enabled and the ends it needs sit under live in-world parts; anything else is inert.",
     "keys": {
       "Attachment0": "@bettervoxel/globaltype/Constraint.Attachment0",
       "Attachment1": "@bettervoxel/globaltype/Constraint.Attachment1",
@@ -3269,7 +3568,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Constraint.html#attachment1"
   },
   "@bettervoxel/globaltype/Constraint.Enabled": {
-    "documentation": "Whether the constraint acts. Disabling is inert (the derived joint goes away); re-enabling rebuilds it at the current poses (§16).",
+    "documentation": "Whether the constraint acts. Disabling is inert (a joint's derived joint goes away, a mover pushes nothing); re-enabling rebuilds a joint at the current poses (§16).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Constraint.html#enabled"
   },
   "@bettervoxel/globaltype/DataModel": {
@@ -3278,6 +3577,7 @@
       "BindToClose": "@bettervoxel/globaltype/DataModel.BindToClose",
       "ClassName": "@bettervoxel/globaltype/DataModel.ClassName",
       "CollectionService": "@bettervoxel/globaltype/DataModel.CollectionService",
+      "DataStoreService": "@bettervoxel/globaltype/DataModel.DataStoreService",
       "Debris": "@bettervoxel/globaltype/DataModel.Debris",
       "GameId": "@bettervoxel/globaltype/DataModel.GameId",
       "GetService": "@bettervoxel/globaltype/DataModel.GetService",
@@ -3285,6 +3585,7 @@
       "IsA": "@bettervoxel/globaltype/DataModel.IsA",
       "JobId": "@bettervoxel/globaltype/DataModel.JobId",
       "Lighting": "@bettervoxel/globaltype/DataModel.Lighting",
+      "MessagingService": "@bettervoxel/globaltype/DataModel.MessagingService",
       "Name": "@bettervoxel/globaltype/DataModel.Name",
       "PlaceId": "@bettervoxel/globaltype/DataModel.PlaceId",
       "Players": "@bettervoxel/globaltype/DataModel.Players",
@@ -3323,6 +3624,10 @@
   "@bettervoxel/globaltype/DataModel.CollectionService": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#collectionservice"
+  },
+  "@bettervoxel/globaltype/DataModel.DataStoreService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#datastoreservice"
   },
   "@bettervoxel/globaltype/DataModel.Debris": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
@@ -3381,6 +3686,10 @@
   "@bettervoxel/globaltype/DataModel.Lighting": {
     "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#lighting"
+  },
+  "@bettervoxel/globaltype/DataModel.MessagingService": {
+    "documentation": "The service as a field — the same value GetService answers for the name (the reference allows both spellings).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataModel.html#messagingservice"
   },
   "@bettervoxel/globaltype/DataModel.Name": {
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
@@ -3452,6 +3761,997 @@
   },
   "@bettervoxel/globaltype/DataModel.service/return/0": {
     "documentation": "`Instance`"
+  },
+  "@bettervoxel/globaltype/DataStore": {
+    "documentation": "A global store's object (identity DataStore < GlobalDataStore, an Instance whose Parent is the DataStoreService): the key-value calls, each answer beside a DataStoreKeyInfo, and every version of a key kept, listed and read back, beside the listing of its keys.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/DataStore.ClassName",
+      "GetAsync": "@bettervoxel/globaltype/DataStore.GetAsync",
+      "GetVersionAsync": "@bettervoxel/globaltype/DataStore.GetVersionAsync",
+      "IncrementAsync": "@bettervoxel/globaltype/DataStore.IncrementAsync",
+      "IsA": "@bettervoxel/globaltype/DataStore.IsA",
+      "ListKeysAsync": "@bettervoxel/globaltype/DataStore.ListKeysAsync",
+      "ListVersionsAsync": "@bettervoxel/globaltype/DataStore.ListVersionsAsync",
+      "Name": "@bettervoxel/globaltype/DataStore.Name",
+      "Parent": "@bettervoxel/globaltype/DataStore.Parent",
+      "RemoveAsync": "@bettervoxel/globaltype/DataStore.RemoveAsync",
+      "RemoveVersionAsync": "@bettervoxel/globaltype/DataStore.RemoveVersionAsync",
+      "SetAsync": "@bettervoxel/globaltype/DataStore.SetAsync",
+      "UpdateAsync": "@bettervoxel/globaltype/DataStore.UpdateAsync"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html"
+  },
+  "@bettervoxel/globaltype/DataStore.ClassName": {
+    "documentation": "\"DataStore\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStore.GetAsync": {
+    "documentation": "The key's value and its DataStoreKeyInfo — NOTHING, zero values, for a key never written or removed (measured). Yields while the store answers. A number key is its text; on a store opened with AllScopes a key is `<scope>/<key>`. The options' UseCache changes nothing: the engine keeps no cache.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#getasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.GetAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.GetAsync/param/1",
+        "name": "options"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.GetAsync/return/0",
+      "@bettervoxel/globaltype/DataStore.GetAsync/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.GetAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.GetAsync/param/1": {
+    "documentation": "`options: DataStoreGetOptions?`"
+  },
+  "@bettervoxel/globaltype/DataStore.GetAsync/return/0": {
+    "documentation": "`any`"
+  },
+  "@bettervoxel/globaltype/DataStore.GetAsync/return/1": {
+    "documentation": "`DataStoreKeyInfo`"
+  },
+  "@bettervoxel/globaltype/DataStore.GetVersionAsync": {
+    "documentation": "The value one version of the key held and that version's key info — nothing for a removal's version; a version the key never had raises `502: … Error code: 25 Reason: The provided version is not valid.` (measured). Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#getversionasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.GetVersionAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.GetVersionAsync/param/1",
+        "name": "version"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.GetVersionAsync/return/0",
+      "@bettervoxel/globaltype/DataStore.GetVersionAsync/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.GetVersionAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.GetVersionAsync/param/1": {
+    "documentation": "`version: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.GetVersionAsync/return/0": {
+    "documentation": "`any`"
+  },
+  "@bettervoxel/globaltype/DataStore.GetVersionAsync/return/1": {
+    "documentation": "`DataStoreKeyInfo`"
+  },
+  "@bettervoxel/globaltype/DataStore.IncrementAsync": {
+    "documentation": "Adds delta (1 by default, rounded to a whole number half away from zero; NaN the int32 minimum, -2147483648) to the key's number — an absent key counts from 0 — and answers the new value and its key info; a key holding anything but a number, NaN included, raises `502: … Error code: 24 Reason: Key value is not numeric.` (measured). An infinite delta raises `Unable to cast double to int` (the engine's). The options' metadata rides the write. Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#incrementasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.IncrementAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.IncrementAsync/param/1",
+        "name": "delta"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.IncrementAsync/param/2",
+        "name": "userIds"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.IncrementAsync/param/3",
+        "name": "options"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.IncrementAsync/return/0",
+      "@bettervoxel/globaltype/DataStore.IncrementAsync/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.IncrementAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.IncrementAsync/param/1": {
+    "documentation": "`delta: number?`"
+  },
+  "@bettervoxel/globaltype/DataStore.IncrementAsync/param/2": {
+    "documentation": "`userIds: {number}?`"
+  },
+  "@bettervoxel/globaltype/DataStore.IncrementAsync/param/3": {
+    "documentation": "`options: DataStoreIncrementOptions?`"
+  },
+  "@bettervoxel/globaltype/DataStore.IncrementAsync/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/DataStore.IncrementAsync/return/1": {
+    "documentation": "`DataStoreKeyInfo`"
+  },
+  "@bettervoxel/globaltype/DataStore.IsA": {
+    "documentation": "True for \"DataStore\", \"GlobalDataStore\" and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListKeysAsync": {
+    "documentation": "The keys that start with prefix, sorted — a removed key too unless excludeDeleted is true (measured; false by default) — pageSize to a page (0: 50), after the cursor a key pages answered — every scope's as `<scope>/<key>` on a store opened with AllScopes; a cursor no listing answered raises `502: … Error code: 32 Reason: The provided exclusive start key is not valid.` (measured). Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#listkeysasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/0",
+        "name": "prefix"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/1",
+        "name": "pageSize"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/2",
+        "name": "cursor"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/3",
+        "name": "excludeDeleted"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.ListKeysAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/0": {
+    "documentation": "`prefix: string?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/1": {
+    "documentation": "`pageSize: number?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/2": {
+    "documentation": "`cursor: string?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListKeysAsync/param/3": {
+    "documentation": "`excludeDeleted: boolean?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListKeysAsync/return/0": {
+    "documentation": "`DataStoreKeyPages`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListVersionsAsync": {
+    "documentation": "Every version of the key — each write, a removal's marked deleted — oldest first unless sortDirection is Descending (measured), written between minDate and maxDate (Unix milliseconds, inclusive; 0 unbounded), pageSize to a page (0: 1024). Every write is kept as a version. The reference kept one version for three writes 7 s apart (measured 2026-10-16) yet two for two writes 0.3 s apart (measured 2026-10-07); the creator docs name a one-per-UTC-hour rule and a 30-day expiry, the window unmeasured. The engine merges and expires nothing. Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#listversionsasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/1",
+        "name": "sortDirection"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/2",
+        "name": "minDate"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/3",
+        "name": "maxDate"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/4",
+        "name": "pageSize"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.ListVersionsAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/1": {
+    "documentation": "`sortDirection: Enum.SortDirection?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/2": {
+    "documentation": "`minDate: number?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/3": {
+    "documentation": "`maxDate: number?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListVersionsAsync/param/4": {
+    "documentation": "`pageSize: number?`"
+  },
+  "@bettervoxel/globaltype/DataStore.ListVersionsAsync/return/0": {
+    "documentation": "`DataStoreVersionPages`"
+  },
+  "@bettervoxel/globaltype/DataStore.Name": {
+    "documentation": "The store's name — \"\" for GetGlobalDataStore's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#name"
+  },
+  "@bettervoxel/globaltype/DataStore.Parent": {
+    "documentation": "The DataStoreService (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#parent"
+  },
+  "@bettervoxel/globaltype/DataStore.RemoveAsync": {
+    "documentation": "Removes the key, writing a version marked deleted, and answers the removed value and its key info; a later GetAsync answers nothing (measured). Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#removeasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.RemoveAsync/param/0",
+        "name": "key"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.RemoveAsync/return/0",
+      "@bettervoxel/globaltype/DataStore.RemoveAsync/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.RemoveAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.RemoveAsync/return/0": {
+    "documentation": "`any`"
+  },
+  "@bettervoxel/globaltype/DataStore.RemoveAsync/return/1": {
+    "documentation": "`DataStoreKeyInfo`"
+  },
+  "@bettervoxel/globaltype/DataStore.RemoveVersionAsync": {
+    "documentation": "Removes one version of the key and answers nothing; the version stays listed, IsDeleted true, and GetVersionAsync of it answers nothing — the newest too, after which the key answers nothing (measured). Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#removeversionasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.RemoveVersionAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.RemoveVersionAsync/param/1",
+        "name": "version"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStore.RemoveVersionAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.RemoveVersionAsync/param/1": {
+    "documentation": "`version: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.SetAsync": {
+    "documentation": "Writes the value (and the user ids, four at most, and the options' metadata, 300 bytes at most) as a new version and answers its version id. The value is kept as JSON — a mixed table keeps its array part, a sparse array or a fractional key becomes string keys, NaN and inf survive — and refused past 4 MB of it; a function, an Instance or a Vector3 cannot be stored (`104: Cannot store <Type> in data store. …`), and a nil value raises `Argument 2 missing or nil`, storing nothing (measured). Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#setasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.SetAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.SetAsync/param/1",
+        "name": "value"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.SetAsync/param/2",
+        "name": "userIds"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.SetAsync/param/3",
+        "name": "options"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.SetAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.SetAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.SetAsync/param/1": {
+    "documentation": "`value: any`"
+  },
+  "@bettervoxel/globaltype/DataStore.SetAsync/param/2": {
+    "documentation": "`userIds: {number}?`"
+  },
+  "@bettervoxel/globaltype/DataStore.SetAsync/param/3": {
+    "documentation": "`options: DataStoreSetOptions?`"
+  },
+  "@bettervoxel/globaltype/DataStore.SetAsync/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/DataStore.UpdateAsync": {
+    "documentation": "Calls transform with the key's value and key info (nil, nil for a key with none) and stores what it returns — the value, the user ids, the metadata — answering the stored value and its key info; a transform returning nil writes nothing and the call answers one nil. A transform that yields (inside a pcall too) or errors is logged (`Transform function error Callbacks cannot yield`; the error with its stack, then `Transform function error <message>`) and the call answers nothing and raises nothing — the value stays; a yielded transform runs on when its wait wakes, its result discarded (measured). If the key changed under the transform, it runs again on the new value. Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStore.html#updateasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.UpdateAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStore.UpdateAsync/param/1",
+        "name": "transform"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStore.UpdateAsync/return/0",
+      "@bettervoxel/globaltype/DataStore.UpdateAsync/return/1"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStore.UpdateAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/DataStore.UpdateAsync/param/1": {
+    "documentation": "`transform: (value: any, keyInfo: DataStoreKeyInfo?) -> (any, {number}?, {[string]: any}?)`"
+  },
+  "@bettervoxel/globaltype/DataStore.UpdateAsync/return/0": {
+    "documentation": "`any`"
+  },
+  "@bettervoxel/globaltype/DataStore.UpdateAsync/return/1": {
+    "documentation": "`DataStoreKeyInfo`"
+  },
+  "@bettervoxel/globaltype/DataStoreGetOptions": {
+    "documentation": "The options GetAsync reads: UseCache, true by default — the engine keeps no cache, so a read is fresh either way. Script-made, never saved.",
+    "keys": {
+      "UseCache": "@bettervoxel/globaltype/DataStoreGetOptions.UseCache"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreGetOptions.html"
+  },
+  "@bettervoxel/globaltype/DataStoreGetOptions.UseCache": {
+    "documentation": "Whether GetAsync may answer from a cache: true by default (measured). The engine keeps no cache, so a read is fresh either way.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreGetOptions.html#usecache"
+  },
+  "@bettervoxel/globaltype/DataStoreIncrementOptions": {
+    "documentation": "The options IncrementAsync reads: the metadata SetMetadata gives rides the increment. Script-made, never saved.",
+    "keys": {
+      "GetMetadata": "@bettervoxel/globaltype/DataStoreIncrementOptions.GetMetadata",
+      "SetMetadata": "@bettervoxel/globaltype/DataStoreIncrementOptions.SetMetadata"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreIncrementOptions.html"
+  },
+  "@bettervoxel/globaltype/DataStoreIncrementOptions.GetMetadata": {
+    "documentation": "The metadata SetMetadata gave — an empty table before it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreIncrementOptions.html#getmetadata",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreIncrementOptions.GetMetadata/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreIncrementOptions.GetMetadata/return/0": {
+    "documentation": "`{[string]: any}`"
+  },
+  "@bettervoxel/globaltype/DataStoreIncrementOptions.SetMetadata": {
+    "documentation": "The metadata the next IncrementAsync with these options writes — a table, 300 bytes of JSON at most when the write lands.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreIncrementOptions.html#setmetadata",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreIncrementOptions.SetMetadata/param/0",
+        "name": "attributes"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStoreIncrementOptions.SetMetadata/param/0": {
+    "documentation": "`attributes: {[string]: any}`"
+  },
+  "@bettervoxel/globaltype/DataStoreInfo": {
+    "documentation": "One written store, as ListDataStoresAsync lists it: its name and its first and latest write.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/DataStoreInfo.ClassName",
+      "CreatedTime": "@bettervoxel/globaltype/DataStoreInfo.CreatedTime",
+      "DataStoreName": "@bettervoxel/globaltype/DataStoreInfo.DataStoreName",
+      "UpdatedTime": "@bettervoxel/globaltype/DataStoreInfo.UpdatedTime"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreInfo.html"
+  },
+  "@bettervoxel/globaltype/DataStoreInfo.ClassName": {
+    "documentation": "\"DataStoreInfo\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreInfo.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreInfo.CreatedTime": {
+    "documentation": "The store's first write in any scope, in milliseconds since the Unix epoch on the session clock.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreInfo.html#createdtime"
+  },
+  "@bettervoxel/globaltype/DataStoreInfo.DataStoreName": {
+    "documentation": "The store's name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreInfo.html#datastorename"
+  },
+  "@bettervoxel/globaltype/DataStoreInfo.UpdatedTime": {
+    "documentation": "The store's latest write in any scope, in milliseconds since the Unix epoch on the session clock.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreInfo.html#updatedtime"
+  },
+  "@bettervoxel/globaltype/DataStoreKey": {
+    "documentation": "One key, as ListKeysAsync lists it.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/DataStoreKey.ClassName",
+      "KeyName": "@bettervoxel/globaltype/DataStoreKey.KeyName"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKey.html"
+  },
+  "@bettervoxel/globaltype/DataStoreKey.ClassName": {
+    "documentation": "\"DataStoreKey\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKey.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreKey.KeyName": {
+    "documentation": "The key — `<scope>/<key>` on a store opened with AllScopes.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKey.html#keyname"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo": {
+    "documentation": "What a store call answers beside a value: the version, the key's creation and the version's time (Unix milliseconds on the session clock), the user ids and the metadata the version was written with.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/DataStoreKeyInfo.ClassName",
+      "CreatedTime": "@bettervoxel/globaltype/DataStoreKeyInfo.CreatedTime",
+      "GetFullName": "@bettervoxel/globaltype/DataStoreKeyInfo.GetFullName",
+      "GetMetadata": "@bettervoxel/globaltype/DataStoreKeyInfo.GetMetadata",
+      "GetUserIds": "@bettervoxel/globaltype/DataStoreKeyInfo.GetUserIds",
+      "Name": "@bettervoxel/globaltype/DataStoreKeyInfo.Name",
+      "Parent": "@bettervoxel/globaltype/DataStoreKeyInfo.Parent",
+      "UpdatedTime": "@bettervoxel/globaltype/DataStoreKeyInfo.UpdatedTime",
+      "Version": "@bettervoxel/globaltype/DataStoreKeyInfo.Version"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.ClassName": {
+    "documentation": "\"DataStoreKeyInfo\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.CreatedTime": {
+    "documentation": "When the key was first written (or first written again after a removal), in milliseconds since the Unix epoch on the session clock.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#createdtime"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.GetFullName": {
+    "documentation": "\"Instance\" — its name, under no parent (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#getfullname",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreKeyInfo.GetFullName/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.GetFullName/return/0": {
+    "documentation": "`string`"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.GetMetadata": {
+    "documentation": "The metadata this version was written with — an empty table when it set none (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#getmetadata",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreKeyInfo.GetMetadata/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.GetMetadata/return/0": {
+    "documentation": "`{[string]: any}`"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.GetUserIds": {
+    "documentation": "The user ids this version was written with, in order — an empty table when it named none (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#getuserids",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreKeyInfo.GetUserIds/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.GetUserIds/return/0": {
+    "documentation": "`{number}`"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.Name": {
+    "documentation": "\"Instance\" — the name its tostring and its member error answer (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#name"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.Parent": {
+    "documentation": "Always nil (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#parent"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.UpdatedTime": {
+    "documentation": "When this version was written, in milliseconds since the Unix epoch on the session clock.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#updatedtime"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyInfo.Version": {
+    "documentation": "The version this answer describes, in the reference's shape `<created>.<sequence>.<updated>.01` over the engine's own numbers — compare it and hand it back, never parse it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyInfo.html#version"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages": {
+    "documentation": "The pages of a store's keys (identity DataStoreKeyPages < Pages), with the Cursor a later ListKeysAsync continues from.",
+    "keys": {
+      "AdvanceToNextPageAsync": "@bettervoxel/globaltype/DataStoreKeyPages.AdvanceToNextPageAsync",
+      "ClassName": "@bettervoxel/globaltype/DataStoreKeyPages.ClassName",
+      "Cursor": "@bettervoxel/globaltype/DataStoreKeyPages.Cursor",
+      "GetCurrentPage": "@bettervoxel/globaltype/DataStoreKeyPages.GetCurrentPage",
+      "IsA": "@bettervoxel/globaltype/DataStoreKeyPages.IsA",
+      "IsFinished": "@bettervoxel/globaltype/DataStoreKeyPages.IsFinished"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyPages.html"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.AdvanceToNextPageAsync": {
+    "documentation": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyPages.html#advancetonextpageasync",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.ClassName": {
+    "documentation": "\"DataStoreKeyPages\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyPages.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.Cursor": {
+    "documentation": "Where the next page starts — a base64 text the listing call takes back as its cursor (measured); \"\" on the last page.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyPages.html#cursor"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.GetCurrentPage": {
+    "documentation": "The current page's items, a fresh table each call (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyPages.html#getcurrentpage",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreKeyPages.GetCurrentPage/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.GetCurrentPage/return/0": {
+    "documentation": "`{DataStoreKey}`"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.IsA": {
+    "documentation": "True for \"DataStoreKeyPages\", \"Pages\" and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyPages.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreKeyPages.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreKeyPages.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/DataStoreKeyPages.IsFinished": {
+    "documentation": "Whether the current page is the last (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreKeyPages.html#isfinished"
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages": {
+    "documentation": "The pages of the written stores (identity DataStoreListingPages < Pages), with the Cursor a later ListDataStoresAsync continues from.",
+    "keys": {
+      "AdvanceToNextPageAsync": "@bettervoxel/globaltype/DataStoreListingPages.AdvanceToNextPageAsync",
+      "ClassName": "@bettervoxel/globaltype/DataStoreListingPages.ClassName",
+      "Cursor": "@bettervoxel/globaltype/DataStoreListingPages.Cursor",
+      "GetCurrentPage": "@bettervoxel/globaltype/DataStoreListingPages.GetCurrentPage",
+      "IsA": "@bettervoxel/globaltype/DataStoreListingPages.IsA",
+      "IsFinished": "@bettervoxel/globaltype/DataStoreListingPages.IsFinished"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreListingPages.html"
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.AdvanceToNextPageAsync": {
+    "documentation": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreListingPages.html#advancetonextpageasync",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.ClassName": {
+    "documentation": "\"DataStoreListingPages\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreListingPages.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.Cursor": {
+    "documentation": "Where the next page starts — a base64 text the listing call takes back as its cursor (measured); \"\" on the last page.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreListingPages.html#cursor"
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.GetCurrentPage": {
+    "documentation": "The current page's items, a fresh table each call (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreListingPages.html#getcurrentpage",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreListingPages.GetCurrentPage/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.GetCurrentPage/return/0": {
+    "documentation": "`{DataStoreInfo}`"
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.IsA": {
+    "documentation": "True for \"DataStoreListingPages\", \"Pages\" and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreListingPages.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreListingPages.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreListingPages.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/DataStoreListingPages.IsFinished": {
+    "documentation": "Whether the current page is the last (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreListingPages.html#isfinished"
+  },
+  "@bettervoxel/globaltype/DataStoreObjectVersionInfo": {
+    "documentation": "One version of a key, as ListVersionsAsync lists it: its id, when it was written and whether it is a removal's.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/DataStoreObjectVersionInfo.ClassName",
+      "CreatedTime": "@bettervoxel/globaltype/DataStoreObjectVersionInfo.CreatedTime",
+      "IsDeleted": "@bettervoxel/globaltype/DataStoreObjectVersionInfo.IsDeleted",
+      "Version": "@bettervoxel/globaltype/DataStoreObjectVersionInfo.Version"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreObjectVersionInfo.html"
+  },
+  "@bettervoxel/globaltype/DataStoreObjectVersionInfo.ClassName": {
+    "documentation": "\"DataStoreObjectVersionInfo\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreObjectVersionInfo.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreObjectVersionInfo.CreatedTime": {
+    "documentation": "When the version was written, in milliseconds since the Unix epoch on the session clock.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreObjectVersionInfo.html#createdtime"
+  },
+  "@bettervoxel/globaltype/DataStoreObjectVersionInfo.IsDeleted": {
+    "documentation": "Whether the version is a removal's (measured: RemoveAsync writes one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreObjectVersionInfo.html#isdeleted"
+  },
+  "@bettervoxel/globaltype/DataStoreObjectVersionInfo.Version": {
+    "documentation": "The version's id — GetVersionAsync and RemoveVersionAsync take it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreObjectVersionInfo.html#version"
+  },
+  "@bettervoxel/globaltype/DataStoreOptions": {
+    "documentation": "The options GetDataStore reads: AllScopes opens a store across every scope of its name (its keys `<scope>/<key>`), and SetExperimentalFeatures takes { v2 = true }. Script-made, never saved.",
+    "keys": {
+      "AllScopes": "@bettervoxel/globaltype/DataStoreOptions.AllScopes",
+      "SetExperimentalFeatures": "@bettervoxel/globaltype/DataStoreOptions.SetExperimentalFeatures"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreOptions.html"
+  },
+  "@bettervoxel/globaltype/DataStoreOptions.AllScopes": {
+    "documentation": "Whether GetDataStore opens the store across every scope of its name (false by default, measured) — then the scope must be \"\" (`DataStore scope should be an empty string allScopes is set to true`, nil meaning \"global\") and every key reads `<scope>/<key>`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreOptions.html#allscopes"
+  },
+  "@bettervoxel/globaltype/DataStoreOptions.SetExperimentalFeatures": {
+    "documentation": "Takes the reference's feature switches; { v2 = true } is accepted and kept (measured) and changes nothing here.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreOptions.html#setexperimentalfeatures",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreOptions.SetExperimentalFeatures/param/0",
+        "name": "experimentalFeatures"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStoreOptions.SetExperimentalFeatures/param/0": {
+    "documentation": "`experimentalFeatures: {[string]: boolean}`"
+  },
+  "@bettervoxel/globaltype/DataStorePages": {
+    "documentation": "The pages of an ordered store's entries sorted by value (identity DataStorePages < Pages), each entry a plain table { key, value }.",
+    "keys": {
+      "AdvanceToNextPageAsync": "@bettervoxel/globaltype/DataStorePages.AdvanceToNextPageAsync",
+      "ClassName": "@bettervoxel/globaltype/DataStorePages.ClassName",
+      "GetCurrentPage": "@bettervoxel/globaltype/DataStorePages.GetCurrentPage",
+      "IsA": "@bettervoxel/globaltype/DataStorePages.IsA",
+      "IsFinished": "@bettervoxel/globaltype/DataStorePages.IsFinished"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStorePages.html"
+  },
+  "@bettervoxel/globaltype/DataStorePages.AdvanceToNextPageAsync": {
+    "documentation": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStorePages.html#advancetonextpageasync",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStorePages.ClassName": {
+    "documentation": "\"DataStorePages\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStorePages.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStorePages.GetCurrentPage": {
+    "documentation": "The current page's items, a fresh table each call (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStorePages.html#getcurrentpage",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStorePages.GetCurrentPage/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStorePages.GetCurrentPage/return/0": {
+    "documentation": "`{{key: string, value: number}}`"
+  },
+  "@bettervoxel/globaltype/DataStorePages.IsA": {
+    "documentation": "True for \"DataStorePages\", \"Pages\" and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStorePages.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStorePages.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStorePages.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStorePages.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/DataStorePages.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/DataStorePages.IsFinished": {
+    "documentation": "Whether the current page is the last (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStorePages.html#isfinished"
+  },
+  "@bettervoxel/globaltype/DataStoreService": {
+    "documentation": "The data stores: GetDataStore and GetOrderedDataStore answer a store's object at once, the same one on every call; the object's calls (GetAsync, SetAsync, UpdateAsync, RemoveAsync, IncrementAsync, the versions and the key listing) and ListDataStoresAsync yield while the store answers. Values are kept as JSON with the reference's limits — 50-character names and keys, 4 MB values. The editor's Play keeps the open project's test store from one Play to the next; a dedicated server keeps its saves where --data-dir says, or none — every store call then raising a 403 text that says so. The server's alone: a client side's call raises.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/DataStoreService.ClassName",
+      "GetDataStore": "@bettervoxel/globaltype/DataStoreService.GetDataStore",
+      "GetGlobalDataStore": "@bettervoxel/globaltype/DataStoreService.GetGlobalDataStore",
+      "GetOrderedDataStore": "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore",
+      "GetRequestBudgetForRequestType": "@bettervoxel/globaltype/DataStoreService.GetRequestBudgetForRequestType",
+      "IsA": "@bettervoxel/globaltype/DataStoreService.IsA",
+      "ListDataStoresAsync": "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync",
+      "Name": "@bettervoxel/globaltype/DataStoreService.Name"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html"
+  },
+  "@bettervoxel/globaltype/DataStoreService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetDataStore": {
+    "documentation": "The global store under name and scope (\"global\" by default) — the same object on every call. A name or scope is 1 to 50 characters (`DataStore name can't be empty string`, `DataStore name is too long`, `DataStore scope can't be empty string`, `DataStore scope is too long`); a number is its text. The options are a DataStoreOptions: with AllScopes the store spans every scope of the name, the scope must be \"\" and each key reads `<scope>/<key>` (another class `510: Options instance not of type DataStoreOptions`, a non-Instance `Unable to cast value to Object`). The server's alone — a client side's call raises `DataStore can't be accessed from client`. The editor's Play keeps the open project's test store for its next Play; a dedicated server keeps its saves where --data-dir says, or none — every call of a store object then raises `403: DataStore access is off: …`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#getdatastore",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.GetDataStore/param/0",
+        "name": "name"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.GetDataStore/param/1",
+        "name": "scope"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.GetDataStore/param/2",
+        "name": "options"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreService.GetDataStore/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetDataStore/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetDataStore/param/1": {
+    "documentation": "`scope: string?`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetDataStore/param/2": {
+    "documentation": "`options: DataStoreOptions?`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetDataStore/return/0": {
+    "documentation": "`DataStore`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetGlobalDataStore": {
+    "documentation": "The experience's default store, named \"\". The server's alone.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#getglobaldatastore",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreService.GetGlobalDataStore/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetGlobalDataStore/return/0": {
+    "documentation": "`DataStore`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore": {
+    "documentation": "The ordered store under name and scope — the same object on every call, the names refused as GetDataStore's. The server's alone.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#getordereddatastore",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore/param/0",
+        "name": "name"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore/param/1",
+        "name": "scope"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore/param/0": {
+    "documentation": "`name: string`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore/param/1": {
+    "documentation": "`scope: string?`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetOrderedDataStore/return/0": {
+    "documentation": "`OrderedDataStore`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetRequestBudgetForRequestType": {
+    "documentation": "How many requests of the type a fresh session may make — the measured constants on a server (688 GetAsync, 673 StandardWrite, 671 UpdateAsync, 40 GetSortedAsync, 33 ListAsync, 40 GetVersionAsync, 42 RemoveVersionAsync; 640 for the rest) and the client's own on a client (measured: 2500, 130 or 350 by type, 17 OnUpdate). The engine keeps no budget and throttles nothing: the answer never moves, where the reference's server budget does.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#getrequestbudgetforrequesttype",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.GetRequestBudgetForRequestType/param/0",
+        "name": "requestType"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreService.GetRequestBudgetForRequestType/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetRequestBudgetForRequestType/param/0": {
+    "documentation": "`requestType: Enum.DataStoreRequestType`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.GetRequestBudgetForRequestType/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync": {
+    "documentation": "The global stores written in any scope whose name starts with prefix, sorted — an ordered store and one never written are not listed (measured) — pageSize to a page (0: 32), after the cursor a listing pages answered. Yields while the store answers. The server's alone — a client side's call raises `DataStore can't be accessed from client` (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#listdatastoresasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/param/0",
+        "name": "prefix"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/param/1",
+        "name": "pageSize"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/param/2",
+        "name": "cursor"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/param/0": {
+    "documentation": "`prefix: string?`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/param/1": {
+    "documentation": "`pageSize: number?`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/param/2": {
+    "documentation": "`cursor: string?`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.ListDataStoresAsync/return/0": {
+    "documentation": "`DataStoreListingPages`"
+  },
+  "@bettervoxel/globaltype/DataStoreService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/DataStoreService.html#name"
+  },
+  "@bettervoxel/globaltype/DataStoreSetOptions": {
+    "documentation": "The options SetAsync reads: the metadata SetMetadata gives rides the write and reads back through the key info. Script-made, never saved.",
+    "keys": {
+      "GetMetadata": "@bettervoxel/globaltype/DataStoreSetOptions.GetMetadata",
+      "SetMetadata": "@bettervoxel/globaltype/DataStoreSetOptions.SetMetadata"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreSetOptions.html"
+  },
+  "@bettervoxel/globaltype/DataStoreSetOptions.GetMetadata": {
+    "documentation": "The metadata SetMetadata gave — an empty table before it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreSetOptions.html#getmetadata",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreSetOptions.GetMetadata/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreSetOptions.GetMetadata/return/0": {
+    "documentation": "`{[string]: any}`"
+  },
+  "@bettervoxel/globaltype/DataStoreSetOptions.SetMetadata": {
+    "documentation": "The metadata the next SetAsync with these options writes — a table (`Unable to cast double to Dictionary` otherwise, measured), 300 bytes of JSON at most when the write lands.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/DataStoreSetOptions.html#setmetadata",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreSetOptions.SetMetadata/param/0",
+        "name": "attributes"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStoreSetOptions.SetMetadata/param/0": {
+    "documentation": "`attributes: {[string]: any}`"
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages": {
+    "documentation": "The pages of a key's versions (identity DataStoreVersionPages < Pages): the current page's items, whether it is the last, and the move to the next. The listing is held whole by the call that made it.",
+    "keys": {
+      "AdvanceToNextPageAsync": "@bettervoxel/globaltype/DataStoreVersionPages.AdvanceToNextPageAsync",
+      "ClassName": "@bettervoxel/globaltype/DataStoreVersionPages.ClassName",
+      "GetCurrentPage": "@bettervoxel/globaltype/DataStoreVersionPages.GetCurrentPage",
+      "IsA": "@bettervoxel/globaltype/DataStoreVersionPages.IsA",
+      "IsFinished": "@bettervoxel/globaltype/DataStoreVersionPages.IsFinished"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreVersionPages.html"
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.AdvanceToNextPageAsync": {
+    "documentation": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreVersionPages.html#advancetonextpageasync",
+    "params": [],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.ClassName": {
+    "documentation": "\"DataStoreVersionPages\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreVersionPages.html#classname"
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.GetCurrentPage": {
+    "documentation": "The current page's items, a fresh table each call (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreVersionPages.html#getcurrentpage",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreVersionPages.GetCurrentPage/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.GetCurrentPage/return/0": {
+    "documentation": "`{DataStoreObjectVersionInfo}`"
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.IsA": {
+    "documentation": "True for \"DataStoreVersionPages\", \"Pages\" and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreVersionPages.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/DataStoreVersionPages.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/DataStoreVersionPages.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/DataStoreVersionPages.IsFinished": {
+    "documentation": "Whether the current page is the last (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/DataStoreVersionPages.html#isfinished"
   },
   "@bettervoxel/globaltype/Debris": {
     "documentation": "Scheduled destruction: AddItem destroys an instance after a lifetime on the pause-aware script clock — fire-and-forget cleanup for projectiles and effects.",
@@ -3711,8 +5011,85 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#visible"
   },
   "@bettervoxel/globaltype/HingeConstraint": {
-    "documentation": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet.",
+    "documentation": "A hinge: the two bodies rotate about the attachments' X axes — free, or driven by a Motor or a Servo (ActuatorType), within optional limits.",
+    "keys": {
+      "ActuatorType": "@bettervoxel/globaltype/HingeConstraint.ActuatorType",
+      "AngularResponsiveness": "@bettervoxel/globaltype/HingeConstraint.AngularResponsiveness",
+      "AngularSpeed": "@bettervoxel/globaltype/HingeConstraint.AngularSpeed",
+      "AngularVelocity": "@bettervoxel/globaltype/HingeConstraint.AngularVelocity",
+      "CurrentAngle": "@bettervoxel/globaltype/HingeConstraint.CurrentAngle",
+      "LimitsEnabled": "@bettervoxel/globaltype/HingeConstraint.LimitsEnabled",
+      "LowerAngle": "@bettervoxel/globaltype/HingeConstraint.LowerAngle",
+      "MotorMaxAcceleration": "@bettervoxel/globaltype/HingeConstraint.MotorMaxAcceleration",
+      "MotorMaxTorque": "@bettervoxel/globaltype/HingeConstraint.MotorMaxTorque",
+      "Radius": "@bettervoxel/globaltype/HingeConstraint.Radius",
+      "Restitution": "@bettervoxel/globaltype/HingeConstraint.Restitution",
+      "ServoMaxTorque": "@bettervoxel/globaltype/HingeConstraint.ServoMaxTorque",
+      "SoftlockServoUponReachingTarget": "@bettervoxel/globaltype/HingeConstraint.SoftlockServoUponReachingTarget",
+      "TargetAngle": "@bettervoxel/globaltype/HingeConstraint.TargetAngle",
+      "UpperAngle": "@bettervoxel/globaltype/HingeConstraint.UpperAngle"
+    },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.ActuatorType": {
+    "documentation": "What drives the hinge: None (a free hinge, the default), Motor (turns at AngularVelocity) or Servo (turns to TargetAngle). Writes accept the Enum.ActuatorType item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#actuatortype"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.AngularResponsiveness": {
+    "documentation": "How stiffly the Servo pulls toward its target: 5 approaches slowly, 45 (the default) arrives without overshoot, 200 overshoots against its torque cap. Stored within 5 to 200: a write outside lands on the nearer end, an infinite one included (measured); a NaN write is refused.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#angularresponsiveness"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.AngularSpeed": {
+    "documentation": "The Servo's rate cap in radians per second: its applied target moves toward TargetAngle by at most this much a second. The default 0 holds the Servo where it stands (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#angularspeed"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.AngularVelocity": {
+    "documentation": "The Motor's target speed in radians per second: Attachment1 turns about Attachment0's X axis at it, within MotorMaxTorque and MotorMaxAcceleration. Default 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#angularvelocity"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.CurrentAngle": {
+    "documentation": "The hinge's angle in degrees: Attachment1 about Attachment0's X axis, 0 with the two attachments aligned, positive turning Attachment0's Y toward its Z (measured). 0 while either end is on no body. Read only; it fires no Changed as it turns.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#currentangle"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.LimitsEnabled": {
+    "documentation": "Whether the hinge stops hard at LowerAngle and UpperAngle. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#limitsenabled"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.LowerAngle": {
+    "documentation": "The lower limit in degrees, while LimitsEnabled. Clamped to -180..180 at the write, an infinity included (measured); a NaN write is refused. Default -45.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#lowerangle"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.MotorMaxAcceleration": {
+    "documentation": "The Motor's angular-acceleration cap in radians per second squared: its applied speed ramps toward AngularVelocity by at most this much a second (measured as a true cap). Default 500000.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#motormaxacceleration"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.MotorMaxTorque": {
+    "documentation": "The most torque the Motor applies. The default 0 moves nothing (measured), as does any value of 0 or less.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#motormaxtorque"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.Radius": {
+    "documentation": "The size of the hinge's marker in studs: cosmetic. Default 0.15.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#radius"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.Restitution": {
+    "documentation": "The limits' bounce, clamped to 0..1 at the write, an infinity included (measured); a NaN write is refused. Stored and saved, but inert: the hinge stops dead at a limit whatever it holds (a recorded divergence — the reference bounces). Default 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#restitution"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.ServoMaxTorque": {
+    "documentation": "The most torque the Servo applies. The default 0 moves nothing, as does any value of 0 or less.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#servomaxtorque"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.SoftlockServoUponReachingTarget": {
+    "documentation": "Deprecated on the reference. Stored and saved, inert. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#softlockservouponreachingtarget"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.TargetAngle": {
+    "documentation": "The Servo's target in degrees from the two attachments aligned, reduced modulo 360 and reached the short way (270 is -90, 720 is 0 — measured). Default 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#targetangle"
+  },
+  "@bettervoxel/globaltype/HingeConstraint.UpperAngle": {
+    "documentation": "The upper limit in degrees, while LimitsEnabled. Clamped to -180..180 at the write, an infinity included (measured); a NaN write is refused. Default 45.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/HingeConstraint.html#upperangle"
   },
   "@bettervoxel/globaltype/HttpService": {
     "documentation": "The JSON codec (JSONEncode/JSONDecode) and random GUIDs, usable everywhere; the request verbs are closed — HttpEnabled is false and GetAsync/PostAsync/RequestAsync error, the engine sends no HTTP.",
@@ -4841,6 +6218,42 @@
     "documentation": "The stored integer. Number writes round half away from zero (3.5 becomes 4, -3.7 becomes -4).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/IntValue.html#value"
   },
+  "@bettervoxel/globaltype/JointInstance": {
+    "documentation": "The base of the classic joints: Part0 and Part1, the frames C0 and C1 they are held at, Enabled, and the read-only Active.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/JointInstance.Active",
+      "C0": "@bettervoxel/globaltype/JointInstance.C0",
+      "C1": "@bettervoxel/globaltype/JointInstance.C1",
+      "Enabled": "@bettervoxel/globaltype/JointInstance.Enabled",
+      "Part0": "@bettervoxel/globaltype/JointInstance.Part0",
+      "Part1": "@bettervoxel/globaltype/JointInstance.Part1"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/JointInstance.html"
+  },
+  "@bettervoxel/globaltype/JointInstance.Active": {
+    "documentation": "Whether the joint acts: Enabled, parented in the tree, both ends set to two different parts in the tree, and not both of them anchored (two anchored parts each root an assembly of their own; measured, §43).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/JointInstance.html#active"
+  },
+  "@bettervoxel/globaltype/JointInstance.C0": {
+    "documentation": "The joint's frame in Part0's space: while Active, Part0.CFrame * C0 equals Part1.CFrame * C1. Writing it moves the part that is not the assembly root on the next physics pass (measured, §43).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/JointInstance.html#c0"
+  },
+  "@bettervoxel/globaltype/JointInstance.C1": {
+    "documentation": "The joint's frame in Part1's space — C0's counterpart.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/JointInstance.html#c1"
+  },
+  "@bettervoxel/globaltype/JointInstance.Enabled": {
+    "documentation": "Whether the joint may act (Active also needs both ends). Disabling leaves the parts where they stand; re-enabling stands the non-root part where C0 and C1 put it (measured, §43).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/JointInstance.html#enabled"
+  },
+  "@bettervoxel/globaltype/JointInstance.Part0": {
+    "documentation": "The part C0 is a frame of: an Instance or nil. Setting an end of an active joint moves the part that is not the assembly root to where the frames put it (§43).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/JointInstance.html#part0"
+  },
+  "@bettervoxel/globaltype/JointInstance.Part1": {
+    "documentation": "The part C1 is a frame of: an Instance or nil.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/JointInstance.html#part1"
+  },
   "@bettervoxel/globaltype/LayerCollector": {
     "documentation": "The UI roots that collect an element tree: ScreenGui on the screen, BillboardGui in the world.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LayerCollector.html"
@@ -4969,6 +6382,92 @@
     "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#name"
   },
+  "@bettervoxel/globaltype/LinearVelocity": {
+    "documentation": "A mover: a force that brings Attachment0's assembly to a velocity within each physics step — the whole vector, its component along a line, or its projection on a plane, named in RelativeTo's frame — within its force limits, the assembly's weight held.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/LinearVelocity.Active",
+      "ForceLimitMode": "@bettervoxel/globaltype/LinearVelocity.ForceLimitMode",
+      "ForceLimitsEnabled": "@bettervoxel/globaltype/LinearVelocity.ForceLimitsEnabled",
+      "LineDirection": "@bettervoxel/globaltype/LinearVelocity.LineDirection",
+      "LineVelocity": "@bettervoxel/globaltype/LinearVelocity.LineVelocity",
+      "MaxAxesForce": "@bettervoxel/globaltype/LinearVelocity.MaxAxesForce",
+      "MaxForce": "@bettervoxel/globaltype/LinearVelocity.MaxForce",
+      "MaxPlanarAxesForce": "@bettervoxel/globaltype/LinearVelocity.MaxPlanarAxesForce",
+      "PlaneVelocity": "@bettervoxel/globaltype/LinearVelocity.PlaneVelocity",
+      "PrimaryTangentAxis": "@bettervoxel/globaltype/LinearVelocity.PrimaryTangentAxis",
+      "ReactionForceEnabled": "@bettervoxel/globaltype/LinearVelocity.ReactionForceEnabled",
+      "RelativeTo": "@bettervoxel/globaltype/LinearVelocity.RelativeTo",
+      "SecondaryTangentAxis": "@bettervoxel/globaltype/LinearVelocity.SecondaryTangentAxis",
+      "VectorVelocity": "@bettervoxel/globaltype/LinearVelocity.VectorVelocity",
+      "VelocityConstraintMode": "@bettervoxel/globaltype/LinearVelocity.VelocityConstraintMode",
+      "Visible": "@bettervoxel/globaltype/LinearVelocity.Visible"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.Active": {
+    "documentation": "Whether the velocity target acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it; a zero MaxForce leaves it active (measured). Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#active"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.ForceLimitMode": {
+    "documentation": "Magnitude (the default) holds the force's length to MaxForce; PerAxis holds each axis of RelativeTo's frame to its lane of MaxAxesForce in Vector mode, each tangent axis to its lane of MaxPlanarAxesForce in Plane mode (a line keeps MaxForce).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#forcelimitmode"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.ForceLimitsEnabled": {
+    "documentation": "Whether the force is limited (by ForceLimitMode); off, the target is reached within the step whatever it takes. Default true.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#forcelimitsenabled"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.LineDirection": {
+    "documentation": "The line Line mode holds the velocity along, in RelativeTo's frame (its length ignored; the zero vector holds nothing). Default (1, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#linedirection"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.LineVelocity": {
+    "documentation": "The speed held along LineDirection in Line mode, studs per second. Default 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#linevelocity"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.MaxAxesForce": {
+    "documentation": "The most force along each axis of RelativeTo's frame under the PerAxis limit in Vector mode; a lane of math.huge is no limit. Default (1000, 1000, 1000).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#maxaxesforce"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.MaxForce": {
+    "documentation": "The most force, the assembly's weight included, under the Magnitude limit (and along a line under either), while ForceLimitsEnabled: the acceleration is MaxForce / mass until the target is reached (measured). Default 1000.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#maxforce"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.MaxPlanarAxesForce": {
+    "documentation": "The most force along each tangent axis under the PerAxis limit in Plane mode; a lane of math.huge is no limit. Default (1000, 1000).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#maxplanaraxesforce"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.PlaneVelocity": {
+    "documentation": "The velocity held along the two tangent axes in Plane mode, studs per second. Default (0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#planevelocity"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.PrimaryTangentAxis": {
+    "documentation": "Plane mode's first axis, in RelativeTo's frame. Default (1, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#primarytangentaxis"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.ReactionForceEnabled": {
+    "documentation": "Whether Attachment1's assembly takes the opposite force under RelativeTo Attachment1, the pair then sharing its momentum (an equal pair, one moving 3, ends at 1.5 each — measured). Default true.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#reactionforceenabled"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.RelativeTo": {
+    "documentation": "The frame the target velocity, the line, the plane and the per-axis limits are named in: the world's (the default), Attachment0's, or Attachment1's — the velocity then relative to Attachment1's assembly.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#relativeto"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.SecondaryTangentAxis": {
+    "documentation": "Plane mode's second axis, in RelativeTo's frame, made perpendicular to the first. Default (0, 1, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#secondarytangentaxis"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.VectorVelocity": {
+    "documentation": "The velocity held in Vector mode, studs per second, in RelativeTo's frame: reached within a step while the force limit allows (measured). Default (0, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#vectorvelocity"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.VelocityConstraintMode": {
+    "documentation": "What the target holds: Vector (the default) the whole velocity, Line its component along LineDirection, Plane its projection on the two tangent axes.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#velocityconstraintmode"
+  },
+  "@bettervoxel/globaltype/LinearVelocity.Visible": {
+    "documentation": "Draws the editor's marker for the velocity target whatever the selection. An authoring aid — nothing at runtime reads it. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LinearVelocity.html#visible"
+  },
   "@bettervoxel/globaltype/LocalScript": {
     "documentation": "A script that runs on each client. Its CLASS decides that — a stored RunContext value is accepted but inert.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/LocalScript.html"
@@ -4992,6 +6491,91 @@
   "@bettervoxel/globaltype/MeshPart.MeshSize": {
     "documentation": "The authored mesh bounds, untouched by resizes. Every write is refused; resize through Size, which scales the mesh against these bounds.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#meshsize"
+  },
+  "@bettervoxel/globaltype/MessagingService": {
+    "documentation": "Topic messages within this server: SubscribeAsync connects a callback to a topic, PublishAsync sends a value to its subscribers, delivered on a later frame as one table { Data, Sent }. The engine runs one server per game, so a publish reaches no other server, and the reference's per-minute limits are not kept. The server's alone: a client side's call raises.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/MessagingService.ClassName",
+      "IsA": "@bettervoxel/globaltype/MessagingService.IsA",
+      "Name": "@bettervoxel/globaltype/MessagingService.Name",
+      "PublishAsync": "@bettervoxel/globaltype/MessagingService.PublishAsync",
+      "SubscribeAsync": "@bettervoxel/globaltype/MessagingService.SubscribeAsync"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/MessagingService.html"
+  },
+  "@bettervoxel/globaltype/MessagingService.ClassName": {
+    "documentation": "The class name — the first name IsA answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/MessagingService.html#classname"
+  },
+  "@bettervoxel/globaltype/MessagingService.IsA": {
+    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/MessagingService.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/MessagingService.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/MessagingService.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/MessagingService.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/MessagingService.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/MessagingService.Name": {
+    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/MessagingService.html#name"
+  },
+  "@bettervoxel/globaltype/MessagingService.PublishAsync": {
+    "documentation": "Sends message to every subscriber of topic on this server: the value travels as JSON text (HttpService's codec, 1 KiB at most — `MessagingService:PublishAsync(): Cannot publish, data exceeded 1kb`) and arrives on a later frame as one table { Data, Sent }: a copy of the value and the session clock's Unix seconds at the publish (GetServerTimeNow's). A topic is 1 to 80 characters (`MessagingService: Topic names cannot be empty.`, `MessagingService: Topic names cannot be more than 80 characters.`). One server only: no other server receives it. The server's alone — a client side's call raises `MessagingService can only be executed by game server`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/MessagingService.html#publishasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/MessagingService.PublishAsync/param/0",
+        "name": "topic"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/MessagingService.PublishAsync/param/1",
+        "name": "message"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/MessagingService.PublishAsync/param/0": {
+    "documentation": "`topic: string`"
+  },
+  "@bettervoxel/globaltype/MessagingService.PublishAsync/param/1": {
+    "documentation": "`message: any`"
+  },
+  "@bettervoxel/globaltype/MessagingService.SubscribeAsync": {
+    "documentation": "Calls callback with every message published to topic on this server from now on — a table { Data, Sent } of its own per publish, the newest subscriber first, on a frame after it — and answers the connection: Disconnect stops the deliveries, and the script's end takes them with it. The topic is refused as PublishAsync's (empty, past 80 characters). The server's alone — a client side's call raises `MessagingService can only be executed by game server`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/MessagingService.html#subscribeasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/MessagingService.SubscribeAsync/param/0",
+        "name": "topic"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/MessagingService.SubscribeAsync/param/1",
+        "name": "callback"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/MessagingService.SubscribeAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/MessagingService.SubscribeAsync/param/0": {
+    "documentation": "`topic: string`"
+  },
+  "@bettervoxel/globaltype/MessagingService.SubscribeAsync/param/1": {
+    "documentation": "`callback: (message: { Data: any, Sent: number }) -> ()`"
+  },
+  "@bettervoxel/globaltype/MessagingService.SubscribeAsync/return/0": {
+    "documentation": "`BVScriptConnection`"
   },
   "@bettervoxel/globaltype/Model": {
     "documentation": "A grouping node for parts: pivots through PrimaryPart (or its bounding-box center without one) and moves as a group via PivotTo.",
@@ -5120,6 +6704,204 @@
   "@bettervoxel/globaltype/ObjectValue.Value": {
     "documentation": "The stored instance reference, or nil. References outlive Destroy — a destroyed target reads as its husk; assigning nil clears the slot.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ObjectValue.html#value"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore": {
+    "documentation": "An ordered store's object (identity OrderedDataStore < GlobalDataStore): whole numbers under keys, read one value at a time or as pages sorted by value — no key info, user ids or metadata.",
+    "keys": {
+      "ClassName": "@bettervoxel/globaltype/OrderedDataStore.ClassName",
+      "GetAsync": "@bettervoxel/globaltype/OrderedDataStore.GetAsync",
+      "GetSortedAsync": "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync",
+      "IncrementAsync": "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync",
+      "IsA": "@bettervoxel/globaltype/OrderedDataStore.IsA",
+      "Name": "@bettervoxel/globaltype/OrderedDataStore.Name",
+      "Parent": "@bettervoxel/globaltype/OrderedDataStore.Parent",
+      "RemoveAsync": "@bettervoxel/globaltype/OrderedDataStore.RemoveAsync",
+      "SetAsync": "@bettervoxel/globaltype/OrderedDataStore.SetAsync",
+      "UpdateAsync": "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.ClassName": {
+    "documentation": "\"OrderedDataStore\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#classname"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetAsync": {
+    "documentation": "The key's number — ONE value, no key info (measured); nothing for a key never written or removed. Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#getasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.GetAsync/param/0",
+        "name": "key"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/OrderedDataStore.GetAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetAsync/return/0": {
+    "documentation": "`number?`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync": {
+    "documentation": "The live entries as { key, value } tables sorted by value — ascending or descending, ties by key — pageSize to a page (1 to 100, 50 by default, a numeric string taken as its number; else `106: PageSize must be within a predefined range`), between minValue and maxValue inclusive (measured); a non-numeric string raises `Unable to cast string to int` (the engine's). ascending is a boolean: a string raises `Unable to cast string to bool` (measured), nil `Argument 1 missing or nil` (the engine's). Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#getsortedasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/0",
+        "name": "ascending"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/1",
+        "name": "pageSize"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/2",
+        "name": "minValue"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/3",
+        "name": "maxValue"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/0": {
+    "documentation": "`ascending: boolean`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/1": {
+    "documentation": "`pageSize: number?`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/2": {
+    "documentation": "`minValue: number?`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/param/3": {
+    "documentation": "`maxValue: number?`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.GetSortedAsync/return/0": {
+    "documentation": "`DataStorePages`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync": {
+    "documentation": "Adds delta (1 by default, rounded half away from zero) to the key's number — an absent key counts from 0 — and answers the new number (measured: 3 then 4). Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#incrementasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync/param/1",
+        "name": "delta"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync/param/1": {
+    "documentation": "`delta: number?`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.IncrementAsync/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.IsA": {
+    "documentation": "True for \"OrderedDataStore\", \"GlobalDataStore\" and \"Instance\".",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#isa",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.IsA/param/0",
+        "name": "className"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/OrderedDataStore.IsA/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.IsA/param/0": {
+    "documentation": "`className: string`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.IsA/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.Name": {
+    "documentation": "The store's name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#name"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.Parent": {
+    "documentation": "The DataStoreService.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#parent"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.RemoveAsync": {
+    "documentation": "Removes the key and answers the number it held — nothing for a key with none. Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#removeasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.RemoveAsync/param/0",
+        "name": "key"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/OrderedDataStore.RemoveAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.RemoveAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.RemoveAsync/return/0": {
+    "documentation": "`number?`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.SetAsync": {
+    "documentation": "Writes a whole number (-2 and 2^53 measured; up to 2^63) and answers nothing; a fraction raises `103: double is not allowed in data stores.`, a string `103: string is not allowed in data stores.`, a boolean `103: bool is not allowed in data stores.` (measured). No user ids and no metadata on an ordered store. Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#setasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.SetAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.SetAsync/param/1",
+        "name": "value"
+      }
+    ],
+    "returns": []
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.SetAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.SetAsync/param/1": {
+    "documentation": "`value: number`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync": {
+    "documentation": "Calls transform with the key's number (nil for a key with none; no key info) and stores the whole number it returns, answering it (measured: 4 then 5); nil writes nothing. A transform that yields or errors is logged and the call answers nothing, as a DataStore's. Yields while the store answers.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/OrderedDataStore.html#updateasync",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync/param/0",
+        "name": "key"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync/param/1",
+        "name": "transform"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync/param/0": {
+    "documentation": "`key: string`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync/param/1": {
+    "documentation": "`transform: (value: number?, keyInfo: nil) -> number?`"
+  },
+  "@bettervoxel/globaltype/OrderedDataStore.UpdateAsync/return/0": {
+    "documentation": "`number?`"
   },
   "@bettervoxel/globaltype/PVInstance": {
     "documentation": "The positioned layer: everything with a pivot — parts and models — answers GetPivot and moves as a group through PivotTo.",
@@ -5369,6 +7151,7 @@
       "Character": "@bettervoxel/globaltype/Player.Character",
       "CharacterAdded": "@bettervoxel/globaltype/Player.CharacterAdded",
       "CharacterRemoving": "@bettervoxel/globaltype/Player.CharacterRemoving",
+      "DisplayName": "@bettervoxel/globaltype/Player.DisplayName",
       "GetCameraState": "@bettervoxel/globaltype/Player.GetCameraState",
       "GetMouse": "@bettervoxel/globaltype/Player.GetMouse",
       "GetNetworkPing": "@bettervoxel/globaltype/Player.GetNetworkPing",
@@ -5392,6 +7175,10 @@
   "@bettervoxel/globaltype/Player.CharacterRemoving": {
     "documentation": "Fires with the character just taken out of the world — the dead body a respawn replaces, the one LoadCharacter replaces, or a leaving player's. Delivered after the swap (measured): the old body's Parent is already nil and Character already the next body (nil on a leave), the old instance still readable; CharacterAdded follows in the same frame. The engine destroys the old body a frame later.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#characterremoving"
+  },
+  "@bettervoxel/globaltype/Player.DisplayName": {
+    "documentation": "The player's Name (measured: Studio's test players and the signed-in account alike, a player that has left too). A script's write is refused with the reference's text, on the server and the client alike (measured): `The current thread cannot set 'Player's display name' (lacking capability WritePlayer)`.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#displayname"
   },
   "@bettervoxel/globaltype/Player.GetCameraState": {
     "documentation": "The player's camera state under server authority: CFrame, FieldOfView and ViewportSize. The CFrame rides the player's input stream, synchronized with the inputs of the same simulation tick (the server reads the camera the player's tick was played under — aim and look-direction logic); the other two replicate as properties do, at their own cadence. The server answers it for any player, a client only for its LocalPlayer; raises under the classic networking model.",
@@ -5427,7 +7214,7 @@
     "documentation": "`number`"
   },
   "@bettervoxel/globaltype/Player.Kick": {
-    "documentation": "Removes the player from the game with an optional message (a number is taken as its text). The server may kick any player: its client's console prints 'Server Kick Message: <message>; Metadata: ', its session ends and its world stays as it stood, and PlayerRemoving fires wherever the player is still held. A client may kick its LocalPlayer alone — another raises 'Cannot kick a non-local Player from a LocalScript' — which ends its session. In solo play the player leaves and no other joins for the rest of the run.",
+    "documentation": "Removes the player from the game with an optional message (a number is taken as its text). The server may kick any player: its client's console prints `Server Kick Message: <message>; Metadata: `, its session ends and its world stays as it stood, and PlayerRemoving fires wherever the player is still held. A client may kick its LocalPlayer alone — another raises 'Cannot kick a non-local Player from a LocalScript' — which ends its session. In solo play the player leaves and no other joins for the rest of the run.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Player.html#kick",
     "params": [
       {
@@ -6196,6 +7983,51 @@
     "documentation": "The server-side handler InvokeServer calls: it receives the invoking player, then the arguments, and its returns cross back to the caller. Assign a function or nil; server-side only.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RemoteFunction.html#onserverinvoke"
   },
+  "@bettervoxel/globaltype/ReplicatedStorage": {
+    "documentation": "The container whose contents replicate to every client: shared modules and the templates a script clones into the world, which neither draw nor simulate until parented into the Workspace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/ReplicatedStorage.html"
+  },
+  "@bettervoxel/globaltype/RodConstraint": {
+    "documentation": "A rigid rod: the two attachments held Length apart, both free to turn.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/RodConstraint.Active",
+      "CurrentDistance": "@bettervoxel/globaltype/RodConstraint.CurrentDistance",
+      "Length": "@bettervoxel/globaltype/RodConstraint.Length",
+      "LimitAngle0": "@bettervoxel/globaltype/RodConstraint.LimitAngle0",
+      "LimitAngle1": "@bettervoxel/globaltype/RodConstraint.LimitAngle1",
+      "LimitsEnabled": "@bettervoxel/globaltype/RodConstraint.LimitsEnabled",
+      "Thickness": "@bettervoxel/globaltype/RodConstraint.Thickness"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html"
+  },
+  "@bettervoxel/globaltype/RodConstraint.Active": {
+    "documentation": "Whether the rod acts: Enabled, in the workspace, both attachments on parts in the workspace, two assemblies, one of them not anchored. Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html#active"
+  },
+  "@bettervoxel/globaltype/RodConstraint.CurrentDistance": {
+    "documentation": "The distance between the attachments in studs, read off the bodies; 0 while either end is on no body. Read only; it fires no Changed as it moves.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html#currentdistance"
+  },
+  "@bettervoxel/globaltype/RodConstraint.Length": {
+    "documentation": "The separation the rod holds its attachments at, in studs, rigidly. The measured default is 5; negative writes clamp to 0, as the rope's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html#length"
+  },
+  "@bettervoxel/globaltype/RodConstraint.LimitAngle0": {
+    "documentation": "The cone's half angle at Attachment0 in degrees, while LimitsEnabled. Stored and saved, but inert: the rod turns freely at both ends (a recorded divergence). Default 90.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html#limitangle0"
+  },
+  "@bettervoxel/globaltype/RodConstraint.LimitAngle1": {
+    "documentation": "The cone's half angle at Attachment1 in degrees, while LimitsEnabled. Stored and saved, but inert, as LimitAngle0. Default 90.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html#limitangle1"
+  },
+  "@bettervoxel/globaltype/RodConstraint.LimitsEnabled": {
+    "documentation": "Whether the rod's angle at each attachment is held within LimitAngle0 and LimitAngle1. Stored and saved, but inert: the rod turns freely at both ends (a recorded divergence). Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html#limitsenabled"
+  },
+  "@bettervoxel/globaltype/RodConstraint.Thickness": {
+    "documentation": "The thickness of the rod's marker in studs: cosmetic. Default 0.1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/RodConstraint.html#thickness"
+  },
   "@bettervoxel/globaltype/RopeConstraint": {
     "documentation": "A slack-allowed distance cap: the bodies never separate beyond Length, and the rope never pushes.",
     "keys": {
@@ -6221,6 +8053,7 @@
       "IsClient": "@bettervoxel/globaltype/RunService.IsClient",
       "IsEdit": "@bettervoxel/globaltype/RunService.IsEdit",
       "IsResimulating": "@bettervoxel/globaltype/RunService.IsResimulating",
+      "IsRunMode": "@bettervoxel/globaltype/RunService.IsRunMode",
       "IsRunning": "@bettervoxel/globaltype/RunService.IsRunning",
       "IsServer": "@bettervoxel/globaltype/RunService.IsServer",
       "IsStudio": "@bettervoxel/globaltype/RunService.IsStudio",
@@ -6409,6 +8242,17 @@
   "@bettervoxel/globaltype/RunService.IsResimulating/return/0": {
     "documentation": "`boolean`"
   },
+  "@bettervoxel/globaltype/RunService.IsRunMode": {
+    "documentation": "True while the editor's Run is live, paused or not: the server side simulating alone, with no Player and no client. False in Play, Play Here, a multiplayer session, a standalone runtime and the editor's Idle.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isrunmode",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/RunService.IsRunMode/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/RunService.IsRunMode/return/0": {
+    "documentation": "`boolean`"
+  },
   "@bettervoxel/globaltype/RunService.IsRunning": {
     "documentation": "True while a game is live and unpaused; false in the editor's Idle and while the simulation is paused. The inverse of IsEdit except while paused, when both answer false.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/RunService.html#isrunning",
@@ -6558,6 +8402,14 @@
   "@bettervoxel/globaltype/Script": {
     "documentation": "A server-side script by default; RunContext can re-home it. Enabled is its run switch — disabling kills its threads, re-enabling restarts it fresh.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Script.html"
+  },
+  "@bettervoxel/globaltype/ServerScriptService": {
+    "documentation": "The server's script container: its Scripts run on the server, and nothing in it replicates to a client.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/ServerScriptService.html"
+  },
+  "@bettervoxel/globaltype/ServerStorage": {
+    "documentation": "The server's own container: its contents never replicate to a client, and neither draw nor simulate until parented into the Workspace.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/ServerStorage.html"
   },
   "@bettervoxel/globaltype/Sound": {
     "documentation": "A playable audio source: Play and Stop drive it, IsPlaying reads back, and volume, speed and looping are properties.",
@@ -6780,6 +8632,72 @@
     "documentation": "The full cone angle in degrees, clamped 0..180 (writing 200 reads back 180). A default spot light reads 90.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpotLight.html#angle"
   },
+  "@bettervoxel/globaltype/SpringConstraint": {
+    "documentation": "A spring between the two attachments: it pulls them toward FreeLength with Stiffness force per stud of stretch (measured: k·x = m·g), slowed by Damping, within MinLength and MaxLength while LimitsEnabled.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/SpringConstraint.Active",
+      "Coils": "@bettervoxel/globaltype/SpringConstraint.Coils",
+      "CurrentLength": "@bettervoxel/globaltype/SpringConstraint.CurrentLength",
+      "Damping": "@bettervoxel/globaltype/SpringConstraint.Damping",
+      "FreeLength": "@bettervoxel/globaltype/SpringConstraint.FreeLength",
+      "LimitsEnabled": "@bettervoxel/globaltype/SpringConstraint.LimitsEnabled",
+      "MaxForce": "@bettervoxel/globaltype/SpringConstraint.MaxForce",
+      "MaxLength": "@bettervoxel/globaltype/SpringConstraint.MaxLength",
+      "MinLength": "@bettervoxel/globaltype/SpringConstraint.MinLength",
+      "Radius": "@bettervoxel/globaltype/SpringConstraint.Radius",
+      "Stiffness": "@bettervoxel/globaltype/SpringConstraint.Stiffness",
+      "Thickness": "@bettervoxel/globaltype/SpringConstraint.Thickness"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.Active": {
+    "documentation": "Whether the spring acts: Enabled, in the workspace, both attachments on parts in the workspace, two assemblies, one of them not anchored (an anchored end leaves it active, as a hinge's anchored axle — measured). Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#active"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.Coils": {
+    "documentation": "The number of coils the spring's marker draws: cosmetic. Default 3.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#coils"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.CurrentLength": {
+    "documentation": "The distance between the attachments in studs, read off the bodies; 0 while either end is on no body. Read only; it fires no Changed as it moves.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#currentlength"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.Damping": {
+    "documentation": "How quickly the spring's oscillation dies down: a force of Damping per stud a second of the attachments' relative speed. 0 (the default) oscillates on; on the measured hung cube 60 settles and 5 still swings after 6 seconds.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#damping"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.FreeLength": {
+    "documentation": "The length the spring rests at, in studs: further apart it pulls, closer it pushes. Default 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#freelength"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.LimitsEnabled": {
+    "documentation": "Whether the spring's length stops hard at MinLength and MaxLength, without a bounce. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#limitsenabled"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.MaxForce": {
+    "documentation": "The most force the spring applies. Stored and saved, but inert: the spring's force is never capped (a recorded divergence). Default inf.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#maxforce"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.MaxLength": {
+    "documentation": "The most separation the spring allows while LimitsEnabled, in studs. Default 5.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#maxlength"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.MinLength": {
+    "documentation": "The least separation the spring allows while LimitsEnabled, in studs. Default 0.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#minlength"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.Radius": {
+    "documentation": "The radius of the spring marker's coils in studs: cosmetic. Default 0.4.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#radius"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.Stiffness": {
+    "documentation": "The spring's force per stud of stretch past FreeLength (or of compression short of it): a 5.6-mass cube hung on Stiffness 100 rests about 11 studs past FreeLength, k·x = m·g (the reference 10.979, the engine 10.960 where the cube falls asleep — measured). The default 0, anything less, or a stiffness below 1e-30 pulls nothing.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#stiffness"
+  },
+  "@bettervoxel/globaltype/SpringConstraint.Thickness": {
+    "documentation": "The thickness of the spring marker's wire in studs: cosmetic. Default 0.1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SpringConstraint.html#thickness"
+  },
   "@bettervoxel/globaltype/StarterGui": {
     "documentation": "The switch on the engine's built-in interfaces: SetCoreGuiEnabled shows or hides the player list (Enum.CoreGuiType.PlayerList, the one drawn today) or every kind at once, GetCoreGuiEnabled reads the store. The container of authored ScreenGuis the reference's service also is waits on UI serialization.",
     "keys": {
@@ -6857,6 +8775,10 @@
   },
   "@bettervoxel/globaltype/StarterGui.SetCoreGuiEnabled/param/1": {
     "documentation": "`enabled: boolean`"
+  },
+  "@bettervoxel/globaltype/StarterPlayerScripts": {
+    "documentation": "The client scripts' container, directly under `game` here (the reference's sits under StarterPlayer): its contents replicate, and its LocalScripts run on each client.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/StarterPlayerScripts.html"
   },
   "@bettervoxel/globaltype/StringValue": {
     "documentation": "A named container for one string.",
@@ -7110,6 +9032,32 @@
   "@bettervoxel/globaltype/TextLabel.TextYAlignment": {
     "documentation": "Where the text block sits vertically in the element: Top, Center (the default) or Bottom. Writes accept the enum item or its name.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextLabel.html#textyalignment"
+  },
+  "@bettervoxel/globaltype/Torque": {
+    "documentation": "A mover: a constant torque on Attachment0's assembly every physics step, named in RelativeTo's frame.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/Torque.Active",
+      "RelativeTo": "@bettervoxel/globaltype/Torque.RelativeTo",
+      "Torque": "@bettervoxel/globaltype/Torque.Torque",
+      "Visible": "@bettervoxel/globaltype/Torque.Visible"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Torque.html"
+  },
+  "@bettervoxel/globaltype/Torque.Active": {
+    "documentation": "Whether the torque acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it. Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Torque.html#active"
+  },
+  "@bettervoxel/globaltype/Torque.RelativeTo": {
+    "documentation": "The frame Torque is named in: Attachment0's (the default), Attachment1's, or the world's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Torque.html#relativeto"
+  },
+  "@bettervoxel/globaltype/Torque.Torque": {
+    "documentation": "The torque applied to Attachment0's assembly every physics step, in RelativeTo's frame. Default (0, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Torque.html#torque"
+  },
+  "@bettervoxel/globaltype/Torque.Visible": {
+    "documentation": "Draws the editor's marker for the torque whatever the selection. An authoring aid — nothing at runtime reads it. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Torque.html#visible"
   },
   "@bettervoxel/globaltype/TriangleMeshPart": {
     "documentation": "The mesh-geometry layer: how imported meshes turn into collision shapes (CollisionFidelity).",
@@ -7951,7 +9899,330 @@
   },
   "@bettervoxel/globaltype/Vector3": {
     "documentation": "Roblox's Vector3 IS Luau's native vector here — one type, two dialects: Vector3.new(1, 2, 3) equals vector.create(1, 2, 3), uppercase X/Y/Z/Magnitude/Unit and the method set ride a type metatable, and lowercase x/y/z stay on the VM fast path. Recorded divergence: typeof says 'vector'. The per-value member surface is not yet in the API model; the constructors below are.",
+    "keys": {
+      "Abs": "@bettervoxel/globaltype/Vector3.Abs",
+      "Angle": "@bettervoxel/globaltype/Vector3.Angle",
+      "Ceil": "@bettervoxel/globaltype/Vector3.Ceil",
+      "Cross": "@bettervoxel/globaltype/Vector3.Cross",
+      "Dot": "@bettervoxel/globaltype/Vector3.Dot",
+      "Floor": "@bettervoxel/globaltype/Vector3.Floor",
+      "FuzzyEq": "@bettervoxel/globaltype/Vector3.FuzzyEq",
+      "Lerp": "@bettervoxel/globaltype/Vector3.Lerp",
+      "Magnitude": "@bettervoxel/globaltype/Vector3.Magnitude",
+      "Max": "@bettervoxel/globaltype/Vector3.Max",
+      "Min": "@bettervoxel/globaltype/Vector3.Min",
+      "Sign": "@bettervoxel/globaltype/Vector3.Sign",
+      "Unit": "@bettervoxel/globaltype/Vector3.Unit",
+      "X": "@bettervoxel/globaltype/Vector3.X",
+      "Y": "@bettervoxel/globaltype/Vector3.Y",
+      "Z": "@bettervoxel/globaltype/Vector3.Z",
+      "lerp": "@bettervoxel/globaltype/Vector3.lerp",
+      "magnitude": "@bettervoxel/globaltype/Vector3.magnitude",
+      "unit": "@bettervoxel/globaltype/Vector3.unit",
+      "x": "@bettervoxel/globaltype/Vector3.x",
+      "y": "@bettervoxel/globaltype/Vector3.y",
+      "z": "@bettervoxel/globaltype/Vector3.z"
+    },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html"
+  },
+  "@bettervoxel/globaltype/Vector3.Abs": {
+    "documentation": "Each component's absolute value.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#abs",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Abs/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Abs/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Angle": {
+    "documentation": "The angle to other in radians: unsigned (0..π), or signed by the rotation's sense around axis when one is given.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#angle",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Angle/param/0",
+        "name": "other"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Angle/param/1",
+        "name": "axis"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Angle/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Angle/param/0": {
+    "documentation": "`other: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Angle/param/1": {
+    "documentation": "`axis: Vector3?`"
+  },
+  "@bettervoxel/globaltype/Vector3.Angle/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Vector3.Ceil": {
+    "documentation": "Each component rounded up.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#ceil",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Ceil/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Ceil/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Cross": {
+    "documentation": "The cross product with other: perpendicular to both, by the right-hand rule.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#cross",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Cross/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Cross/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Cross/param/0": {
+    "documentation": "`other: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Cross/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Dot": {
+    "documentation": "The dot product with other.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#dot",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Dot/param/0",
+        "name": "other"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Dot/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Dot/param/0": {
+    "documentation": "`other: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Dot/return/0": {
+    "documentation": "`number`"
+  },
+  "@bettervoxel/globaltype/Vector3.Floor": {
+    "documentation": "Each component rounded down.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#floor",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Floor/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Floor/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.FuzzyEq": {
+    "documentation": "Whether each component is within epsilon of other's (1e-5 when omitted).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#fuzzyeq",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.FuzzyEq/param/0",
+        "name": "other"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.FuzzyEq/param/1",
+        "name": "epsilon"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.FuzzyEq/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.FuzzyEq/param/0": {
+    "documentation": "`other: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.FuzzyEq/param/1": {
+    "documentation": "`epsilon: number?`"
+  },
+  "@bettervoxel/globaltype/Vector3.FuzzyEq/return/0": {
+    "documentation": "`boolean`"
+  },
+  "@bettervoxel/globaltype/Vector3.Lerp": {
+    "documentation": "The point alpha of the way from this vector to goal.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Lerp/param/0": {
+    "documentation": "`goal: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/Vector3.Lerp/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Magnitude": {
+    "documentation": "The vector's length.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#magnitude"
+  },
+  "@bettervoxel/globaltype/Vector3.Max": {
+    "documentation": "The componentwise maximum of this vector and the others.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#max",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Max/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Max/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Max/param/0": {
+    "documentation": "`...: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Max/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Min": {
+    "documentation": "The componentwise minimum of this vector and the others.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#min",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.Min/param/0",
+        "name": "..."
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Min/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Min/param/0": {
+    "documentation": "`...: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Min/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Sign": {
+    "documentation": "Each component's sign: -1, 0 or 1.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#sign",
+    "params": [],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.Sign/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.Sign/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.Unit": {
+    "documentation": "The vector scaled to length 1, in its own direction.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#unit"
+  },
+  "@bettervoxel/globaltype/Vector3.X": {
+    "documentation": "The X component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#x"
+  },
+  "@bettervoxel/globaltype/Vector3.Y": {
+    "documentation": "The Y component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#y"
+  },
+  "@bettervoxel/globaltype/Vector3.Z": {
+    "documentation": "The Z component.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#z"
+  },
+  "@bettervoxel/globaltype/Vector3.lerp": {
+    "documentation": "Deprecated: the retired lowercase spelling of Lerp, answered the same way — use Lerp.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#lerp",
+    "params": [
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.lerp/param/0",
+        "name": "goal"
+      },
+      {
+        "documentation": "@bettervoxel/globaltype/Vector3.lerp/param/1",
+        "name": "alpha"
+      }
+    ],
+    "returns": [
+      "@bettervoxel/globaltype/Vector3.lerp/return/0"
+    ]
+  },
+  "@bettervoxel/globaltype/Vector3.lerp/param/0": {
+    "documentation": "`goal: Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.lerp/param/1": {
+    "documentation": "`alpha: number`"
+  },
+  "@bettervoxel/globaltype/Vector3.lerp/return/0": {
+    "documentation": "`Vector3`"
+  },
+  "@bettervoxel/globaltype/Vector3.magnitude": {
+    "documentation": "Deprecated: the retired lowercase spelling of Magnitude, answered the same way — use Magnitude.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#magnitude"
+  },
+  "@bettervoxel/globaltype/Vector3.unit": {
+    "documentation": "Deprecated: the retired lowercase spelling of Unit, answered the same way — use Unit.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#unit"
+  },
+  "@bettervoxel/globaltype/Vector3.x": {
+    "documentation": "The X component, the native vector's own lane: read with no metatable, the VM's fast path.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#x"
+  },
+  "@bettervoxel/globaltype/Vector3.y": {
+    "documentation": "The Y component, the native vector's own lane: read with no metatable, the VM's fast path.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#y"
+  },
+  "@bettervoxel/globaltype/Vector3.z": {
+    "documentation": "The Z component, the native vector's own lane: read with no metatable, the VM's fast path.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/datatypes/Vector3.html#z"
+  },
+  "@bettervoxel/globaltype/VectorForce": {
+    "documentation": "A mover: a constant force on Attachment0's assembly every physics step, named in RelativeTo's frame, at Attachment0 (turning the assembly by its arm) or at the centre of mass.",
+    "keys": {
+      "Active": "@bettervoxel/globaltype/VectorForce.Active",
+      "ApplyAtCenterOfMass": "@bettervoxel/globaltype/VectorForce.ApplyAtCenterOfMass",
+      "Force": "@bettervoxel/globaltype/VectorForce.Force",
+      "RelativeTo": "@bettervoxel/globaltype/VectorForce.RelativeTo",
+      "Visible": "@bettervoxel/globaltype/VectorForce.Visible"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/VectorForce.html"
+  },
+  "@bettervoxel/globaltype/VectorForce.Active": {
+    "documentation": "Whether the force acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it; a zero Force leaves it active (measured). Read only.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/VectorForce.html#active"
+  },
+  "@bettervoxel/globaltype/VectorForce.ApplyAtCenterOfMass": {
+    "documentation": "Whether the force acts at the assembly's centre of mass (no turn) instead of at Attachment0. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/VectorForce.html#applyatcenterofmass"
+  },
+  "@bettervoxel/globaltype/VectorForce.Force": {
+    "documentation": "The force pushed on Attachment0's assembly every physics step, in RelativeTo's frame; off the centre of mass it turns the assembly too (measured). Default (1000, 0, 0).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/VectorForce.html#force"
+  },
+  "@bettervoxel/globaltype/VectorForce.RelativeTo": {
+    "documentation": "The frame Force is named in: Attachment0's (the default — it turns with the assembly), Attachment1's, or the world's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/VectorForce.html#relativeto"
+  },
+  "@bettervoxel/globaltype/VectorForce.Visible": {
+    "documentation": "Draws the editor's marker for the force whatever the selection. An authoring aid — nothing at runtime reads it. Default false.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/VectorForce.html#visible"
+  },
+  "@bettervoxel/globaltype/Weld": {
+    "documentation": "A classic joint: while Active, Part0.CFrame * C0 equals Part1.CFrame * C1, and the part that is not the assembly root stands where the frames put it — creating the weld, or writing C0, C1, an end or Enabled, moves it. Inactive between two anchored parts.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Weld.html"
   },
   "@bettervoxel/globaltype/WeldConstraint": {
     "documentation": "Rigidly binds Part0 to Part1: while Enabled the two parts move as one assembly.",

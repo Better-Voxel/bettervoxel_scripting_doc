@@ -4,6 +4,231 @@
       "creatable": true,
       "members": [
         {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the alignment acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body in TwoAttachment mode (measured: OneAttachment needs Attachment0 alone). Read only."
+        },
+        {
+          "decl": "Enum.AlignType",
+          "kind": "ReadWrite",
+          "name": "AlignType",
+          "summary": "What turns: AllAxes (the default) the whole orientation; PrimaryAxisParallel Attachment0's X parallel to the goal's X; PrimaryAxisLookAt Attachment0's X toward LookAtPosition (one attachment) or Attachment1's position (two). Parallel, Perpendicular and PrimaryAxisPerpendicular are refused (a recorded divergence)."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "CFrame",
+          "summary": "The goal orientation in OneAttachment mode: Attachment0 turns to its rotation; its translation is saved and ignored, as the reference's (a look-at aims at LookAtPosition). Default identity."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "LookAtPosition",
+          "summary": "The world point Attachment0's X turns toward when AlignType is PrimaryAxisLookAt and Mode is OneAttachment. Neither saved nor replicated: a client's is its own. Default (0, 0, 0)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxAngularVelocity",
+          "summary": "The speed Attachment0 turns toward its goal at, at most, in radians per second. Default inf."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxTorque",
+          "summary": "The most torque the alignment turns with; math.huge is no limit. Default 10000."
+        },
+        {
+          "decl": "Enum.OrientationAlignmentMode",
+          "kind": "ReadWrite",
+          "name": "Mode",
+          "summary": "TwoAttachment (the default) turns Attachment0 to Attachment1's orientation; OneAttachment turns it to CFrame's."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "PrimaryAxis",
+          "summary": "The goal's X axis in OneAttachment mode — a view of CFrame's rotation: a write turns the goal so its X is the axis, keeping its Y as near as perpendicularity allows. Default (1, 0, 0)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "PrimaryAxisOnly",
+          "summary": "Deprecated on the reference: set AlignType instead. True makes AllAxes turn the primary axes alone, as PrimaryAxisParallel does. Default false.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ReactionTorqueEnabled",
+          "summary": "Whether Attachment1's assembly takes the opposite torque (TwoAttachment mode). Default false."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Responsiveness",
+          "summary": "How quickly Attachment0 turns to its goal: an approach without overshoot that settles in about 13 / Responsiveness seconds (45 is within 1 degree of a quarter turn at 0.32 s, measured). Stored within 5 to 200: a write outside lands on the nearer end (measured), an infinite one included; a NaN write is refused. Default 10."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "RigidityEnabled",
+          "summary": "Always false: the rigid alignment is not built, and a write of true is refused (a recorded divergence)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "SecondaryAxis",
+          "summary": "The goal's Y axis in OneAttachment mode — a view of CFrame's rotation: a write turns the goal about its X toward the axis. Default (0, 1, 0)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Draws the editor's marker for the alignment whatever the selection. An authoring aid — nothing at runtime reads it. Default false."
+        }
+      ],
+      "name": "AlignOrientation",
+      "parent": "Constraint",
+      "summary": "A mover: a torque that turns Attachment0 to Attachment1's orientation, or to CFrame's with one attachment — the whole orientation, its primary axis alone, or that axis toward a point (AlignType; LookAtPosition with one attachment) — as quickly as Responsiveness asks and within MaxTorque and MaxAngularVelocity."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the alignment acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body in TwoAttachment mode or when the per-axis limit is in its frame (measured: OneAttachment needs Attachment0 alone). Read only."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ApplyAtCenterOfMass",
+          "summary": "Whether the force acts at the assembly's centre of mass instead of at Attachment0. Default false."
+        },
+        {
+          "decl": "Enum.ForceLimitMode",
+          "kind": "ReadWrite",
+          "name": "ForceLimitMode",
+          "summary": "Magnitude (the default) holds the force's length to MaxForce; PerAxis holds each axis of ForceRelativeTo's frame to its lane of MaxAxesForce."
+        },
+        {
+          "decl": "Enum.ActuatorRelativeTo",
+          "kind": "ReadWrite",
+          "name": "ForceRelativeTo",
+          "summary": "The frame whose axes the PerAxis limit applies along: the world's (the default), Attachment0's or Attachment1's."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "MaxAxesForce",
+          "summary": "The most force along each axis of ForceRelativeTo's frame under the PerAxis limit; a lane of math.huge is no limit. Default (10000, 10000, 10000)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxForce",
+          "summary": "The most force the alignment pushes with under the Magnitude limit — the assembly's weight included; math.huge is no limit. Default 10000."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxVelocity",
+          "summary": "The speed Attachment0 approaches its goal at, at most, in studs per second (measured as an exact cap). Default inf."
+        },
+        {
+          "decl": "Enum.PositionAlignmentMode",
+          "kind": "ReadWrite",
+          "name": "Mode",
+          "summary": "TwoAttachment (the default) carries Attachment0 to Attachment1; OneAttachment carries it to Position."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Position",
+          "summary": "The goal in world space in OneAttachment mode: Attachment0 is carried there. Default (0, 0, 0)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ReactionForceEnabled",
+          "summary": "Whether Attachment1's assembly takes the opposite force (TwoAttachment mode). Default false."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Responsiveness",
+          "summary": "How quickly Attachment0 reaches its goal: an approach without overshoot that settles in about 13 / Responsiveness seconds (45 is within 0.1 stud of a 10-stud goal at 0.32 s, measured). Stored within 5 to 200: a write outside lands on the nearer end (measured), an infinite one included; a NaN write is refused. Default 10."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "RigidityEnabled",
+          "summary": "Always false: the rigid alignment is not built, and a write of true is refused (a recorded divergence)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Draws the editor's marker for the alignment whatever the selection. An authoring aid — nothing at runtime reads it. Default false."
+        }
+      ],
+      "name": "AlignPosition",
+      "parent": "Constraint",
+      "summary": "A mover: a force that carries Attachment0 to Attachment1, or to Position with one attachment, as quickly as Responsiveness asks and within MaxForce and MaxVelocity — holding the assembly's weight while it does."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the angular velocity target acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it; the fresh zero MaxTorque leaves it active (measured). Read only."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "AngularVelocity",
+          "summary": "The angular velocity, radians per second, the torque brings Attachment0's assembly to within each physics step, in RelativeTo's frame — relative to Attachment1's assembly under Attachment1. Default (0, 0, 0)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxTorque",
+          "summary": "The most torque the target spins the assembly with; the default 0 turns nothing, as does any value of 0 or less (the hinge's rule); math.huge is no limit."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ReactionTorqueEnabled",
+          "summary": "Whether Attachment1's assembly takes the opposite torque — with RelativeTo Attachment1, the frame it is meaningful in. Default false."
+        },
+        {
+          "decl": "Enum.ActuatorRelativeTo",
+          "kind": "ReadWrite",
+          "name": "RelativeTo",
+          "summary": "The frame AngularVelocity is named in: the world's (the default), Attachment0's, or Attachment1's — the spin then relative to Attachment1's assembly."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Draws the editor's marker for the angular velocity target whatever the selection. An authoring aid — nothing at runtime reads it. Default false."
+        }
+      ],
+      "name": "AngularVelocity",
+      "parent": "Constraint",
+      "summary": "A mover: a torque that brings Attachment0's assembly to an angular velocity within each physics step, named in RelativeTo's frame, within MaxTorque — whose default 0 turns nothing."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
           "decl": "CFrame",
           "kind": "ReadWrite",
           "name": "CFrame",
@@ -43,6 +268,68 @@
       "name": "Attachment",
       "parent": "Instance",
       "summary": "A named point on a part: its CFrame, Position and Orientation are LOCAL to the parent, and the WorldCFrame/WorldPosition pair is the composed world view (writing it recomputes the local). Constraints anchor to attachments; Visible draws the editor marker."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the ball socket acts: Enabled, in the workspace, both attachments on parts in the workspace, two assemblies, one of them not anchored (an anchored end leaves it active). Read only."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "LimitsEnabled",
+          "summary": "Whether Attachment1's X axis stops hard within UpperAngle of Attachment0's — the tilt cone (measured a hard limit) — and, with TwistLimitsEnabled, its twist within the twist range. Default false."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxFrictionTorque",
+          "summary": "The socket's friction torque. Reads 0, the default; a write of any other value is refused: the reference's friction holds the attachments' angle against a smaller load (measured) and the engine's solver has no such hold (not supported in v1)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Radius",
+          "summary": "The size of the ball socket's marker in studs: cosmetic. Default 0.15."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Restitution",
+          "summary": "The cone's bounce, clamped to 0..1 at the write (measured), an infinity included; a NaN write is refused. Stored and saved, but inert: the socket stops dead at its limits whatever it holds (a recorded divergence, as the hinge's). Default 0."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "TwistLimitsEnabled",
+          "summary": "Whether the twist — the angle from Attachment0's Y axis to Attachment1's about their X — stops hard within TwistLowerAngle and TwistUpperAngle. One of the limits: it acts while LimitsEnabled is on too. Default false."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TwistLowerAngle",
+          "summary": "The twist's lower limit in degrees, while TwistLimitsEnabled. Clamped to -180..180 at the write (measured), an infinity included; never reordered against TwistUpperAngle (measured); a NaN write is refused. Default -45."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TwistUpperAngle",
+          "summary": "The twist's upper limit in degrees, while TwistLimitsEnabled (a 20 rad/s twist under ±10 stopped at 12.1 — measured). Clamped to -180..180 at the write, an infinity included, never reordered against TwistLowerAngle (measured); a NaN write is refused. Default 45."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "UpperAngle",
+          "summary": "The tilt cone's half angle in degrees, while LimitsEnabled: the most Attachment1's X axis turns from Attachment0's (a hung arm pushed hard stopped at 30.9 under 30 — measured). Clamped to 0..180 at the write, an infinity included (measured); a NaN write is refused. Default 45."
+        }
+      ],
+      "name": "BallSocketConstraint",
+      "parent": "Constraint",
+      "summary": "A ball and socket: the two attachments held at one point, free to turn about it — while LimitsEnabled, Attachment1's X axis within UpperAngle of Attachment0's (a hard stop, measured), and with TwistLimitsEnabled its twist within TwistLowerAngle and TwistUpperAngle."
     },
     {
       "creatable": false,
@@ -816,12 +1103,122 @@
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "Enabled",
-          "summary": "Whether the constraint acts. Disabling is inert (the derived joint goes away); re-enabling rebuilds it at the current poses (§16)."
+          "summary": "Whether the constraint acts. Disabling is inert (a joint's derived joint goes away, a mover pushes nothing); re-enabling rebuilds a joint at the current poses (§16)."
         }
       ],
       "name": "Constraint",
       "parent": "Instance",
-      "summary": "The base of the attachment-anchored constraints: Attachment0, Attachment1 and Enabled. A constraint acts while Enabled and both ends sit under live in-world parts; anything else is inert."
+      "summary": "The base of the attachment-anchored constraints: Attachment0, Attachment1 and Enabled. A constraint acts while Enabled and the ends it needs sit under live in-world parts; anything else is inert."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "UseCache",
+          "summary": "Whether GetAsync may answer from a cache: true by default (measured). The engine keeps no cache, so a read is fresh either way."
+        }
+      ],
+      "name": "DataStoreGetOptions",
+      "parent": "Instance",
+      "summary": "The options GetAsync reads: UseCache, true by default — the engine keeps no cache, so a read is fresh either way. Script-made, never saved."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "() -> {[string]: any}",
+          "kind": "Method",
+          "name": "GetMetadata",
+          "params": [],
+          "returns": [
+            {
+              "type": "{[string]: any}"
+            }
+          ],
+          "summary": "The metadata SetMetadata gave — an empty table before it."
+        },
+        {
+          "decl": "(attributes: {[string]: any}) -> ()",
+          "kind": "Method",
+          "name": "SetMetadata",
+          "params": [
+            {
+              "name": "attributes",
+              "optional": false,
+              "type": "{[string]: any}"
+            }
+          ],
+          "returns": [],
+          "summary": "The metadata the next IncrementAsync with these options writes — a table, 300 bytes of JSON at most when the write lands."
+        }
+      ],
+      "name": "DataStoreIncrementOptions",
+      "parent": "Instance",
+      "summary": "The options IncrementAsync reads: the metadata SetMetadata gives rides the increment. Script-made, never saved."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "AllScopes",
+          "summary": "Whether GetDataStore opens the store across every scope of its name (false by default, measured) — then the scope must be \"\" (`DataStore scope should be an empty string allScopes is set to true`, nil meaning \"global\") and every key reads `<scope>/<key>`."
+        },
+        {
+          "decl": "(experimentalFeatures: {[string]: boolean}) -> ()",
+          "kind": "Method",
+          "name": "SetExperimentalFeatures",
+          "params": [
+            {
+              "name": "experimentalFeatures",
+              "optional": false,
+              "type": "{[string]: boolean}"
+            }
+          ],
+          "returns": [],
+          "summary": "Takes the reference's feature switches; { v2 = true } is accepted and kept (measured) and changes nothing here."
+        }
+      ],
+      "name": "DataStoreOptions",
+      "parent": "Instance",
+      "summary": "The options GetDataStore reads: AllScopes opens a store across every scope of its name (its keys `<scope>/<key>`), and SetExperimentalFeatures takes { v2 = true }. Script-made, never saved."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "() -> {[string]: any}",
+          "kind": "Method",
+          "name": "GetMetadata",
+          "params": [],
+          "returns": [
+            {
+              "type": "{[string]: any}"
+            }
+          ],
+          "summary": "The metadata SetMetadata gave — an empty table before it."
+        },
+        {
+          "decl": "(attributes: {[string]: any}) -> ()",
+          "kind": "Method",
+          "name": "SetMetadata",
+          "params": [
+            {
+              "name": "attributes",
+              "optional": false,
+              "type": "{[string]: any}"
+            }
+          ],
+          "returns": [],
+          "summary": "The metadata the next SetAsync with these options writes — a table (`Unable to cast double to Dictionary` otherwise, measured), 300 bytes of JSON at most when the write lands."
+        }
+      ],
+      "name": "DataStoreSetOptions",
+      "parent": "Instance",
+      "summary": "The options SetAsync reads: the metadata SetMetadata gives rides the write and reads back through the key info. Script-made, never saved."
     },
     {
       "creatable": true,
@@ -932,10 +1329,104 @@
     },
     {
       "creatable": true,
-      "members": [],
+      "members": [
+        {
+          "decl": "Enum.ActuatorType",
+          "kind": "ReadWrite",
+          "name": "ActuatorType",
+          "summary": "What drives the hinge: None (a free hinge, the default), Motor (turns at AngularVelocity) or Servo (turns to TargetAngle). Writes accept the Enum.ActuatorType item or its name."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "AngularResponsiveness",
+          "summary": "How stiffly the Servo pulls toward its target: 5 approaches slowly, 45 (the default) arrives without overshoot, 200 overshoots against its torque cap. Stored within 5 to 200: a write outside lands on the nearer end, an infinite one included (measured); a NaN write is refused."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "AngularSpeed",
+          "summary": "The Servo's rate cap in radians per second: its applied target moves toward TargetAngle by at most this much a second. The default 0 holds the Servo where it stands (measured)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "AngularVelocity",
+          "summary": "The Motor's target speed in radians per second: Attachment1 turns about Attachment0's X axis at it, within MotorMaxTorque and MotorMaxAcceleration. Default 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "CurrentAngle",
+          "summary": "The hinge's angle in degrees: Attachment1 about Attachment0's X axis, 0 with the two attachments aligned, positive turning Attachment0's Y toward its Z (measured). 0 while either end is on no body. Read only; it fires no Changed as it turns."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "LimitsEnabled",
+          "summary": "Whether the hinge stops hard at LowerAngle and UpperAngle. Default false."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "LowerAngle",
+          "summary": "The lower limit in degrees, while LimitsEnabled. Clamped to -180..180 at the write, an infinity included (measured); a NaN write is refused. Default -45."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MotorMaxAcceleration",
+          "summary": "The Motor's angular-acceleration cap in radians per second squared: its applied speed ramps toward AngularVelocity by at most this much a second (measured as a true cap). Default 500000."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MotorMaxTorque",
+          "summary": "The most torque the Motor applies. The default 0 moves nothing (measured), as does any value of 0 or less."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Radius",
+          "summary": "The size of the hinge's marker in studs: cosmetic. Default 0.15."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Restitution",
+          "summary": "The limits' bounce, clamped to 0..1 at the write, an infinity included (measured); a NaN write is refused. Stored and saved, but inert: the hinge stops dead at a limit whatever it holds (a recorded divergence — the reference bounces). Default 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ServoMaxTorque",
+          "summary": "The most torque the Servo applies. The default 0 moves nothing, as does any value of 0 or less."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "SoftlockServoUponReachingTarget",
+          "summary": "Deprecated on the reference. Stored and saved, inert. Default false.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "TargetAngle",
+          "summary": "The Servo's target in degrees from the two attachments aligned, reduced modulo 360 and reached the short way (270 is -90, 720 is 0 — measured). Default 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "UpperAngle",
+          "summary": "The upper limit in degrees, while LimitsEnabled. Clamped to -180..180 at the write, an infinity included (measured); a NaN write is refused. Default 45."
+        }
+      ],
       "name": "HingeConstraint",
       "parent": "Constraint",
-      "summary": "A free hinge: the two bodies rotate about the attachments' X axes. No motor, servo or limits yet."
+      "summary": "A hinge: the two bodies rotate about the attachments' X axes — free, or driven by a Motor or a Servo (ActuatorType), within optional limits."
     },
     {
       "creatable": true,
@@ -1988,6 +2479,50 @@
     },
     {
       "creatable": false,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the joint acts: Enabled, parented in the tree, both ends set to two different parts in the tree, and not both of them anchored (two anchored parts each root an assembly of their own; measured, §43)."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "C0",
+          "summary": "The joint's frame in Part0's space: while Active, Part0.CFrame * C0 equals Part1.CFrame * C1. Writing it moves the part that is not the assembly root on the next physics pass (measured, §43)."
+        },
+        {
+          "decl": "CFrame",
+          "kind": "ReadWrite",
+          "name": "C1",
+          "summary": "The joint's frame in Part1's space — C0's counterpart."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the joint may act (Active also needs both ends). Disabling leaves the parts where they stand; re-enabling stands the non-root part where C0 and C1 put it (measured, §43)."
+        },
+        {
+          "decl": "BasePart?",
+          "kind": "ReadWrite",
+          "name": "Part0",
+          "summary": "The part C0 is a frame of: an Instance or nil. Setting an end of an active joint moves the part that is not the assembly root to where the frames put it (§43)."
+        },
+        {
+          "decl": "BasePart?",
+          "kind": "ReadWrite",
+          "name": "Part1",
+          "summary": "The part C1 is a frame of: an Instance or nil."
+        }
+      ],
+      "name": "JointInstance",
+      "parent": "Instance",
+      "summary": "The base of the classic joints: Part0 and Part1, the frames C0 and C1 they are held at, Enabled, and the read-only Active."
+    },
+    {
+      "creatable": false,
       "members": [],
       "name": "LayerCollector",
       "parent": "GuiBase2d",
@@ -2030,6 +2565,110 @@
       "name": "Light",
       "parent": "Instance",
       "summary": "The shared light surface: Brightness, Color, Range, Shadows and the Enabled switch, parented under the part that carries the light."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the velocity target acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it; a zero MaxForce leaves it active (measured). Read only."
+        },
+        {
+          "decl": "Enum.ForceLimitMode",
+          "kind": "ReadWrite",
+          "name": "ForceLimitMode",
+          "summary": "Magnitude (the default) holds the force's length to MaxForce; PerAxis holds each axis of RelativeTo's frame to its lane of MaxAxesForce in Vector mode, each tangent axis to its lane of MaxPlanarAxesForce in Plane mode (a line keeps MaxForce)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ForceLimitsEnabled",
+          "summary": "Whether the force is limited (by ForceLimitMode); off, the target is reached within the step whatever it takes. Default true."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "LineDirection",
+          "summary": "The line Line mode holds the velocity along, in RelativeTo's frame (its length ignored; the zero vector holds nothing). Default (1, 0, 0)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "LineVelocity",
+          "summary": "The speed held along LineDirection in Line mode, studs per second. Default 0."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "MaxAxesForce",
+          "summary": "The most force along each axis of RelativeTo's frame under the PerAxis limit in Vector mode; a lane of math.huge is no limit. Default (1000, 1000, 1000)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxForce",
+          "summary": "The most force, the assembly's weight included, under the Magnitude limit (and along a line under either), while ForceLimitsEnabled: the acceleration is MaxForce / mass until the target is reached (measured). Default 1000."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "ReadWrite",
+          "name": "MaxPlanarAxesForce",
+          "summary": "The most force along each tangent axis under the PerAxis limit in Plane mode; a lane of math.huge is no limit. Default (1000, 1000)."
+        },
+        {
+          "decl": "Vector2",
+          "kind": "ReadWrite",
+          "name": "PlaneVelocity",
+          "summary": "The velocity held along the two tangent axes in Plane mode, studs per second. Default (0, 0)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "PrimaryTangentAxis",
+          "summary": "Plane mode's first axis, in RelativeTo's frame. Default (1, 0, 0)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ReactionForceEnabled",
+          "summary": "Whether Attachment1's assembly takes the opposite force under RelativeTo Attachment1, the pair then sharing its momentum (an equal pair, one moving 3, ends at 1.5 each — measured). Default true."
+        },
+        {
+          "decl": "Enum.ActuatorRelativeTo",
+          "kind": "ReadWrite",
+          "name": "RelativeTo",
+          "summary": "The frame the target velocity, the line, the plane and the per-axis limits are named in: the world's (the default), Attachment0's, or Attachment1's — the velocity then relative to Attachment1's assembly."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "SecondaryTangentAxis",
+          "summary": "Plane mode's second axis, in RelativeTo's frame, made perpendicular to the first. Default (0, 1, 0)."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "VectorVelocity",
+          "summary": "The velocity held in Vector mode, studs per second, in RelativeTo's frame: reached within a step while the force limit allows (measured). Default (0, 0, 0)."
+        },
+        {
+          "decl": "Enum.VelocityConstraintMode",
+          "kind": "ReadWrite",
+          "name": "VelocityConstraintMode",
+          "summary": "What the target holds: Vector (the default) the whole velocity, Line its component along LineDirection, Plane its projection on the two tangent axes."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Draws the editor's marker for the velocity target whatever the selection. An authoring aid — nothing at runtime reads it. Default false."
+        }
+      ],
+      "name": "LinearVelocity",
+      "parent": "Constraint",
+      "summary": "A mover: a force that brings Attachment0's assembly to a velocity within each physics step — the whole vector, its component along a line, or its projection on a plane, named in RelativeTo's frame — within its force limits, the assembly's weight held."
     },
     {
       "creatable": false,
@@ -2467,6 +3106,12 @@
           "summary": "Fires with the character just taken out of the world — the dead body a respawn replaces, the one LoadCharacter replaces, or a leaving player's. Delivered after the swap (measured): the old body's Parent is already nil and Character already the next body (nil on a leave), the old instance still readable; CharacterAdded follows in the same frame. The engine destroys the old body a frame later."
         },
         {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "DisplayName",
+          "summary": "The player's Name (measured: Studio's test players and the signed-in account alike, a player that has left too). A script's write is refused with the reference's text, on the server and the client alike (measured): `The current thread cannot set 'Player's display name' (lacking capability WritePlayer)`."
+        },
+        {
           "decl": "() -> {CFrame: CFrame, FieldOfView: number, ViewportSize: Vector2}",
           "kind": "Method",
           "name": "GetCameraState",
@@ -2514,7 +3159,7 @@
             }
           ],
           "returns": [],
-          "summary": "Removes the player from the game with an optional message (a number is taken as its text). The server may kick any player: its client's console prints 'Server Kick Message: <message>; Metadata: ', its session ends and its world stays as it stood, and PlayerRemoving fires wherever the player is still held. A client may kick its LocalPlayer alone — another raises 'Cannot kick a non-local Player from a LocalScript' — which ends its session. In solo play the player leaves and no other joins for the rest of the run."
+          "summary": "Removes the player from the game with an optional message (a number is taken as its text). The server may kick any player: its client's console prints `Server Kick Message: <message>; Metadata: `, its session ends and its world stays as it stood, and PlayerRemoving fires wherever the player is still held. A client may kick its LocalPlayer alone — another raises 'Cannot kick a non-local Player from a LocalScript' — which ends its session. In solo play the player leaves and no other joins for the rest of the run."
         },
         {
           "decl": "() -> ()",
@@ -2818,6 +3463,56 @@
       "creatable": true,
       "members": [
         {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the rod acts: Enabled, in the workspace, both attachments on parts in the workspace, two assemblies, one of them not anchored. Read only."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "CurrentDistance",
+          "summary": "The distance between the attachments in studs, read off the bodies; 0 while either end is on no body. Read only; it fires no Changed as it moves."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Length",
+          "summary": "The separation the rod holds its attachments at, in studs, rigidly. The measured default is 5; negative writes clamp to 0, as the rope's."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "LimitAngle0",
+          "summary": "The cone's half angle at Attachment0 in degrees, while LimitsEnabled. Stored and saved, but inert: the rod turns freely at both ends (a recorded divergence). Default 90."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "LimitAngle1",
+          "summary": "The cone's half angle at Attachment1 in degrees, while LimitsEnabled. Stored and saved, but inert, as LimitAngle0. Default 90."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "LimitsEnabled",
+          "summary": "Whether the rod's angle at each attachment is held within LimitAngle0 and LimitAngle1. Stored and saved, but inert: the rod turns freely at both ends (a recorded divergence). Default false."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Thickness",
+          "summary": "The thickness of the rod's marker in studs: cosmetic. Default 0.1."
+        }
+      ],
+      "name": "RodConstraint",
+      "parent": "Constraint",
+      "summary": "A rigid rod: the two attachments held Length apart, both free to turn."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "Length",
@@ -3074,6 +3769,86 @@
       "name": "SpotLight",
       "parent": "Light",
       "summary": "A cone light aimed along its parent's orientation; Angle is the full cone in degrees."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the spring acts: Enabled, in the workspace, both attachments on parts in the workspace, two assemblies, one of them not anchored (an anchored end leaves it active, as a hinge's anchored axle — measured). Read only."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Coils",
+          "summary": "The number of coils the spring's marker draws: cosmetic. Default 3."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "CurrentLength",
+          "summary": "The distance between the attachments in studs, read off the bodies; 0 while either end is on no body. Read only; it fires no Changed as it moves."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Damping",
+          "summary": "How quickly the spring's oscillation dies down: a force of Damping per stud a second of the attachments' relative speed. 0 (the default) oscillates on; on the measured hung cube 60 settles and 5 still swings after 6 seconds."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "FreeLength",
+          "summary": "The length the spring rests at, in studs: further apart it pulls, closer it pushes. Default 1."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "LimitsEnabled",
+          "summary": "Whether the spring's length stops hard at MinLength and MaxLength, without a bounce. Default false."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxForce",
+          "summary": "The most force the spring applies. Stored and saved, but inert: the spring's force is never capped (a recorded divergence). Default inf."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MaxLength",
+          "summary": "The most separation the spring allows while LimitsEnabled, in studs. Default 5."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "MinLength",
+          "summary": "The least separation the spring allows while LimitsEnabled, in studs. Default 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Radius",
+          "summary": "The radius of the spring marker's coils in studs: cosmetic. Default 0.4."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Stiffness",
+          "summary": "The spring's force per stud of stretch past FreeLength (or of compression short of it): a 5.6-mass cube hung on Stiffness 100 rests about 11 studs past FreeLength, k·x = m·g (the reference 10.979, the engine 10.960 where the cube falls asleep — measured). The default 0, anything less, or a stiffness below 1e-30 pulls nothing."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Thickness",
+          "summary": "The thickness of the spring marker's wire in studs: cosmetic. Default 0.1."
+        }
+      ],
+      "name": "SpringConstraint",
+      "parent": "Constraint",
+      "summary": "A spring between the two attachments: it pulls them toward FreeLength with Stiffness force per stud of stretch (measured: k·x = m·g), slowed by Damping, within MinLength and MaxLength while LimitsEnabled."
     },
     {
       "creatable": true,
@@ -3380,6 +4155,38 @@
       "summary": "A UI element that displays text."
     },
     {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the torque acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it. Read only."
+        },
+        {
+          "decl": "Enum.ActuatorRelativeTo",
+          "kind": "ReadWrite",
+          "name": "RelativeTo",
+          "summary": "The frame Torque is named in: Attachment0's (the default), Attachment1's, or the world's."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Torque",
+          "summary": "The torque applied to Attachment0's assembly every physics step, in RelativeTo's frame. Default (0, 0, 0)."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Draws the editor's marker for the torque whatever the selection. An authoring aid — nothing at runtime reads it. Default false."
+        }
+      ],
+      "name": "Torque",
+      "parent": "Constraint",
+      "summary": "A mover: a constant torque on Attachment0's assembly every physics step, named in RelativeTo's frame."
+    },
+    {
       "creatable": false,
       "members": [
         {
@@ -3575,6 +4382,51 @@
       "members": [
         {
           "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "Active",
+          "summary": "Whether the force acts: Enabled, in the workspace, Attachment0 on a part that is not anchored, and Attachment1 on a body when RelativeTo names it; a zero Force leaves it active (measured). Read only."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "ApplyAtCenterOfMass",
+          "summary": "Whether the force acts at the assembly's centre of mass (no turn) instead of at Attachment0. Default false."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadWrite",
+          "name": "Force",
+          "summary": "The force pushed on Attachment0's assembly every physics step, in RelativeTo's frame; off the centre of mass it turns the assembly too (measured). Default (1000, 0, 0)."
+        },
+        {
+          "decl": "Enum.ActuatorRelativeTo",
+          "kind": "ReadWrite",
+          "name": "RelativeTo",
+          "summary": "The frame Force is named in: Attachment0's (the default — it turns with the assembly), Attachment1's, or the world's."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Visible",
+          "summary": "Draws the editor's marker for the force whatever the selection. An authoring aid — nothing at runtime reads it. Default false."
+        }
+      ],
+      "name": "VectorForce",
+      "parent": "Constraint",
+      "summary": "A mover: a constant force on Attachment0's assembly every physics step, named in RelativeTo's frame, at Attachment0 (turning the assembly by its arm) or at the centre of mass."
+    },
+    {
+      "creatable": true,
+      "members": [],
+      "name": "Weld",
+      "parent": "JointInstance",
+      "summary": "A classic joint: while Active, Part0.CFrame * C0 equals Part1.CFrame * C1, and the part that is not the assembly root stands where the frames put it — creating the weld, or writing C0, C1, an end or Enabled, moves it. Inactive between two anchored parts."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "boolean",
           "kind": "ReadWrite",
           "name": "Enabled",
           "summary": "Whether the weld holds. Disabling releases the bond without deleting the constraint; re-enabling re-welds at the parts' current poses."
@@ -3693,6 +4545,260 @@
     {
       "members": [
         {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "Abs",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "Each component's absolute value."
+        },
+        {
+          "decl": "(other: Vector3, axis: Vector3?) -> number",
+          "kind": "Method",
+          "name": "Angle",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "axis",
+              "optional": true,
+              "type": "Vector3?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The angle to other in radians: unsigned (0..π), or signed by the rotation's sense around axis when one is given."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "Ceil",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "Each component rounded up."
+        },
+        {
+          "decl": "(other: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "Cross",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The cross product with other: perpendicular to both, by the right-hand rule."
+        },
+        {
+          "decl": "(other: Vector3) -> number",
+          "kind": "Method",
+          "name": "Dot",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "The dot product with other."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "Floor",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "Each component rounded down."
+        },
+        {
+          "decl": "(other: Vector3, epsilon: number?) -> boolean",
+          "kind": "Method",
+          "name": "FuzzyEq",
+          "params": [
+            {
+              "name": "other",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "epsilon",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "Whether each component is within epsilon of other's (1e-5 when omitted)."
+        },
+        {
+          "decl": "(goal: Vector3, alpha: number) -> Vector3",
+          "kind": "Method",
+          "name": "Lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The point alpha of the way from this vector to goal."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Magnitude",
+          "summary": "The vector's length."
+        },
+        {
+          "decl": "(...: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "Max",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The componentwise maximum of this vector and the others."
+        },
+        {
+          "decl": "(...: Vector3) -> Vector3",
+          "kind": "Method",
+          "name": "Min",
+          "params": [
+            {
+              "name": "...",
+              "optional": false,
+              "type": "Vector3"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The componentwise minimum of this vector and the others."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "Sign",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "Each component's sign: -1, 0 or 1."
+        },
+        {
+          "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "Unit",
+          "summary": "The vector scaled to length 1, in its own direction."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "X",
+          "summary": "The X component."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Y",
+          "summary": "The Y component."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "Z",
+          "summary": "The Z component."
+        },
+        {
+          "decl": "(goal: Vector3, alpha: number) -> Vector3",
+          "kind": "Method",
+          "name": "lerp",
+          "params": [
+            {
+              "name": "goal",
+              "optional": false,
+              "type": "Vector3"
+            },
+            {
+              "name": "alpha",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "Deprecated: the retired lowercase spelling of Lerp, answered the same way — use Lerp.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "magnitude",
+          "summary": "Deprecated: the retired lowercase spelling of Magnitude, answered the same way — use Magnitude.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
           "decl": "(x: number?, y: number?, z: number?) -> Vector3",
           "kind": "Static",
           "name": "new",
@@ -3728,15 +4834,42 @@
         },
         {
           "decl": "Vector3",
+          "kind": "ReadOnly",
+          "name": "unit",
+          "summary": "Deprecated: the retired lowercase spelling of Unit, answered the same way — use Unit.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "x",
+          "summary": "The X component, the native vector's own lane: read with no metatable, the VM's fast path."
+        },
+        {
+          "decl": "Vector3",
           "kind": "Static",
           "name": "xAxis",
           "summary": "The X unit vector (1, 0, 0)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "y",
+          "summary": "The Y component, the native vector's own lane: read with no metatable, the VM's fast path."
         },
         {
           "decl": "Vector3",
           "kind": "Static",
           "name": "yAxis",
           "summary": "The Y unit vector (0, 1, 0)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "z",
+          "summary": "The Z component, the native vector's own lane: read with no metatable, the VM's fast path."
         },
         {
           "decl": "Vector3",
@@ -5792,7 +6925,7 @@
               "type": "Font"
             }
           ],
-          "summary": "The face a legacy Enum.Font item names: the reference's catalog family (rbxasset://fonts/families/<Family>.json, rendered as the engine default face at the item's weight and style) — the same face the Font property stores, so fromEnum(label.Font) == label.FontFace after a Font write. Enum.Font.Unknown refuses."
+          "summary": "The face a legacy Enum.Font item names: the reference's catalog family (`rbxasset://fonts/families/<Family>.json`, rendered as the engine default face at the item's weight and style) — the same face the Font property stores, so fromEnum(label.Font) == label.FontFace after a Font write. Enum.Font.Unknown refuses."
         },
         {
           "decl": "(family: string, weight: Enum.FontWeight?, style: Enum.FontStyle?) -> Font",
@@ -7090,6 +8223,877 @@
     {
       "members": [
         {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStoreKeyInfo\"."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "CreatedTime",
+          "summary": "When the key was first written (or first written again after a removal), in milliseconds since the Unix epoch on the session clock."
+        },
+        {
+          "decl": "() -> string",
+          "kind": "Method",
+          "name": "GetFullName",
+          "params": [],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "\"Instance\" — its name, under no parent (measured)."
+        },
+        {
+          "decl": "() -> {[string]: any}",
+          "kind": "Method",
+          "name": "GetMetadata",
+          "params": [],
+          "returns": [
+            {
+              "type": "{[string]: any}"
+            }
+          ],
+          "summary": "The metadata this version was written with — an empty table when it set none (measured)."
+        },
+        {
+          "decl": "() -> {number}",
+          "kind": "Method",
+          "name": "GetUserIds",
+          "params": [],
+          "returns": [
+            {
+              "type": "{number}"
+            }
+          ],
+          "summary": "The user ids this version was written with, in order — an empty table when it named none (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "\"Instance\" — the name its tostring and its member error answer (measured)."
+        },
+        {
+          "decl": "Instance?",
+          "kind": "ReadOnly",
+          "name": "Parent",
+          "summary": "Always nil (measured)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "UpdatedTime",
+          "summary": "When this version was written, in milliseconds since the Unix epoch on the session clock."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Version",
+          "summary": "The version this answer describes, in the reference's shape `<created>.<sequence>.<updated>.01` over the engine's own numbers — compare it and hand it back, never parse it."
+        }
+      ],
+      "name": "DataStoreKeyInfo",
+      "summary": "What a store call answers beside a value: the version, the key's creation and the version's time (Unix milliseconds on the session clock), the user ids and the metadata the version was written with."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStoreObjectVersionInfo\"."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "CreatedTime",
+          "summary": "When the version was written, in milliseconds since the Unix epoch on the session clock."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "IsDeleted",
+          "summary": "Whether the version is a removal's (measured: RemoveAsync writes one)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Version",
+          "summary": "The version's id — GetVersionAsync and RemoveVersionAsync take it."
+        }
+      ],
+      "name": "DataStoreObjectVersionInfo",
+      "summary": "One version of a key, as ListVersionsAsync lists it: its id, when it was written and whether it is a removal's."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStoreKey\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "KeyName",
+          "summary": "The key — `<scope>/<key>` on a store opened with AllScopes."
+        }
+      ],
+      "name": "DataStoreKey",
+      "summary": "One key, as ListKeysAsync lists it."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStoreInfo\"."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "CreatedTime",
+          "summary": "The store's first write in any scope, in milliseconds since the Unix epoch on the session clock."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "DataStoreName",
+          "summary": "The store's name."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadOnly",
+          "name": "UpdatedTime",
+          "summary": "The store's latest write in any scope, in milliseconds since the Unix epoch on the session clock."
+        }
+      ],
+      "name": "DataStoreInfo",
+      "summary": "One written store, as ListDataStoresAsync lists it: its name and its first and latest write."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "AdvanceToNextPageAsync",
+          "params": [],
+          "returns": [],
+          "summary": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStoreVersionPages\"."
+        },
+        {
+          "decl": "() -> {DataStoreObjectVersionInfo}",
+          "kind": "Method",
+          "name": "GetCurrentPage",
+          "params": [],
+          "returns": [
+            {
+              "type": "{DataStoreObjectVersionInfo}"
+            }
+          ],
+          "summary": "The current page's items, a fresh table each call (measured)."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True for \"DataStoreVersionPages\", \"Pages\" and \"Instance\"."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "IsFinished",
+          "summary": "Whether the current page is the last (measured)."
+        }
+      ],
+      "name": "DataStoreVersionPages",
+      "summary": "The pages of a key's versions (identity DataStoreVersionPages < Pages): the current page's items, whether it is the last, and the move to the next. The listing is held whole by the call that made it."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "AdvanceToNextPageAsync",
+          "params": [],
+          "returns": [],
+          "summary": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStoreKeyPages\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Cursor",
+          "summary": "Where the next page starts — a base64 text the listing call takes back as its cursor (measured); \"\" on the last page."
+        },
+        {
+          "decl": "() -> {DataStoreKey}",
+          "kind": "Method",
+          "name": "GetCurrentPage",
+          "params": [],
+          "returns": [
+            {
+              "type": "{DataStoreKey}"
+            }
+          ],
+          "summary": "The current page's items, a fresh table each call (measured)."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True for \"DataStoreKeyPages\", \"Pages\" and \"Instance\"."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "IsFinished",
+          "summary": "Whether the current page is the last (measured)."
+        }
+      ],
+      "name": "DataStoreKeyPages",
+      "summary": "The pages of a store's keys (identity DataStoreKeyPages < Pages), with the Cursor a later ListKeysAsync continues from."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "AdvanceToNextPageAsync",
+          "params": [],
+          "returns": [],
+          "summary": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStoreListingPages\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Cursor",
+          "summary": "Where the next page starts — a base64 text the listing call takes back as its cursor (measured); \"\" on the last page."
+        },
+        {
+          "decl": "() -> {DataStoreInfo}",
+          "kind": "Method",
+          "name": "GetCurrentPage",
+          "params": [],
+          "returns": [
+            {
+              "type": "{DataStoreInfo}"
+            }
+          ],
+          "summary": "The current page's items, a fresh table each call (measured)."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True for \"DataStoreListingPages\", \"Pages\" and \"Instance\"."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "IsFinished",
+          "summary": "Whether the current page is the last (measured)."
+        }
+      ],
+      "name": "DataStoreListingPages",
+      "summary": "The pages of the written stores (identity DataStoreListingPages < Pages), with the Cursor a later ListDataStoresAsync continues from."
+    },
+    {
+      "members": [
+        {
+          "decl": "() -> ()",
+          "kind": "Method",
+          "name": "AdvanceToNextPageAsync",
+          "params": [],
+          "returns": [],
+          "summary": "Moves to the next page; on the last page raises `No pages to advance to` (measured). The listing is held whole by its call, so advancing never yields and never lands on an empty page — the reference's yields and may answer one mid-listing (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStorePages\"."
+        },
+        {
+          "decl": "() -> {{key: string, value: number}}",
+          "kind": "Method",
+          "name": "GetCurrentPage",
+          "params": [],
+          "returns": [
+            {
+              "type": "{{key: string, value: number}}"
+            }
+          ],
+          "summary": "The current page's items, a fresh table each call (measured)."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True for \"DataStorePages\", \"Pages\" and \"Instance\"."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadOnly",
+          "name": "IsFinished",
+          "summary": "Whether the current page is the last (measured)."
+        }
+      ],
+      "name": "DataStorePages",
+      "summary": "The pages of an ordered store's entries sorted by value (identity DataStorePages < Pages), each entry a plain table { key, value }."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"DataStore\"."
+        },
+        {
+          "decl": "(key: string, options: DataStoreGetOptions?) -> (any, DataStoreKeyInfo)",
+          "kind": "Method",
+          "name": "GetAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "options",
+              "optional": true,
+              "type": "DataStoreGetOptions?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "any"
+            },
+            {
+              "type": "DataStoreKeyInfo"
+            }
+          ],
+          "summary": "The key's value and its DataStoreKeyInfo — NOTHING, zero values, for a key never written or removed (measured). Yields while the store answers. A number key is its text; on a store opened with AllScopes a key is `<scope>/<key>`. The options' UseCache changes nothing: the engine keeps no cache."
+        },
+        {
+          "decl": "(key: string, version: string) -> (any, DataStoreKeyInfo)",
+          "kind": "Method",
+          "name": "GetVersionAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "version",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "any"
+            },
+            {
+              "type": "DataStoreKeyInfo"
+            }
+          ],
+          "summary": "The value one version of the key held and that version's key info — nothing for a removal's version; a version the key never had raises `502: … Error code: 25 Reason: The provided version is not valid.` (measured). Yields while the store answers."
+        },
+        {
+          "decl": "(key: string, delta: number?, userIds: {number}?, options: DataStoreIncrementOptions?) -> (number, DataStoreKeyInfo)",
+          "kind": "Method",
+          "name": "IncrementAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "delta",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "userIds",
+              "optional": true,
+              "type": "{number}?"
+            },
+            {
+              "name": "options",
+              "optional": true,
+              "type": "DataStoreIncrementOptions?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "DataStoreKeyInfo"
+            }
+          ],
+          "summary": "Adds delta (1 by default, rounded to a whole number half away from zero; NaN the int32 minimum, -2147483648) to the key's number — an absent key counts from 0 — and answers the new value and its key info; a key holding anything but a number, NaN included, raises `502: … Error code: 24 Reason: Key value is not numeric.` (measured). An infinite delta raises `Unable to cast double to int` (the engine's). The options' metadata rides the write. Yields while the store answers."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True for \"DataStore\", \"GlobalDataStore\" and \"Instance\"."
+        },
+        {
+          "decl": "(prefix: string?, pageSize: number?, cursor: string?, excludeDeleted: boolean?) -> DataStoreKeyPages",
+          "kind": "Method",
+          "name": "ListKeysAsync",
+          "params": [
+            {
+              "name": "prefix",
+              "optional": true,
+              "type": "string?"
+            },
+            {
+              "name": "pageSize",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "cursor",
+              "optional": true,
+              "type": "string?"
+            },
+            {
+              "name": "excludeDeleted",
+              "optional": true,
+              "type": "boolean?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "DataStoreKeyPages"
+            }
+          ],
+          "summary": "The keys that start with prefix, sorted — a removed key too unless excludeDeleted is true (measured; false by default) — pageSize to a page (0: 50), after the cursor a key pages answered — every scope's as `<scope>/<key>` on a store opened with AllScopes; a cursor no listing answered raises `502: … Error code: 32 Reason: The provided exclusive start key is not valid.` (measured). Yields while the store answers."
+        },
+        {
+          "decl": "(key: string, sortDirection: Enum.SortDirection?, minDate: number?, maxDate: number?, pageSize: number?) -> DataStoreVersionPages",
+          "kind": "Method",
+          "name": "ListVersionsAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "sortDirection",
+              "optional": true,
+              "type": "Enum.SortDirection?"
+            },
+            {
+              "name": "minDate",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "maxDate",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "pageSize",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "DataStoreVersionPages"
+            }
+          ],
+          "summary": "Every version of the key — each write, a removal's marked deleted — oldest first unless sortDirection is Descending (measured), written between minDate and maxDate (Unix milliseconds, inclusive; 0 unbounded), pageSize to a page (0: 1024). Every write is kept as a version. The reference kept one version for three writes 7 s apart (measured 2026-10-16) yet two for two writes 0.3 s apart (measured 2026-10-07); the creator docs name a one-per-UTC-hour rule and a 30-day expiry, the window unmeasured. The engine merges and expires nothing. Yields while the store answers."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The store's name — \"\" for GetGlobalDataStore's."
+        },
+        {
+          "decl": "Instance",
+          "kind": "ReadOnly",
+          "name": "Parent",
+          "summary": "The DataStoreService (measured)."
+        },
+        {
+          "decl": "(key: string) -> (any, DataStoreKeyInfo)",
+          "kind": "Method",
+          "name": "RemoveAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "any"
+            },
+            {
+              "type": "DataStoreKeyInfo"
+            }
+          ],
+          "summary": "Removes the key, writing a version marked deleted, and answers the removed value and its key info; a later GetAsync answers nothing (measured). Yields while the store answers."
+        },
+        {
+          "decl": "(key: string, version: string) -> ()",
+          "kind": "Method",
+          "name": "RemoveVersionAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "version",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [],
+          "summary": "Removes one version of the key and answers nothing; the version stays listed, IsDeleted true, and GetVersionAsync of it answers nothing — the newest too, after which the key answers nothing (measured). Yields while the store answers.",
+          "tags": [
+            "Deprecated"
+          ]
+        },
+        {
+          "decl": "(key: string, value: any, userIds: {number}?, options: DataStoreSetOptions?) -> string",
+          "kind": "Method",
+          "name": "SetAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": "any"
+            },
+            {
+              "name": "userIds",
+              "optional": true,
+              "type": "{number}?"
+            },
+            {
+              "name": "options",
+              "optional": true,
+              "type": "DataStoreSetOptions?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "string"
+            }
+          ],
+          "summary": "Writes the value (and the user ids, four at most, and the options' metadata, 300 bytes at most) as a new version and answers its version id. The value is kept as JSON — a mixed table keeps its array part, a sparse array or a fractional key becomes string keys, NaN and inf survive — and refused past 4 MB of it; a function, an Instance or a Vector3 cannot be stored (`104: Cannot store <Type> in data store. …`), and a nil value raises `Argument 2 missing or nil`, storing nothing (measured). Yields while the store answers."
+        },
+        {
+          "decl": "(key: string, transform: (value: any, keyInfo: DataStoreKeyInfo?) -> (any, {number}?, {[string]: any}?)) -> (any, DataStoreKeyInfo)",
+          "kind": "Method",
+          "name": "UpdateAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "transform",
+              "optional": false,
+              "type": "(value: any, keyInfo: DataStoreKeyInfo?) -> (any, {number}?, {[string]: any}?)"
+            }
+          ],
+          "returns": [
+            {
+              "type": "any"
+            },
+            {
+              "type": "DataStoreKeyInfo"
+            }
+          ],
+          "summary": "Calls transform with the key's value and key info (nil, nil for a key with none) and stores what it returns — the value, the user ids, the metadata — answering the stored value and its key info; a transform returning nil writes nothing and the call answers one nil. A transform that yields (inside a pcall too) or errors is logged (`Transform function error Callbacks cannot yield`; the error with its stack, then `Transform function error <message>`) and the call answers nothing and raises nothing — the value stays; a yielded transform runs on when its wait wakes, its result discarded (measured). If the key changed under the transform, it runs again on the new value. Yields while the store answers."
+        }
+      ],
+      "name": "DataStore",
+      "summary": "A global store's object (identity DataStore < GlobalDataStore, an Instance whose Parent is the DataStoreService): the key-value calls, each answer beside a DataStoreKeyInfo, and every version of a key kept, listed and read back, beside the listing of its keys."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "\"OrderedDataStore\"."
+        },
+        {
+          "decl": "(key: string) -> number?",
+          "kind": "Method",
+          "name": "GetAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number?"
+            }
+          ],
+          "summary": "The key's number — ONE value, no key info (measured); nothing for a key never written or removed. Yields while the store answers."
+        },
+        {
+          "decl": "(ascending: boolean, pageSize: number?, minValue: number?, maxValue: number?) -> DataStorePages",
+          "kind": "Method",
+          "name": "GetSortedAsync",
+          "params": [
+            {
+              "name": "ascending",
+              "optional": false,
+              "type": "boolean"
+            },
+            {
+              "name": "pageSize",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "minValue",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "maxValue",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "DataStorePages"
+            }
+          ],
+          "summary": "The live entries as { key, value } tables sorted by value — ascending or descending, ties by key — pageSize to a page (1 to 100, 50 by default, a numeric string taken as its number; else `106: PageSize must be within a predefined range`), between minValue and maxValue inclusive (measured); a non-numeric string raises `Unable to cast string to int` (the engine's). ascending is a boolean: a string raises `Unable to cast string to bool` (measured), nil `Argument 1 missing or nil` (the engine's). Yields while the store answers."
+        },
+        {
+          "decl": "(key: string, delta: number?) -> number",
+          "kind": "Method",
+          "name": "IncrementAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "delta",
+              "optional": true,
+              "type": "number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "Adds delta (1 by default, rounded half away from zero) to the key's number — an absent key counts from 0 — and answers the new number (measured: 3 then 4). Yields while the store answers."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True for \"OrderedDataStore\", \"GlobalDataStore\" and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The store's name."
+        },
+        {
+          "decl": "Instance",
+          "kind": "ReadOnly",
+          "name": "Parent",
+          "summary": "The DataStoreService."
+        },
+        {
+          "decl": "(key: string) -> number?",
+          "kind": "Method",
+          "name": "RemoveAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number?"
+            }
+          ],
+          "summary": "Removes the key and answers the number it held — nothing for a key with none. Yields while the store answers."
+        },
+        {
+          "decl": "(key: string, value: number) -> ()",
+          "kind": "Method",
+          "name": "SetAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "value",
+              "optional": false,
+              "type": "number"
+            }
+          ],
+          "returns": [],
+          "summary": "Writes a whole number (-2 and 2^53 measured; up to 2^63) and answers nothing; a fraction raises `103: double is not allowed in data stores.`, a string `103: string is not allowed in data stores.`, a boolean `103: bool is not allowed in data stores.` (measured). No user ids and no metadata on an ordered store. Yields while the store answers."
+        },
+        {
+          "decl": "(key: string, transform: (value: number?, keyInfo: nil) -> number?) -> number?",
+          "kind": "Method",
+          "name": "UpdateAsync",
+          "params": [
+            {
+              "name": "key",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "transform",
+              "optional": true,
+              "type": "(value: number?, keyInfo: nil) -> number?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number?"
+            }
+          ],
+          "summary": "Calls transform with the key's number (nil for a key with none; no key info) and stores the whole number it returns, answering it (measured: 4 then 5); nil writes nothing. A transform that yields or errors is logged and the call answers nothing, as a DataStore's. Yields while the store answers."
+        }
+      ],
+      "name": "OrderedDataStore",
+      "summary": "An ordered store's object (identity OrderedDataStore < GlobalDataStore): whole numbers under keys, read one value at a time or as pages sorted by value — no key info, user ids or metadata."
+    },
+    {
+      "members": [
+        {
           "decl": "boolean",
           "kind": "ReadOnly",
           "name": "Connected",
@@ -7220,6 +9224,24 @@
   ],
   "dump_format": 1,
   "enums": {
+    "ActuatorRelativeTo": [
+      "Attachment0",
+      "Attachment1",
+      "World"
+    ],
+    "ActuatorType": [
+      "Motor",
+      "None",
+      "Servo"
+    ],
+    "AlignType": [
+      "AllAxes",
+      "Parallel",
+      "Perpendicular",
+      "PrimaryAxisLookAt",
+      "PrimaryAxisParallel",
+      "PrimaryAxisPerpendicular"
+    ],
     "ApplyStrokeMode": [
       "Border",
       "Contextual"
@@ -7264,6 +9286,25 @@
       "Health",
       "PlayerList",
       "SelfView"
+    ],
+    "DataStoreRequestType": [
+      "GetAsync",
+      "GetSortedAsync",
+      "GetVersionAsync",
+      "ListAsync",
+      "OnUpdate",
+      "OrderedList",
+      "OrderedRead",
+      "OrderedRemove",
+      "OrderedWrite",
+      "RemoveVersionAsync",
+      "SetIncrementAsync",
+      "SetIncrementSortedAsync",
+      "StandardList",
+      "StandardRead",
+      "StandardRemove",
+      "StandardWrite",
+      "UpdateAsync"
     ],
     "EasingDirection": [
       "In",
@@ -7361,6 +9402,10 @@
       "Regular",
       "SemiBold",
       "Thin"
+    ],
+    "ForceLimitMode": [
+      "Magnitude",
+      "PerAxis"
     ],
     "HorizontalAlignment": [
       "Center",
@@ -7502,6 +9547,10 @@
       "Right",
       "Top"
     ],
+    "OrientationAlignmentMode": [
+      "OneAttachment",
+      "TwoAttachment"
+    ],
     "PartType": [
       "Ball",
       "Block",
@@ -7551,6 +9600,10 @@
       "Paused",
       "Playing"
     ],
+    "PositionAlignmentMode": [
+      "OneAttachment",
+      "TwoAttachment"
+    ],
     "PredictionMode": [
       "Automatic",
       "Off",
@@ -7593,6 +9646,10 @@
       "Legacy",
       "Server"
     ],
+    "SortDirection": [
+      "Ascending",
+      "Descending"
+    ],
     "SortOrder": [
       "Custom",
       "LayoutOrder",
@@ -7621,6 +9678,11 @@
       "MouseButton1",
       "MouseButton2",
       "MouseButton3"
+    ],
+    "VelocityConstraintMode": [
+      "Line",
+      "Plane",
+      "Vector"
     ],
     "VerticalAlignment": [
       "Bottom",
@@ -7729,6 +9791,12 @@
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
+          "decl": "DataStoreService",
+          "kind": "ReadOnly",
+          "name": "DataStoreService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
           "decl": "Debris",
           "kind": "ReadOnly",
           "name": "Debris",
@@ -7795,6 +9863,12 @@
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
+          "decl": "MessagingService",
+          "kind": "ReadOnly",
+          "name": "MessagingService",
+          "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
+        },
+        {
           "decl": "string",
           "kind": "ReadOnly",
           "name": "Name",
@@ -7813,7 +9887,7 @@
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
-          "decl": "Instance",
+          "decl": "ReplicatedStorage",
           "kind": "ReadOnly",
           "name": "ReplicatedStorage",
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
@@ -7825,13 +9899,13 @@
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
-          "decl": "Instance",
+          "decl": "ServerScriptService",
           "kind": "ReadOnly",
           "name": "ServerScriptService",
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
-          "decl": "Instance",
+          "decl": "ServerStorage",
           "kind": "ReadOnly",
           "name": "ServerStorage",
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
@@ -7849,7 +9923,7 @@
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
         },
         {
-          "decl": "Instance",
+          "decl": "StarterPlayerScripts",
           "kind": "ReadOnly",
           "name": "StarterPlayerScripts",
           "summary": "The service as a field — the same value GetService answers for the name (the reference allows both spellings)."
@@ -8067,6 +10141,18 @@
             }
           ],
           "summary": "True while a BindToSimulation callback runs as part of a rollback's re-simulation rather than the step's first run; false otherwise."
+        },
+        {
+          "decl": "() -> boolean",
+          "kind": "Method",
+          "name": "IsRunMode",
+          "params": [],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "True while the editor's Run is live, paused or not: the server side simulating alone, with no Player and no client. False in Play, Play Here, a multiplayer session, a standalone runtime and the editor's Idle."
         },
         {
           "decl": "() -> boolean",
@@ -9224,6 +11310,249 @@
       ],
       "name": "StarterGui",
       "summary": "The switch on the engine's built-in interfaces: SetCoreGuiEnabled shows or hides the player list (Enum.CoreGuiType.PlayerList, the one drawn today) or every kind at once, GetCoreGuiEnabled reads the store. The container of authored ScreenGuis the reference's service also is waits on UI serialization."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(name: string, scope: string?, options: DataStoreOptions?) -> DataStore",
+          "kind": "Method",
+          "name": "GetDataStore",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "scope",
+              "optional": true,
+              "type": "string?"
+            },
+            {
+              "name": "options",
+              "optional": true,
+              "type": "DataStoreOptions?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "DataStore"
+            }
+          ],
+          "summary": "The global store under name and scope (\"global\" by default) — the same object on every call. A name or scope is 1 to 50 characters (`DataStore name can't be empty string`, `DataStore name is too long`, `DataStore scope can't be empty string`, `DataStore scope is too long`); a number is its text. The options are a DataStoreOptions: with AllScopes the store spans every scope of the name, the scope must be \"\" and each key reads `<scope>/<key>` (another class `510: Options instance not of type DataStoreOptions`, a non-Instance `Unable to cast value to Object`). The server's alone — a client side's call raises `DataStore can't be accessed from client`. The editor's Play keeps the open project's test store for its next Play; a dedicated server keeps its saves where --data-dir says, or none — every call of a store object then raises `403: DataStore access is off: …`."
+        },
+        {
+          "decl": "() -> DataStore",
+          "kind": "Method",
+          "name": "GetGlobalDataStore",
+          "params": [],
+          "returns": [
+            {
+              "type": "DataStore"
+            }
+          ],
+          "summary": "The experience's default store, named \"\". The server's alone."
+        },
+        {
+          "decl": "(name: string, scope: string?) -> OrderedDataStore",
+          "kind": "Method",
+          "name": "GetOrderedDataStore",
+          "params": [
+            {
+              "name": "name",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "scope",
+              "optional": true,
+              "type": "string?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "OrderedDataStore"
+            }
+          ],
+          "summary": "The ordered store under name and scope — the same object on every call, the names refused as GetDataStore's. The server's alone."
+        },
+        {
+          "decl": "(requestType: Enum.DataStoreRequestType) -> number",
+          "kind": "Method",
+          "name": "GetRequestBudgetForRequestType",
+          "params": [
+            {
+              "name": "requestType",
+              "optional": false,
+              "type": "Enum.DataStoreRequestType"
+            }
+          ],
+          "returns": [
+            {
+              "type": "number"
+            }
+          ],
+          "summary": "How many requests of the type a fresh session may make — the measured constants on a server (688 GetAsync, 673 StandardWrite, 671 UpdateAsync, 40 GetSortedAsync, 33 ListAsync, 40 GetVersionAsync, 42 RemoveVersionAsync; 640 for the rest) and the client's own on a client (measured: 2500, 130 or 350 by type, 17 OnUpdate). The engine keeps no budget and throttles nothing: the answer never moves, where the reference's server budget does."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "(prefix: string?, pageSize: number?, cursor: string?) -> DataStoreListingPages",
+          "kind": "Method",
+          "name": "ListDataStoresAsync",
+          "params": [
+            {
+              "name": "prefix",
+              "optional": true,
+              "type": "string?"
+            },
+            {
+              "name": "pageSize",
+              "optional": true,
+              "type": "number?"
+            },
+            {
+              "name": "cursor",
+              "optional": true,
+              "type": "string?"
+            }
+          ],
+          "returns": [
+            {
+              "type": "DataStoreListingPages"
+            }
+          ],
+          "summary": "The global stores written in any scope whose name starts with prefix, sorted — an ordered store and one never written are not listed (measured) — pageSize to a page (0: 32), after the cursor a listing pages answered. Yields while the store answers. The server's alone — a client side's call raises `DataStore can't be accessed from client` (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        }
+      ],
+      "name": "DataStoreService",
+      "summary": "The data stores: GetDataStore and GetOrderedDataStore answer a store's object at once, the same one on every call; the object's calls (GetAsync, SetAsync, UpdateAsync, RemoveAsync, IncrementAsync, the versions and the key listing) and ListDataStoresAsync yield while the store answers. Values are kept as JSON with the reference's limits — 50-character names and keys, 4 MB values. The editor's Play keeps the open project's test store from one Play to the next; a dedicated server keeps its saves where --data-dir says, or none — every store call then raising a 403 text that says so. The server's alone: a client side's call raises."
+    },
+    {
+      "members": [
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "ClassName",
+          "summary": "The class name — the first name IsA answers."
+        },
+        {
+          "decl": "(className: string) -> boolean",
+          "kind": "Method",
+          "name": "IsA",
+          "params": [
+            {
+              "name": "className",
+              "optional": false,
+              "type": "string"
+            }
+          ],
+          "returns": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadOnly",
+          "name": "Name",
+          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
+        },
+        {
+          "decl": "(topic: string, message: any) -> ()",
+          "kind": "Method",
+          "name": "PublishAsync",
+          "params": [
+            {
+              "name": "topic",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "message",
+              "optional": false,
+              "type": "any"
+            }
+          ],
+          "returns": [],
+          "summary": "Sends message to every subscriber of topic on this server: the value travels as JSON text (HttpService's codec, 1 KiB at most — `MessagingService:PublishAsync(): Cannot publish, data exceeded 1kb`) and arrives on a later frame as one table { Data, Sent }: a copy of the value and the session clock's Unix seconds at the publish (GetServerTimeNow's). A topic is 1 to 80 characters (`MessagingService: Topic names cannot be empty.`, `MessagingService: Topic names cannot be more than 80 characters.`). One server only: no other server receives it. The server's alone — a client side's call raises `MessagingService can only be executed by game server`."
+        },
+        {
+          "decl": "(topic: string, callback: (message: { Data: any, Sent: number }) -> ()) -> BVScriptConnection",
+          "kind": "Method",
+          "name": "SubscribeAsync",
+          "params": [
+            {
+              "name": "topic",
+              "optional": false,
+              "type": "string"
+            },
+            {
+              "name": "callback",
+              "optional": false,
+              "type": "(message: { Data: any, Sent: number }) -> ()"
+            }
+          ],
+          "returns": [
+            {
+              "type": "BVScriptConnection"
+            }
+          ],
+          "summary": "Calls callback with every message published to topic on this server from now on — a table { Data, Sent } of its own per publish, the newest subscriber first, on a frame after it — and answers the connection: Disconnect stops the deliveries, and the script's end takes them with it. The topic is refused as PublishAsync's (empty, past 80 characters). The server's alone — a client side's call raises `MessagingService can only be executed by game server`."
+        }
+      ],
+      "name": "MessagingService",
+      "summary": "Topic messages within this server: SubscribeAsync connects a callback to a topic, PublishAsync sends a value to its subscribers, delivered on a later frame as one table { Data, Sent }. The engine runs one server per game, so a publish reaches no other server, and the reference's per-minute limits are not kept. The server's alone: a client side's call raises."
+    },
+    {
+      "members": [],
+      "name": "ReplicatedStorage",
+      "summary": "The container whose contents replicate to every client: shared modules and the templates a script clones into the world, which neither draw nor simulate until parented into the Workspace."
+    },
+    {
+      "members": [],
+      "name": "ServerStorage",
+      "summary": "The server's own container: its contents never replicate to a client, and neither draw nor simulate until parented into the Workspace."
+    },
+    {
+      "members": [],
+      "name": "ServerScriptService",
+      "summary": "The server's script container: its Scripts run on the server, and nothing in it replicates to a client."
+    },
+    {
+      "members": [],
+      "name": "StarterPlayerScripts",
+      "summary": "The client scripts' container, directly under `game` here (the reference's sits under StarterPlayer): its contents replicate, and its LocalScripts run on each client."
     }
   ]
 }

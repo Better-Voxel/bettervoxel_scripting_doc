@@ -3,12 +3,48 @@
 --   cargo test -p bv_engine_core --features docgen --test api_surface
 -- The syntax is Luau's current definition-file grammar (extern types),
 -- validated in CI with luau-lsp analyze against a smoke script.
--- Vector3 is Luau's native vector (one type, two dialects; typeof says
--- "vector" — a recorded divergence), so it is an alias, not a class.
+-- Vector3 is declared as the reference's class, its surface the one the
+-- engine serves on Luau's native vector. The VM has ONE type for both
+-- dialects (typeof says "vector"); the checker has two: a
+-- vector.create value is its builtin vector and does not mix with an
+-- engine API's Vector3 — a recorded divergence.
 -- Signals are declared without payload generics; each member's fired
 -- arguments ride its trailing comment.
 
-export type Vector3 = vector
+declare extern type Vector3 with
+    function Abs(self): Vector3
+    function Angle(self, other: Vector3, axis: Vector3?): number
+    function Ceil(self): Vector3
+    function Cross(self, other: Vector3): Vector3
+    function Dot(self, other: Vector3): number
+    function Floor(self): Vector3
+    function FuzzyEq(self, other: Vector3, epsilon: number?): boolean
+    function Lerp(self, goal: Vector3, alpha: number): Vector3
+    Magnitude: number
+    function Max(self, ...: Vector3): Vector3
+    function Min(self, ...: Vector3): Vector3
+    function Sign(self): Vector3
+    Unit: Vector3
+    X: number
+    Y: number
+    Z: number
+    @deprecated
+    function lerp(self, goal: Vector3, alpha: number): Vector3
+    magnitude: number -- deprecated
+    unit: Vector3 -- deprecated
+    x: number
+    y: number
+    z: number
+    function __add(self, other: Vector3): Vector3
+    function __sub(self, other: Vector3): Vector3
+    function __mul(self, other: Vector3): Vector3
+    function __mul(self, other: number): Vector3
+    function __div(self, other: Vector3): Vector3
+    function __div(self, other: number): Vector3
+    function __idiv(self, other: Vector3): Vector3
+    function __idiv(self, other: number): Vector3
+    function __unm(self): Vector3
+end
 
 declare extern type BVScriptConnection with
     Connected: boolean
@@ -126,6 +162,10 @@ declare extern type CFrame with
     x: number -- deprecated
     y: number -- deprecated
     z: number -- deprecated
+    function __mul(self, other: CFrame): CFrame
+    function __mul(self, other: Vector3): Vector3
+    function __add(self, other: Vector3): CFrame
+    function __sub(self, other: Vector3): CFrame
 end
 
 declare extern type Color3 with
@@ -156,11 +196,17 @@ declare extern type UDim2 with
     Y: UDim
     @deprecated
     function lerp(self, goal: UDim2, alpha: number): UDim2
+    function __add(self, other: UDim2): UDim2
+    function __sub(self, other: UDim2): UDim2
+    function __unm(self): UDim2
 end
 
 declare extern type UDim with
     Offset: number
     Scale: number
+    function __add(self, other: UDim): UDim
+    function __sub(self, other: UDim): UDim
+    function __unm(self): UDim
 end
 
 declare extern type Font with
@@ -200,6 +246,15 @@ declare extern type Vector2 with
     unit: Vector2 -- deprecated
     x: number -- deprecated
     y: number -- deprecated
+    function __add(self, other: Vector2): Vector2
+    function __sub(self, other: Vector2): Vector2
+    function __mul(self, other: Vector2): Vector2
+    function __mul(self, other: number): Vector2
+    function __div(self, other: Vector2): Vector2
+    function __div(self, other: number): Vector2
+    function __idiv(self, other: Vector2): Vector2
+    function __idiv(self, other: number): Vector2
+    function __unm(self): Vector2
 end
 
 declare extern type NumberRange with
@@ -324,6 +379,25 @@ declare extern type Constraint extends Instance with
     Enabled: boolean
 end
 
+declare extern type DataStoreGetOptions extends Instance with
+    UseCache: boolean
+end
+
+declare extern type DataStoreIncrementOptions extends Instance with
+    function GetMetadata(self): {[string]: any}
+    function SetMetadata(self, attributes: {[string]: any}): ()
+end
+
+declare extern type DataStoreOptions extends Instance with
+    AllScopes: boolean
+    function SetExperimentalFeatures(self, experimentalFeatures: {[string]: boolean}): ()
+end
+
+declare extern type DataStoreSetOptions extends Instance with
+    function GetMetadata(self): {[string]: any}
+    function SetMetadata(self, attributes: {[string]: any}): ()
+end
+
 declare extern type Folder extends Instance with
 end
 
@@ -394,6 +468,15 @@ declare extern type InputContext extends Instance with
     Sink: boolean
 end
 
+declare extern type JointInstance extends Instance with
+    Active: boolean
+    C0: CFrame
+    C1: CFrame
+    Enabled: boolean
+    Part0: BasePart?
+    Part1: BasePart?
+end
+
 declare extern type Light extends Instance with
     Brightness: number
     Color: Color3
@@ -451,6 +534,7 @@ declare extern type Player extends Instance with
     Character: Instance?
     CharacterAdded: BVScriptSignal -- fires (Instance)
     CharacterRemoving: BVScriptSignal -- fires (Instance)
+    DisplayName: string
     function GetCameraState(self): {CFrame: CFrame, FieldOfView: number, ViewportSize: Vector2}
     function GetMouse(self): PlayerMouse
     function GetNetworkPing(self): number
@@ -531,6 +615,60 @@ declare extern type WeldConstraint extends Instance with
     Part1: BasePart?
 end
 
+declare extern type AlignOrientation extends Constraint with
+    Active: boolean
+    AlignType: EnumItem
+    CFrame: CFrame
+    LookAtPosition: Vector3
+    MaxAngularVelocity: number
+    MaxTorque: number
+    Mode: EnumItem
+    PrimaryAxis: Vector3
+    PrimaryAxisOnly: boolean -- deprecated
+    ReactionTorqueEnabled: boolean
+    Responsiveness: number
+    RigidityEnabled: boolean
+    SecondaryAxis: Vector3
+    Visible: boolean
+end
+
+declare extern type AlignPosition extends Constraint with
+    Active: boolean
+    ApplyAtCenterOfMass: boolean
+    ForceLimitMode: EnumItem
+    ForceRelativeTo: EnumItem
+    MaxAxesForce: Vector3
+    MaxForce: number
+    MaxVelocity: number
+    Mode: EnumItem
+    Position: Vector3
+    ReactionForceEnabled: boolean
+    Responsiveness: number
+    RigidityEnabled: boolean
+    Visible: boolean
+end
+
+declare extern type AngularVelocity extends Constraint with
+    Active: boolean
+    AngularVelocity: Vector3
+    MaxTorque: number
+    ReactionTorqueEnabled: boolean
+    RelativeTo: EnumItem
+    Visible: boolean
+end
+
+declare extern type BallSocketConstraint extends Constraint with
+    Active: boolean
+    LimitsEnabled: boolean
+    MaxFrictionTorque: number
+    Radius: number
+    Restitution: number
+    TwistLimitsEnabled: boolean
+    TwistLowerAngle: number
+    TwistUpperAngle: number
+    UpperAngle: number
+end
+
 declare extern type BasePart extends PVInstance with
     Anchored: boolean
     function ApplyAngularImpulse(self, impulse: Vector3): ()
@@ -601,10 +739,44 @@ declare extern type GuiBase2d extends GuiBase with
 end
 
 declare extern type HingeConstraint extends Constraint with
+    ActuatorType: EnumItem
+    AngularResponsiveness: number
+    AngularSpeed: number
+    AngularVelocity: number
+    CurrentAngle: number
+    LimitsEnabled: boolean
+    LowerAngle: number
+    MotorMaxAcceleration: number
+    MotorMaxTorque: number
+    Radius: number
+    Restitution: number
+    ServoMaxTorque: number
+    SoftlockServoUponReachingTarget: boolean -- deprecated
+    TargetAngle: number
+    UpperAngle: number
 end
 
 declare extern type IntValue extends ValueBase with
     Value: number
+end
+
+declare extern type LinearVelocity extends Constraint with
+    Active: boolean
+    ForceLimitMode: EnumItem
+    ForceLimitsEnabled: boolean
+    LineDirection: Vector3
+    LineVelocity: number
+    MaxAxesForce: Vector3
+    MaxForce: number
+    MaxPlanarAxesForce: Vector2
+    PlaneVelocity: Vector2
+    PrimaryTangentAxis: Vector3
+    ReactionForceEnabled: boolean
+    RelativeTo: EnumItem
+    SecondaryTangentAxis: Vector3
+    VectorVelocity: Vector3
+    VelocityConstraintMode: EnumItem
+    Visible: boolean
 end
 
 declare extern type Model extends PVInstance with
@@ -641,6 +813,16 @@ declare extern type RemoteEvent extends BaseRemoteEvent with
     OnServerEvent: BVScriptSignal -- fires (Instance, ...any)
 end
 
+declare extern type RodConstraint extends Constraint with
+    Active: boolean
+    CurrentDistance: number
+    Length: number
+    LimitAngle0: number
+    LimitAngle1: number
+    LimitsEnabled: boolean
+    Thickness: number
+end
+
 declare extern type RopeConstraint extends Constraint with
     Length: number
 end
@@ -649,11 +831,44 @@ declare extern type SpotLight extends Light with
     Angle: number
 end
 
+declare extern type SpringConstraint extends Constraint with
+    Active: boolean
+    Coils: number
+    CurrentLength: number
+    Damping: number
+    FreeLength: number
+    LimitsEnabled: boolean
+    MaxForce: number
+    MaxLength: number
+    MinLength: number
+    Radius: number
+    Stiffness: number
+    Thickness: number
+end
+
 declare extern type StringValue extends ValueBase with
     Value: string
 end
 
+declare extern type Torque extends Constraint with
+    Active: boolean
+    RelativeTo: EnumItem
+    Torque: Vector3
+    Visible: boolean
+end
+
 declare extern type UIComponent extends UIBase with
+end
+
+declare extern type VectorForce extends Constraint with
+    Active: boolean
+    ApplyAtCenterOfMass: boolean
+    Force: Vector3
+    RelativeTo: EnumItem
+    Visible: boolean
+end
+
+declare extern type Weld extends JointInstance with
 end
 
 declare extern type FormFactorPart extends BasePart with
@@ -822,6 +1037,18 @@ declare extern type UIListLayout extends UIGridStyleLayout with
     VerticalAlignment: EnumItem
 end
 
+declare extern type ReplicatedStorage extends Instance with
+end
+
+declare extern type ServerStorage extends Instance with
+end
+
+declare extern type ServerScriptService extends Instance with
+end
+
+declare extern type StarterPlayerScripts extends Instance with
+end
+
 declare extern type Tween with
     function Cancel(self): ()
     ClassName: string
@@ -860,6 +1087,101 @@ declare extern type PlayerMouse with
     Y: number
 end
 
+declare extern type DataStoreKeyInfo with
+    ClassName: string
+    CreatedTime: number
+    function GetFullName(self): string
+    function GetMetadata(self): {[string]: any}
+    function GetUserIds(self): {number}
+    Name: string
+    Parent: Instance?
+    UpdatedTime: number
+    Version: string
+end
+
+declare extern type DataStoreObjectVersionInfo with
+    ClassName: string
+    CreatedTime: number
+    IsDeleted: boolean
+    Version: string
+end
+
+declare extern type DataStoreKey with
+    ClassName: string
+    KeyName: string
+end
+
+declare extern type DataStoreInfo with
+    ClassName: string
+    CreatedTime: number
+    DataStoreName: string
+    UpdatedTime: number
+end
+
+declare extern type DataStoreVersionPages with
+    function AdvanceToNextPageAsync(self): ()
+    ClassName: string
+    function GetCurrentPage(self): {DataStoreObjectVersionInfo}
+    function IsA(self, className: string): boolean
+    IsFinished: boolean
+end
+
+declare extern type DataStoreKeyPages with
+    function AdvanceToNextPageAsync(self): ()
+    ClassName: string
+    Cursor: string
+    function GetCurrentPage(self): {DataStoreKey}
+    function IsA(self, className: string): boolean
+    IsFinished: boolean
+end
+
+declare extern type DataStoreListingPages with
+    function AdvanceToNextPageAsync(self): ()
+    ClassName: string
+    Cursor: string
+    function GetCurrentPage(self): {DataStoreInfo}
+    function IsA(self, className: string): boolean
+    IsFinished: boolean
+end
+
+declare extern type DataStorePages with
+    function AdvanceToNextPageAsync(self): ()
+    ClassName: string
+    function GetCurrentPage(self): {{key: string, value: number}}
+    function IsA(self, className: string): boolean
+    IsFinished: boolean
+end
+
+declare extern type DataStore with
+    ClassName: string
+    function GetAsync(self, key: string, options: DataStoreGetOptions?): (any, DataStoreKeyInfo)
+    function GetVersionAsync(self, key: string, version: string): (any, DataStoreKeyInfo)
+    function IncrementAsync(self, key: string, delta: number?, userIds: {number}?, options: DataStoreIncrementOptions?): (number, DataStoreKeyInfo)
+    function IsA(self, className: string): boolean
+    function ListKeysAsync(self, prefix: string?, pageSize: number?, cursor: string?, excludeDeleted: boolean?): DataStoreKeyPages
+    function ListVersionsAsync(self, key: string, sortDirection: EnumItem?, minDate: number?, maxDate: number?, pageSize: number?): DataStoreVersionPages
+    Name: string
+    Parent: Instance
+    function RemoveAsync(self, key: string): (any, DataStoreKeyInfo)
+    @deprecated
+    function RemoveVersionAsync(self, key: string, version: string): ()
+    function SetAsync(self, key: string, value: any, userIds: {number}?, options: DataStoreSetOptions?): string
+    function UpdateAsync(self, key: string, transform: (value: any, keyInfo: DataStoreKeyInfo?) -> (any, {number}?, {[string]: any}?)): (any, DataStoreKeyInfo)
+end
+
+declare extern type OrderedDataStore with
+    ClassName: string
+    function GetAsync(self, key: string): number?
+    function GetSortedAsync(self, ascending: boolean, pageSize: number?, minValue: number?, maxValue: number?): DataStorePages
+    function IncrementAsync(self, key: string, delta: number?): number
+    function IsA(self, className: string): boolean
+    Name: string
+    Parent: Instance
+    function RemoveAsync(self, key: string): number?
+    function SetAsync(self, key: string, value: number): ()
+    function UpdateAsync(self, key: string, transform: (value: number?, keyInfo: nil) -> number?): number?
+end
+
 declare extern type RunService with
     function BindToRenderStep(self, name: string, priority: number, callback: (deltaTime: number) -> ()): ()
     function BindToSimulation(self, callback: (deltaTime: number) -> (), frequency: EnumItem?, priority: number?): BVScriptConnection
@@ -872,6 +1194,7 @@ declare extern type RunService with
     function IsClient(self): boolean
     function IsEdit(self): boolean
     function IsResimulating(self): boolean
+    function IsRunMode(self): boolean
     function IsRunning(self): boolean
     function IsServer(self): boolean
     function IsStudio(self): boolean
@@ -991,27 +1314,48 @@ declare extern type StarterGui with
     function SetCoreGuiEnabled(self, coreGuiType: EnumItem, enabled: boolean): ()
 end
 
+declare extern type DataStoreService with
+    ClassName: string
+    function GetDataStore(self, name: string, scope: string?, options: DataStoreOptions?): DataStore
+    function GetGlobalDataStore(self): DataStore
+    function GetOrderedDataStore(self, name: string, scope: string?): OrderedDataStore
+    function GetRequestBudgetForRequestType(self, requestType: EnumItem): number
+    function IsA(self, className: string): boolean
+    function ListDataStoresAsync(self, prefix: string?, pageSize: number?, cursor: string?): DataStoreListingPages
+    Name: string
+end
+
+declare extern type MessagingService with
+    ClassName: string
+    function IsA(self, className: string): boolean
+    Name: string
+    function PublishAsync(self, topic: string, message: any): ()
+    function SubscribeAsync(self, topic: string, callback: (message: { Data: any, Sent: number }) -> ()): BVScriptConnection
+end
+
 declare extern type DataModel with
-    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: "StarterGui") -> StarterGui) & ((self: DataModel, service: string) -> Instance)
+    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: "StarterGui") -> StarterGui) & ((self: DataModel, service: "DataStoreService") -> DataStoreService) & ((self: DataModel, service: "MessagingService") -> MessagingService) & ((self: DataModel, service: "ReplicatedStorage") -> ReplicatedStorage) & ((self: DataModel, service: "ServerStorage") -> ServerStorage) & ((self: DataModel, service: "ServerScriptService") -> ServerScriptService) & ((self: DataModel, service: "StarterPlayerScripts") -> StarterPlayerScripts) & ((self: DataModel, service: string) -> Instance)
     function BindToClose(self, callback: (reason: EnumItem) -> ()): ()
     ClassName: string
     CollectionService: CollectionService
+    DataStoreService: DataStoreService
     Debris: Debris
     GameId: number
     HttpService: HttpService
     function IsA(self, className: string): boolean
     JobId: string
     Lighting: Lighting
+    MessagingService: MessagingService
     Name: string
     PlaceId: number
     Players: Players
-    ReplicatedStorage: Instance
+    ReplicatedStorage: ReplicatedStorage
     RunService: RunService
-    ServerScriptService: Instance
-    ServerStorage: Instance
+    ServerScriptService: ServerScriptService
+    ServerStorage: ServerStorage
     SoundService: SoundService
     StarterGui: StarterGui
-    StarterPlayerScripts: Instance
+    StarterPlayerScripts: StarterPlayerScripts
     TweenService: TweenService
     UserInputService: UserInputService
     Workspace: Workspace
@@ -1071,7 +1415,7 @@ declare Font: {
 }
 
 declare Instance: {
-    new: ((className: "Attachment") -> Attachment) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "Humanoid") -> Humanoid) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "AlignOrientation") -> AlignOrientation) & ((className: "AlignPosition") -> AlignPosition) & ((className: "AngularVelocity") -> AngularVelocity) & ((className: "Attachment") -> Attachment) & ((className: "BallSocketConstraint") -> BallSocketConstraint) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "DataStoreGetOptions") -> DataStoreGetOptions) & ((className: "DataStoreIncrementOptions") -> DataStoreIncrementOptions) & ((className: "DataStoreOptions") -> DataStoreOptions) & ((className: "DataStoreSetOptions") -> DataStoreSetOptions) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "Humanoid") -> Humanoid) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "LinearVelocity") -> LinearVelocity) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RodConstraint") -> RodConstraint) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "SpringConstraint") -> SpringConstraint) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "Torque") -> Torque) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "VectorForce") -> VectorForce) & ((className: "Weld") -> Weld) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
 }
 
 declare NumberRange: {
@@ -1137,12 +1481,16 @@ export type Enum = {
 
 declare Enum: {
     GetEnums: (self: any) -> {Enum},
+    ActuatorRelativeTo: Enum & { Attachment0: EnumItem, Attachment1: EnumItem, World: EnumItem },
+    ActuatorType: Enum & { Motor: EnumItem, None: EnumItem, Servo: EnumItem },
+    AlignType: Enum & { AllAxes: EnumItem, Parallel: EnumItem, Perpendicular: EnumItem, PrimaryAxisLookAt: EnumItem, PrimaryAxisParallel: EnumItem, PrimaryAxisPerpendicular: EnumItem },
     ApplyStrokeMode: Enum & { Border: EnumItem, Contextual: EnumItem },
     AuthorityMode: Enum & { Automatic: EnumItem, Server: EnumItem },
     CameraType: Enum & { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },
     CloseReason: Enum & { DeveloperShutdown: EnumItem, DeveloperUpdate: EnumItem, Moderation: EnumItem, OutOfMemory: EnumItem, RobloxMaintenance: EnumItem, ServerEmpty: EnumItem, Unknown: EnumItem },
     CollisionFidelity: Enum & { Box: EnumItem, Default: EnumItem, Hull: EnumItem, PreciseConvexDecomposition: EnumItem },
     CoreGuiType: Enum & { All: EnumItem, AvatarSwitcher: EnumItem, Backpack: EnumItem, Captures: EnumItem, Chat: EnumItem, EmotesMenu: EnumItem, ExperienceShop: EnumItem, Health: EnumItem, PlayerList: EnumItem, SelfView: EnumItem },
+    DataStoreRequestType: Enum & { GetAsync: EnumItem, GetSortedAsync: EnumItem, GetVersionAsync: EnumItem, ListAsync: EnumItem, OnUpdate: EnumItem, OrderedList: EnumItem, OrderedRead: EnumItem, OrderedRemove: EnumItem, OrderedWrite: EnumItem, RemoveVersionAsync: EnumItem, SetIncrementAsync: EnumItem, SetIncrementSortedAsync: EnumItem, StandardList: EnumItem, StandardRead: EnumItem, StandardRemove: EnumItem, StandardWrite: EnumItem, UpdateAsync: EnumItem },
     EasingDirection: Enum & { In: EnumItem, InOut: EnumItem, Out: EnumItem },
     EasingStyle: Enum & { Back: EnumItem, Bounce: EnumItem, Circular: EnumItem, Cubic: EnumItem, Elastic: EnumItem, Exponential: EnumItem, Linear: EnumItem, Quad: EnumItem, Quart: EnumItem, Quint: EnumItem, Sine: EnumItem },
     FieldOfViewMode: Enum & { Diagonal: EnumItem, MaxAxis: EnumItem, Vertical: EnumItem },
@@ -1150,6 +1498,7 @@ declare Enum: {
     Font: Enum & { AmaticSC: EnumItem, Antique: EnumItem, Arcade: EnumItem, Arial: EnumItem, ArialBold: EnumItem, Arimo: EnumItem, ArimoBold: EnumItem, Bangers: EnumItem, Bodoni: EnumItem, BuilderSans: EnumItem, BuilderSansBold: EnumItem, BuilderSansExtraBold: EnumItem, BuilderSansMedium: EnumItem, Cartoon: EnumItem, Code: EnumItem, Creepster: EnumItem, DenkOne: EnumItem, Fantasy: EnumItem, Fondamento: EnumItem, FredokaOne: EnumItem, Garamond: EnumItem, Gotham: EnumItem, GothamBlack: EnumItem, GothamBold: EnumItem, GothamMedium: EnumItem, GrenzeGotisch: EnumItem, Highway: EnumItem, IndieFlower: EnumItem, JosefinSans: EnumItem, Jura: EnumItem, Kalam: EnumItem, Legacy: EnumItem, LuckiestGuy: EnumItem, Merriweather: EnumItem, Michroma: EnumItem, Nunito: EnumItem, Oswald: EnumItem, PatrickHand: EnumItem, PermanentMarker: EnumItem, Roboto: EnumItem, RobotoCondensed: EnumItem, RobotoMono: EnumItem, Sarpanch: EnumItem, SciFi: EnumItem, SourceSans: EnumItem, SourceSansBold: EnumItem, SourceSansItalic: EnumItem, SourceSansLight: EnumItem, SourceSansSemibold: EnumItem, SpecialElite: EnumItem, TitilliumWeb: EnumItem, Ubuntu: EnumItem, Unknown: EnumItem },
     FontStyle: Enum & { Italic: EnumItem, Normal: EnumItem },
     FontWeight: Enum & { Bold: EnumItem, ExtraBold: EnumItem, ExtraLight: EnumItem, Heavy: EnumItem, Light: EnumItem, Medium: EnumItem, Regular: EnumItem, SemiBold: EnumItem, Thin: EnumItem },
+    ForceLimitMode: Enum & { Magnitude: EnumItem, PerAxis: EnumItem },
     HorizontalAlignment: Enum & { Center: EnumItem, Left: EnumItem, Right: EnumItem },
     HumanoidStateType: Enum & { Climbing: EnumItem, Dead: EnumItem, FallingDown: EnumItem, Flying: EnumItem, Freefall: EnumItem, GettingUp: EnumItem, Jumping: EnumItem, Landed: EnumItem, None: EnumItem, Physics: EnumItem, PlatformStanding: EnumItem, Ragdoll: EnumItem, Running: EnumItem, RunningNoPhysics: EnumItem, Seated: EnumItem, StrafingNoPhysics: EnumItem, Swimming: EnumItem },
     InputActionType: Enum & { Bool: EnumItem, Direction1D: EnumItem, Direction2D: EnumItem, Direction3D: EnumItem },
@@ -1157,6 +1506,7 @@ declare Enum: {
     Material: Enum & { Brick: EnumItem, Concrete: EnumItem, Glass: EnumItem, Grass: EnumItem, Metal: EnumItem, Neon: EnumItem, Plastic: EnumItem, Slate: EnumItem, SmoothPlastic: EnumItem, Wood: EnumItem },
     MouseBehavior: Enum & { Default: EnumItem, LockCenter: EnumItem, LockCurrentPosition: EnumItem },
     NormalId: Enum & { Back: EnumItem, Bottom: EnumItem, Front: EnumItem, Left: EnumItem, Right: EnumItem, Top: EnumItem },
+    OrientationAlignmentMode: Enum & { OneAttachment: EnumItem, TwoAttachment: EnumItem },
     PartType: Enum & { Ball: EnumItem, Block: EnumItem, CornerWedge: EnumItem, Cylinder: EnumItem, Wedge: EnumItem },
     ParticleEmitterShape: Enum & { Box: EnumItem, Cylinder: EnumItem, Disc: EnumItem, Sphere: EnumItem },
     ParticleEmitterShapeInOut: Enum & { InAndOut: EnumItem, Inward: EnumItem, Outward: EnumItem },
@@ -1165,6 +1515,7 @@ declare Enum: {
     ParticleFlipbookMode: Enum & { Loop: EnumItem, OneShot: EnumItem, PingPong: EnumItem, Random: EnumItem },
     ParticleOrientation: Enum & { FacingCamera: EnumItem, FacingCameraWorldUp: EnumItem, VelocityParallel: EnumItem, VelocityPerpendicular: EnumItem },
     PlaybackState: Enum & { Begin: EnumItem, Cancelled: EnumItem, Completed: EnumItem, Delayed: EnumItem, Paused: EnumItem, Playing: EnumItem },
+    PositionAlignmentMode: Enum & { OneAttachment: EnumItem, TwoAttachment: EnumItem },
     PredictionMode: Enum & { Automatic: EnumItem, Off: EnumItem, On: EnumItem },
     PredictionStatus: Enum & { Authoritative: EnumItem, None: EnumItem, Predicted: EnumItem },
     RaycastFilterType: Enum & { Blacklist: EnumItem, Exclude: EnumItem, Include: EnumItem, Whitelist: EnumItem },
@@ -1172,15 +1523,18 @@ declare Enum: {
     RollOffMode: Enum & { Inverse: EnumItem, InverseTapered: EnumItem, Linear: EnumItem, LinearSquare: EnumItem },
     RotationOrder: Enum & { XYZ: EnumItem, XZY: EnumItem, YXZ: EnumItem, YZX: EnumItem, ZXY: EnumItem, ZYX: EnumItem },
     RunContext: Enum & { Client: EnumItem, Legacy: EnumItem, Server: EnumItem },
+    SortDirection: Enum & { Ascending: EnumItem, Descending: EnumItem },
     SortOrder: Enum & { Custom: EnumItem, LayoutOrder: EnumItem, Name: EnumItem },
     StepFrequency: Enum & { Hz1: EnumItem, Hz10: EnumItem, Hz15: EnumItem, Hz30: EnumItem, Hz5: EnumItem, Hz60: EnumItem },
     TextXAlignment: Enum & { Center: EnumItem, Left: EnumItem, Right: EnumItem },
     TextYAlignment: Enum & { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
     UserInputType: Enum & { Keyboard: EnumItem, MouseButton1: EnumItem, MouseButton2: EnumItem, MouseButton3: EnumItem },
+    VelocityConstraintMode: Enum & { Line: EnumItem, Plane: EnumItem, Vector: EnumItem },
     VerticalAlignment: Enum & { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
 }
 
 declare function warn(...: any): ()
+declare function collectgarbage(mode: "count"): number
 
 declare debug: {
     info: ((thread: thread, level: number, options: string) -> ...any) & ((level: number, options: string) -> ...any) & ((fun: (...any) -> ...any, options: string) -> ...any),
@@ -1193,6 +1547,23 @@ declare debug: {
     getmemorycategory: () -> string,
 }
 
+declare task: {
+    wait: (duration: number?) -> number,
+    spawn: <A...>(f: ((A...) -> ()) | thread, A...) -> thread,
+    defer: <A...>(f: ((A...) -> ()) | thread, A...) -> thread,
+    delay: <A...>(duration: number, f: ((A...) -> ()) | thread, A...) -> thread,
+    cancel: (thread: thread) -> (),
+    synchronize: () -> (),
+    desynchronize: () -> (),
+}
+
+declare Signals: {
+    Get: (name: string) -> BVScriptSignal,
+    Fire: (name: string, ...any) -> (),
+}
+
+declare Keybinds: { [string]: BVScriptSignal }
+
 declare function wait(seconds: number?): (number, number)
 declare function spawn(callback: (number, number) -> ()): ()
 declare function delay(delayTime: number?, callback: (number, number) -> ()): ()
@@ -1201,5 +1572,5 @@ declare function time(): number
 declare function elapsedTime(): number
 
 declare workspace: Workspace
-declare script: Instance
+declare script: LuaSourceContainer
 declare game: DataModel
