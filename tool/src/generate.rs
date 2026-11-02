@@ -3,7 +3,8 @@
 //! page shapes are a faithful port of the engine's original emitters —
 //! with EMPTY content the class/datatype/service/enums/globals/README
 //! pages must come out byte-identical to the engine-emitted ones (the
-//! stage-2 parity gate); content only ever ADDS sections.
+//! stage-2 parity gate), save the one markdown escape [`prose`] applies
+//! to the model's summaries; content only ever ADDS sections.
 
 use crate::content::{Content, Example, MemberContent};
 use crate::dump::{Class, Dump, Member};
@@ -31,6 +32,47 @@ const BOOK_TOML: &str = "[book]\n\
     [build]\n\
     build-dir = \"../target/book\"\n\
     create-missing = false\n";
+
+/// The model's prose, made safe for mdBook: a bare `<` outside a code
+/// span becomes `&lt;`, so a placeholder such as `<message>` in an engine
+/// summary is text, not an HTML tag mdBook 0.5 reports as unclosed (its
+/// warnings fail the site). A code span keeps its characters — markdown
+/// already shows them literally. Hand-authored content is written as its
+/// author typed it, so an autolink `<https://…>` stays one.
+fn prose(text: &str) -> String {
+    let mut out = String::with_capacity(text.len());
+    let mut in_code = false;
+    for c in text.chars() {
+        match c {
+            '`' => {
+                in_code = !in_code;
+                out.push(c);
+            }
+            '<' if !in_code => out.push_str("&lt;"),
+            _ => out.push(c),
+        }
+    }
+    out
+}
+
+#[cfg(test)]
+mod tests {
+    use super::prose;
+
+    #[test]
+    fn a_bare_placeholder_is_escaped_and_a_code_span_is_kept() {
+        assert_eq!(
+            prose("prints 'Server Kick Message: <message>; …'"),
+            "prints 'Server Kick Message: &lt;message>; …'"
+        );
+        assert_eq!(
+            prose("then `Transform function error <message>` without"),
+            "then `Transform function error <message>` without"
+        );
+        assert_eq!(prose("a <b> in `<c>` and <d>"), "a &lt;b> in `<c>` and &lt;d>");
+        assert_eq!(prose("no brackets at all"), "no brackets at all");
+    }
+}
 
 pub fn generate(root: &Path, dump: &Dump, content: &Content) -> io::Result<()> {
     let book = root.join("book");
@@ -277,7 +319,7 @@ fn push_member_section(
             let _ = writeln!(out, "### {}\n\n`{}`\n", member.name, member.decl);
         }
     }
-    let _ = writeln!(out, "{}\n", member.summary);
+    let _ = writeln!(out, "{}\n", prose(&member.summary));
 
     let Some(content) = content else {
         return;
@@ -369,7 +411,7 @@ fn emit_class_page(dump: &Dump, class: &Class, content: &Content) -> String {
         "Not creatable: the engine spawns it.".to_string()
     };
     let _ = writeln!(out, "{creation}\n");
-    let _ = writeln!(out, "{}\n", class.summary);
+    let _ = writeln!(out, "{}\n", prose(&class.summary));
     push_owner_extras(&mut out, "classes", &class.name, content);
 
     push_member_groups_for(&mut out, "classes", &class.name, &class.members, content);
@@ -409,7 +451,7 @@ fn emit_standalone_page(
 ) -> String {
     let mut out = String::new();
     let _ = writeln!(out, "# {name}\n");
-    let _ = writeln!(out, "{summary}\n");
+    let _ = writeln!(out, "{}\n", prose(summary));
     push_owner_extras(&mut out, section, name, content);
     push_member_groups_for(&mut out, section, name, members, content);
     out
