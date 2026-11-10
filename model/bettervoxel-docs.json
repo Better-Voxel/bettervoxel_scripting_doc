@@ -7118,11 +7118,11 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#speed"
   },
   "@bettervoxel/globaltype/ParticleEmitter.SpreadAngle": {
-    "documentation": "The emission cone half-angles in degrees, per axis, around the EmissionDirection.",
+    "documentation": "The emission cone's full angles in degrees, one per axis across the emission direction — a tilt of up to half each way.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#spreadangle"
   },
   "@bettervoxel/globaltype/ParticleEmitter.Squash": {
-    "documentation": "The particle's stretch over its lifetime: positive squashes along the velocity, negative stretches (0 is round).",
+    "documentation": "The particle's stretch over its lifetime: positive widens the quad and shortens it along its up axis (the velocity under VelocityParallel), negative the reverse.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ParticleEmitter.html#squash"
   },
   "@bettervoxel/globaltype/ParticleEmitter.Texture": {

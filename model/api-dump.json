@@ -3035,13 +3035,13 @@
           "decl": "Vector2",
           "kind": "ReadWrite",
           "name": "SpreadAngle",
-          "summary": "The emission cone half-angles in degrees, per axis, around the EmissionDirection."
+          "summary": "The emission cone's full angles in degrees, one per axis across the emission direction — a tilt of up to half each way."
         },
         {
           "decl": "NumberSequence",
           "kind": "ReadWrite",
           "name": "Squash",
-          "summary": "The particle's stretch over its lifetime: positive squashes along the velocity, negative stretches (0 is round)."
+          "summary": "The particle's stretch over its lifetime: positive widens the quad and shortens it along its up axis (the velocity under VelocityParallel), negative the reverse."
         },
         {
           "decl": "string",
