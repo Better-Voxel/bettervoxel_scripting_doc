@@ -1925,7 +1925,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#locked"
   },
   "@bettervoxel/globaltype/BasePart.Mass": {
-    "documentation": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume. Read only.",
+    "documentation": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume, a part thinner than 0.05 along an axis weighed as 0.05 thick along it, as the reference simulates it. Read only.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BasePart.html#mass"
   },
   "@bettervoxel/globaltype/BasePart.Material": {

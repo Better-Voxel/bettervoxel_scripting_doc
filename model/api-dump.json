@@ -505,7 +505,7 @@
           "decl": "number",
           "kind": "ReadOnly",
           "name": "Mass",
-          "summary": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume. Read only."
+          "summary": "The part's own mass: its material's density (the reference's numbers — Plastic 0.7, Metal 7.85, …) times its shape's volume, a part thinner than 0.05 along an axis weighed as 0.05 thick along it, as the reference simulates it. Read only."
         },
         {
           "decl": "Enum.Material",
