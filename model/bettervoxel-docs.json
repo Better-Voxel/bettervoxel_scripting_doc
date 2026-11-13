@@ -3222,7 +3222,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ClickDetector.html"
   },
   "@bettervoxel/globaltype/ClickDetector.MaxActivationDistance": {
-    "documentation": "How far away (in studs) a player can be and still click, floored at 0.",
+    "documentation": "How far away (in studs) a player can be and still click (32 by default), floored at 0.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ClickDetector.html#maxactivationdistance"
   },
   "@bettervoxel/globaltype/ClickDetector.MouseClick": {
@@ -5699,7 +5699,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputContext.html#enabled"
   },
   "@bettervoxel/globaltype/InputContext.Priority": {
-    "documentation": "Contexts are read in descending priority (0 by default; an integer, a fraction truncates): a higher context's Sink consumes keys before a lower one sees them.",
+    "documentation": "Contexts are read in descending priority (1000 by default; an integer, a fraction truncates): a higher context's Sink consumes keys before a lower one sees them.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/InputContext.html#priority"
   },
   "@bettervoxel/globaltype/InputContext.Sink": {

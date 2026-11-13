@@ -1068,7 +1068,7 @@
           "decl": "number",
           "kind": "ReadWrite",
           "name": "MaxActivationDistance",
-          "summary": "How far away (in studs) a player can be and still click, floored at 0."
+          "summary": "How far away (in studs) a player can be and still click (32 by default), floored at 0."
         },
         {
           "decl": "BVScriptSignal<Instance>",
@@ -1907,7 +1907,7 @@
           "decl": "number",
           "kind": "ReadWrite",
           "name": "Priority",
-          "summary": "Contexts are read in descending priority (0 by default; an integer, a fraction truncates): a higher context's Sink consumes keys before a lower one sees them."
+          "summary": "Contexts are read in descending priority (1000 by default; an integer, a fraction truncates): a higher context's Sink consumes keys before a lower one sees them."
         },
         {
           "decl": "boolean",
