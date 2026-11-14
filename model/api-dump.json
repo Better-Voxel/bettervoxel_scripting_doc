@@ -618,13 +618,13 @@
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "Enabled",
-          "summary": "The script's run switch. Disabling kills the script's threads and listeners before the next pass; re-enabling restarts it fresh from the top. Writes require a real boolean (the reference engine coerces — a recorded strict-typing divergence)."
+          "summary": "The script's run switch. Disabling ends the script's run at the write: everything it had made — its connections, delays, deferred and waiting threads — dies there, and a thread running at the write goes on with what it makes after. Re-enabling restarts it fresh from the top. Writes require a real boolean (the reference engine coerces — a recorded strict-typing divergence)."
         },
         {
           "decl": "Enum.RunContext",
           "kind": "ReadWrite",
           "name": "RunContext",
-          "summary": "Where the script runs: Legacy (placement decides), Server, or Client. Writes accept the enum item or its name string and re-derive execution immediately. A LocalScript's stored value is inert — its class decides."
+          "summary": "Where the script runs: Legacy (placement decides), Server, or Client. Writes accept the enum item or its name string; the engine re-derives where the script runs from the new value at its next frame, so a write that takes a running script out ends it up to a frame after the write. A LocalScript's stored value is inert — its class decides."
         }
       ],
       "name": "BaseScript",
@@ -2309,7 +2309,7 @@
           "decl": "Instance?",
           "kind": "ReadWrite",
           "name": "Parent",
-          "summary": "The instance's parent in the object tree, or nil for a detached root; a Player's is the Players service while it is in the game (measured). Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. Locked after Destroy."
+          "summary": "The instance's parent in the object tree, or nil for a detached root; a Player's is the Players service while it is in the game (measured). Assigning Parent reparents without moving anything in world space; assigning nil detaches the subtree without destroying it. A running script the move takes out of where it runs — the instance or one below it — ends its run at the write. Locked after Destroy."
         },
         {
           "decl": "Enum.PredictionMode",
