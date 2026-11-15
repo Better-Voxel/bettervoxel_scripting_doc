@@ -944,8 +944,10 @@ declare extern type LocalScript extends Script with
 end
 
 declare extern type MeshPart extends TriangleMeshPart with
+    DoubleSided: boolean
     MeshId: string
     MeshSize: Vector3
+    TextureID: string
 end
 
 declare extern type Part extends FormFactorPart with

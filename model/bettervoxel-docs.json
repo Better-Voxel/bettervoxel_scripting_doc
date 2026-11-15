@@ -6479,10 +6479,16 @@
   "@bettervoxel/globaltype/MeshPart": {
     "documentation": "A part whose geometry is an imported mesh. Size scales the mesh against its authored MeshSize; collision comes from the baked CollisionFidelity shapes; the mesh reference itself is immutable.",
     "keys": {
+      "DoubleSided": "@bettervoxel/globaltype/MeshPart.DoubleSided",
       "MeshId": "@bettervoxel/globaltype/MeshPart.MeshId",
-      "MeshSize": "@bettervoxel/globaltype/MeshPart.MeshSize"
+      "MeshSize": "@bettervoxel/globaltype/MeshPart.MeshSize",
+      "TextureID": "@bettervoxel/globaltype/MeshPart.TextureID"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html"
+  },
+  "@bettervoxel/globaltype/MeshPart.DoubleSided": {
+    "documentation": "Whether both faces of the mesh's triangles are drawn (false by default). Drawing only: the collider is the mesh's either way.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#doublesided"
   },
   "@bettervoxel/globaltype/MeshPart.MeshId": {
     "documentation": "The mesh asset reference, as the asset's local path — the empty string on a meshless husk. Every write is refused: the mesh reference is immutable after authoring.",
@@ -6491,6 +6497,10 @@
   "@bettervoxel/globaltype/MeshPart.MeshSize": {
     "documentation": "The authored mesh bounds, untouched by resizes. Every write is refused; resize through Size, which scales the mesh against these bounds.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#meshsize"
+  },
+  "@bettervoxel/globaltype/MeshPart.TextureID": {
+    "documentation": "The image drawn over the mesh, as a local asset path; the empty string draws none. A number is taken as its text; any other value is refused. A server's write replicates like any other property's.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#textureid"
   },
   "@bettervoxel/globaltype/MessagingService": {
     "documentation": "Topic messages within this server: SubscribeAsync connects a callback to a topic, PublishAsync sends a value to its subscribers, delivered on a later frame as one table { Data, Sent }. The engine runs one server per game, so a publish reaches no other server, and the reference's per-minute limits are not kept. The server's alone: a client side's call raises.",
