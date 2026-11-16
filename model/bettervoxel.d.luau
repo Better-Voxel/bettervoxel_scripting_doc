@@ -603,6 +603,17 @@ declare extern type SoundGroup extends Instance with
     Volume: number
 end
 
+declare extern type SurfaceAppearance extends Instance with
+    AlphaMode: EnumItem
+    Color: Color3
+    ColorMap: string
+    EmissiveStrength: number
+    EmissiveTint: Color3
+    MetalnessMap: string
+    NormalMap: string
+    RoughnessMap: string
+end
+
 declare extern type UIBase extends Instance with
 end
 
@@ -879,6 +890,9 @@ declare extern type GuiObject extends GuiBase2d with
     BackgroundColor3: Color3
     BackgroundTransparency: number
     LayoutOrder: number
+    MouseEnter: BVScriptSignal -- fires (number, number)
+    MouseLeave: BVScriptSignal -- fires (number, number)
+    MouseMoved: BVScriptSignal -- fires (number, number)
     Position: UDim2
     Size: UDim2
     Visible: boolean
@@ -935,6 +949,9 @@ end
 
 declare extern type GuiButton extends GuiObject with
     Activated: BVScriptSignal -- fires ()
+    MouseButton1Click: BVScriptSignal -- fires ()
+    MouseButton1Down: BVScriptSignal -- fires (number, number)
+    MouseButton1Up: BVScriptSignal -- fires (number, number)
 end
 
 declare extern type GuiLabel extends GuiObject with
@@ -1417,7 +1434,7 @@ declare Font: {
 }
 
 declare Instance: {
-    new: ((className: "AlignOrientation") -> AlignOrientation) & ((className: "AlignPosition") -> AlignPosition) & ((className: "AngularVelocity") -> AngularVelocity) & ((className: "Attachment") -> Attachment) & ((className: "BallSocketConstraint") -> BallSocketConstraint) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "DataStoreGetOptions") -> DataStoreGetOptions) & ((className: "DataStoreIncrementOptions") -> DataStoreIncrementOptions) & ((className: "DataStoreOptions") -> DataStoreOptions) & ((className: "DataStoreSetOptions") -> DataStoreSetOptions) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "Humanoid") -> Humanoid) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "LinearVelocity") -> LinearVelocity) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RodConstraint") -> RodConstraint) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "SpringConstraint") -> SpringConstraint) & ((className: "StringValue") -> StringValue) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "Torque") -> Torque) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "VectorForce") -> VectorForce) & ((className: "Weld") -> Weld) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "AlignOrientation") -> AlignOrientation) & ((className: "AlignPosition") -> AlignPosition) & ((className: "AngularVelocity") -> AngularVelocity) & ((className: "Attachment") -> Attachment) & ((className: "BallSocketConstraint") -> BallSocketConstraint) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "DataStoreGetOptions") -> DataStoreGetOptions) & ((className: "DataStoreIncrementOptions") -> DataStoreIncrementOptions) & ((className: "DataStoreOptions") -> DataStoreOptions) & ((className: "DataStoreSetOptions") -> DataStoreSetOptions) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "Humanoid") -> Humanoid) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "LinearVelocity") -> LinearVelocity) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RodConstraint") -> RodConstraint) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "SpringConstraint") -> SpringConstraint) & ((className: "StringValue") -> StringValue) & ((className: "SurfaceAppearance") -> SurfaceAppearance) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "Torque") -> Torque) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "VectorForce") -> VectorForce) & ((className: "Weld") -> Weld) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
 }
 
 declare NumberRange: {
@@ -1486,6 +1503,7 @@ declare Enum: {
     ActuatorRelativeTo: Enum & { Attachment0: EnumItem, Attachment1: EnumItem, World: EnumItem },
     ActuatorType: Enum & { Motor: EnumItem, None: EnumItem, Servo: EnumItem },
     AlignType: Enum & { AllAxes: EnumItem, Parallel: EnumItem, Perpendicular: EnumItem, PrimaryAxisLookAt: EnumItem, PrimaryAxisParallel: EnumItem, PrimaryAxisPerpendicular: EnumItem },
+    AlphaMode: Enum & { Opaque: EnumItem, Overlay: EnumItem, TintMask: EnumItem, Transparency: EnumItem },
     ApplyStrokeMode: Enum & { Border: EnumItem, Contextual: EnumItem },
     AuthorityMode: Enum & { Automatic: EnumItem, Server: EnumItem },
     CameraType: Enum & { Attach: EnumItem, Custom: EnumItem, Fixed: EnumItem, Follow: EnumItem, Orbital: EnumItem, Scriptable: EnumItem, Track: EnumItem, Watch: EnumItem },

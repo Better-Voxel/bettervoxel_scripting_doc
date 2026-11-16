@@ -4955,27 +4955,45 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiBase2d.html"
   },
   "@bettervoxel/globaltype/GuiButton": {
-    "documentation": "The clickable UI elements: Activated fires on click release.",
+    "documentation": "The clickable UI elements: MouseButton1Down, MouseButton1Up and MouseButton1Click follow the left mouse button over the button, and Activated fires on its release there.",
     "keys": {
-      "Activated": "@bettervoxel/globaltype/GuiButton.Activated"
+      "Activated": "@bettervoxel/globaltype/GuiButton.Activated",
+      "MouseButton1Click": "@bettervoxel/globaltype/GuiButton.MouseButton1Click",
+      "MouseButton1Down": "@bettervoxel/globaltype/GuiButton.MouseButton1Down",
+      "MouseButton1Up": "@bettervoxel/globaltype/GuiButton.MouseButton1Up"
     },
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiButton.html"
   },
   "@bettervoxel/globaltype/GuiButton.Activated": {
-    "documentation": "Fires (with no arguments) when a click is released over the button.",
+    "documentation": "Fires (with no arguments) when the left mouse button is released over the button, wherever it was pressed — the release alone decides (measured); MouseButton1Click is the one that needs the press on the button too. A click belongs to the top-most button or TextBox under the pointer alone: a button under another button, or under a TextBox, hears nothing. A finger lifted over the button activates it as the mouse button's release does. The reference passes (inputObject, clickCount); neither is carried.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiButton.html#activated"
+  },
+  "@bettervoxel/globaltype/GuiButton.MouseButton1Click": {
+    "documentation": "Fires (with no arguments) when the left mouse button went down and came up over this same button (measured) — a press that began elsewhere and ends here fires MouseButton1Up and Activated without it. Leaving the button and coming back with the mouse button held keeps the click; hiding the button under a pointer at rest while it is pressed forgets it, shown again or not (both measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiButton.html#mousebutton1click"
+  },
+  "@bettervoxel/globaltype/GuiButton.MouseButton1Down": {
+    "documentation": "Fires (x, y) when the left mouse button goes down over the button. A click belongs to the top-most button or TextBox under the pointer alone (measured: a button over a button, and over a TextBox, takes it): a button drawn under another button hears nothing, and one under a Frame or a label still does (both measured); one under a TextBox hears nothing either, by the same rule, which was not measured. A touch stands in for the mouse pointer: the first finger down is the pointer until it lifts, its touch the left button's press and its lift the release.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiButton.html#mousebutton1down"
+  },
+  "@bettervoxel/globaltype/GuiButton.MouseButton1Up": {
+    "documentation": "Fires (x, y) when the left mouse button comes up over the button, wherever it went down; a press on the button released off it fires nothing (measured). Order on a release: MouseButton1Click, MouseButton1Up, Activated.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiButton.html#mousebutton1up"
   },
   "@bettervoxel/globaltype/GuiLabel": {
     "documentation": "The display-only UI elements — the image and text labels.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiLabel.html"
   },
   "@bettervoxel/globaltype/GuiObject": {
-    "documentation": "The visible UI elements: UDim2 Position and Size, AnchorPoint, and the background fill.",
+    "documentation": "The visible UI elements: UDim2 Position and Size, AnchorPoint, the background fill, and the pointer's MouseEnter, MouseLeave and MouseMoved — on every element under the pointer, whatever is drawn over it.",
     "keys": {
       "AnchorPoint": "@bettervoxel/globaltype/GuiObject.AnchorPoint",
       "BackgroundColor3": "@bettervoxel/globaltype/GuiObject.BackgroundColor3",
       "BackgroundTransparency": "@bettervoxel/globaltype/GuiObject.BackgroundTransparency",
       "LayoutOrder": "@bettervoxel/globaltype/GuiObject.LayoutOrder",
+      "MouseEnter": "@bettervoxel/globaltype/GuiObject.MouseEnter",
+      "MouseLeave": "@bettervoxel/globaltype/GuiObject.MouseLeave",
+      "MouseMoved": "@bettervoxel/globaltype/GuiObject.MouseMoved",
       "Position": "@bettervoxel/globaltype/GuiObject.Position",
       "Size": "@bettervoxel/globaltype/GuiObject.Size",
       "Visible": "@bettervoxel/globaltype/GuiObject.Visible"
@@ -4997,6 +5015,18 @@
   "@bettervoxel/globaltype/GuiObject.LayoutOrder": {
     "documentation": "The sibling sort key a parent's UIListLayout orders by (SortOrder.LayoutOrder); lower comes first. Ignored without a layout.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#layoutorder"
+  },
+  "@bettervoxel/globaltype/GuiObject.MouseEnter": {
+    "documentation": "Fires (x, y) when the pointer comes over the element — over any part of it that is drawn, whatever is drawn on top of it: hover is not occluded (measured), and every element under the pointer hears it, the one on top first. A MouseMoved precedes it in the same frame. An element shown under a pointer at rest hears it when the pointer next moves or its left button changes, not before (measured). (x, y) is the pointer in the player window, in logical pixels from its top-left corner — the space of UserInputService:GetMouseLocation() and the mouse's X and Y. The reference's pair is in screen space, the top bar's inset included; the engine draws no inset.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#mouseenter"
+  },
+  "@bettervoxel/globaltype/GuiObject.MouseLeave": {
+    "documentation": "Fires (x, y) when the pointer is no longer over the element: it moved off, or the cursor left the window ((x, y) is then where it last stood). An element hidden under a pointer at rest hears it when the pointer next moves or its left button changes, not before (measured). A held mouse button does not hold the hover (measured). No MouseMoved fires on the element that frame.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#mouseleave"
+  },
+  "@bettervoxel/globaltype/GuiObject.MouseMoved": {
+    "documentation": "Fires (x, y) once per frame in which the pointer moved while over the element, and after a left press or release over it (measured: both bring one, behind the button's own signals). Every element under the pointer hears it, the one on top first. These are the moments the hover is settled, and the only ones (measured): the frame's MouseLeave and MouseEnter follow it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/GuiObject.html#mousemoved"
   },
   "@bettervoxel/globaltype/GuiObject.Position": {
     "documentation": "The element's position as a UDim2 (scale plus pixel offset per axis), relative to the parent element.",
@@ -6499,7 +6529,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#meshsize"
   },
   "@bettervoxel/globaltype/MeshPart.TextureID": {
-    "documentation": "The image drawn over the mesh, as a local asset path; the empty string draws none. A number is taken as its text; any other value is refused. A server's write replicates like any other property's.",
+    "documentation": "The image drawn over the mesh, as a local asset path; the empty string draws none. A SurfaceAppearance under the part replaces it on screen. A number is taken as its text; any other value is refused. A server's write replicates like any other property's.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/MeshPart.html#textureid"
   },
   "@bettervoxel/globaltype/MessagingService": {
@@ -8801,6 +8831,52 @@
     "documentation": "The stored string.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/StringValue.html#value"
   },
+  "@bettervoxel/globaltype/SurfaceAppearance": {
+    "documentation": "A MeshPart's material, hung under the part — any other BasePart refuses it as a parent: a colour map with its Color tint and AlphaMode, a normal map, metalness and roughness maps, and an emission's strength and tint. Scripts set Color, AlphaMode and the emission; the four maps are plugin-only. Saved, cloned and replicated with the part, and drawn over it: the last one under a MeshPart replaces its TextureID and its Material's look.",
+    "keys": {
+      "AlphaMode": "@bettervoxel/globaltype/SurfaceAppearance.AlphaMode",
+      "Color": "@bettervoxel/globaltype/SurfaceAppearance.Color",
+      "ColorMap": "@bettervoxel/globaltype/SurfaceAppearance.ColorMap",
+      "EmissiveStrength": "@bettervoxel/globaltype/SurfaceAppearance.EmissiveStrength",
+      "EmissiveTint": "@bettervoxel/globaltype/SurfaceAppearance.EmissiveTint",
+      "MetalnessMap": "@bettervoxel/globaltype/SurfaceAppearance.MetalnessMap",
+      "NormalMap": "@bettervoxel/globaltype/SurfaceAppearance.NormalMap",
+      "RoughnessMap": "@bettervoxel/globaltype/SurfaceAppearance.RoughnessMap"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.AlphaMode": {
+    "documentation": "How the ColorMap's alpha is read: Overlay (the default) lays the map over the part's Color by it, Transparency makes it the surface's opacity, TintMask says where Color tints the map, Opaque ignores it while the part's Transparency is 0 (above, the opacity is the alpha times 1 - Transparency). Writes accept the Enum.AlphaMode item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#alphamode"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.Color": {
+    "documentation": "The tint the ColorMap is multiplied by, white by default. A Color3 or a raw RGB vector.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#color"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.ColorMap": {
+    "documentation": "The colour and alpha image, as a local asset path. Plugin-only: a game script's read and write are refused (`The current thread cannot read 'ColorMap' (lacking capability Plugin)`, measured), as is GetPropertyChangedSignal of it; the editor and the place file set it, and Clone copies it.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#colormap"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.EmissiveStrength": {
+    "documentation": "The emission's multiplier, 1 by default: a write below 0 stores 0, and nothing caps it above (measured) but finiteness: math.huge stores the largest finite number. Emission needs a mask the engine cannot hold yet, so it lights nothing — as the reference's lights nothing without one (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#emissivestrength"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.EmissiveTint": {
+    "documentation": "The emission's tint, white by default.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#emissivetint"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.MetalnessMap": {
+    "documentation": "The greyscale metalness image, as a local asset path. Plugin-only, as ColorMap is.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#metalnessmap"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.NormalMap": {
+    "documentation": "The tangent-space normal image (OpenGL's convention: green points up the texture), as a local asset path. Plugin-only, as ColorMap is.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#normalmap"
+  },
+  "@bettervoxel/globaltype/SurfaceAppearance.RoughnessMap": {
+    "documentation": "The greyscale roughness image, as a local asset path. Plugin-only, as ColorMap is.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#roughnessmap"
+  },
   "@bettervoxel/globaltype/TextBox": {
     "documentation": "Typed text input: click (or CaptureFocus) to focus, keystrokes edit Text, Enter or clicking away releases — FocusLost says which. ClearTextOnFocus, TextEditable and MultiLine behave like the reference engine; no cursor or selection yet (v1).",
     "keys": {
@@ -8841,7 +8917,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#focuslost"
   },
   "@bettervoxel/globaltype/TextBox.Focused": {
-    "documentation": "Fires (with no arguments) when the box gains keyboard focus — a click or CaptureFocus.",
+    "documentation": "Fires (with no arguments) when the box gains keyboard focus — a left press on it, or CaptureFocus. A press on a button drawn over the box is the button's and does not focus it (measured).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#focused"
   },
   "@bettervoxel/globaltype/TextBox.Font": {
