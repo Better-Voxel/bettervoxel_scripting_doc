@@ -328,6 +328,15 @@ declare extern type Instance with
     function remove(self): ()
 end
 
+declare extern type Atmosphere extends Instance with
+    Color: Color3
+    Decay: Color3
+    Density: number
+    Glare: number
+    Haze: number
+    Offset: number
+end
+
 declare extern type Attachment extends Instance with
     CFrame: CFrame
     Orientation: Vector3
@@ -485,6 +494,21 @@ declare extern type Light extends Instance with
     Shadows: boolean
 end
 
+declare extern type Lighting extends Instance with
+    Ambient: Color3
+    Brightness: number
+    ClockTime: number
+    EnvironmentDiffuseScale: number
+    EnvironmentSpecularScale: number
+    ExposureCompensation: number
+    FogColor: Color3
+    FogEnd: number
+    FogStart: number
+    GeographicLatitude: number
+    function GetSunDirection(self): Vector3
+    GlobalShadows: boolean
+end
+
 declare extern type LuaSourceContainer extends Instance with
 end
 
@@ -561,6 +585,10 @@ declare extern type PlayerPrefab extends Instance with
     function SpawnCharacter(self, position: Vector3?): Instance
     Touched: BVScriptSignal -- fires (Instance)
     Velocity: Vector3 -- deprecated
+end
+
+declare extern type PostEffect extends Instance with
+    Enabled: boolean
 end
 
 declare extern type RemoteFunction extends Instance with
@@ -719,6 +747,12 @@ declare extern type BaseScript extends LuaSourceContainer with
     RunContext: EnumItem
 end
 
+declare extern type BloomEffect extends PostEffect with
+    Intensity: number
+    Size: number
+    Threshold: number
+end
+
 declare extern type BoolValue extends ValueBase with
     Value: boolean
 end
@@ -744,6 +778,17 @@ declare extern type Camera extends PVInstance with
     function WorldToScreenPoint(self, worldPoint: Vector3): (Vector3, boolean)
     function WorldToViewportPoint(self, worldPoint: Vector3): (Vector3, boolean)
     function ZoomToExtents(self, boundingBoxCFrame: CFrame, boundingBoxSize: Vector3): ()
+end
+
+declare extern type ColorCorrectionEffect extends PostEffect with
+    Brightness: number
+    Contrast: number
+    Saturation: number
+    TintColor: Color3
+end
+
+declare extern type ColorGradingEffect extends PostEffect with
+    TonemapperPreset: EnumItem
 end
 
 declare extern type GuiBase2d extends GuiBase with
@@ -1268,22 +1313,6 @@ declare extern type SoundService with
     function PlayLocalSound(self, sound: Instance): ()
 end
 
-declare extern type Lighting with
-    Ambient: Color3
-    Brightness: number
-    ClassName: string
-    ClockTime: number
-    ExposureCompensation: number
-    FogColor: Color3
-    FogEnd: number
-    FogStart: number
-    GeographicLatitude: number
-    function GetSunDirection(self): Vector3
-    GlobalShadows: boolean
-    function IsA(self, className: string): boolean
-    Name: string
-end
-
 declare extern type Debris with
     function AddItem(self, item: Instance, lifetime: number?): ()
     ClassName: string
@@ -1353,7 +1382,7 @@ declare extern type MessagingService with
 end
 
 declare extern type DataModel with
-    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: "StarterGui") -> StarterGui) & ((self: DataModel, service: "DataStoreService") -> DataStoreService) & ((self: DataModel, service: "MessagingService") -> MessagingService) & ((self: DataModel, service: "ReplicatedStorage") -> ReplicatedStorage) & ((self: DataModel, service: "ServerStorage") -> ServerStorage) & ((self: DataModel, service: "ServerScriptService") -> ServerScriptService) & ((self: DataModel, service: "StarterPlayerScripts") -> StarterPlayerScripts) & ((self: DataModel, service: string) -> Instance)
+    GetService: ((self: DataModel, service: "Workspace") -> Workspace) & ((self: DataModel, service: "Lighting") -> Lighting) & ((self: DataModel, service: "RunService") -> RunService) & ((self: DataModel, service: "Players") -> Players) & ((self: DataModel, service: "UserInputService") -> UserInputService) & ((self: DataModel, service: "SoundService") -> SoundService) & ((self: DataModel, service: "Debris") -> Debris) & ((self: DataModel, service: "TweenService") -> TweenService) & ((self: DataModel, service: "CollectionService") -> CollectionService) & ((self: DataModel, service: "HttpService") -> HttpService) & ((self: DataModel, service: "StarterGui") -> StarterGui) & ((self: DataModel, service: "DataStoreService") -> DataStoreService) & ((self: DataModel, service: "MessagingService") -> MessagingService) & ((self: DataModel, service: "ReplicatedStorage") -> ReplicatedStorage) & ((self: DataModel, service: "ServerStorage") -> ServerStorage) & ((self: DataModel, service: "ServerScriptService") -> ServerScriptService) & ((self: DataModel, service: "StarterPlayerScripts") -> StarterPlayerScripts) & ((self: DataModel, service: string) -> Instance)
     function BindToClose(self, callback: (reason: EnumItem) -> ()): ()
     ClassName: string
     CollectionService: CollectionService
@@ -1434,7 +1463,7 @@ declare Font: {
 }
 
 declare Instance: {
-    new: ((className: "AlignOrientation") -> AlignOrientation) & ((className: "AlignPosition") -> AlignPosition) & ((className: "AngularVelocity") -> AngularVelocity) & ((className: "Attachment") -> Attachment) & ((className: "BallSocketConstraint") -> BallSocketConstraint) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "DataStoreGetOptions") -> DataStoreGetOptions) & ((className: "DataStoreIncrementOptions") -> DataStoreIncrementOptions) & ((className: "DataStoreOptions") -> DataStoreOptions) & ((className: "DataStoreSetOptions") -> DataStoreSetOptions) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "Humanoid") -> Humanoid) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "LinearVelocity") -> LinearVelocity) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RodConstraint") -> RodConstraint) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "SpringConstraint") -> SpringConstraint) & ((className: "StringValue") -> StringValue) & ((className: "SurfaceAppearance") -> SurfaceAppearance) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "Torque") -> Torque) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "VectorForce") -> VectorForce) & ((className: "Weld") -> Weld) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
+    new: ((className: "AlignOrientation") -> AlignOrientation) & ((className: "AlignPosition") -> AlignPosition) & ((className: "AngularVelocity") -> AngularVelocity) & ((className: "Atmosphere") -> Atmosphere) & ((className: "Attachment") -> Attachment) & ((className: "BallSocketConstraint") -> BallSocketConstraint) & ((className: "BillboardGui") -> BillboardGui) & ((className: "BindableEvent") -> BindableEvent) & ((className: "BindableFunction") -> BindableFunction) & ((className: "BloomEffect") -> BloomEffect) & ((className: "BoolValue") -> BoolValue) & ((className: "Camera") -> Camera) & ((className: "ClickDetector") -> ClickDetector) & ((className: "ColorCorrectionEffect") -> ColorCorrectionEffect) & ((className: "ColorGradingEffect") -> ColorGradingEffect) & ((className: "DataStoreGetOptions") -> DataStoreGetOptions) & ((className: "DataStoreIncrementOptions") -> DataStoreIncrementOptions) & ((className: "DataStoreOptions") -> DataStoreOptions) & ((className: "DataStoreSetOptions") -> DataStoreSetOptions) & ((className: "Folder") -> Folder) & ((className: "Frame") -> Frame) & ((className: "HingeConstraint") -> HingeConstraint) & ((className: "Humanoid") -> Humanoid) & ((className: "ImageLabel") -> ImageLabel) & ((className: "InputAction") -> InputAction) & ((className: "InputBinding") -> InputBinding) & ((className: "InputContext") -> InputContext) & ((className: "IntValue") -> IntValue) & ((className: "LinearVelocity") -> LinearVelocity) & ((className: "MeshPart") -> MeshPart) & ((className: "Model") -> Model) & ((className: "NumberValue") -> NumberValue) & ((className: "ObjectValue") -> ObjectValue) & ((className: "Part") -> Part) & ((className: "ParticleEmitter") -> ParticleEmitter) & ((className: "PointLight") -> PointLight) & ((className: "RemoteEvent") -> RemoteEvent) & ((className: "RemoteFunction") -> RemoteFunction) & ((className: "RodConstraint") -> RodConstraint) & ((className: "RopeConstraint") -> RopeConstraint) & ((className: "ScreenGui") -> ScreenGui) & ((className: "Sound") -> Sound) & ((className: "SoundGroup") -> SoundGroup) & ((className: "SpotLight") -> SpotLight) & ((className: "SpringConstraint") -> SpringConstraint) & ((className: "StringValue") -> StringValue) & ((className: "SurfaceAppearance") -> SurfaceAppearance) & ((className: "TextBox") -> TextBox) & ((className: "TextButton") -> TextButton) & ((className: "TextLabel") -> TextLabel) & ((className: "Torque") -> Torque) & ((className: "UICorner") -> UICorner) & ((className: "UIGradient") -> UIGradient) & ((className: "UIListLayout") -> UIListLayout) & ((className: "UIPadding") -> UIPadding) & ((className: "UIStroke") -> UIStroke) & ((className: "VectorForce") -> VectorForce) & ((className: "Weld") -> Weld) & ((className: "WeldConstraint") -> WeldConstraint) & ((className: string) -> Instance),
 }
 
 declare NumberRange: {
@@ -1548,6 +1577,7 @@ declare Enum: {
     StepFrequency: Enum & { Hz1: EnumItem, Hz10: EnumItem, Hz15: EnumItem, Hz30: EnumItem, Hz5: EnumItem, Hz60: EnumItem },
     TextXAlignment: Enum & { Center: EnumItem, Left: EnumItem, Right: EnumItem },
     TextYAlignment: Enum & { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },
+    TonemapperPreset: Enum & { Default: EnumItem, Retro: EnumItem },
     UserInputType: Enum & { Keyboard: EnumItem, MouseButton1: EnumItem, MouseButton2: EnumItem, MouseButton3: EnumItem },
     VelocityConstraintMode: Enum & { Line: EnumItem, Plane: EnumItem, Vector: EnumItem },
     VerticalAlignment: Enum & { Bottom: EnumItem, Center: EnumItem, Top: EnumItem },

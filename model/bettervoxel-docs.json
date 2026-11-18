@@ -778,7 +778,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html"
   },
   "@bettervoxel/global/Instance.new": {
-    "documentation": "A default-constructed instance of the named class, with Parent nil — assign Parent to bring it into the world (derived state appears on attach). Only creatable classes are accepted; abstract and engine-spawned classes error exactly like an unknown name.",
+    "documentation": "A default-constructed instance of the named class, with Parent nil — assign Parent to bring it into the world (derived state appears on attach). It is named after its class, save fourteen born as the reference names them: a BloomEffect Bloom, a ColorCorrectionEffect ColorCorrection, a ColorGradingEffect ColorGrading; a BoolValue, IntValue, NumberValue, StringValue and ObjectValue Value; a BindableEvent Event, a BindableFunction Function; a DataStoreOptions, DataStoreSetOptions, DataStoreGetOptions and DataStoreIncrementOptions Instance. Only creatable classes are accepted; abstract and engine-spawned classes error exactly like an unknown name.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#new",
     "params": [
       {
@@ -1540,6 +1540,42 @@
     "documentation": "Draws the editor's marker for the angular velocity target whatever the selection. An authoring aid — nothing at runtime reads it. Default false.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/AngularVelocity.html#visible"
   },
+  "@bettervoxel/globaltype/Atmosphere": {
+    "documentation": "The haze over distance, at home under Lighting: Density and Offset (0..1), Glare and Haze (0..10), a Color and a Decay. Saved, cloned and replicated like any instance, wherever it is parented. The engine does not draw it: a place's haze is Lighting's fog.",
+    "keys": {
+      "Color": "@bettervoxel/globaltype/Atmosphere.Color",
+      "Decay": "@bettervoxel/globaltype/Atmosphere.Decay",
+      "Density": "@bettervoxel/globaltype/Atmosphere.Density",
+      "Glare": "@bettervoxel/globaltype/Atmosphere.Glare",
+      "Haze": "@bettervoxel/globaltype/Atmosphere.Haze",
+      "Offset": "@bettervoxel/globaltype/Atmosphere.Offset"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Atmosphere.html"
+  },
+  "@bettervoxel/globaltype/Atmosphere.Color": {
+    "documentation": "The haze's hue, (0.7843, 0.6667, 0.4235) by default, stored as written; its effect shows best with a Haze above 0. A Color3 or a raw RGB vector. The engine does not draw the haze.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Atmosphere.html#color"
+  },
+  "@bettervoxel/globaltype/Atmosphere.Decay": {
+    "documentation": "The haze's hue away from the sun, which Color falls off toward, seen with a Haze and a Glare above 0; (0.3608, 0.2353, 0.0549) by default, stored as written. A Color3 or a raw RGB vector. The engine does not draw the haze.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Atmosphere.html#decay"
+  },
+  "@bettervoxel/globaltype/Atmosphere.Density": {
+    "documentation": "The amount of particles in the air: the higher, the more the haze hides what stands far off, 0.395 by default. Clamped onto 0..1, a NaN stored as 0. The engine does not draw the haze: a place's haze is Lighting's fog.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Atmosphere.html#density"
+  },
+  "@bettervoxel/globaltype/Atmosphere.Glare": {
+    "documentation": "The glow of the haze around the sun, seen with a Haze above 0, 0 by default. Clamped onto 0..10, a NaN stored as 0. The engine does not draw the haze.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Atmosphere.html#glare"
+  },
+  "@bettervoxel/globaltype/Atmosphere.Haze": {
+    "documentation": "The haze over the sky: raised, it turns the sky and the horizon one dull colour and leaves what stands in the world as it was (measured at 3), 0 by default. Clamped onto 0..10, a NaN stored as 0. The engine does not draw the haze.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Atmosphere.html#haze"
+  },
+  "@bettervoxel/globaltype/Atmosphere.Offset": {
+    "documentation": "How light passes between the camera and the sky behind what stands far off: higher sets distant objects against the sky, lower blends them into it, 0 by default. Clamped onto 0..1, a NaN stored as 0. The engine does not draw the haze.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Atmosphere.html#offset"
+  },
   "@bettervoxel/globaltype/Attachment": {
     "documentation": "A named point on a part: its CFrame, Position and Orientation are LOCAL to the parent, and the WorldCFrame/WorldPosition pair is the composed world view (writing it recomputes the local). Constraints anchor to attachments; Visible draws the editor marker.",
     "keys": {
@@ -2086,6 +2122,27 @@
   "@bettervoxel/globaltype/BindableFunction.OnInvoke": {
     "documentation": "The handler Invoke calls. Assign a function or nil; unset reads nil, and calling Invoke while unset errors.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BindableFunction.html#oninvoke"
+  },
+  "@bettervoxel/globaltype/BloomEffect": {
+    "documentation": "A glow around the picture's bright areas: Intensity, Size and Threshold. Born named Bloom. The engine does not draw it.",
+    "keys": {
+      "Intensity": "@bettervoxel/globaltype/BloomEffect.Intensity",
+      "Size": "@bettervoxel/globaltype/BloomEffect.Size",
+      "Threshold": "@bettervoxel/globaltype/BloomEffect.Threshold"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BloomEffect.html"
+  },
+  "@bettervoxel/globaltype/BloomEffect.Intensity": {
+    "documentation": "How strong the bloom's glow is, 0.4 by default; stored as written (the reference clamps none), a non-finite value made finite (NaN stores 0, math.huge the largest finite number).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BloomEffect.html#intensity"
+  },
+  "@bettervoxel/globaltype/BloomEffect.Size": {
+    "documentation": "How far the bloom reaches, 24 by default (the bloom branch of the name: a number here, where a part's is a Vector3 and a gui's a UDim2); stored as written, a non-finite value made finite.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BloomEffect.html#size"
+  },
+  "@bettervoxel/globaltype/BloomEffect.Threshold": {
+    "documentation": "How bright a pixel must be to bloom, 0.95 by default; stored as written, a non-finite value made finite.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/BloomEffect.html#threshold"
   },
   "@bettervoxel/globaltype/BoolValue": {
     "documentation": "A named container for one boolean.",
@@ -3522,6 +3579,43 @@
   },
   "@bettervoxel/globaltype/Color3.lerp/return/0": {
     "documentation": "`Color3`"
+  },
+  "@bettervoxel/globaltype/ColorCorrectionEffect": {
+    "documentation": "A correction of the picture's colours as the screen shows them, after the tone curve: Brightness, Contrast, Saturation and a TintColor. Born named ColorCorrection. Drawn while enabled as a child of Lighting (no deeper; one under the camera is not read); several there act as one, their Brightness, Contrast and Saturation summed and their TintColors multiplied. The UI is not corrected.",
+    "keys": {
+      "Brightness": "@bettervoxel/globaltype/ColorCorrectionEffect.Brightness",
+      "Contrast": "@bettervoxel/globaltype/ColorCorrectionEffect.Contrast",
+      "Saturation": "@bettervoxel/globaltype/ColorCorrectionEffect.Saturation",
+      "TintColor": "@bettervoxel/globaltype/ColorCorrectionEffect.TintColor"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ColorCorrectionEffect.html"
+  },
+  "@bettervoxel/globaltype/ColorCorrectionEffect.Brightness": {
+    "documentation": "What the correction adds to every channel of the displayed picture, 0 by default; stored as written (the reference clamps none), a non-finite value made finite (NaN stores 0, math.huge the largest finite number).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ColorCorrectionEffect.html#brightness"
+  },
+  "@bettervoxel/globaltype/ColorCorrectionEffect.Contrast": {
+    "documentation": "How far the correction spreads the displayed picture's channels from their middle (each scaled by one more than it about 0.5), 0 by default; stored as written, a non-finite value made finite.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ColorCorrectionEffect.html#contrast"
+  },
+  "@bettervoxel/globaltype/ColorCorrectionEffect.Saturation": {
+    "documentation": "How far the correction moves the displayed picture's colours from their grey (0.34 R + 0.55 G + 0.11 B; -1 is no colour at all), 0 by default; stored as written, a non-finite value made finite.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ColorCorrectionEffect.html#saturation"
+  },
+  "@bettervoxel/globaltype/ColorCorrectionEffect.TintColor": {
+    "documentation": "What the correction multiplies the displayed picture's channels by, its last step, white by default.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ColorCorrectionEffect.html#tintcolor"
+  },
+  "@bettervoxel/globaltype/ColorGradingEffect": {
+    "documentation": "The picture's tone curve, its TonemapperPreset: Default or Retro. Born named ColorGrading. The engine does not draw it.",
+    "keys": {
+      "TonemapperPreset": "@bettervoxel/globaltype/ColorGradingEffect.TonemapperPreset"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ColorGradingEffect.html"
+  },
+  "@bettervoxel/globaltype/ColorGradingEffect.TonemapperPreset": {
+    "documentation": "The tone curve: Default (the standing curve) or Retro (a plain clip, channel by channel). Writes accept the Enum.TonemapperPreset item or its name.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/ColorGradingEffect.html#tonemapperpreset"
   },
   "@bettervoxel/globaltype/ColorSequence": {
     "documentation": "A piecewise-linear color ramp over a unit time span, built from 2 to 20 keypoints under the same rules as NumberSequence — the particle Color.",
@@ -5831,7 +5925,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#descendantadded"
   },
   "@bettervoxel/globaltype/Instance.Destroy": {
-    "documentation": "Destroys the instance and its whole subtree, firing Destroying. Destroyed instances stay readable as husks: properties read their last values, Parent reads nil and is locked. Destroying an already-destroyed instance does nothing.",
+    "documentation": "Destroys the instance and its whole subtree, firing Destroying. Destroyed instances stay readable as husks: properties read their last values, Parent reads nil and is locked. Destroying an already-destroyed instance does nothing. A root of the place — the Workspace, Lighting, a service container — refuses, its Parent locked.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#destroy",
     "params": [],
     "returns": []
@@ -6127,7 +6221,7 @@
     "documentation": "`boolean`"
   },
   "@bettervoxel/globaltype/Instance.Name": {
-    "documentation": "The instance's name — the label the Explorer shows and the key FindFirstChild, WaitForChild and dot-child access match on. Names need not be unique among siblings; lookups return the first match in child order.",
+    "documentation": "The instance's name — the label the Explorer shows and the key FindFirstChild, WaitForChild and dot-child access match on. Names need not be unique among siblings; lookups return the first match in child order. A root of the place (the Workspace, Lighting, a service container) keeps its name: writing another raises `The Name property of <root> is locked`.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Instance.html#name"
   },
   "@bettervoxel/globaltype/Instance.Parent": {
@@ -6320,63 +6414,66 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Light.html#shadows"
   },
   "@bettervoxel/globaltype/Lighting": {
-    "documentation": "The global lighting state: ambient color, sun brightness, the ClockTime day cycle, and distance fog. The skybox is file-authored in v1 — scripts move the sun, not the sky.",
+    "documentation": "The global lighting state: ambient color, sun brightness, the ClockTime day cycle, distance fog, the exposure bias, and how much the skybox lights (EnvironmentDiffuseScale) and is reflected (EnvironmentSpecularScale). The skybox itself is file-authored in v1 — scripts move the sun and the two scales, not the sky. A root of the tree, as the Workspace is: its children are saved with the place and replicate, nothing under it draws or simulates, and a Script whose RunContext is Server or Client runs there.",
     "keys": {
       "Ambient": "@bettervoxel/globaltype/Lighting.Ambient",
       "Brightness": "@bettervoxel/globaltype/Lighting.Brightness",
-      "ClassName": "@bettervoxel/globaltype/Lighting.ClassName",
       "ClockTime": "@bettervoxel/globaltype/Lighting.ClockTime",
+      "EnvironmentDiffuseScale": "@bettervoxel/globaltype/Lighting.EnvironmentDiffuseScale",
+      "EnvironmentSpecularScale": "@bettervoxel/globaltype/Lighting.EnvironmentSpecularScale",
       "ExposureCompensation": "@bettervoxel/globaltype/Lighting.ExposureCompensation",
       "FogColor": "@bettervoxel/globaltype/Lighting.FogColor",
       "FogEnd": "@bettervoxel/globaltype/Lighting.FogEnd",
       "FogStart": "@bettervoxel/globaltype/Lighting.FogStart",
       "GeographicLatitude": "@bettervoxel/globaltype/Lighting.GeographicLatitude",
       "GetSunDirection": "@bettervoxel/globaltype/Lighting.GetSunDirection",
-      "GlobalShadows": "@bettervoxel/globaltype/Lighting.GlobalShadows",
-      "IsA": "@bettervoxel/globaltype/Lighting.IsA",
-      "Name": "@bettervoxel/globaltype/Lighting.Name"
+      "GlobalShadows": "@bettervoxel/globaltype/Lighting.GlobalShadows"
     },
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html"
   },
   "@bettervoxel/globaltype/Lighting.Ambient": {
     "documentation": "The ambient light color, filling in where no light reaches. Accepts a Color3 or a raw RGB vector, like every color setter.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#ambient"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#ambient"
   },
   "@bettervoxel/globaltype/Lighting.Brightness": {
     "documentation": "The sun's intensity, floored at 0.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#brightness"
-  },
-  "@bettervoxel/globaltype/Lighting.ClassName": {
-    "documentation": "The class name — the first name IsA answers.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#classname"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#brightness"
   },
   "@bettervoxel/globaltype/Lighting.ClockTime": {
     "documentation": "The time of day in hours: writes clamp onto 0..24 and 24 reads back as 0 (the measured reference contract); the sun and sky follow.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#clocktime"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#clocktime"
+  },
+  "@bettervoxel/globaltype/Lighting.EnvironmentDiffuseScale": {
+    "documentation": "How much of the skybox's light reaches the surfaces the sun does not, on top of Ambient: 0 is the ambient alone, 1 the sky's own light. A metal takes nothing from it, and a place with no skybox nothing at all. A skybox with an authored prefiltered pair lights by the pair alone, which this does not reach. Writes clamp onto 0..1; a non-finite number is refused. 1 by default.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#environmentdiffusescale"
+  },
+  "@bettervoxel/globaltype/Lighting.EnvironmentSpecularScale": {
+    "documentation": "How much of the skybox a surface reflects: 0 reflects nothing (a metal then goes dark), 1 the sky as drawn. Under a skybox's authored prefiltered pair this scales the whole pair: its diffuse light and its reflections. Writes clamp onto 0..1; a non-finite number is refused. 1 by default.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#environmentspecularscale"
   },
   "@bettervoxel/globaltype/Lighting.ExposureCompensation": {
     "documentation": "A bias to the scene's exposure before the tone curve, in stops: 1 is twice the light, -1 half. Writes clamp onto -5..5, the range the reference states; a non-finite number is refused.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#exposurecompensation"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#exposurecompensation"
   },
   "@bettervoxel/globaltype/Lighting.FogColor": {
     "documentation": "The distance-fog color.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogcolor"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#fogcolor"
   },
   "@bettervoxel/globaltype/Lighting.FogEnd": {
     "documentation": "The distance where fog fully occludes, in studs, floored at 0.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogend"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#fogend"
   },
   "@bettervoxel/globaltype/Lighting.FogStart": {
     "documentation": "The distance where fog begins, in studs, floored at 0.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#fogstart"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#fogstart"
   },
   "@bettervoxel/globaltype/Lighting.GeographicLatitude": {
     "documentation": "Degrees north, clamped to -90..90. The sun follows the reference's measured model — the day circle plus a tan(latitude - 23.5) north-lean — so at the engine default 0 (Roblox defaults to 41.733) the noon sun leans 23.5 degrees south, and latitude 23.5 puts it overhead.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#geographiclatitude"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#geographiclatitude"
   },
   "@bettervoxel/globaltype/Lighting.GetSunDirection": {
     "documentation": "The unit direction toward the sun for the current ClockTime and GeographicLatitude.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#getsundirection",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#getsundirection",
     "params": [],
     "returns": [
       "@bettervoxel/globaltype/Lighting.GetSunDirection/return/0"
@@ -6387,30 +6484,7 @@
   },
   "@bettervoxel/globaltype/Lighting.GlobalShadows": {
     "documentation": "Whether the sun casts shadows. Turn it off (with Brightness 0) for a fully unlit look.",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#globalshadows"
-  },
-  "@bettervoxel/globaltype/Lighting.IsA": {
-    "documentation": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\".",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#isa",
-    "params": [
-      {
-        "documentation": "@bettervoxel/globaltype/Lighting.IsA/param/0",
-        "name": "className"
-      }
-    ],
-    "returns": [
-      "@bettervoxel/globaltype/Lighting.IsA/return/0"
-    ]
-  },
-  "@bettervoxel/globaltype/Lighting.IsA/param/0": {
-    "documentation": "`className: string`"
-  },
-  "@bettervoxel/globaltype/Lighting.IsA/return/0": {
-    "documentation": "`boolean`"
-  },
-  "@bettervoxel/globaltype/Lighting.Name": {
-    "documentation": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one).",
-    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/services/Lighting.html#name"
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/Lighting.html#globalshadows"
   },
   "@bettervoxel/globaltype/LinearVelocity": {
     "documentation": "A mover: a force that brings Attachment0's assembly to a velocity within each physics step — the whole vector, its component along a line, or its projection on a plane, named in RelativeTo's frame — within its force limits, the assembly's weight held.",
@@ -7665,6 +7739,17 @@
   "@bettervoxel/globaltype/PointLight": {
     "documentation": "A light radiating in every direction from its parent's position.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PointLight.html"
+  },
+  "@bettervoxel/globaltype/PostEffect": {
+    "documentation": "The base of the effects over the rendered picture: the Enabled switch. Saved, cloned and replicated like any instance, wherever it is parented; of the post effects the engine draws the ColorCorrectionEffect alone.",
+    "keys": {
+      "Enabled": "@bettervoxel/globaltype/PostEffect.Enabled"
+    },
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PostEffect.html"
+  },
+  "@bettervoxel/globaltype/PostEffect.Enabled": {
+    "documentation": "Whether the effect is on (true by default). The effect keeps its other values while off. An enabled ColorCorrectionEffect under Lighting corrects the picture, a disabled one does nothing; a bloom and a grading are not drawn, their value saved, cloned and replicated.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/PostEffect.html#enabled"
   },
   "@bettervoxel/globaltype/Random": {
     "documentation": "A seeded pseudo-random generator — the reference engine's own stream (PCG32), so a seed draws the same numbers here as there: NextNumber, NextInteger, NextUnitVector, an in-place Shuffle and Clone; two generators are equal when their states are. Random.new() with no seed draws from the VM's generator, the one math.random uses.",

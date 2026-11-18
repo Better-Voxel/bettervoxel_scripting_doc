@@ -229,6 +229,50 @@
       "creatable": true,
       "members": [
         {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "Color",
+          "summary": "The haze's hue, (0.7843, 0.6667, 0.4235) by default, stored as written; its effect shows best with a Haze above 0. A Color3 or a raw RGB vector. The engine does not draw the haze."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "Decay",
+          "summary": "The haze's hue away from the sun, which Color falls off toward, seen with a Haze and a Glare above 0; (0.3608, 0.2353, 0.0549) by default, stored as written. A Color3 or a raw RGB vector. The engine does not draw the haze."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Density",
+          "summary": "The amount of particles in the air: the higher, the more the haze hides what stands far off, 0.395 by default. Clamped onto 0..1, a NaN stored as 0. The engine does not draw the haze: a place's haze is Lighting's fog."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Glare",
+          "summary": "The glow of the haze around the sun, seen with a Haze above 0, 0 by default. Clamped onto 0..10, a NaN stored as 0. The engine does not draw the haze."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Haze",
+          "summary": "The haze over the sky: raised, it turns the sky and the horizon one dull colour and leaves what stands in the world as it was (measured at 3), 0 by default. Clamped onto 0..10, a NaN stored as 0. The engine does not draw the haze."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Offset",
+          "summary": "How light passes between the camera and the sky behind what stands far off: higher sets distant objects against the sky, lower blends them into it, 0 by default. Clamped onto 0..1, a NaN stored as 0. The engine does not draw the haze."
+        }
+      ],
+      "name": "Atmosphere",
+      "parent": "Instance",
+      "summary": "The haze over distance, at home under Lighting: Density and Offset (0..1), Glare and Haze (0..10), a Color and a Decay. Saved, cloned and replicated like any instance, wherever it is parented. The engine does not draw it: a place's haze is Lighting's fog."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
           "decl": "CFrame",
           "kind": "ReadWrite",
           "name": "CFrame",
@@ -724,6 +768,32 @@
       "creatable": true,
       "members": [
         {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Intensity",
+          "summary": "How strong the bloom's glow is, 0.4 by default; stored as written (the reference clamps none), a non-finite value made finite (NaN stores 0, math.huge the largest finite number)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Size",
+          "summary": "How far the bloom reaches, 24 by default (the bloom branch of the name: a number here, where a part's is a Vector3 and a gui's a UDim2); stored as written, a non-finite value made finite."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Threshold",
+          "summary": "How bright a pixel must be to bloom, 0.95 by default; stored as written, a non-finite value made finite."
+        }
+      ],
+      "name": "BloomEffect",
+      "parent": "PostEffect",
+      "summary": "A glow around the picture's bright areas: Intensity, Size and Threshold. Born named Bloom. The engine does not draw it."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "Value",
@@ -1083,6 +1153,52 @@
       "name": "ClickDetector",
       "parent": "Instance",
       "summary": "Makes its parent part clickable: MouseClick fires with the clicking player, within MaxActivationDistance."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Brightness",
+          "summary": "What the correction adds to every channel of the displayed picture, 0 by default; stored as written (the reference clamps none), a non-finite value made finite (NaN stores 0, math.huge the largest finite number)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Contrast",
+          "summary": "How far the correction spreads the displayed picture's channels from their middle (each scaled by one more than it about 0.5), 0 by default; stored as written, a non-finite value made finite."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Saturation",
+          "summary": "How far the correction moves the displayed picture's colours from their grey (0.34 R + 0.55 G + 0.11 B; -1 is no colour at all), 0 by default; stored as written, a non-finite value made finite."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "TintColor",
+          "summary": "What the correction multiplies the displayed picture's channels by, its last step, white by default."
+        }
+      ],
+      "name": "ColorCorrectionEffect",
+      "parent": "PostEffect",
+      "summary": "A correction of the picture's colours as the screen shows them, after the tone curve: Brightness, Contrast, Saturation and a TintColor. Born named ColorCorrection. Drawn while enabled as a child of Lighting (no deeper; one under the camera is not read); several there act as one, their Brightness, Contrast and Saturation summed and their TintColors multiplied. The UI is not corrected."
+    },
+    {
+      "creatable": true,
+      "members": [
+        {
+          "decl": "Enum.TonemapperPreset",
+          "kind": "ReadWrite",
+          "name": "TonemapperPreset",
+          "summary": "The tone curve: Default (the standing curve) or Retro (a plain clip, channel by channel). Writes accept the Enum.TonemapperPreset item or its name."
+        }
+      ],
+      "name": "ColorGradingEffect",
+      "parent": "PostEffect",
+      "summary": "The picture's tone curve, its TonemapperPreset: Default or Retro. Born named ColorGrading. The engine does not draw it."
     },
     {
       "creatable": false,
@@ -2073,7 +2189,7 @@
           "name": "Destroy",
           "params": [],
           "returns": [],
-          "summary": "Destroys the instance and its whole subtree, firing Destroying. Destroyed instances stay readable as husks: properties read their last values, Parent reads nil and is locked. Destroying an already-destroyed instance does nothing."
+          "summary": "Destroys the instance and its whole subtree, firing Destroying. Destroyed instances stay readable as husks: properties read their last values, Parent reads nil and is locked. Destroying an already-destroyed instance does nothing. A root of the place — the Workspace, Lighting, a service container — refuses, its Parent locked."
         },
         {
           "decl": "BVScriptSignal",
@@ -2360,7 +2476,7 @@
           "decl": "string",
           "kind": "ReadWrite",
           "name": "Name",
-          "summary": "The instance's name — the label the Explorer shows and the key FindFirstChild, WaitForChild and dot-child access match on. Names need not be unique among siblings; lookups return the first match in child order."
+          "summary": "The instance's name — the label the Explorer shows and the key FindFirstChild, WaitForChild and dot-child access match on. Names need not be unique among siblings; lookups return the first match in child order. A root of the place (the Workspace, Lighting, a service container) keeps its name: writing another raises `The Name property of <root> is locked`."
         },
         {
           "decl": "Instance?",
@@ -2502,7 +2618,7 @@
               "type": "Instance"
             }
           ],
-          "summary": "A default-constructed instance of the named class, with Parent nil — assign Parent to bring it into the world (derived state appears on attach). Only creatable classes are accepted; abstract and engine-spawned classes error exactly like an unknown name."
+          "summary": "A default-constructed instance of the named class, with Parent nil — assign Parent to bring it into the world (derived state appears on attach). It is named after its class, save fourteen born as the reference names them: a BloomEffect Bloom, a ColorCorrectionEffect ColorCorrection, a ColorGradingEffect ColorGrading; a BoolValue, IntValue, NumberValue, StringValue and ObjectValue Value; a BindableEvent Event, a BindableFunction Function; a DataStoreOptions, DataStoreSetOptions, DataStoreGetOptions and DataStoreIncrementOptions Instance. Only creatable classes are accepted; abstract and engine-spawned classes error exactly like an unknown name."
         },
         {
           "decl": "() -> ()",
@@ -2622,6 +2738,92 @@
       "name": "Light",
       "parent": "Instance",
       "summary": "The shared light surface: Brightness, Color, Range, Shadows and the Enabled switch, parented under the part that carries the light."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "Ambient",
+          "summary": "The ambient light color, filling in where no light reaches. Accepts a Color3 or a raw RGB vector, like every color setter."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "Brightness",
+          "summary": "The sun's intensity, floored at 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ClockTime",
+          "summary": "The time of day in hours: writes clamp onto 0..24 and 24 reads back as 0 (the measured reference contract); the sun and sky follow."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "EnvironmentDiffuseScale",
+          "summary": "How much of the skybox's light reaches the surfaces the sun does not, on top of Ambient: 0 is the ambient alone, 1 the sky's own light. A metal takes nothing from it, and a place with no skybox nothing at all. A skybox with an authored prefiltered pair lights by the pair alone, which this does not reach. Writes clamp onto 0..1; a non-finite number is refused. 1 by default."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "EnvironmentSpecularScale",
+          "summary": "How much of the skybox a surface reflects: 0 reflects nothing (a metal then goes dark), 1 the sky as drawn. Under a skybox's authored prefiltered pair this scales the whole pair: its diffuse light and its reflections. Writes clamp onto 0..1; a non-finite number is refused. 1 by default."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "ExposureCompensation",
+          "summary": "A bias to the scene's exposure before the tone curve, in stops: 1 is twice the light, -1 half. Writes clamp onto -5..5, the range the reference states; a non-finite number is refused."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "FogColor",
+          "summary": "The distance-fog color."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "FogEnd",
+          "summary": "The distance where fog fully occludes, in studs, floored at 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "FogStart",
+          "summary": "The distance where fog begins, in studs, floored at 0."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "GeographicLatitude",
+          "summary": "Degrees north, clamped to -90..90. The sun follows the reference's measured model — the day circle plus a tan(latitude - 23.5) north-lean — so at the engine default 0 (Roblox defaults to 41.733) the noon sun leans 23.5 degrees south, and latitude 23.5 puts it overhead."
+        },
+        {
+          "decl": "() -> Vector3",
+          "kind": "Method",
+          "name": "GetSunDirection",
+          "params": [],
+          "returns": [
+            {
+              "type": "Vector3"
+            }
+          ],
+          "summary": "The unit direction toward the sun for the current ClockTime and GeographicLatitude."
+        },
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "GlobalShadows",
+          "summary": "Whether the sun casts shadows. Turn it off (with Brightness 0) for a fully unlit look."
+        }
+      ],
+      "name": "Lighting",
+      "parent": "Instance",
+      "summary": "The global lighting state: ambient color, sun brightness, the ClockTime day cycle, distance fog, the exposure bias, and how much the skybox lights (EnvironmentDiffuseScale) and is reflected (EnvironmentSpecularScale). The skybox itself is file-authored in v1 — scripts move the sun and the two scales, not the sky. A root of the tree, as the Workspace is: its children are saved with the place and replicate, nothing under it draws or simulates, and a Script whose RunContext is Server or Client runs there."
     },
     {
       "creatable": true,
@@ -3392,6 +3594,20 @@
       "name": "PointLight",
       "parent": "Light",
       "summary": "A light radiating in every direction from its parent's position."
+    },
+    {
+      "creatable": false,
+      "members": [
+        {
+          "decl": "boolean",
+          "kind": "ReadWrite",
+          "name": "Enabled",
+          "summary": "Whether the effect is on (true by default). The effect keeps its other values while off. An enabled ColorCorrectionEffect under Lighting corrects the picture, a disabled one does nothing; a bloom and a grading are not drawn, their value saved, cloned and replicated."
+        }
+      ],
+      "name": "PostEffect",
+      "parent": "Instance",
+      "summary": "The base of the effects over the rendered picture: the Enabled switch. Saved, cloned and replicated like any instance, wherever it is parented; of the post effects the engine draws the ColorCorrectionEffect alone."
     },
     {
       "creatable": true,
@@ -9804,6 +10020,10 @@
       "Center",
       "Top"
     ],
+    "TonemapperPreset": [
+      "Default",
+      "Retro"
+    ],
     "UserInputType": [
       "Keyboard",
       "MouseButton1",
@@ -10770,108 +10990,6 @@
       ],
       "name": "SoundService",
       "summary": "Non-positional playback: PlayLocalSound starts a Sound wherever it lives, storage included."
-    },
-    {
-      "members": [
-        {
-          "decl": "Color3",
-          "kind": "ReadWrite",
-          "name": "Ambient",
-          "summary": "The ambient light color, filling in where no light reaches. Accepts a Color3 or a raw RGB vector, like every color setter."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "Brightness",
-          "summary": "The sun's intensity, floored at 0."
-        },
-        {
-          "decl": "string",
-          "kind": "ReadOnly",
-          "name": "ClassName",
-          "summary": "The class name — the first name IsA answers."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "ClockTime",
-          "summary": "The time of day in hours: writes clamp onto 0..24 and 24 reads back as 0 (the measured reference contract); the sun and sky follow."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "ExposureCompensation",
-          "summary": "A bias to the scene's exposure before the tone curve, in stops: 1 is twice the light, -1 half. Writes clamp onto -5..5, the range the reference states; a non-finite number is refused."
-        },
-        {
-          "decl": "Color3",
-          "kind": "ReadWrite",
-          "name": "FogColor",
-          "summary": "The distance-fog color."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "FogEnd",
-          "summary": "The distance where fog fully occludes, in studs, floored at 0."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "FogStart",
-          "summary": "The distance where fog begins, in studs, floored at 0."
-        },
-        {
-          "decl": "number",
-          "kind": "ReadWrite",
-          "name": "GeographicLatitude",
-          "summary": "Degrees north, clamped to -90..90. The sun follows the reference's measured model — the day circle plus a tan(latitude - 23.5) north-lean — so at the engine default 0 (Roblox defaults to 41.733) the noon sun leans 23.5 degrees south, and latitude 23.5 puts it overhead."
-        },
-        {
-          "decl": "() -> Vector3",
-          "kind": "Method",
-          "name": "GetSunDirection",
-          "params": [],
-          "returns": [
-            {
-              "type": "Vector3"
-            }
-          ],
-          "summary": "The unit direction toward the sun for the current ClockTime and GeographicLatitude."
-        },
-        {
-          "decl": "boolean",
-          "kind": "ReadWrite",
-          "name": "GlobalShadows",
-          "summary": "Whether the sun casts shadows. Turn it off (with Brightness 0) for a fully unlit look."
-        },
-        {
-          "decl": "(className: string) -> boolean",
-          "kind": "Method",
-          "name": "IsA",
-          "params": [
-            {
-              "name": "className",
-              "optional": false,
-              "type": "string"
-            }
-          ],
-          "returns": [
-            {
-              "type": "boolean"
-            }
-          ],
-          "summary": "The ancestry test: true for the class name, any measured base (the DataModel is a ServiceProvider, a Tween is a TweenBase) and \"Instance\"."
-        },
-        {
-          "decl": "string",
-          "kind": "ReadOnly",
-          "name": "Name",
-          "summary": "The display name: the class name again, except RunService (measured \"Run Service\") and the DataModel, whose Name is the place name (\"Game\" is the recorded stub until the engine carries one)."
-        }
-      ],
-      "name": "Lighting",
-      "summary": "The global lighting state: ambient color, sun brightness, the ClockTime day cycle, and distance fog. The skybox is file-authored in v1 — scripts move the sun, not the sky."
     },
     {
       "members": [
