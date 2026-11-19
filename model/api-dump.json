@@ -4214,13 +4214,19 @@
           "name": "CaptureFocus",
           "params": [],
           "returns": [],
-          "summary": "Gives this box keyboard focus, releasing any other focused box (its FocusLost fires with false)."
+          "summary": "Gives this box keyboard focus, releasing any other focused box (its FocusLost fires with false). IsFocused, UserInputService:GetFocusedTextBox and CursorPosition (#Text + 1, after ClearTextOnFocus emptied it) answer at once; Focused fires afterwards. A box the client does not draw takes no focus."
         },
         {
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "ClearTextOnFocus",
-          "summary": "Empties Text when the box gains focus (true by default)."
+          "summary": "Empties Text when the box gains focus, by a click or CaptureFocus (true by default). A box that is not TextEditable is not emptied (measured)."
+        },
+        {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "CursorPosition",
+          "summary": "The caret, in bytes of Text: 1 before the first character, #Text + 1 after the last, -1 for none (1 on a fresh box; -1 once the focus is lost). A write is clamped at once; a position on an unfocused box focuses it, and -1 on the focused box releases it — both silently (measured). CaptureFocus puts it at #Text + 1 at once."
         },
         {
           "decl": "BVScriptSignal<boolean>",
@@ -4229,14 +4235,14 @@
           "payloads": [
             "boolean"
           ],
-          "summary": "Fires when the box loses focus, with enterPressed: true for Return, false for Escape, a click elsewhere, or ReleaseFocus."
+          "summary": "Fires when the box loses focus, with enterPressed: true for Return or ReleaseFocus(true), false for Escape, a click elsewhere, another box taking the focus, a detach or ReleaseFocus(). CursorPosition and SelectionStart already read -1 when it fires."
         },
         {
           "decl": "BVScriptSignal",
           "kind": "Signal",
           "name": "Focused",
           "payloads": [],
-          "summary": "Fires (with no arguments) when the box gains keyboard focus — a left press on it, or CaptureFocus. A press on a button drawn over the box is the button's and does not focus it (measured)."
+          "summary": "Fires (with no arguments) when the box gains keyboard focus — a left press on it, or CaptureFocus. A press on a button drawn over the box is the button's and does not focus it (measured). A CursorPosition write focuses silently."
         },
         {
           "decl": "Enum.Font",
@@ -4260,13 +4266,25 @@
               "type": "boolean"
             }
           ],
-          "summary": "Whether this box holds keyboard focus right now."
+          "summary": "Whether this box holds keyboard focus right now — a focus verb of the same thread already counts."
         },
         {
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "MultiLine",
-          "summary": "Return inserts a newline instead of releasing focus."
+          "summary": "Return inserts a newline (`\\n`, measured) instead of releasing focus, and Up and Down move a line."
+        },
+        {
+          "decl": "Color3",
+          "kind": "ReadWrite",
+          "name": "PlaceholderColor3",
+          "summary": "The placeholder's color: (0.5, 0.5, 0.5) on a fresh box (measured)."
+        },
+        {
+          "decl": "string",
+          "kind": "ReadWrite",
+          "name": "PlaceholderText",
+          "summary": "What the box draws while Text is empty, focused or not (empty by default)."
         },
         {
           "decl": "(submitted: boolean?) -> ()",
@@ -4289,10 +4307,16 @@
           "summary": "Renders the typed Text as rich-text markup (see TextLabel)."
         },
         {
+          "decl": "number",
+          "kind": "ReadWrite",
+          "name": "SelectionStart",
+          "summary": "The selection's anchor, in bytes of Text like CursorPosition, -1 for no selection: the selection is what lies between the two. A write is clamped like CursorPosition's and moves no focus."
+        },
+        {
           "decl": "string",
           "kind": "ReadWrite",
           "name": "Text",
-          "summary": "The typed content. Keystrokes edit it while the box holds focus; writes land like any property."
+          "summary": "The typed content. Keystrokes edit it while the box holds focus — a listener hears a typed key's change one frame after the key; writes land like any property, and a write while focused keeps the caret where it still fits."
         },
         {
           "decl": "Color3",
@@ -4304,7 +4328,7 @@
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "TextEditable",
-          "summary": "Whether keystrokes edit Text. A non-editable box still focuses."
+          "summary": "Whether keystrokes edit Text. A box that is not editable still focuses, and its caret and selection still move (measured)."
         },
         {
           "decl": "boolean",
@@ -4345,7 +4369,7 @@
       ],
       "name": "TextBox",
       "parent": "GuiObject",
-      "summary": "Typed text input: click (or CaptureFocus) to focus, keystrokes edit Text, Enter or clicking away releases — FocusLost says which. ClearTextOnFocus, TextEditable and MultiLine behave like the reference engine; no cursor or selection yet (v1)."
+      "summary": "Typed text input: click (or CaptureFocus) to focus, keystrokes edit Text at the caret, Return or clicking away releases — FocusLost says which. The caret and the selection are CursorPosition and SelectionStart (bytes, 1-based, -1 for none); the arrows, Home and End, the word moves, Shift selections, Ctrl+A, the clipboard keys, a drag and an IME edit it; PlaceholderText draws while Text is empty. ClearTextOnFocus, TextEditable and MultiLine behave like the reference engine. Not built: undo, ContentText, TextBounds, TextFits, TextWrapped, TextTruncate, FocusLost's InputObject and UserInputService.TextBoxFocused / TextBoxFocusReleased; every loss of the focus sets CursorPosition to -1 (the reference keeps it when another box's CaptureFocus takes the focus); while focused the text is clipped to the box."
     },
     {
       "creatable": true,

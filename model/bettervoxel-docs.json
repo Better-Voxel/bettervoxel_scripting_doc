@@ -8963,18 +8963,22 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/SurfaceAppearance.html#roughnessmap"
   },
   "@bettervoxel/globaltype/TextBox": {
-    "documentation": "Typed text input: click (or CaptureFocus) to focus, keystrokes edit Text, Enter or clicking away releases — FocusLost says which. ClearTextOnFocus, TextEditable and MultiLine behave like the reference engine; no cursor or selection yet (v1).",
+    "documentation": "Typed text input: click (or CaptureFocus) to focus, keystrokes edit Text at the caret, Return or clicking away releases — FocusLost says which. The caret and the selection are CursorPosition and SelectionStart (bytes, 1-based, -1 for none); the arrows, Home and End, the word moves, Shift selections, Ctrl+A, the clipboard keys, a drag and an IME edit it; PlaceholderText draws while Text is empty. ClearTextOnFocus, TextEditable and MultiLine behave like the reference engine. Not built: undo, ContentText, TextBounds, TextFits, TextWrapped, TextTruncate, FocusLost's InputObject and UserInputService.TextBoxFocused / TextBoxFocusReleased; every loss of the focus sets CursorPosition to -1 (the reference keeps it when another box's CaptureFocus takes the focus); while focused the text is clipped to the box.",
     "keys": {
       "CaptureFocus": "@bettervoxel/globaltype/TextBox.CaptureFocus",
       "ClearTextOnFocus": "@bettervoxel/globaltype/TextBox.ClearTextOnFocus",
+      "CursorPosition": "@bettervoxel/globaltype/TextBox.CursorPosition",
       "FocusLost": "@bettervoxel/globaltype/TextBox.FocusLost",
       "Focused": "@bettervoxel/globaltype/TextBox.Focused",
       "Font": "@bettervoxel/globaltype/TextBox.Font",
       "FontFace": "@bettervoxel/globaltype/TextBox.FontFace",
       "IsFocused": "@bettervoxel/globaltype/TextBox.IsFocused",
       "MultiLine": "@bettervoxel/globaltype/TextBox.MultiLine",
+      "PlaceholderColor3": "@bettervoxel/globaltype/TextBox.PlaceholderColor3",
+      "PlaceholderText": "@bettervoxel/globaltype/TextBox.PlaceholderText",
       "ReleaseFocus": "@bettervoxel/globaltype/TextBox.ReleaseFocus",
       "RichText": "@bettervoxel/globaltype/TextBox.RichText",
+      "SelectionStart": "@bettervoxel/globaltype/TextBox.SelectionStart",
       "Text": "@bettervoxel/globaltype/TextBox.Text",
       "TextColor3": "@bettervoxel/globaltype/TextBox.TextColor3",
       "TextEditable": "@bettervoxel/globaltype/TextBox.TextEditable",
@@ -8988,21 +8992,25 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html"
   },
   "@bettervoxel/globaltype/TextBox.CaptureFocus": {
-    "documentation": "Gives this box keyboard focus, releasing any other focused box (its FocusLost fires with false).",
+    "documentation": "Gives this box keyboard focus, releasing any other focused box (its FocusLost fires with false). IsFocused, UserInputService:GetFocusedTextBox and CursorPosition (#Text + 1, after ClearTextOnFocus emptied it) answer at once; Focused fires afterwards. A box the client does not draw takes no focus.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#capturefocus",
     "params": [],
     "returns": []
   },
   "@bettervoxel/globaltype/TextBox.ClearTextOnFocus": {
-    "documentation": "Empties Text when the box gains focus (true by default).",
+    "documentation": "Empties Text when the box gains focus, by a click or CaptureFocus (true by default). A box that is not TextEditable is not emptied (measured).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#cleartextonfocus"
   },
+  "@bettervoxel/globaltype/TextBox.CursorPosition": {
+    "documentation": "The caret, in bytes of Text: 1 before the first character, #Text + 1 after the last, -1 for none (1 on a fresh box; -1 once the focus is lost). A write is clamped at once; a position on an unfocused box focuses it, and -1 on the focused box releases it — both silently (measured). CaptureFocus puts it at #Text + 1 at once.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#cursorposition"
+  },
   "@bettervoxel/globaltype/TextBox.FocusLost": {
-    "documentation": "Fires when the box loses focus, with enterPressed: true for Return, false for Escape, a click elsewhere, or ReleaseFocus.",
+    "documentation": "Fires when the box loses focus, with enterPressed: true for Return or ReleaseFocus(true), false for Escape, a click elsewhere, another box taking the focus, a detach or ReleaseFocus(). CursorPosition and SelectionStart already read -1 when it fires.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#focuslost"
   },
   "@bettervoxel/globaltype/TextBox.Focused": {
-    "documentation": "Fires (with no arguments) when the box gains keyboard focus — a left press on it, or CaptureFocus. A press on a button drawn over the box is the button's and does not focus it (measured).",
+    "documentation": "Fires (with no arguments) when the box gains keyboard focus — a left press on it, or CaptureFocus. A press on a button drawn over the box is the button's and does not focus it (measured). A CursorPosition write focuses silently.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#focused"
   },
   "@bettervoxel/globaltype/TextBox.Font": {
@@ -9014,7 +9022,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#fontface"
   },
   "@bettervoxel/globaltype/TextBox.IsFocused": {
-    "documentation": "Whether this box holds keyboard focus right now.",
+    "documentation": "Whether this box holds keyboard focus right now — a focus verb of the same thread already counts.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#isfocused",
     "params": [],
     "returns": [
@@ -9025,8 +9033,16 @@
     "documentation": "`boolean`"
   },
   "@bettervoxel/globaltype/TextBox.MultiLine": {
-    "documentation": "Return inserts a newline instead of releasing focus.",
+    "documentation": "Return inserts a newline (`\\n`, measured) instead of releasing focus, and Up and Down move a line.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#multiline"
+  },
+  "@bettervoxel/globaltype/TextBox.PlaceholderColor3": {
+    "documentation": "The placeholder's color: (0.5, 0.5, 0.5) on a fresh box (measured).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#placeholdercolor3"
+  },
+  "@bettervoxel/globaltype/TextBox.PlaceholderText": {
+    "documentation": "What the box draws while Text is empty, focused or not (empty by default).",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#placeholdertext"
   },
   "@bettervoxel/globaltype/TextBox.ReleaseFocus": {
     "documentation": "Releases this box's focus; FocusLost fires with the submitted flag (false when omitted). A no-op while unfocused.",
@@ -9046,8 +9062,12 @@
     "documentation": "Renders the typed Text as rich-text markup (see TextLabel).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#richtext"
   },
+  "@bettervoxel/globaltype/TextBox.SelectionStart": {
+    "documentation": "The selection's anchor, in bytes of Text like CursorPosition, -1 for no selection: the selection is what lies between the two. A write is clamped like CursorPosition's and moves no focus.",
+    "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#selectionstart"
+  },
   "@bettervoxel/globaltype/TextBox.Text": {
-    "documentation": "The typed content. Keystrokes edit it while the box holds focus; writes land like any property.",
+    "documentation": "The typed content. Keystrokes edit it while the box holds focus — a listener hears a typed key's change one frame after the key; writes land like any property, and a write while focused keeps the caret where it still fits.",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#text"
   },
   "@bettervoxel/globaltype/TextBox.TextColor3": {
@@ -9055,7 +9075,7 @@
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#textcolor3"
   },
   "@bettervoxel/globaltype/TextBox.TextEditable": {
-    "documentation": "Whether keystrokes edit Text. A non-editable box still focuses.",
+    "documentation": "Whether keystrokes edit Text. A box that is not editable still focuses, and its caret and selection still move (measured).",
     "learn_more_link": "https://better-voxel.github.io/bettervoxel_scripting_doc/classes/TextBox.html#texteditable"
   },
   "@bettervoxel/globaltype/TextBox.TextScaled": {

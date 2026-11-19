@@ -1025,14 +1025,18 @@ end
 declare extern type TextBox extends GuiObject with
     function CaptureFocus(self): ()
     ClearTextOnFocus: boolean
+    CursorPosition: number
     FocusLost: BVScriptSignal -- fires (boolean)
     Focused: BVScriptSignal -- fires ()
     Font: EnumItem
     FontFace: Font
     function IsFocused(self): boolean
     MultiLine: boolean
+    PlaceholderColor3: Color3
+    PlaceholderText: string
     function ReleaseFocus(self, submitted: boolean?): ()
     RichText: boolean
+    SelectionStart: number
     Text: string
     TextColor3: Color3
     TextEditable: boolean
