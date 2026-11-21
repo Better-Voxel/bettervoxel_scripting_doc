@@ -771,24 +771,24 @@
           "decl": "number",
           "kind": "ReadWrite",
           "name": "Intensity",
-          "summary": "How strong the bloom's glow is, 0.4 by default; stored as written (the reference clamps none), a non-finite value made finite (NaN stores 0, math.huge the largest finite number)."
+          "summary": "How strong the bloom's glow is, 0.4 by default: a plain factor on the glow, 0 none at all, the enabled effects' values summed; stored as written (the reference clamps none), a non-finite value made finite (NaN stores 0, math.huge the largest finite number)."
         },
         {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "Size",
-          "summary": "How far the bloom reaches, 24 by default (the bloom branch of the name: a number here, where a part's is a Vector3 and a gui's a UDim2); stored as written, a non-finite value made finite."
+          "summary": "How far the bloom reaches, 24 by default — not a radius in pixels: 0 leaves a sliver, and the reach grows faster than the number (the bloom branch of the name: a number here, where a part's is a Vector3 and a gui's a UDim2); stored as written, a non-finite value made finite."
         },
         {
           "decl": "number",
           "kind": "ReadWrite",
           "name": "Threshold",
-          "summary": "How bright a pixel must be to bloom, 0.95 by default; stored as written, a non-finite value made finite."
+          "summary": "How bright a pixel must be to bloom, 0.95 by default, in units where a white surface under white light is 1: what lies above it blooms; stored as written, a non-finite value made finite."
         }
       ],
       "name": "BloomEffect",
       "parent": "PostEffect",
-      "summary": "A glow around the picture's bright areas: Intensity, Size and Threshold. Born named Bloom. The engine does not draw it."
+      "summary": "A glow around the picture's bright areas: Intensity, Size and Threshold. Born named Bloom. Drawn while enabled as a child of Lighting or of the current camera; several act as one, their Intensity summed, the smallest Threshold and the largest Size. A place with none enabled blooms as Intensity 1, Size 24, Threshold 2."
     },
     {
       "creatable": true,
@@ -1184,7 +1184,7 @@
       ],
       "name": "ColorCorrectionEffect",
       "parent": "PostEffect",
-      "summary": "A correction of the picture's colours as the screen shows them, after the tone curve: Brightness, Contrast, Saturation and a TintColor. Born named ColorCorrection. Drawn while enabled as a child of Lighting (no deeper; one under the camera is not read); several there act as one, their Brightness, Contrast and Saturation summed and their TintColors multiplied. The UI is not corrected."
+      "summary": "A correction of the picture's colours as the screen shows them, after the tone curve: Brightness, Contrast, Saturation and a TintColor. Born named ColorCorrection. Drawn while enabled as a child of Lighting or of the current camera (no deeper); several there act as one, their Brightness, Contrast and Saturation summed and their TintColors multiplied. The UI is not corrected."
     },
     {
       "creatable": true,
@@ -1193,12 +1193,12 @@
           "decl": "Enum.TonemapperPreset",
           "kind": "ReadWrite",
           "name": "TonemapperPreset",
-          "summary": "The tone curve: Default (the standing curve) or Retro (a plain clip, channel by channel). Writes accept the Enum.TonemapperPreset item or its name."
+          "summary": "The tone curve: Default (the standing curve) or Retro (its own measured curve, near a plain clip, channel by channel). Writes accept the Enum.TonemapperPreset item or its name."
         }
       ],
       "name": "ColorGradingEffect",
       "parent": "PostEffect",
-      "summary": "The picture's tone curve, its TonemapperPreset: Default or Retro. Born named ColorGrading. The engine does not draw it."
+      "summary": "The picture's tone curve, its TonemapperPreset: Default or Retro. Born named ColorGrading. Of the gradings that are children of Lighting the one parented last is drawn, and none while it is disabled."
     },
     {
       "creatable": false,
@@ -3602,12 +3602,12 @@
           "decl": "boolean",
           "kind": "ReadWrite",
           "name": "Enabled",
-          "summary": "Whether the effect is on (true by default). The effect keeps its other values while off. An enabled ColorCorrectionEffect under Lighting corrects the picture, a disabled one does nothing; a bloom and a grading are not drawn, their value saved, cloned and replicated."
+          "summary": "Whether the effect is on (true by default). The effect keeps its other values while off. An enabled effect under Lighting acts on the picture, a disabled one does nothing: with no BloomEffect enabled the place blooms as Intensity 1, Size 24, Threshold 2, and with the last-parented ColorGradingEffect disabled no grading applies."
         }
       ],
       "name": "PostEffect",
       "parent": "Instance",
-      "summary": "The base of the effects over the rendered picture: the Enabled switch. Saved, cloned and replicated like any instance, wherever it is parented; of the post effects the engine draws the ColorCorrectionEffect alone."
+      "summary": "The base of the effects over the rendered picture: the Enabled switch. Saved, cloned and replicated like any instance, wherever it is parented; drawn while enabled as a child of Lighting, no deeper (a BloomEffect or a ColorCorrectionEffect under the current camera too)."
     },
     {
       "creatable": true,
